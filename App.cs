@@ -2,10 +2,23 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Surface.Core;
 
+using SurfaceTower.Model;
+
 namespace SurfaceTower
 {
   public class App : SurfaceApp
   {
+    private BaseModel model = new BaseModel();
+
+    #region Properties
+
+    public BaseModel Model
+    {
+      get { return model; }
+    }
+
+    #endregion
+
     protected override void Initialize()
     {
       base.Initialize();
