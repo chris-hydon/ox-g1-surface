@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurfaceTower", "SurfaceTower.csproj", "{5897FE50-D891-4396-896B-F4FAE13B1A35}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5897FE50-D891-4396-896B-F4FAE13B1A35}.Debug|x86.ActiveCfg = Debug|x86
+		{5897FE50-D891-4396-896B-F4FAE13B1A35}.Debug|x86.Build.0 = Debug|x86
+		{5897FE50-D891-4396-896B-F4FAE13B1A35}.Release|x86.ActiveCfg = Release|x86
+		{5897FE50-D891-4396-896B-F4FAE13B1A35}.Release|x86.Build.0 = Release|x86
+		{AAD02F98-9442-4BDC-8379-7FC36CD946AB}.Debug|x86.ActiveCfg = Debug|x86
+		{AAD02F98-9442-4BDC-8379-7FC36CD946AB}.Release|x86.ActiveCfg = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

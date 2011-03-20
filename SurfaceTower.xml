@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ss:ApplicationInfo
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:ss="http://schemas.microsoft.com/Surface/2007/ApplicationMetadata">
+  <Application>
+    <Title>SurfaceTower</Title>
+    <Description>A musical tower defense game.</Description>
+    <ExecutableFile>SurfaceTower.exe</ExecutableFile>
+    <Arguments></Arguments>
+    <!-- Add the following lines when the files actually exist! -->
+    <!--
+    <IconImageFile>Resources\icon.png</IconImageFile>
+    <Preview>
+      <PreviewImageFile>Resources\iconPreview.png</PreviewImageFile>
+    </Preview>
+    -->
+  </Application>
+</ss:ApplicationInfo>
