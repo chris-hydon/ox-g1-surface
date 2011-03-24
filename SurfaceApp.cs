@@ -2,6 +2,9 @@ using System;
 using Microsoft.Surface;
 using Microsoft.Surface.Core;
 using Microsoft.Xna.Framework;
+using SurfaceTower.VideoEngine;
+using SurfaceTower.Model;
+
 
 namespace SurfaceTower
 {
@@ -22,6 +25,13 @@ namespace SurfaceTower
     // start in Activated state
     protected bool isApplicationActivated = true;
     protected bool isApplicationPreviewed;
+
+
+    //Holds the game state and logic
+    protected BaseModel gameModel;
+    //Used to display the game, implements the draw method
+    protected View gameView;
+
 
     /// <summary>
     /// The graphics device manager for the application.
@@ -150,6 +160,11 @@ namespace SurfaceTower
                                            graphics.GraphicsDevice.Viewport.Height,
                                            0);
 
+      //Initialize the game model
+      gameModel = new BaseModel();  
+      //Initialize the UI component
+      gameView = new SimpleView(gameModel, graphics);
+
       if (currentOrientation == UserOrientation.Top)
       {
         screenTransform = inverted;
@@ -205,11 +220,8 @@ namespace SurfaceTower
         ApplicationLauncher.SignalApplicationLoadComplete();
         applicationLoadCompleteSignalled = true;
       }
-
       DoRotate(gameTime, screenTransform.Equals(inverted));
-
-      DoDraw(gameTime);
-
+      gameView.draw(gameTime);
       base.Draw(gameTime);
     }
 
