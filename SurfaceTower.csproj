@@ -109,6 +109,7 @@
     <Compile Include="AudioEngine\AudioSummary.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Model\Enemy.cs" />
+    <Compile Include="Model\EventArgs\UpdateArgs.cs" />
     <Compile Include="Model\MainTurret.cs" />
     <Compile Include="Model\BaseModel.cs" />
     <Compile Include="Model\Music.cs" />

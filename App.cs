@@ -9,6 +9,9 @@ namespace SurfaceTower
 {
   public class App : SurfaceApp
   {
+    //For static access - should not be changed.
+    public static App Instance;
+
     //Holds the game state and logic
     protected BaseModel gameModel;
     //Used to display the game, implements the draw method
@@ -27,6 +30,7 @@ namespace SurfaceTower
     {
       base.Initialize();
 
+      App.Instance = this;
       //Initialize the game model
       gameModel = new BaseModel();
       //Initialize the UI component
@@ -46,6 +50,7 @@ namespace SurfaceTower
 
     protected override void DoUpdate(GameTime gameTime, bool activated)
     {
+      gameModel.OnUpdate(gameTime);
     }
     
     protected override void ProcessContacts(GameTime gameTime, ReadOnlyContactCollection contacts)
