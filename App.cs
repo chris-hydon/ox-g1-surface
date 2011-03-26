@@ -3,18 +3,22 @@ using Microsoft.Xna.Framework;
 using Microsoft.Surface.Core;
 
 using SurfaceTower.Model;
+using SurfaceTower.VideoEngine;
 
 namespace SurfaceTower
 {
   public class App : SurfaceApp
   {
-    private BaseModel model = new BaseModel();
+    //Holds the game state and logic
+    protected BaseModel gameModel;
+    //Used to display the game, implements the draw method
+    protected View gameView;
 
     #region Properties
 
     public BaseModel Model
     {
-      get { return model; }
+      get { return gameModel; }
     }
 
     #endregion
@@ -22,12 +26,18 @@ namespace SurfaceTower
     protected override void Initialize()
     {
       base.Initialize();
+
+      //Initialize the game model
+      gameModel = new BaseModel();
+      //Initialize the UI component
+      gameView = new SimpleView(gameModel, graphics);
     }
 
     #region Game Events
 
     protected override void DoDraw(GameTime gameTime)
     {
+      gameView.draw(gameTime);
     }
 
     protected override void DoRotate(GameTime gameTime, bool inverted)
