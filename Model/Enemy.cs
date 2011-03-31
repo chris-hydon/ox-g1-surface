@@ -6,9 +6,18 @@ namespace SurfaceTower.Model
   {
     protected GameTime dying;
     protected GameTime dead;
+    protected int x, y;
 
     #region Properties
 
+    public int X
+    {
+        get { return x; }
+    }
+    public int Y
+    {
+        get { return y; }
+    }
     public GameTime Dying
     {
       get { return dying; }
@@ -35,14 +44,21 @@ namespace SurfaceTower.Model
 
     public void Kill()
     {
-      // TODO: Method stub.
+        Stage.INSTANCE.kill(this);
     }
 
     public void Cremate()
     {
-      // TODO: Method stub.
+        Stage.INSTANCE.cremate(this);
     }
 
     #endregion
+
+      #region Methods
+      public void moveTo(Vector2 destination){
+            x = (int)destination.X;
+            y = (int)destination.Y;
+        }
+      #endregion
   }
 }
