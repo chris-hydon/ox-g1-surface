@@ -38,8 +38,8 @@ namespace SurfaceTower
 
       //For toy version, put an enemy on the stage
       //TO-DO: For the toy version, manually add enemy to Stage.INSTANCE.Living. Commented-out below gives error
-      Enemy enemy = new Enemy();
-      enemy.moveTo(new Vector2(100, 150));
+      Enemy enemy = new Enemy(20, 30, 10);
+      enemy.MoveTo(new Vector2(100, 150));
       //Stage.INSTANCE.Living.Add(enemy);
 
     }

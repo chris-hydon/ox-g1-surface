@@ -4,61 +4,56 @@ namespace SurfaceTower.Model
 {
   public class Enemy
   {
-    protected GameTime dying;
-    protected GameTime dead;
-    protected int x, y;
+    //An enemy with a speed of 1 will take MOVES moves to reach the tower.
+    protected int MOVES = 100;
+    protected int x, y, size, health, speed;
 
     #region Properties
 
     public int X
     {
-        get { return x; }
+      get { return x; }
+      set { x = value; }
     }
     public int Y
     {
-        get { return y; }
+      get { return y; }
+      set { y = value; }
     }
-    public GameTime Dying
+    public int Size
     {
-      get { return dying; }
+      get { return size; }
+      set { size = value; }
     }
-
-    public GameTime Dead
+    public int Health
     {
-      get { return dead; }
+      get { return health; }
+      set { health = value; }
+    }
+    public int Speed
+    {
+      get { return speed; }
+      set { speed = value; }
     }
 
     #endregion
 
-    #region Dying Enemies
 
-    public bool IsDying()
+    #region Methods
+    public Enemy(int x, int y, int size, int health, int speed)
     {
-      return (this.Dying == null);
+      this.x = x;
+      this.y = y;
+      this.size = size;
+      this.health = health;
+      this.speed = speed;
     }
-
-    public bool IsDead()
-    {
-      return (this.Dead == null);
+    public void Move(){
+      int XDist = TOWER.X - x;
+      int YDist = TOWER.Y - y;
+      x += XDist * (speed / MOVES);
+      y += YDist * (speed / MOVES);
     }
-
-    public void Kill()
-    {
-        Stage.INSTANCE.kill(this);
-    }
-
-    public void Cremate()
-    {
-        Stage.INSTANCE.cremate(this);
-    }
-
     #endregion
-
-      #region Methods
-      public void moveTo(Vector2 destination){
-            x = (int)destination.X;
-            y = (int)destination.Y;
-        }
-      #endregion
   }
 }
