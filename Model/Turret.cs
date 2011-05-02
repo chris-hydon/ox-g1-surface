@@ -1,24 +1,59 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
+
 
 namespace SurfaceTower.Model
 {
   public class Turret
   {
-    private float orientation;
-    private Vector2 position;
+    [Flags]
+    public enum Effects {None = 0}
+    
+    protected Vector2 position;
+    protected float orientation = 0;
+    protected int owner;
+    protected Effects effect = Effects.None;
+    protected int strength = 1;
 
     #region Properties
 
     public float Orientation
     {
       get { return orientation; }
+      set { orientation = value; }
     }
 
     public Vector2 Position
     {
       get { return position; }
     }
+    public Effects Effect
+    {
+      get { return effect; }
+      set { effect = value; }
+    }
+    public int Strength
+    {
+      get { return strength; }
+      set { strength = value; }
+    }
+    public int Owner
+    {
+      get { return owner; }
+    }
 
+    #endregion
+    #region Methods
+    public Turret(Vector2 position, int owner)
+    {
+      this.position = position;
+      this.owner = owner;
+    }
+    public void Shoot()
+    {
+      Bullet bullet = new Bullet(position.X, position.Y, orientation, 5, strength, effect);
+      BaseModel.INSTANCE.Bullets.Add(bullet);
+    }
     #endregion
   }
 }
