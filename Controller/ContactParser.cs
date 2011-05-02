@@ -12,7 +12,6 @@ namespace SurfaceTower.Controller
   {
     public void ProcessContacts(GameTime gameTime, ReadOnlyContactCollection contacts)
     {
-      throw new NotImplementedException();
     }
   }
 }
