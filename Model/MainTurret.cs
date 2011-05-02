@@ -22,6 +22,7 @@ namespace SurfaceTower.Model
     public static Vector2 TowerPos()
     {
       InteractiveSurface s = InteractiveSurface.DefaultInteractiveSurface;
+      if (s == null) return Vector2.Zero;
       return new Vector2(s.Width / 2, s.Height / 2);
     }
 

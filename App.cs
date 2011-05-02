@@ -32,7 +32,7 @@ namespace SurfaceTower
 
       App.Instance = this;
       //Initialize the game model
-      gameModel = new BaseModel();
+      gameModel = new TestingModel();
       //Initialize the UI component
       gameView = new SimpleView(gameModel, graphics);
     }

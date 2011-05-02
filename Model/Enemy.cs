@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using System;
 
 namespace SurfaceTower.Model
 {
@@ -39,6 +40,7 @@ namespace SurfaceTower.Model
     #endregion
 
     #region Methods
+
     public Enemy(int x, int y, int size, int health, int speed)
     {
       this.x = x;
@@ -47,13 +49,18 @@ namespace SurfaceTower.Model
       this.health = health;
       this.speed = speed;
     }
-    public void Move()
+    public virtual void Move()
     {
       Vector2 pos = MainTurret.TowerPos();
       int XDist = (int) pos.X - x;
       int YDist = (int) pos.Y - y;
       x += XDist * (speed / MOVES);
       y += YDist * (speed / MOVES);
+    }
+
+    public virtual bool IsHit(Bullet b)
+    {
+      return (Math.Abs(b.x - X) <= Size && Math.Abs(b.y - Y) <= Size);
     }
     #endregion
   }

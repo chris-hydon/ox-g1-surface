@@ -140,10 +140,10 @@ namespace SurfaceTower.Model
       {
         foreach(Enemy e in living)
         {
-          if(Math.Abs(b.x-e.X) <= e.Size && Math.Abs(b.y-e.Y) <= e.Size)
+          if (e.IsHit(b))
           {
             e.Health -= b.power;
-            if(e.Health <= 0)
+            if (e.Health <= 0)
             {
               MakeDying(new EnemyTimePair(e, gameTime));
             }
