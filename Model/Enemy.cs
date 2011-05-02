@@ -5,7 +5,7 @@ namespace SurfaceTower.Model
 {
   public class Enemy
   {
-    protected float x, y;
+    protected float x, y, rotation;
     protected int size, health, speed;
 
     #region Properties
@@ -19,6 +19,11 @@ namespace SurfaceTower.Model
     {
       get { return (int) y; }
       set { y = value; }
+    }
+    public float Rotation
+    {
+      get { return rotation; }
+      set { rotation = value; }
     }
     public int Size
     {
@@ -40,10 +45,11 @@ namespace SurfaceTower.Model
 
     #region Methods
 
-    public Enemy(int x, int y, int size, int health, int speed)
+    public Enemy(int x, int y, float rotation, int size, int health, int speed)
     {
       this.x = x;
       this.y = y;
+      this.rotation = rotation;
       this.size = size;
       this.health = health;
       this.speed = speed;
