@@ -60,7 +60,7 @@ namespace SurfaceTower.Model
 
     public virtual bool IsHit(Bullet b)
     {
-      return (Math.Abs(b.x - X) <= Size && Math.Abs(b.y - Y) <= Size);
+      return (Math.Abs(b.X - X) <= Size && Math.Abs(b.Y - Y) <= Size);
     }
     #endregion
   }

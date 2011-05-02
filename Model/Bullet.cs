@@ -7,9 +7,39 @@ namespace SurfaceTower.Model
 {
   public class Bullet
   {
-    public int x, y, rotation, speed, power, effect;
+    protected int x, y, speed, power;
+    protected float rotation;
+    protected Turret.Effects effect;
 
-    public Bullet(int x, int y, int rotation, int speed, int power, Turret.Effects effect)
+  #region Properties
+    public int X
+    {
+      get { return x; }
+    }
+    public int Y
+    {
+      get { return y; }
+    }
+    public float Rotation
+    {
+      get { return rotation; }
+    }
+    public int Speed
+    {
+      get { return speed; }
+    }
+    public int Power
+    {
+      get { return power; }
+    }
+    public Turret.Effects Effect
+    {
+      get { return effect; }
+    }
+    
+  #endregion
+
+    public Bullet(int x, int y, float rotation, int speed, int power, Turret.Effects effect)
     {
       this.x = x;
       this.y = y;

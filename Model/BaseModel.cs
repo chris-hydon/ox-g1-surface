@@ -122,7 +122,7 @@ namespace SurfaceTower.Model
         {
           if (e.IsHit(b))
           {
-            e.Health -= b.power;
+            e.Health -= b.Power;
             if (e.Health <= 0)
             {
               MakeDying(new EnemyTimePair(e, LastUpdate));
