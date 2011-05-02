@@ -29,7 +29,7 @@ namespace SurfaceTower.Model
       Music.Beat += new EventHandler(OnBeat);
 
       //For toy version, put an enemy on the stage
-      Living.Add(new Enemy(20, 30, 10, 100, 5));
+      Living.Add(new Enemy(20, 30, 10, 100, 1));
     }
 
     /// <summary>

@@ -5,20 +5,20 @@ namespace SurfaceTower.Model
 {
   public class Enemy
   {
-    //An enemy with a speed of 1 will take MOVES moves to reach the tower.
-    protected int MOVES = 100;
-    protected int x, y, size, health, speed;
+    protected int SPEED_CONSTANT = 20;
+    protected float x, y;
+    protected int size, health, speed;
 
     #region Properties
 
     public int X
     {
-      get { return x; }
+      get { return (int) x; }
       set { x = value; }
     }
     public int Y
     {
-      get { return y; }
+      get { return (int) y; }
       set { y = value; }
     }
     public int Size
@@ -52,10 +52,24 @@ namespace SurfaceTower.Model
     public virtual void Move()
     {
       Vector2 pos = MainTurret.TowerPos();
-      int XDist = (int) pos.X - x;
-      int YDist = (int) pos.Y - y;
-      x += XDist * (speed / MOVES);
-      y += YDist * (speed / MOVES);
+      float XDist = pos.X - x;
+      float YDist = pos.Y - y;
+      System.Console.WriteLine("X = " + x + " Y = " + y);
+      if (XDist != 0 || YDist != 0)
+      {
+        Vector2 direction = new Vector2(pos.X - x, pos.Y - y);
+        if (direction.Length() < speed)
+        {
+          x = pos.X;
+          y = pos.Y;
+        }
+        else
+        {
+          direction.Normalize();
+          x += direction.X * speed/SPEED_CONSTANT;
+          y += direction.Y * speed/SPEED_CONSTANT;
+        }
+      }
     }
 
     public virtual bool IsHit(Bullet b)
