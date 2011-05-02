@@ -49,10 +49,10 @@ namespace SurfaceTower.Model
       this.speed = speed;
     }
     public void Move(){
-      int XDist = TOWER.X - x;
-      int YDist = TOWER.Y - y;
-      x += XDist * (speed / MOVES);
-      y += YDist * (speed / MOVES);
+      //int XDist = TOWER.X - x;
+      //int YDist = TOWER.Y - y;
+      //x += XDist * (speed / MOVES);
+      //y += YDist * (speed / MOVES);
     }
     #endregion
   }
