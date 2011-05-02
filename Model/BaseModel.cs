@@ -46,7 +46,7 @@ namespace SurfaceTower.Model
   public class BaseModel
   {
     public static BaseModel INSTANCE = new BaseModel();
-    protected ICollection<EnemyTimePair> dying, dead = new LinkedList<EnemyTimePair>();
+    protected ICollection<EnemyTimePair> dying = new LinkedList<EnemyTimePair>(), dead = new LinkedList<EnemyTimePair>();
     protected ICollection<CollisionTimePair> collisions = new LinkedList<CollisionTimePair>();
     protected ICollection<Bullet> bullets = new LinkedList<Bullet>();
     protected ICollection<Enemy> living = new LinkedList<Enemy>();
@@ -116,6 +116,7 @@ namespace SurfaceTower.Model
     {
       lastUpdate = gameTime.TotalRealTime;
       Update(this, new UpdateArgs(LastUpdate));
+      Queue<Enemy> deathRow = new Queue<Enemy>();
       foreach(Bullet b in bullets)
       {
         foreach(Enemy e in living)
@@ -125,9 +126,13 @@ namespace SurfaceTower.Model
             e.Health -= b.Power;
             if (e.Health <= 0)
             {
-              MakeDying(new EnemyTimePair(e, LastUpdate));
+              deathRow.Enqueue(e);
             }
           }
+        }
+        while (deathRow.Count > 0)
+        {
+          MakeDying(new EnemyTimePair(deathRow.Dequeue(), LastUpdate));
         }
         b.Move();
       }
@@ -139,6 +144,7 @@ namespace SurfaceTower.Model
 
     public void MakeDying(EnemyTimePair etp)
     {
+      Living.Remove(etp.enemy);
       dying.Add(etp);
     }
 

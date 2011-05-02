@@ -7,18 +7,18 @@ namespace SurfaceTower.Model
 {
   public class Bullet
   {
-    protected int x, y, speed, power;
-    protected float rotation;
+    protected int speed, power;
+    protected float x, y, rotation;
     protected Turret.Effects effect;
 
   #region Properties
     public int X
     {
-      get { return x; }
+      get { return (int) x; }
     }
     public int Y
     {
-      get { return y; }
+      get { return (int) y; }
     }
     public float Rotation
     {
@@ -51,8 +51,8 @@ namespace SurfaceTower.Model
 
     public void Move()
     {
-      x += (int) Math.Ceiling(speed * Math.Cos(rotation)/Constants.SPEED_CONSTANT);
-      y += (int) Math.Ceiling(speed * Math.Sin(rotation)/Constants.SPEED_CONSTANT);
+      x += (float) (speed * Math.Cos(rotation)/Constants.SPEED_CONSTANT);
+      y += (float) (speed * Math.Sin(rotation)/Constants.SPEED_CONSTANT);
     }
   }
 }
