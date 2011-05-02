@@ -37,7 +37,7 @@ namespace SurfaceTower
       //Initialize the game model
       gameModel = new TestingModel();
       //Initialize the UI component
-      gameView = new SimpleView(gameModel, graphics);
+      gameView = new SimpleView(gameModel, graphics, Content);
       contactParser = new ContactParser();
     }
 
