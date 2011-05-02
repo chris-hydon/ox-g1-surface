@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.Surface.Core;
 using Microsoft.Xna.Framework;
 
 using SurfaceTower.Model.EventArguments;
@@ -15,6 +16,16 @@ namespace SurfaceTower.Model
     {
       this.playerId = playerId;
     }
+
+    #region Statics
+
+    public static Vector2 TowerPos()
+    {
+      InteractiveSurface s = InteractiveSurface.DefaultInteractiveSurface;
+      return new Vector2(s.Width / 2, s.Height / 2);
+    }
+
+    #endregion
 
     #region Properties
 

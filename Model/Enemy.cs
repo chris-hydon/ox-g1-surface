@@ -38,7 +38,6 @@ namespace SurfaceTower.Model
 
     #endregion
 
-
     #region Methods
     public Enemy(int x, int y, int size, int health, int speed)
     {
@@ -48,11 +47,13 @@ namespace SurfaceTower.Model
       this.health = health;
       this.speed = speed;
     }
-    public void Move(){
-      //int XDist = TOWER.X - x;
-      //int YDist = TOWER.Y - y;
-      //x += XDist * (speed / MOVES);
-      //y += YDist * (speed / MOVES);
+    public void Move()
+    {
+      Vector2 pos = MainTurret.TowerPos();
+      int XDist = (int) pos.X - x;
+      int YDist = (int) pos.Y - y;
+      x += XDist * (speed / MOVES);
+      y += YDist * (speed / MOVES);
     }
     #endregion
   }

@@ -1,4 +1,6 @@
-﻿namespace SurfaceTower
+﻿using Microsoft.Xna.Framework;
+
+namespace SurfaceTower
 {
   public static class Constants
   {
