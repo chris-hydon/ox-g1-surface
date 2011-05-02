@@ -4,6 +4,7 @@ using Microsoft.Surface.Core;
 
 using SurfaceTower.Model;
 using SurfaceTower.VideoEngine;
+using SurfaceTower.Controller;
 
 namespace SurfaceTower
 {
@@ -16,6 +17,8 @@ namespace SurfaceTower
     protected BaseModel gameModel;
     //Used to display the game, implements the draw method
     protected View gameView;
+    //Used to handle input
+    protected ContactParser contactParser;
 
     #region Properties
 
@@ -35,6 +38,7 @@ namespace SurfaceTower
       gameModel = new TestingModel();
       //Initialize the UI component
       gameView = new SimpleView(gameModel, graphics);
+      contactParser = new ContactParser();
     }
 
     #region Game Events
@@ -55,6 +59,7 @@ namespace SurfaceTower
     
     protected override void ProcessContacts(GameTime gameTime, ReadOnlyContactCollection contacts)
     {
+      contactParser.ProcessContacts(gameTime, contacts);
     }
 
     #endregion

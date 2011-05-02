@@ -8,23 +8,6 @@ namespace SurfaceTower.Model
 {
   #region Structures
 
-  public struct Bullet
-  {
-    public int x, y, rotation, speed, power;
-    public Bullet(int x, int y, int rotation, int speed, int power)
-    {
-      this.x = x;
-      this.y = y;
-      this.rotation = rotation;
-      this.speed = speed;
-      this.power = power;
-    }
-    public void Move()
-    {
-      x += (int)Math.Ceiling(speed * Math.Cos(rotation));
-      y += (int)Math.Ceiling(speed * Math.Sin(rotation));
-    }
-  }
   public struct Collision
   {
     public enum CollisionType { BULLET_ENEMY, ENEMY_TOWER };
@@ -37,32 +20,23 @@ namespace SurfaceTower.Model
       this.type = type;
     }
   }
+
   public struct EnemyTimePair
   {
     public Enemy enemy;
-    public GameTime time;
-    public EnemyTimePair(Enemy enemy, GameTime time){
+    public TimeSpan time;
+    public EnemyTimePair(Enemy enemy, TimeSpan time){
       this.enemy = enemy;
       this.time = time;
     }
   }
+
   public struct CollisionTimePair
   {
     public Collision collision;
-    public GameTime time;
-    public CollisionTimePair(Collision collision, GameTime time){
+    public TimeSpan time;
+    public CollisionTimePair(Collision collision, TimeSpan time){
       this.collision = collision;
-      this.time = time;
-    }
-  }
-  public struct ContactTriple
-  {
-    public int x, y;
-    public GameTime time;
-    public ContactTriple(int x, int y, GameTime time)
-    {
-      this.x = x;
-      this.y = y;
       this.time = time;
     }
   }
@@ -74,10 +48,10 @@ namespace SurfaceTower.Model
     public static BaseModel INSTANCE = new BaseModel();
     protected ICollection<EnemyTimePair> dying, dead = new LinkedList<EnemyTimePair>();
     protected ICollection<CollisionTimePair> collisions = new LinkedList<CollisionTimePair>();
-    protected ICollection<ContactTriple> contacts = new LinkedList<ContactTriple>();
     protected ICollection<Bullet> bullets = new LinkedList<Bullet>();
     protected ICollection<Enemy> living = new LinkedList<Enemy>();
 
+    protected TimeSpan lastUpdate;
     protected Music music = new Music();
     protected MainTurret[] players = new MainTurret[4] { new MainTurret(0), new MainTurret(1), new MainTurret(2), new MainTurret(3) };
     protected ICollection<Turret> turrets = new LinkedList<Turret>();
@@ -103,25 +77,30 @@ namespace SurfaceTower.Model
     {
       get { return living; }
     }
+
     public ICollection<EnemyTimePair> Dying
     {
       get { return dying; }
     }
+
     public ICollection<EnemyTimePair> Dead
     {
       get { return dead; }
     }
+
     public ICollection<Bullet> Bullets
     {
       get { return bullets; }
     }
+
     public ICollection<CollisionTimePair> Collisions
     {
       get { return collisions; }
     }
-    public ICollection<ContactTriple> Contacts
+
+    public TimeSpan LastUpdate
     {
-      get { return contacts; }
+      get { return lastUpdate; }
     }
     #endregion
 
@@ -135,7 +114,8 @@ namespace SurfaceTower.Model
 
     public virtual void OnUpdate(GameTime gameTime)
     {
-      Update(this, new UpdateArgs(gameTime.TotalRealTime));
+      lastUpdate = gameTime.TotalRealTime;
+      Update(this, new UpdateArgs(LastUpdate));
       foreach(Bullet b in bullets)
       {
         foreach(Enemy e in living)
@@ -145,7 +125,7 @@ namespace SurfaceTower.Model
             e.Health -= b.power;
             if (e.Health <= 0)
             {
-              MakeDying(new EnemyTimePair(e, gameTime));
+              MakeDying(new EnemyTimePair(e, LastUpdate));
             }
           }
         }
@@ -161,15 +141,18 @@ namespace SurfaceTower.Model
     {
       dying.Add(etp);
     }
+
     public void Kill(EnemyTimePair etp)
     {
       dying.Remove(etp);
-      //dead.Add(new EnemyTimePair(etp.enemy, CURRENT-GAME-TIME));
+      dead.Add(new EnemyTimePair(etp.enemy, LastUpdate));
     }
+
     public void Cremate(EnemyTimePair etp)
     {
       dead.Remove(etp);
     }
+
     #endregion
   }
 }
