@@ -51,8 +51,8 @@ namespace SurfaceTower.Model
 
     public void Move()
     {
-      x += (int) Math.Ceiling(speed * Math.Cos(rotation));
-      y += (int) Math.Ceiling(speed * Math.Sin(rotation));
+      x += (int) Math.Ceiling(speed * Math.Cos(rotation)/Constants.SPEED_CONSTANT);
+      y += (int) Math.Ceiling(speed * Math.Sin(rotation)/Constants.SPEED_CONSTANT);
     }
   }
 }

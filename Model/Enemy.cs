@@ -5,7 +5,6 @@ namespace SurfaceTower.Model
 {
   public class Enemy
   {
-    protected int SPEED_CONSTANT = 20;
     protected float x, y;
     protected int size, health, speed;
 
@@ -54,7 +53,6 @@ namespace SurfaceTower.Model
       Vector2 pos = MainTurret.TowerPos();
       float XDist = pos.X - x;
       float YDist = pos.Y - y;
-      System.Console.WriteLine("X = " + x + " Y = " + y);
       if (XDist != 0 || YDist != 0)
       {
         Vector2 direction = new Vector2(pos.X - x, pos.Y - y);
@@ -66,8 +64,8 @@ namespace SurfaceTower.Model
         else
         {
           direction.Normalize();
-          x += direction.X * speed/SPEED_CONSTANT;
-          y += direction.Y * speed/SPEED_CONSTANT;
+          x += direction.X * speed/Constants.SPEED_CONSTANT;
+          y += direction.Y * speed/Constants.SPEED_CONSTANT;
         }
       }
     }
