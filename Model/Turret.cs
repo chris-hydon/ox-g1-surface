@@ -52,7 +52,7 @@ namespace SurfaceTower.Model
     public void Shoot()
     {
       Bullet bullet = new Bullet((int)position.X, (int)position.Y, orientation, 5, strength, effect);
-      BaseModel.INSTANCE.Bullets.Add(bullet);
+      App.Instance.Model.Bullets.Add(bullet);
     }
     #endregion
   }

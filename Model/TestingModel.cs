@@ -31,7 +31,7 @@ namespace SurfaceTower.Model
       //For toy version, put an enemy on the stage
       for (int i = 0; i < 100; i++)
       {
-        Living.Add(new Enemy(50*(i%10), 50*(i/10), 10, 100, 1));
+        Living.Add(new Enemy(50*(i%10), 50*(i/10), 0, 10, 100, 1));
         Bullets.Add(new Bullet((int) MainTurret.TowerPos().X, (int) MainTurret.TowerPos().Y, i / 3.6f, 2, 100, Turret.Effects.None));
       }
     }

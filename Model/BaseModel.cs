@@ -45,7 +45,6 @@ namespace SurfaceTower.Model
 
   public class BaseModel
   {
-    public static BaseModel INSTANCE = new BaseModel();
     protected ICollection<EnemyTimePair> dying = new LinkedList<EnemyTimePair>(), dead = new LinkedList<EnemyTimePair>();
     protected ICollection<CollisionTimePair> collisions = new LinkedList<CollisionTimePair>();
     protected ICollection<Bullet> bullets = new LinkedList<Bullet>();
