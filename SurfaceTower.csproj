@@ -162,6 +162,12 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="AudioResources\AudioResources.csproj">
+      <Project>{A4AE7DE5-1F6E-4AA4-AE21-9D40E7F1CB1A}</Project>
+      <Name>AudioResources</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
