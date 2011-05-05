@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Audio;
 
-namespace SurfaceTower.TowerAudioEngine
+namespace SurfaceTower.TowerAudio
 {
     class MelodyPlayer
     {
@@ -94,17 +94,17 @@ namespace SurfaceTower.TowerAudioEngine
 
         internal void OnClick()
         {
-            throw new NotImplementedException();
+            
         }
 
         internal void OnBeat()
         {
-            throw new NotImplementedException();
+            
         }
 
         internal void OnBar()
         {
-            throw new NotImplementedException();
+            
         }
 
         #endregion

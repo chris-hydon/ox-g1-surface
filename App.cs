@@ -5,6 +5,7 @@ using Microsoft.Surface.Core;
 using SurfaceTower.Model;
 using SurfaceTower.VideoEngine;
 using SurfaceTower.Controller;
+using SurfaceTower.TowerAudio;
 
 namespace SurfaceTower
 {
@@ -15,6 +16,8 @@ namespace SurfaceTower
 
     //Holds the game state and logic
     protected BaseModel gameModel;
+    //Plays the sounds.
+    protected TowerAudioEngine towerAudioEngine;
     //Used to display the game, implements the draw method
     protected View gameView;
     //Used to handle input
@@ -36,6 +39,8 @@ namespace SurfaceTower
       App.Instance = this;
       //Initialize the game model
       gameModel = new TestingModel();
+      //Initialize AudioEngine
+      towerAudioEngine = new TowerAudioEngine(gameModel);
       //Initialize the UI component
       gameView = new SimpleView(gameModel, graphics, Content);
       contactParser = new ContactParser();

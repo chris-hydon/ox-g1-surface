@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework.Audio;
 
 
-namespace SurfaceTower.TowerAudioEngine
+namespace SurfaceTower.TowerAudio
 {
     class DrumPlayer
     {
@@ -95,9 +95,13 @@ namespace SurfaceTower.TowerAudioEngine
 
         internal void OnClick()
         {
+            if (positionPointer >= SIZE) positionPointer = 0;
             for (int i = 0; i < NO_OF_INSTRUMENTS; i++)
             {
-                if (drumLoop.loopTrace[i][positionPointer] != 0 && playing[i]) drumSoundBank.PlayCue(instrumentName[i] + drumLoop.loopTrace[i][positionPointer].ToString());
+                if (drumLoop.loopTrace[i][positionPointer] != 0 && playing[i])
+                {
+                    drumSoundBank.PlayCue(instrumentName[i] + drumLoop.loopTrace[i][positionPointer].ToString());
+                }
             }
 
             positionPointer++;
@@ -105,7 +109,7 @@ namespace SurfaceTower.TowerAudioEngine
 
         internal void OnBeat()
         {
-            throw new NotImplementedException();
+            
         }
 
         //Bar should happen before Click whenever it does happen.

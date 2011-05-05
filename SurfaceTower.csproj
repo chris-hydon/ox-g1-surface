@@ -105,9 +105,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
-    <Compile Include="AudioEngine\AudioEngine.cs" />
-    <Compile Include="AudioEngine\DrumPlayer.cs" />
-    <Compile Include="AudioEngine\MelodyPlayer.cs" />
+    <Compile Include="TowerAudio\TowerAudioEngine.cs" />
+    <Compile Include="TowerAudio\DrumPlayer.cs" />
+    <Compile Include="TowerAudio\MelodyPlayer.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Controller\ContactData.cs" />
     <Compile Include="Controller\ContactParser.cs" />

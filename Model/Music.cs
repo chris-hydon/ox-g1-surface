@@ -141,15 +141,15 @@ namespace SurfaceTower.Model
       if ((time - lastBar).TotalMilliseconds > BarDuration())
       {
         lastClick = lastBeat = lastBar = time;
-        if (Click != null) Click(this, null);
-        if (Beat != null) Beat(this, null);
         if (Bar != null) Bar(this, null);
+        if (Beat != null) Beat(this, null);
+        if (Click != null) Click(this, null);
       }
       else if ((time - lastBeat).TotalMilliseconds > BeatDuration())
       {
         lastClick = lastBeat = time;
-        if (Click != null) Click(this, null);
         if (Beat != null) Beat(this, null);
+        if (Click != null) Click(this, null);
       }
       else if ((time - lastClick).TotalMilliseconds > ClickDuration())
       {

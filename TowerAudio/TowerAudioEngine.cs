@@ -5,14 +5,15 @@ using System.Text;
 using SurfaceTower.Model;
 using Microsoft.Xna.Framework.Audio;
 
-namespace SurfaceTower.TowerAudioEngine
+namespace SurfaceTower.TowerAudio
 {
-    class TowerAudioEngine
+    public class TowerAudioEngine
     {
         private BaseModel baseModel;
         private AudioEngine audioEngine;
         private DrumPlayer drumPlayer;
         private SoundBank drumSoundBank;
+        private WaveBank waveBank;
         private MelodyPlayer melodyPlayer;
         private SoundBank melodySoundBank;
 
@@ -21,8 +22,10 @@ namespace SurfaceTower.TowerAudioEngine
             this.baseModel = baseModel;
 
             audioEngine = new AudioEngine("Content/AudioResources.xgs");
-            drumSoundBank = new SoundBank(audioEngine, "Content/Drum Bank.xwb");
-            melodySoundBank = new SoundBank(audioEngine, "Content/Melody Bank.xwb");
+            audioEngine.Update();
+            drumSoundBank = new SoundBank(audioEngine, "Content/Drum Bank.xsb");
+            waveBank = new WaveBank(audioEngine, "Content/Wave Bank.xwb");
+            melodySoundBank = new SoundBank(audioEngine, "Content/Melody Bank.xsb");
 
             drumPlayer = new DrumPlayer(drumSoundBank);
             melodyPlayer = new MelodyPlayer(melodySoundBank);
@@ -30,8 +33,10 @@ namespace SurfaceTower.TowerAudioEngine
             App.Instance.Model.Music.Click += new EventHandler(OnClick);
             App.Instance.Model.Music.Beat += new EventHandler(OnBeat);
             App.Instance.Model.Music.Bar += new EventHandler(OnBar);
+            App.Instance.Model.Update += new EventHandler<SurfaceTower.Model.EventArguments.UpdateArgs>(OnUpdate);
         }
 
+        
         #region Called on Event
 
         void OnClick(object sender, EventArgs e)
@@ -50,6 +55,11 @@ namespace SurfaceTower.TowerAudioEngine
         {
             drumPlayer.OnBar();
             melodyPlayer.OnBar();
+        }
+
+        void OnUpdate(object sender, SurfaceTower.Model.EventArguments.UpdateArgs e)
+        {
+            audioEngine.Update();
         }
 
         #endregion
