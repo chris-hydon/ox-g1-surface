@@ -123,8 +123,10 @@
     <Compile Include="Program.cs" />
     <Compile Include="SurfaceApp.cs" />
     <Compile Include="Tests\Model\BulletTest.cs" />
+    <Compile Include="VideoEngine\BloomComponent.cs" />
     <Compile Include="VideoEngine\View.cs" />
     <Compile Include="VideoEngine\SimpleView.cs" />
+    <Compile Include="VideoEngine\View3D.cs" />
   </ItemGroup>
   <ItemGroup>
     <NestedContentProject Include="Content\Content.contentproj">
