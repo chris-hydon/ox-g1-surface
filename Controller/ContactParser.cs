@@ -42,9 +42,43 @@ namespace SurfaceTower.Controller
       {
         // Add a player!
         MainTurret[] players = App.Instance.Model.Players;
+        MainTurret[] sortedPlayers;
         
-        // Which region? TODO: Decide based not on order, but on where the tag is placed.
-        foreach (MainTurret t in players)
+        // Which region?
+        int width = App.Instance.GraphicsDevice.PresentationParameters.BackBufferWidth;
+        int height = App.Instance.GraphicsDevice.PresentationParameters.BackBufferHeight;
+        float x = (float) e.Contact.CenterX / width;
+        float y = (float) e.Contact.CenterY / height;
+
+        // Top/right (0/1)
+        if (x > y)
+        {
+          // Top (0)
+          if (x + y < 1)
+          {
+            sortedPlayers = new MainTurret[] { players[0], players[x > 0.5 ? 1 : 3], players[x > 0.5 ? 3 : 1], players[2] };
+          }
+          // Right (1)
+          else
+          {
+            sortedPlayers = new MainTurret[] { players[1], players[y > 0.5 ? 2 : 0], players[y > 0.5 ? 0 : 2], players[3] };
+          }
+        }
+        else
+        {
+          // Left (3)
+          if (x + y < 1)
+          {
+            sortedPlayers = new MainTurret[] { players[3], players[y > 0.5 ? 2 : 0], players[y > 0.5 ? 0 : 2], players[1] };
+          }
+          // Bottom (2)
+          else
+          {
+            sortedPlayers = new MainTurret[] { players[2], players[x > 0.5 ? 1 : 3], players[x > 0.5 ? 3 : 1], players[0] };
+          }
+        }
+
+        foreach (MainTurret t in sortedPlayers)
         {
           if (!t.IsActive)
           {

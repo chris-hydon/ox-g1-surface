@@ -3,6 +3,7 @@ using Microsoft.Surface.Core;
 using Microsoft.Xna.Framework;
 
 using SurfaceTower.Model.EventArguments;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace SurfaceTower.Model
 {
@@ -21,9 +22,8 @@ namespace SurfaceTower.Model
 
     public static Vector2 TowerPos()
     {
-      InteractiveSurface s = InteractiveSurface.DefaultInteractiveSurface;
-      if (s == null) return Vector2.Zero;
-      return new Vector2(s.Width / 2, s.Height / 2);
+      PresentationParameters p = App.Instance.GraphicsDevice.PresentationParameters;
+      return new Vector2(p.BackBufferWidth / 2, p.BackBufferHeight / 2);
     }
 
     #endregion
