@@ -3,56 +3,83 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using SurfaceTower.Model.Shape;
+using Microsoft.Xna.Framework;
+
 namespace SurfaceTower.Model
 {
-  public class Bullet
+  public class Bullet : ICollidable, IMovable
   {
-    protected int speed, power;
-    protected float x, y, rotation;
+    protected Vector2 velocity;
+    protected Vector2 acceleration = Vector2.Zero;
+    protected readonly IShape shape;
+    protected int power;
     protected Turret.Effects effect;
 
-  #region Properties
-    public int X
+    #region Properties
+
+    public IShape Shape
     {
-      get { return (int) x; }
+      get { return shape; }
     }
-    public int Y
+
+    public float Orientation
     {
-      get { return (int) y; }
+      get { return (float) Math.Atan(Velocity.Y / Velocity.X); }
+      set
+      {
+        // The orientation of a bullet is always the direction of travel and cannot be set directly.
+        throw new InvalidOperationException();
+      }
     }
-    public float Rotation
+
+    public Vector2 Location
     {
-      get { return rotation; }
+      get { return shape.Origin; }
+      set { shape.Origin = value; }
     }
-    public int Speed
+
+    public Vector2 Velocity
     {
-      get { return speed; }
+      get { return velocity; }
+      set { velocity = value; }
     }
+
+    public Vector2 Acceleration
+    {
+      get { return acceleration; }
+      set { acceleration = value; }
+    }
+
     public int Power
     {
       get { return power; }
     }
+
     public Turret.Effects Effect
     {
       get { return effect; }
     }
     
-  #endregion
+    #endregion
 
-    public Bullet(int x, int y, float rotation, int speed, int power, Turret.Effects effect)
+    public Bullet(Vector2 location, Vector2 velocity, int power, Turret.Effects effect)
     {
-      this.x = x;
-      this.y = y;
-      this.rotation = rotation;
-      this.speed = speed;
+      this.shape = new Circle(3, location);
+      this.velocity = velocity;
       this.power = power;
       this.effect = effect;
     }
 
     public void Move()
     {
-      x += (float) (speed * Math.Cos(rotation)/Constants.SPEED_CONSTANT);
-      y += (float) (speed * Math.Sin(rotation)/Constants.SPEED_CONSTANT);
+      Velocity += Acceleration / Constants.UPDATES_PER_SECOND;
+      Location += Velocity / Constants.UPDATES_PER_SECOND;
+    }
+
+    public bool Collides(ICollidable c)
+    {
+      return Shape.Collides(c.Shape);
     }
   }
 }

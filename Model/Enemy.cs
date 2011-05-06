@@ -1,84 +1,81 @@
-﻿using Microsoft.Xna.Framework;
-using System;
+﻿using System;
+
+using Microsoft.Xna.Framework;
+using SurfaceTower.Model.Shape;
 
 namespace SurfaceTower.Model
 {
-  public class Enemy
+  public class Enemy : ICollidable, IMovable
   {
-    protected float x, y, rotation;
-    protected int size, health, speed;
+    protected Vector2 velocity;
+    protected Vector2 acceleration = Vector2.Zero;
+    protected readonly IShape shape;
+    protected float orientation;
+    protected int health;
 
     #region Properties
 
-    public int X
+    public IShape Shape
     {
-      get { return (int) x; }
-      set { x = value; }
+      get { return shape; }
     }
-    public int Y
+
+    public float Orientation
     {
-      get { return (int) y; }
-      set { y = value; }
+      get { return orientation; }
+      set { orientation = value; }
     }
-    public float Rotation
+
+    public Vector2 Location
     {
-      get { return rotation; }
-      set { rotation = value; }
+      get { return Shape.Origin; }
+      set { Shape.Origin = value; }
     }
-    public int Size
+
+    public Vector2 Velocity
     {
-      get { return size; }
-      set { size = value; }
+      get { return velocity; }
+      set { velocity = value; }
     }
+
+    public Vector2 Acceleration
+    {
+      get { return acceleration; }
+      set { acceleration = value; }
+    }
+
+    public float Size
+    {
+      get { return ((Circle) Shape).Radius; }
+    }
+
     public int Health
     {
       get { return health; }
       set { health = value; }
-    }
-    public int Speed
-    {
-      get { return speed; }
-      set { speed = value; }
     }
 
     #endregion
 
     #region Methods
 
-    public Enemy(int x, int y, float rotation, int size, int health, int speed)
+    public Enemy(Vector2 location, float orientation, int size, int health, Vector2 velocity)
     {
-      this.x = x;
-      this.y = y;
-      this.rotation = rotation;
-      this.size = size;
+      this.shape = new Circle(size, location);
+      this.orientation = orientation;
       this.health = health;
-      this.speed = speed;
-    }
-    public virtual void Move()
-    {
-      Vector2 pos = MainTurret.TowerPos();
-      float XDist = pos.X - x;
-      float YDist = pos.Y - y;
-      if (XDist != 0 || YDist != 0)
-      {
-        Vector2 direction = new Vector2(pos.X - x, pos.Y - y);
-        if (direction.Length() < speed)
-        {
-          x = pos.X;
-          y = pos.Y;
-        }
-        else
-        {
-          direction.Normalize();
-          x += direction.X * speed/Constants.SPEED_CONSTANT;
-          y += direction.Y * speed/Constants.SPEED_CONSTANT;
-        }
-      }
+      this.velocity = new Vector2(velocity.X, velocity.Y);
     }
 
-    public virtual bool IsHit(Bullet b)
+    public virtual void Move()
     {
-      return (Math.Abs(b.X - X) <= Size && Math.Abs(b.Y - Y) <= Size);
+      Velocity += Acceleration / Constants.UPDATES_PER_SECOND;
+      Location += Velocity / Constants.UPDATES_PER_SECOND;
+    }
+
+    public bool Collides(ICollidable c)
+    {
+      return Shape.Collides(c.Shape);
     }
     #endregion
   }

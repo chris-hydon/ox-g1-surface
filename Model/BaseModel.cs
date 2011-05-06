@@ -52,7 +52,8 @@ namespace SurfaceTower.Model
 
     protected TimeSpan lastUpdate;
     protected Music music = new Music();
-    protected MainTurret[] players = new MainTurret[4] { new MainTurret(0), new MainTurret(1), new MainTurret(2), new MainTurret(3) };
+    protected MainGun[] players = new MainGun[4] { new MainGun(0), new MainGun(1), new MainGun(2), new MainGun(3) };
+    protected Tower tower = new Tower();
     protected ICollection<Turret> turrets = new LinkedList<Turret>();
 
     #region Properties
@@ -62,9 +63,14 @@ namespace SurfaceTower.Model
       get { return music; }
     }
 
-    public MainTurret[] Players
+    public MainGun[] Players
     {
       get { return players; }
+    }
+
+    public Tower Tower
+    {
+      get { return tower; }
     }
 
     public ICollection<Turret> Turrets
@@ -120,7 +126,7 @@ namespace SurfaceTower.Model
       {
         foreach(Enemy e in living)
         {
-          if (e.IsHit(b))
+          if (e.Collides(b))
           {
             e.Health -= b.Power;
             if (e.Health <= 0)

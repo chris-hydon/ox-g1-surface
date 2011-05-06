@@ -1,0 +1,40 @@
+﻿using Microsoft.Xna.Framework;
+namespace SurfaceTower.Model.Shape
+{
+  public class Circle : IShape
+  {
+    float radius;
+    Vector2 origin;
+
+    #region Properties
+
+    public float Radius
+    {
+      get { return radius; }
+    }
+
+    public Vector2 Origin
+    {
+      get { return origin; }
+      set { origin = value; }
+    }
+
+    #endregion
+
+    public Circle(float radius, Vector2 origin)
+    {
+      this.radius = radius;
+      this.origin = origin;
+    }
+
+    public bool Collides(IShape otherShape)
+    {
+      return otherShape.CheckCollides(this);
+    }
+
+    public bool CheckCollides(Circle otherShape)
+    {
+      return Radius + otherShape.Radius > (Origin - otherShape.Origin).Length();
+    }
+  }
+}

@@ -41,8 +41,8 @@ namespace SurfaceTower.Controller
       if (e.Contact.IsTagRecognized)
       {
         // Add a player!
-        MainTurret[] players = App.Instance.Model.Players;
-        MainTurret[] sortedPlayers;
+        MainGun[] players = App.Instance.Model.Players;
+        MainGun[] sortedPlayers;
         
         // Which region?
         int width = App.Instance.GraphicsDevice.PresentationParameters.BackBufferWidth;
@@ -56,12 +56,12 @@ namespace SurfaceTower.Controller
           // Top (0)
           if (x + y < 1)
           {
-            sortedPlayers = new MainTurret[] { players[0], players[x > 0.5 ? 1 : 3], players[x > 0.5 ? 3 : 1], players[2] };
+            sortedPlayers = new MainGun[] { players[0], players[x > 0.5 ? 1 : 3], players[x > 0.5 ? 3 : 1], players[2] };
           }
           // Right (1)
           else
           {
-            sortedPlayers = new MainTurret[] { players[1], players[y > 0.5 ? 2 : 0], players[y > 0.5 ? 0 : 2], players[3] };
+            sortedPlayers = new MainGun[] { players[1], players[y > 0.5 ? 2 : 0], players[y > 0.5 ? 0 : 2], players[3] };
           }
         }
         else
@@ -69,16 +69,16 @@ namespace SurfaceTower.Controller
           // Left (3)
           if (x + y < 1)
           {
-            sortedPlayers = new MainTurret[] { players[3], players[y > 0.5 ? 2 : 0], players[y > 0.5 ? 0 : 2], players[1] };
+            sortedPlayers = new MainGun[] { players[3], players[y > 0.5 ? 2 : 0], players[y > 0.5 ? 0 : 2], players[1] };
           }
           // Bottom (2)
           else
           {
-            sortedPlayers = new MainTurret[] { players[2], players[x > 0.5 ? 1 : 3], players[x > 0.5 ? 3 : 1], players[0] };
+            sortedPlayers = new MainGun[] { players[2], players[x > 0.5 ? 1 : 3], players[x > 0.5 ? 3 : 1], players[0] };
           }
         }
 
-        foreach (MainTurret t in sortedPlayers)
+        foreach (MainGun t in sortedPlayers)
         {
           if (!t.IsActive)
           {

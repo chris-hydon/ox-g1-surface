@@ -105,6 +105,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="Model\ICollidable.cs" />
+    <Compile Include="Model\IEntity.cs" />
+    <Compile Include="Model\IMovable.cs" />
+    <Compile Include="Model\Shape\Circle.cs" />
+    <Compile Include="Model\Shape\IShape.cs" />
+    <Compile Include="Model\Tower.cs" />
     <Compile Include="TowerAudio\TowerAudioEngine.cs" />
     <Compile Include="TowerAudio\DrumPlayer.cs" />
     <Compile Include="TowerAudio\MelodyPlayer.cs" />
@@ -114,7 +120,7 @@
     <Compile Include="Model\Bullet.cs" />
     <Compile Include="Model\Enemy.cs" />
     <Compile Include="Model\EventArgs\UpdateArgs.cs" />
-    <Compile Include="Model\MainTurret.cs" />
+    <Compile Include="Model\MainGun.cs" />
     <Compile Include="Model\BaseModel.cs" />
     <Compile Include="Model\Music.cs" />
     <Compile Include="Model\TestingModel.cs" />

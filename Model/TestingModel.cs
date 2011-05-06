@@ -28,11 +28,15 @@ namespace SurfaceTower.Model
 
       Music.Beat += new EventHandler(OnBeat);
 
-      //For toy version, put an enemy on the stage
+      //For toy version, put some enemy on the stage, at a constant velocity towards the tower.
       for (int i = 0; i < 100; i++)
       {
-        Living.Add(new Enemy(50*(i%10), 50*(i/10), 0, 10, 100, 1));
-        Bullets.Add(new Bullet((int) MainTurret.TowerPos().X, (int) MainTurret.TowerPos().Y, i / 3.6f, 2, 100, Turret.Effects.None));
+        Vector2 enemyPos = new Vector2(50*(i%10), 50*(i/10));
+        Vector2 enemyVelocity = Tower.Location - enemyPos;
+        enemyVelocity /= enemyVelocity.Length() / 25;
+        double bulletAngle = 2 * i * Math.PI / 100;
+        Living.Add(new Enemy(enemyPos, 0, 10, 100, enemyVelocity));
+        Bullets.Add(new Bullet(Tower.Location, new Vector2(50 * (float) Math.Cos(bulletAngle), 50 * (float) Math.Sin(bulletAngle)), 100, Turret.Effects.None));
       }
     }
 

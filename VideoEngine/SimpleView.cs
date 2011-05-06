@@ -56,13 +56,13 @@ namespace SurfaceTower.VideoEngine
             spritebatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.None);
             //Living
             foreach (Enemy e in baseModel.Living){
-                spritebatch.Draw(enemy, new Rectangle(e.X, e.Y, enemy.Width, enemy.Height), Color.White);
+                spritebatch.Draw(enemy, new Rectangle((int) e.Location.X, (int) e.Location.Y, enemy.Width, enemy.Height), Color.White);
             }
 
             //bullets
             foreach (Bullet b in baseModel.Bullets)
             {
-                spritebatch.Draw(bullet, new Rectangle(b.X, b.Y, 20, 20), null, Color.White, b.Rotation, new Vector2(bullet.Width/2, bullet.Height/2), SpriteEffects.None, 0f);
+                spritebatch.Draw(bullet, new Rectangle((int) b.Location.X, (int) b.Location.Y, 20, 20), null, Color.White, b.Orientation, new Vector2(bullet.Width/2, bullet.Height/2), SpriteEffects.None, 0f);
             }
             spritebatch.End();
             return;
