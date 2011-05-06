@@ -8,6 +8,7 @@ namespace SurfaceTower.TowerAudio
 {
     class MelodyPlayer
     {
+        #region Structures and Enums
         private struct Scale
         {
             public int[] notes;
@@ -18,7 +19,10 @@ namespace SurfaceTower.TowerAudio
             }
         }
         enum ScaleType { Major, NatMinor, HarMinor, Pentatonic };
+        #endregion
 
+
+        #region Constants
         public const int SPREAD = 2;
 
         private int[][] scaleSignature = new int[][]
@@ -28,12 +32,16 @@ namespace SurfaceTower.TowerAudio
         new int[]{2,1,2,2,1,3,1},
         new int[]{2,2,3,2,3},
         };
+        #endregion
 
+        #region Variables
         private Scale currentScale;
 
         private SoundBank melodySoundBank;
         private Random random;
+        #endregion
 
+        #region Methods
         public MelodyPlayer(SoundBank melodySoundBank)
         {
             this.melodySoundBank = melodySoundBank;
@@ -89,6 +97,7 @@ namespace SurfaceTower.TowerAudio
 
             return new Scale(result);
         }
+        #endregion
 
         #region Things happening on Events
 
