@@ -17,6 +17,8 @@ namespace SurfaceTower.TowerAudio
 
         public TowerAudioEngine(BaseModel baseModel)
         {
+          try
+          {
             this.baseModel = baseModel;
 
             audioEngine = new AudioEngine("Content/8bit.xgs");
@@ -34,6 +36,11 @@ namespace SurfaceTower.TowerAudio
             App.Instance.Model.Music.Beat += new EventHandler(OnBeat);
             App.Instance.Model.Music.Bar += new EventHandler(OnBar);
             App.Instance.Model.Update += new EventHandler<SurfaceTower.Model.EventArguments.UpdateArgs>(OnUpdate);
+          }
+          catch (InvalidOperationException e)
+          {
+            Console.WriteLine("There is no audio device plugged in. AudioEngine will not be used.");
+          }
         }
 
         
