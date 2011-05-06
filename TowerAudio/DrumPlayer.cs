@@ -52,7 +52,8 @@ namespace SurfaceTower.TowerAudio
         #endregion
 
         #region Variables
-        private SoundBank drumSoundBank;
+        private AudioEngine audioEngine;
+        private ICollection<SoundBank> soundBanks;
         private int positionPointer;
         private DrumLoop drumLoop;
 
@@ -61,7 +62,7 @@ namespace SurfaceTower.TowerAudio
         private bool[] playing;
         #endregion
 
-        public DrumPlayer(SoundBank drumSoundBank)
+        public DrumPlayer(AudioEngine audioEngine)
         {
             playing = new bool[NO_OF_INSTRUMENTS];
             switchFlag = true;
@@ -75,7 +76,10 @@ namespace SurfaceTower.TowerAudio
 
             drumLoop = new DrumLoop(loopTrace);
             positionPointer = 0;
-            this.drumSoundBank = drumSoundBank;
+
+            this.audioEngine = audioEngine;
+            soundBanks = new LinkedList<SoundBank>();
+            soundBanks.Add(new SoundBank(audioEngine, "Content/Drum Sound.xsb"));
         }
 
         //Probability of generating a sound on a click is b/a
@@ -100,7 +104,7 @@ namespace SurfaceTower.TowerAudio
             {
                 if (drumLoop.loopTrace[i][positionPointer] != 0 && playing[i])
                 {
-                    drumSoundBank.PlayCue(instrumentName[i] + drumLoop.loopTrace[i][positionPointer].ToString());
+                    //drumSoundBank.PlayCue(instrumentName[i] + drumLoop.loopTrace[i][positionPointer].ToString());
                 }
             }
 

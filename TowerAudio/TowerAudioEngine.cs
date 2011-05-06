@@ -12,23 +12,23 @@ namespace SurfaceTower.TowerAudio
         private BaseModel baseModel;
         private AudioEngine audioEngine;
         private DrumPlayer drumPlayer;
-        private SoundBank drumSoundBank;
-        private WaveBank waveBank;
         private MelodyPlayer melodyPlayer;
-        private SoundBank melodySoundBank;
+        private ICollection<WaveBank> waveBanks;
 
         public TowerAudioEngine(BaseModel baseModel)
         {
             this.baseModel = baseModel;
 
-            audioEngine = new AudioEngine("Content/AudioResources.xgs");
+            audioEngine = new AudioEngine("Content/8bit.xgs");
             audioEngine.Update();
-            drumSoundBank = new SoundBank(audioEngine, "Content/Drum Bank.xsb");
-            waveBank = new WaveBank(audioEngine, "Content/Wave Bank.xwb");
-            melodySoundBank = new SoundBank(audioEngine, "Content/Melody Bank.xsb");
+            //this is needed as the constructor does something magical which allows the sounds to play
+            waveBanks = new LinkedList<WaveBank>();
+            waveBanks.Add(new WaveBank(audioEngine, "Content/Arabian Bank.xwb"));
+            waveBanks.Add(new WaveBank(audioEngine, "Content/Heavy Bank.xwb"));
+            waveBanks.Add(new WaveBank(audioEngine, "Content/Drum Bank.xwb"));
 
-            drumPlayer = new DrumPlayer(drumSoundBank);
-            melodyPlayer = new MelodyPlayer(melodySoundBank);
+            drumPlayer = new DrumPlayer(audioEngine);
+            melodyPlayer = new MelodyPlayer(audioEngine);
 
             App.Instance.Model.Music.Click += new EventHandler(OnClick);
             App.Instance.Model.Music.Beat += new EventHandler(OnBeat);

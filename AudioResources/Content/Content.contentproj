@@ -5035,70 +5035,512 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
-    <Compile Include="melody\tone0.wav">
-      <Name>tone0</Name>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="melody\arabian\10l.wav">
+      <Name>10l</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
-    <Compile Include="melody\tone1.wav">
-      <Name>tone1</Name>
+    <Compile Include="melody\arabian\10s.wav">
+      <Name>10s</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
-    <Compile Include="melody\tone10.wav">
-      <Name>tone10</Name>
+    <Compile Include="melody\arabian\11l.wav">
+      <Name>11l</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
-    <Compile Include="melody\tone11.wav">
-      <Name>tone11</Name>
+    <Compile Include="melody\arabian\11s.wav">
+      <Name>11s</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
-    <Compile Include="melody\tone2.wav">
-      <Name>tone2</Name>
+    <Compile Include="melody\arabian\12l.wav">
+      <Name>12l</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
-    <Compile Include="melody\tone3.wav">
-      <Name>tone3</Name>
+    <Compile Include="melody\arabian\12s.wav">
+      <Name>12s</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
-    <Compile Include="melody\tone4.wav">
-      <Name>tone4</Name>
+    <Compile Include="melody\arabian\13l.wav">
+      <Name>13l</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
-    <Compile Include="melody\tone5.wav">
-      <Name>tone5</Name>
+    <Compile Include="melody\arabian\13s.wav">
+      <Name>13s</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
-    <Compile Include="melody\tone6.wav">
-      <Name>tone6</Name>
+    <Compile Include="melody\arabian\14l.wav">
+      <Name>14l</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
-    <Compile Include="melody\tone7.wav">
-      <Name>tone7</Name>
+    <Compile Include="melody\arabian\14s.wav">
+      <Name>14s</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
-    <Compile Include="melody\tone8.wav">
-      <Name>tone8</Name>
+    <Compile Include="melody\arabian\15l.wav">
+      <Name>15l</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
-    <Compile Include="melody\tone9.wav">
-      <Name>tone9</Name>
+    <Compile Include="melody\arabian\15s.wav">
+      <Name>15s</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\arabian\16l.wav">
+      <Name>16l</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\arabian\16s.wav">
+      <Name>16s</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\arabian\17l.wav">
+      <Name>17l</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\arabian\17s.wav">
+      <Name>17s</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\arabian\18l.wav">
+      <Name>18l</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\arabian\18s.wav">
+      <Name>18s</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\arabian\19l.wav">
+      <Name>19l</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\arabian\19s.wav">
+      <Name>19s</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\arabian\1l.wav">
+      <Name>1l</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\arabian\1s.wav">
+      <Name>1s</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\arabian\20l.wav">
+      <Name>20l</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\arabian\20s.wav">
+      <Name>20s</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\arabian\21l.wav">
+      <Name>21l</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\arabian\21s.wav">
+      <Name>21s</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\arabian\22l.wav">
+      <Name>22l</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\arabian\22s.wav">
+      <Name>22s</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\arabian\23l.wav">
+      <Name>23l</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\arabian\23s.wav">
+      <Name>23s</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\arabian\24l.wav">
+      <Name>24l</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\arabian\24s.wav">
+      <Name>24s</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\arabian\2l.wav">
+      <Name>2l</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\arabian\2s.wav">
+      <Name>2s</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\arabian\3l.wav">
+      <Name>3l</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\arabian\3s.wav">
+      <Name>3s</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\arabian\4l.wav">
+      <Name>4l</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\arabian\4s.wav">
+      <Name>4s</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\arabian\5l.wav">
+      <Name>5l</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\arabian\5s.wav">
+      <Name>5s</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\arabian\6l.wav">
+      <Name>6l</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\arabian\6s.wav">
+      <Name>6s</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\arabian\7l.wav">
+      <Name>7l</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\arabian\7s.wav">
+      <Name>7s</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\arabian\8l.wav">
+      <Name>8l</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\arabian\8s.wav">
+      <Name>8s</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\arabian\9l.wav">
+      <Name>9l</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\arabian\9s.wav">
+      <Name>9s</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\arabian\arabian.wav">
+      <Name>arabian</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\arabian\arabian_long.wav">
+      <Name>arabian_long</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\heavy\10l.wav">
+      <Name>10l</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\heavy\10s.wav">
+      <Name>10s</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\heavy\11l.wav">
+      <Name>11l</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\heavy\11s.wav">
+      <Name>11s</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\heavy\12l.wav">
+      <Name>12l</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\heavy\12s.wav">
+      <Name>12s</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\heavy\13l.wav">
+      <Name>13l</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\heavy\13s.wav">
+      <Name>13s</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\heavy\14l.wav">
+      <Name>14l</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\heavy\14s.wav">
+      <Name>14s</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\heavy\15l.wav">
+      <Name>15l</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\heavy\15s.wav">
+      <Name>15s</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\heavy\16l.wav">
+      <Name>16l</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\heavy\16s.wav">
+      <Name>16s</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\heavy\17l.wav">
+      <Name>17l</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\heavy\17s.wav">
+      <Name>17s</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\heavy\18l.wav">
+      <Name>18l</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\heavy\18s.wav">
+      <Name>18s</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\heavy\19l.wav">
+      <Name>19l</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\heavy\19s.wav">
+      <Name>19s</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\heavy\1l.wav">
+      <Name>1l</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\heavy\1s.wav">
+      <Name>1s</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\heavy\20l.wav">
+      <Name>20l</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\heavy\20s.wav">
+      <Name>20s</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\heavy\21l.wav">
+      <Name>21l</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\heavy\21s.wav">
+      <Name>21s</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\heavy\22l.wav">
+      <Name>22l</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\heavy\22s.wav">
+      <Name>22s</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\heavy\23l.wav">
+      <Name>23l</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\heavy\23s.wav">
+      <Name>23s</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\heavy\24l.wav">
+      <Name>24l</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\heavy\24s.wav">
+      <Name>24s</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\heavy\2l.wav">
+      <Name>2l</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\heavy\2s.wav">
+      <Name>2s</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\heavy\3l.wav">
+      <Name>3l</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\heavy\3s.wav">
+      <Name>3s</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\heavy\4l.wav">
+      <Name>4l</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\heavy\4s.wav">
+      <Name>4s</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\heavy\5l.wav">
+      <Name>5l</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\heavy\5s.wav">
+      <Name>5s</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\heavy\6l.wav">
+      <Name>6l</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\heavy\6s.wav">
+      <Name>6s</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\heavy\7l.wav">
+      <Name>7l</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\heavy\7s.wav">
+      <Name>7s</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\heavy\8l.wav">
+      <Name>8l</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\heavy\8s.wav">
+      <Name>8s</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\heavy\9l.wav">
+      <Name>9l</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\heavy\9s.wav">
+      <Name>9s</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\heavy\heavy.wav">
+      <Name>heavy</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="melody\heavy\heavy_long.wav">
+      <Name>heavy_long</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AudioResources.xap">
-      <Name>AudioResources</Name>
+    <Compile Include="8bit.xap">
+      <Name>8bit</Name>
       <Importer>XactImporter</Importer>
       <Processor>XactProcessor</Processor>
     </Compile>

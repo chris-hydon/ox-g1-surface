@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Audio;
+using SurfaceTower.Model;
 
 namespace SurfaceTower.TowerAudio
 {
@@ -37,19 +38,27 @@ namespace SurfaceTower.TowerAudio
         #region Variables
         private Scale currentScale;
 
-        private SoundBank melodySoundBank;
+        private BaseModel model;
+        private AudioEngine audioEngine;
+        private ICollection<SoundBank> soundBanks;
         private Random random;
         #endregion
 
-        #region Methods
-        public MelodyPlayer(SoundBank melodySoundBank)
+        
+        public MelodyPlayer(AudioEngine audioEngine)
         {
-            this.melodySoundBank = melodySoundBank;
+            this.audioEngine = audioEngine;
             random = new Random();
+            model = App.Instance.Model;
+
+            soundBanks = new LinkedList<SoundBank>();
+            soundBanks.Add(new SoundBank(audioEngine, "Content/Arabian Sound.xsb"));
+            soundBanks.Add(new SoundBank(audioEngine, "Content/Heavy Sound.xsb"));
 
             currentScale = CreateScale(1, ScaleType.Major);
         }
 
+        #region Methods
         private Scale CreateScale(int note, ScaleType scaleType)
         {
             int scaleLength = scaleSignature[(int)scaleType].Length;
@@ -103,7 +112,18 @@ namespace SurfaceTower.TowerAudio
 
         internal void OnClick()
         {
-            
+            if (model.Dying.Count > 0)
+            {
+                //Sound has to be played.
+                int scaleLength = currentScale.notes.Length;
+                int notePosition = random.Next(scaleLength);
+                soundBanks.ElementAt(1).PlayCue( currentScale.notes[notePosition]+ "s");
+
+                while (model.Dying.Count != 0)
+                {
+                    model.Kill(model.Dying.ElementAt(0));
+                }
+            }
         }
 
         internal void OnBeat()
