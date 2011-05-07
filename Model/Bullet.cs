@@ -1,20 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-using SurfaceTower.Model.Shape;
 using Microsoft.Xna.Framework;
+using SurfaceTower.Model.Gun;
+using SurfaceTower.Model.Shape;
 
 namespace SurfaceTower.Model
 {
+  [Flags]
+  public enum Effects
+  {
+    None = 0
+  }
+
   public class Bullet : ICollidable, IMovable
   {
     protected Vector2 velocity;
     protected Vector2 acceleration = Vector2.Zero;
     protected readonly IShape shape;
     protected int power;
-    protected Turret.Effects effect;
+    protected int playerId;
+    protected Effects effects;
 
     #region Properties
 
@@ -56,19 +61,25 @@ namespace SurfaceTower.Model
       get { return power; }
     }
 
-    public Turret.Effects Effect
+    public int PlayerId
     {
-      get { return effect; }
+      get { return playerId; }
+    }
+
+    public Effects Effects
+    {
+      get { return effects; }
     }
     
     #endregion
 
-    public Bullet(Vector2 location, Vector2 velocity, int power, Turret.Effects effect)
+    public Bullet(Vector2 location, Vector2 velocity, int power, Effects effects, int playerId)
     {
       this.shape = new Circle(3, location);
       this.velocity = velocity;
       this.power = power;
-      this.effect = effect;
+      this.effects = effects;
+      this.playerId = playerId;
     }
 
     public void Move()

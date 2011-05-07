@@ -7,6 +7,7 @@ namespace SurfaceTower.Model
   public class Tower : IEntity, ICollidable
   {
     private readonly Circle shape;
+    private int health;
 
     #region Properties
 
@@ -23,6 +24,12 @@ namespace SurfaceTower.Model
     public IShape Shape
     {
       get { return shape; }
+    }
+
+    public int Health
+    {
+      get { return health; }
+      set { health = value; }
     }
 
     #endregion

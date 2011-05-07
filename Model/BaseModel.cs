@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
 using SurfaceTower.Model.EventArguments;
+using SurfaceTower.Model.Gun;
 
 namespace SurfaceTower.Model
 {

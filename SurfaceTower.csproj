@@ -105,6 +105,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="Model\EventArgs\ShotArgs.cs" />
+    <Compile Include="Model\Gun\IGun.cs" />
+    <Compile Include="Model\Gun\ShotPatterns.cs" />
     <Compile Include="Model\ICollidable.cs" />
     <Compile Include="Model\IEntity.cs" />
     <Compile Include="Model\IMovable.cs" />
@@ -120,11 +123,11 @@
     <Compile Include="Model\Bullet.cs" />
     <Compile Include="Model\Enemy.cs" />
     <Compile Include="Model\EventArgs\UpdateArgs.cs" />
-    <Compile Include="Model\MainGun.cs" />
+    <Compile Include="Model\Gun\MainGun.cs" />
     <Compile Include="Model\BaseModel.cs" />
     <Compile Include="Model\Music.cs" />
     <Compile Include="Model\TestingModel.cs" />
-    <Compile Include="Model\Turret.cs" />
+    <Compile Include="Model\Gun\Turret.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="SurfaceApp.cs" />

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Microsoft.Surface.Core;
 using Microsoft.Xna.Framework;
 using SurfaceTower.Model;
+using SurfaceTower.Model.Gun;
 
 namespace SurfaceTower.Controller
 {

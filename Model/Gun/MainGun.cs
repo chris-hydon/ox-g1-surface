@@ -1,22 +1,26 @@
 ﻿using System;
-using Microsoft.Surface.Core;
-using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 
-using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
+using SurfaceTower.Model;
 using SurfaceTower.Model.EventArguments;
 using SurfaceTower.Model.Shape;
 
-namespace SurfaceTower.Model
+namespace SurfaceTower.Model.Gun
 {
-  public class MainGun
+  public class MainGun : IGun
   {
     private bool active = false;
     private float orientation;
     private int playerId;
+    private ShotPatterns shots;
+    private int strength;
 
     public MainGun(int playerId)
     {
       this.playerId = playerId;
+      strength = Constants.MAIN_TURRET_DEFAULT_POWER;
+      Shots = ShotPatterns.Simple;
     }
 
     #region Properties
@@ -35,6 +39,17 @@ namespace SurfaceTower.Model
       get { return playerId; }
     }
 
+    public int Strength
+    {
+      get { return strength; }
+    }
+
+    public ShotPatterns Shots
+    {
+      get { return shots; }
+      set { shots = value; }
+    }
+
     public bool IsActive
     {
       get { return active; }
@@ -48,14 +63,12 @@ namespace SurfaceTower.Model
 
           if (value)
           {
-            m.Update += new EventHandler<UpdateArgs>(OnUpdate);
             m.Music.Click += new EventHandler(OnClick);
             m.Music.Beat += new EventHandler(OnBeat);
           }
           else
           {
             // This bit is magic.
-            m.Update -= new EventHandler<UpdateArgs>(OnUpdate);
             m.Music.Click -= new EventHandler(OnClick);
             m.Music.Beat -= new EventHandler(OnBeat);
           }
@@ -69,7 +82,7 @@ namespace SurfaceTower.Model
 
     #region Events
 
-    public event EventHandler ShotFired;
+    public event EventHandler<ShotArgs> ShotFired;
     public event EventHandler UpgradeReady;
 
     #endregion
@@ -77,12 +90,22 @@ namespace SurfaceTower.Model
     #region Methods
 
     /// <summary>
-    /// Called in response to the BaseModel.Update signal.
+    /// Shoot this gun's ShotPatterns. It fires one bullet per ShotPattern with the
+    /// appropriate parameters, then signals the ShotFired event.
     /// </summary>
-    /// <param name="sender">The BaseModel object which sent the Update signal.</param>
-    /// <param name="args">UpdateArgs object containing the current TimeSpan snapshot.</param>
-    public void OnUpdate(object sender, UpdateArgs args)
+    public void Shoot()
     {
+      foreach (ShotPattern shot in Shots)
+      {
+        Vector2 velocity = new Vector2(
+          (float) Math.Cos(Orientation + shot.OrientationModifier),
+          (float) Math.Sin(Orientation + shot.OrientationModifier)
+        );
+        Vector2 locMod = Vector2.Transform(shot.PositionModifier, Matrix.CreateRotationZ(Orientation));
+        Bullet bullet = new Bullet(App.Instance.Model.Tower.Location + locMod, velocity, Strength, shot.Effects, PlayerId);
+        App.Instance.Model.Bullets.Add(bullet);
+      }
+      if (ShotFired != null) ShotFired(this, new ShotArgs(Shots));
     }
 
     /// <summary>
