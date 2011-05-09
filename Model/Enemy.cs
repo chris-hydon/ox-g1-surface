@@ -7,13 +7,28 @@ namespace SurfaceTower.Model
 {
   public class Enemy : ICollidable, IMovable
   {
+    [Flags]
+    public enum States
+    {
+      None = 0,
+      Slowed = 1,
+      Burning = 2,
+      Stunned = 4,
+    }
     protected Vector2 velocity;
     protected Vector2 acceleration = Vector2.Zero;
     protected readonly IShape shape;
     protected float orientation;
     protected int health;
+    protected States state;
 
     #region Properties
+
+    public States State
+    {
+      get { return state; }
+      set { state = value; }
+    }
 
     public IShape Shape
     {
@@ -69,8 +84,15 @@ namespace SurfaceTower.Model
 
     public virtual void Move()
     {
-      Velocity += Acceleration / Constants.UPDATES_PER_SECOND;
-      Location += Velocity / Constants.UPDATES_PER_SECOND;
+      if ((state & States.Stunned) == 0)
+      {
+        Velocity += Acceleration / Constants.UPDATES_PER_SECOND;
+        Location += ((state & States.Slowed) == 0 ? Velocity/2 : Velocity) / Constants.UPDATES_PER_SECOND;
+        if ((state & States.Burning) != 0)
+        {
+          health--;
+        }
+      }
     }
 
     public bool Collides(ICollidable c)

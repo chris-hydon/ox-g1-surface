@@ -123,6 +123,7 @@ namespace SurfaceTower.Model
       lastUpdate = gameTime.TotalRealTime;
       Update(this, new UpdateArgs(LastUpdate));
       Queue<Enemy> deathRow = new Queue<Enemy>();
+      Queue<Bullet> usedBullets = new Queue<Bullet>();
       foreach(Bullet b in bullets)
       {
         foreach(Enemy e in living)
@@ -134,6 +135,24 @@ namespace SurfaceTower.Model
             {
               deathRow.Enqueue(e);
             }
+
+            if ((Effects.Pierce & b.Effects) == 0)
+            {
+              usedBullets.Enqueue(b);
+            }
+            if ((Effects.Burn & b.Effects) != 0)
+            {
+              e.State |= Enemy.States.Burning;
+            }
+            if ((Effects.Slow & b.Effects) != 0)
+            {
+              e.State |= Enemy.States.Slowed;
+            }
+            if ((Effects.Stun & b.Effects) != 0)
+            {
+              e.State |= Enemy.States.Stunned;
+            }
+
           }
         }
         while (deathRow.Count > 0)
@@ -141,6 +160,10 @@ namespace SurfaceTower.Model
           MakeDying(new EnemyTimePair(deathRow.Dequeue(), LastUpdate));
         }
         b.Move();
+      }
+      while (usedBullets.Count > 0)
+      {
+        bullets.Remove(usedBullets.Dequeue());
       }
       foreach (Enemy e in living)
       {

@@ -42,6 +42,7 @@ namespace SurfaceTower.Model.Gun
     public int Strength
     {
       get { return strength; }
+      set { strength = value; }
     }
 
     public ShotPatterns Shots
