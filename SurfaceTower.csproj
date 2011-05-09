@@ -105,8 +105,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
-    <Compile Include="Model\EventArgs\EnemyArgs.cs" />
-    <Compile Include="Model\EventArgs\ShotArgs.cs" />
+    <Compile Include="Model\EventArguments\EnemyArgs.cs" />
+    <Compile Include="Model\EventArguments\ShotArgs.cs" />
     <Compile Include="Model\Gun\IGun.cs" />
     <Compile Include="Model\Gun\ShotPatterns.cs" />
     <Compile Include="Model\ICollidable.cs" />
@@ -123,7 +123,7 @@
     <Compile Include="Controller\ContactParser.cs" />
     <Compile Include="Model\Bullet.cs" />
     <Compile Include="Model\Enemy.cs" />
-    <Compile Include="Model\EventArgs\UpdateArgs.cs" />
+    <Compile Include="Model\EventArguments\UpdateArgs.cs" />
     <Compile Include="Model\Gun\MainGun.cs" />
     <Compile Include="Model\BaseModel.cs" />
     <Compile Include="Model\Music.cs" />
