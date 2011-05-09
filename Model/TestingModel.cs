@@ -2,6 +2,7 @@
 
 using Microsoft.Xna.Framework;
 using SurfaceTower.Model.Gun;
+using SurfaceTower.Model.EventArguments;
 
 namespace SurfaceTower.Model
 {
@@ -34,8 +35,8 @@ namespace SurfaceTower.Model
         Vector2 enemyVelocity = Tower.Location - enemyPos;
         enemyVelocity /= enemyVelocity.Length() / 25;
         double bulletAngle = 2 * i * Math.PI / 100;
-        Living.Add(new Enemy(enemyPos, 0, 10, 100, enemyVelocity));
-        Bullets.Add(new Bullet(Tower.Location, new Vector2(50 * (float) Math.Cos(bulletAngle), 50 * (float) Math.Sin(bulletAngle)), 100, Effects.None, i % 4));
+        Spawn(new Enemy(enemyPos, 0, 10, 100, enemyVelocity));
+        Bullets.Add(new Bullet(Tower.Location, new Vector2(50 * (float) Math.Cos(bulletAngle), 50 * (float) Math.Sin(bulletAngle)), 100, (i%2==1)?Effects.Pierce:Effects.None, i % 4));
       }
     }
 

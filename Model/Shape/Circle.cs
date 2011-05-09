@@ -13,6 +13,16 @@ namespace SurfaceTower.Model.Shape
       get { return radius; }
     }
 
+    public float Width
+    {
+      get { return Radius * 2; }
+    }
+
+    public float Height
+    {
+      get { return Radius * 2; }
+    }
+
     public Vector2 Origin
     {
       get { return origin; }

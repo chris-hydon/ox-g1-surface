@@ -9,7 +9,11 @@ namespace SurfaceTower.Model
   [Flags]
   public enum Effects
   {
-    None = 0
+    None = 0,
+    Pierce = 1,
+    Burn = 2,
+    Stun = 4,
+    Slow = 8,
   }
 
   public class Bullet : ICollidable, IMovable

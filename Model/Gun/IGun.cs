@@ -10,6 +10,7 @@ namespace SurfaceTower.Model.Gun
   {
     int PlayerId { get; }
     ShotPatterns Shots { get; set; }
+    int Strength { get; set; }
 
     event EventHandler<ShotArgs> ShotFired;
     event EventHandler UpgradeReady;
