@@ -6,30 +6,54 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
+using SurfaceTower.Model;
+
 namespace SurfaceTower.VideoEngine.ParticleEngine
 {
     public class PEngine
     {
         const int MAXEMITTERS = 50;
-        private ICollection<Emitter> emitters;
+        private int numberOfEmitters;
+        private ICollection<AbstractEmitter> emitters;
         private SimpleView view;
         private Texture2D tex;
 
         public PEngine(SimpleView view)
         {
             this.view = view;
-            emitters = new List<Emitter>(MAXEMITTERS);
+            emitters = new List<AbstractEmitter>(MAXEMITTERS);
             tex = view.content.Load<Texture2D>("particle");
+            numberOfEmitters = 0;
         }
 
         public void addEmitter(Vector2 position)
         {
+
             emitters.Add(new Emitter(position, tex));
+            numberOfEmitters++;
         }
 
-        public void Update()
+        public void addExplosion(Vector2 position)
         {
-            foreach (Emitter e in emitters)
+            ExplosionEmitter e = new ExplosionEmitter(position, tex);
+            e.Update();
+            emitters.Add(e);
+            numberOfEmitters++;
+        }
+
+        public void Update(ICollection<Enemy> living)
+        {
+            AbstractEmitter em;
+            for (int i=0; i < numberOfEmitters; i++)
+            {
+                em = emitters.ElementAt<AbstractEmitter>(i);
+                if (em.IsFinished())
+                {
+                    emitters.Remove(em);
+                    numberOfEmitters--;
+                }
+            }
+            foreach (AbstractEmitter e in emitters)
             {
                 e.Update();
             }
@@ -37,7 +61,7 @@ namespace SurfaceTower.VideoEngine.ParticleEngine
 
         public void Draw()
         {
-            foreach (Emitter e in emitters)
+            foreach (AbstractEmitter e in emitters)
             {
                 e.Draw(view.spritebatch);
             }

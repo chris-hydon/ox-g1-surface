@@ -8,14 +8,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace SurfaceTower.VideoEngine.ParticleEngine
 { 
-    public class Emitter
+    public class Emitter : AbstractEmitter
     {
         const int MAXPARTICLES = 200;
-        private int numberOfParticles;
-        private Vector2 position;
-        private ICollection<Particle> particles;
-        private Texture2D sprite;
-        private Random random;
 
         public Emitter(Vector2 position, Texture2D sprite)
         {
@@ -23,10 +18,9 @@ namespace SurfaceTower.VideoEngine.ParticleEngine
             this.sprite = sprite;
             particles = new List<Particle>(MAXPARTICLES);
             numberOfParticles = 0;
-            this.random = new Random();
         }
 
-        public void Update(){
+        public override void Update(){
             Particle p;
             for (int i = numberOfParticles; i < MAXPARTICLES; i++)
             {
@@ -47,6 +41,10 @@ namespace SurfaceTower.VideoEngine.ParticleEngine
             }
         }
 
+        public override bool IsFinished(){
+            return false;
+        }
+
         private Particle newParticle()
         {
             Vector2 v = (float)random.NextDouble()*0.05f*(new Vector2(random.Next(100), random.Next(100)));
@@ -62,18 +60,11 @@ namespace SurfaceTower.VideoEngine.ParticleEngine
             float a = (float)random.NextDouble();
             float av = (float)random.NextDouble();
             int s = random.Next(5);
-            int ttl = random.Next(150)+1;
-            Particle particle = new Particle(v, p, a, av, s, ttl, sprite);
+            int ttl = random.Next(50)+1;
+            Particle particle = new Particle(v, p, a, av, s, ttl, sprite, Color.Green);
             return particle;
         }
 
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            foreach (Particle p in particles)
-            {
-                p.Draw(spriteBatch);
-            }
-        }
 
     }
 }

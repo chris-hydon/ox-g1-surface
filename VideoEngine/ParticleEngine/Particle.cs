@@ -20,10 +20,10 @@ namespace SurfaceTower.VideoEngine.ParticleEngine
         public int size { get; set; }
         public float angle { get; set; }
         public float angVelocity { get; set; }
-        Color c = new Color(Color.Green, 1);
+        private Color color;
         #endregion
 
-        public Particle(Vector2 velocity, Vector2 position, float angle, float angVelocity, int size, int timeToLive, Texture2D sprite)
+        public Particle(Vector2 velocity, Vector2 position, float angle, float angVelocity, int size, int timeToLive, Texture2D sprite, Color color)
         {
             this.velocity = velocity;
             this.position = position;
@@ -32,6 +32,7 @@ namespace SurfaceTower.VideoEngine.ParticleEngine
             this.angle = angle;
             this.angVelocity= angVelocity;
             this.sprite = sprite;
+            this.color = color;
             originalttl = timeToLive;
         }
         
@@ -57,9 +58,9 @@ namespace SurfaceTower.VideoEngine.ParticleEngine
         {
             Vector2 origin = new Vector2(sprite.Width/2, sprite.Height/2);
             int a = (255 * timeToLive) / originalttl;
-            c.A = (byte) ((255*timeToLive) / originalttl);
+            color.A = (byte) ((255*timeToLive) / originalttl);
             if (a < 0 || a > 255) Console.WriteLine(a);
-            spriteBatch.Draw(sprite, new Rectangle((int)position.X, (int)position.Y, 5, 5), c);
+            spriteBatch.Draw(sprite, new Rectangle((int)position.X, (int)position.Y, 5, 5), color);
 
         }
 

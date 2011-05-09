@@ -55,7 +55,7 @@ namespace SurfaceTower.VideoEngine
             particleEngine.addEmitter(new Vector2(500));
             particleEngine.addEmitter(new Vector2(100));
             particleEngine.addEmitter(new Vector2(600));
-
+            particleEngine.addExplosion(new Vector2(App.Instance.GraphicsDevice.Viewport.Width / 2, App.Instance.GraphicsDevice.Viewport.Height / 2));
         }
 
         public void draw(GameTime gameTime){
@@ -64,7 +64,7 @@ namespace SurfaceTower.VideoEngine
             //Clear the previous frame 
             graphics.GraphicsDevice.Clear(Color.Black);
 
-            particleEngine.Update();
+            particleEngine.Update(baseModel.Living);
 
           
             spritebatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.None);
