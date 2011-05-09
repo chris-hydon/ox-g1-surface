@@ -113,6 +113,7 @@ namespace SurfaceTower.Model
     #region Events
 
     public event EventHandler<UpdateArgs> Update;
+    public event EventHandler<EnemyArgs> NewEnemy;
 
     #endregion
 
@@ -169,6 +170,12 @@ namespace SurfaceTower.Model
       {
         e.Move();
       }
+    }
+
+    public void Spawn(Enemy e)
+    {
+      Living.Add(e);
+      if (NewEnemy != null) NewEnemy(this, new EnemyArgs(e));
     }
 
     public void MakeDying(EnemyTimePair etp)

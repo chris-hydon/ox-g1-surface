@@ -105,6 +105,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="Model\EventArgs\EnemyArgs.cs" />
     <Compile Include="Model\EventArgs\ShotArgs.cs" />
     <Compile Include="Model\Gun\IGun.cs" />
     <Compile Include="Model\Gun\ShotPatterns.cs" />
