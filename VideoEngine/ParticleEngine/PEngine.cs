@@ -5,7 +5,6 @@ using System.Text;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
 using SurfaceTower.Model;
 
 namespace SurfaceTower.VideoEngine.ParticleEngine
@@ -13,7 +12,6 @@ namespace SurfaceTower.VideoEngine.ParticleEngine
     public class PEngine
     {
         const int MAXEMITTERS = 50;
-        private int numberOfEmitters;
         private ICollection<AbstractEmitter> emitters;
         private SimpleView view;
         private Texture2D tex;
@@ -23,14 +21,18 @@ namespace SurfaceTower.VideoEngine.ParticleEngine
             this.view = view;
             emitters = new List<AbstractEmitter>(MAXEMITTERS);
             tex = view.content.Load<Texture2D>("particle");
-            numberOfEmitters = 0;
+            App.Instance.Model.NewEnemy += new EventHandler<SurfaceTower.Model.EventArguments.EnemyArgs>(NewEnemy);
+        }
+
+        void NewEnemy(object sender, SurfaceTower.Model.EventArguments.EnemyArgs e)
+        {
+            //emitters.Add(new EnemyEmitter(e.Enemy, tex));
         }
 
         public void addEmitter(Vector2 position)
         {
 
             emitters.Add(new Emitter(position, tex));
-            numberOfEmitters++;
         }
 
         public void addExplosion(Vector2 position)
@@ -38,19 +40,17 @@ namespace SurfaceTower.VideoEngine.ParticleEngine
             ExplosionEmitter e = new ExplosionEmitter(position, tex);
             e.Update();
             emitters.Add(e);
-            numberOfEmitters++;
         }
 
         public void Update(ICollection<Enemy> living)
         {
             AbstractEmitter em;
-            for (int i=0; i < numberOfEmitters; i++)
+            for (int i=0; i < emitters.Count; i++)
             {
                 em = emitters.ElementAt<AbstractEmitter>(i);
                 if (em.IsFinished())
                 {
                     emitters.Remove(em);
-                    numberOfEmitters--;
                 }
             }
             foreach (AbstractEmitter e in emitters)

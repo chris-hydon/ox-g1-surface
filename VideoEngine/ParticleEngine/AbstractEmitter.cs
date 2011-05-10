@@ -19,6 +19,7 @@ namespace SurfaceTower.VideoEngine.ParticleEngine
         public AbstractEmitter()
         {
             random = new Random();
+            this.particles = new List<Particle>();
         }
 
         public void Draw(SpriteBatch spriteBatch){

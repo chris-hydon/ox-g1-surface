@@ -52,9 +52,6 @@ namespace SurfaceTower.VideoEngine
             gm.Components.Add(bloom);
             particleEngine = new PEngine(this);
             particleEngine.addEmitter(new Vector2(300));
-            particleEngine.addEmitter(new Vector2(500));
-            particleEngine.addEmitter(new Vector2(100));
-            particleEngine.addEmitter(new Vector2(600));
             particleEngine.addExplosion(new Vector2(App.Instance.GraphicsDevice.Viewport.Width / 2, App.Instance.GraphicsDevice.Viewport.Height / 2));
         }
 
@@ -72,13 +69,15 @@ namespace SurfaceTower.VideoEngine
             particleEngine.Draw();
             //Living
             foreach (Enemy e in baseModel.Living){
-                spritebatch.Draw(enemy, new Rectangle((int) e.Location.X, (int) e.Location.Y, enemy.Width, enemy.Height), Color.White);
+                Rectangle rect = new Rectangle((int)e.Location.X, (int)e.Location.Y, (int)e.Shape.Width, (int)e.Shape.Height);
+                spritebatch.Draw(enemy, rect, new Rectangle(0,0,enemy.Width, enemy.Height), Color.White, e.Orientation, new Vector2(enemy.Width / 2, enemy.Height / 2), SpriteEffects.None, 1);
             }
 
             //bullets
             foreach (Bullet b in baseModel.Bullets)
             {
-                spritebatch.Draw(bullet, new Rectangle((int) b.Location.X, (int) b.Location.Y, 20, 20), null, Color.White, b.Orientation, new Vector2(bullet.Width/2, bullet.Height/2), SpriteEffects.None, 0f);
+                Rectangle rect = new Rectangle((int)b.Location.X, (int)b.Location.Y, (int)b.Shape.Width, (int)b.Shape.Height);
+                spritebatch.Draw(bullet, rect, new Rectangle(0, 0, bullet.Width, bullet.Height), Color.White, b.Orientation, new Vector2(bullet.Width / 2, bullet.Height / 2), SpriteEffects.None, 1);
             }
             spritebatch.End();
             return;

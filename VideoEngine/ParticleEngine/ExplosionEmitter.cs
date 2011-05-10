@@ -59,7 +59,7 @@ namespace SurfaceTower.VideoEngine.ParticleEngine
 
         public override bool IsFinished()
         {
-            return false;
+            return (particles.Count <= 0);
         }
 
 

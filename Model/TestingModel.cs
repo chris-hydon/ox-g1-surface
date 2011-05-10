@@ -28,6 +28,7 @@ namespace SurfaceTower.Model
 
       Music.Beat += new EventHandler(OnBeat);
 
+
       //For toy version, put some enemy on the stage, at a constant velocity towards the tower.
       for (int i = 0; i < 1; i++)
       {
@@ -36,6 +37,8 @@ namespace SurfaceTower.Model
         Bullets.Add(new Bullet(new Vector2 (0,0), new Vector2(100 * (float) Math.Cos(bulletAngle), 100 * (float) Math.Sin(bulletAngle)), 100, Effects.Homing, i % 4));
       }
     }
+
+  
 
     /// <summary>
     /// Called in response to the Music.Beat signal.

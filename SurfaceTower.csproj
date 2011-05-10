@@ -136,6 +136,7 @@
     <Compile Include="VideoEngine\BloomComponent.cs" />
     <Compile Include="VideoEngine\ParticleEngine\AbstractEmitter.cs" />
     <Compile Include="VideoEngine\ParticleEngine\Emitter.cs" />
+    <Compile Include="VideoEngine\ParticleEngine\EnemyEmitter.cs" />
     <Compile Include="VideoEngine\ParticleEngine\ExplosionEmitter.cs" />
     <Compile Include="VideoEngine\ParticleEngine\IEmitter.cs" />
     <Compile Include="VideoEngine\ParticleEngine\PEngine.cs" />
