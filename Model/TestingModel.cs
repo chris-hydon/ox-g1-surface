@@ -32,7 +32,7 @@ namespace SurfaceTower.Model
       for (int i = 0; i < 1; i++)
       {
         double bulletAngle = 0;
-        Spawn(new Enemy(Tower.Location, 0, 10, 100, new Vector2(1,1)));
+        Spawn(new Enemy(Tower.Location, 0, 10, 100, new Vector2(-100,100)));
         Bullets.Add(new Bullet(new Vector2 (0,0), new Vector2(100 * (float) Math.Cos(bulletAngle), 100 * (float) Math.Sin(bulletAngle)), 100, Effects.Homing, i % 4));
       }
     }

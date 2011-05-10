@@ -25,8 +25,13 @@ namespace SurfaceTower.Model
     protected int power;
     protected int playerId;
     protected Effects effects;
+    protected int age;
 
     #region Properties
+    public int Age
+    {
+      get { return age; }
+    }
 
     public IShape Shape
     {
@@ -89,32 +94,32 @@ namespace SurfaceTower.Model
     
     public void Move()
     {
-      if (((Effects.Homing & effects) != 0) && App.Instance.Model.Living.Count > 0)
+      if (age > Constants.BULLET_LIFE)
       {
-        double neardist = double.PositiveInfinity;
-        Enemy nearest = new Enemy(Location, Orientation, 0, 0, Velocity);
-        foreach (Enemy e in App.Instance.Model.Living)
-        {
-          double dist = Math.Sqrt((e.Location.X - Location.X) * (e.Location.X - Location.X) + (e.Location.Y - Location.Y) * (e.Location.Y - Location.Y));
-          if (dist < neardist)
-          {
-            nearest = e;
-          }
-        }
-        Vector2 target = nearest.Location - Location;
-        Velocity += (1000*target/(target.Length()*target.Length()));
-        float speed = Velocity.Length();
-        if (target.Length() < 60)
-        {
-          target.Normalize();
-          Velocity = speed*target;
-        }
+        App.Instance.Model.UsedBullets.Enqueue(this);
       }
       else
       {
+        if (((Effects.Homing & effects) != 0) && App.Instance.Model.Living.Count > 0)
+        {
+          double neardist = double.PositiveInfinity;
+          Enemy nearest = new Enemy(Location, Orientation, 0, 0, Velocity);
+          foreach (Enemy e in App.Instance.Model.Living)
+          {
+            double dist = Math.Sqrt((e.Location.X - Location.X) * (e.Location.X - Location.X) + (e.Location.Y - Location.Y) * (e.Location.Y - Location.Y));
+            if (dist < neardist)
+            {
+              nearest = e;
+            }
+          }
+          Vector2 target = (nearest.Location + nearest.Velocity/Constants.UPDATES_PER_SECOND) - Location;
+          float modifier = (target.X * Velocity.X + target.Y * Velocity.Y < Math.PI) ? 0.05f : 0.3f;
+          Acceleration = (20000 * target / (modifier * target.Length() * target.Length())) - Velocity;
+        }
         Velocity += Acceleration / Constants.UPDATES_PER_SECOND;
+        Location += Velocity / Constants.UPDATES_PER_SECOND;
+        age++;
       }
-      Location += Velocity / Constants.UPDATES_PER_SECOND;
     }
 
     public bool Collides(ICollidable c)

@@ -21,9 +21,14 @@ namespace SurfaceTower.Model
     protected float orientation;
     protected int health;
     protected States state;
+    protected int age = 0;
 
     #region Properties
 
+    public int Age
+    {
+      get { return age; }
+    }
     public States State
     {
       get { return state; }

@@ -50,6 +50,7 @@ namespace SurfaceTower.Model
     protected ICollection<CollisionTimePair> collisions = new LinkedList<CollisionTimePair>();
     protected ICollection<Bullet> bullets = new LinkedList<Bullet>();
     protected ICollection<Enemy> living = new LinkedList<Enemy>();
+    protected Queue<Bullet> usedBullets = new Queue<Bullet>();
 
     protected TimeSpan lastUpdate;
     protected Music music = new Music();
@@ -58,6 +59,10 @@ namespace SurfaceTower.Model
     protected ICollection<Turret> turrets = new LinkedList<Turret>();
 
     #region Properties
+    public Queue<Bullet> UsedBullets
+    {
+      get { return usedBullets; }
+    }
 
     public Music Music
     {
