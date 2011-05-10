@@ -57,6 +57,7 @@ namespace SurfaceTower.Model.Gun
 
     public event EventHandler<ShotArgs> ShotFired;
     public event EventHandler UpgradeReady;
+    public event EventHandler<BulletArgs> NewBullet;
 
     #endregion
 
@@ -80,6 +81,7 @@ namespace SurfaceTower.Model.Gun
         Vector2 locMod = Vector2.Transform(shot.PositionModifier, Matrix.CreateRotationZ(Orientation));
         Bullet bullet = new Bullet(App.Instance.Model.Tower.Location + locMod, velocity, Strength, shot.Effects, PlayerId);
         App.Instance.Model.Bullets.Add(bullet);
+        if (NewBullet != null) NewBullet(this, new BulletArgs(bullet));
       }
       if (ShotFired != null) ShotFired(this, new ShotArgs(Shots));
     }

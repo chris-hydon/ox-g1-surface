@@ -192,10 +192,7 @@ namespace SurfaceTower.Model
     public void Kill(EnemyTimePair etp)
     {
       dying.Remove(etp);
-      if (DeadEnemy != null)
-      {
-        DeadEnemy(this, new EnemyArgs(etp.enemy));
-      }
+      if (DeadEnemy != null) DeadEnemy(this, new EnemyArgs(etp.enemy));
       dead.Add(new EnemyTimePair(etp.enemy, LastUpdate));
     }
 
