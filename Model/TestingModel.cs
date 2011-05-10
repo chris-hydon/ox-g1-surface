@@ -29,14 +29,11 @@ namespace SurfaceTower.Model
       Music.Beat += new EventHandler(OnBeat);
 
       //For toy version, put some enemy on the stage, at a constant velocity towards the tower.
-      for (int i = 0; i < 100; i++)
+      for (int i = 0; i < 1; i++)
       {
-        Vector2 enemyPos = new Vector2(50*(i%10), 50*(i/10));
-        Vector2 enemyVelocity = Tower.Location - enemyPos;
-        enemyVelocity /= enemyVelocity.Length() / 25;
-        double bulletAngle = 2 * i * Math.PI / 100;
-        Spawn(new Enemy(enemyPos, 0, 10, 100, enemyVelocity));
-        Bullets.Add(new Bullet(Tower.Location, new Vector2(50 * (float) Math.Cos(bulletAngle), 50 * (float) Math.Sin(bulletAngle)), 100, (i%2==1)?Effects.Pierce:Effects.None, i % 4));
+        double bulletAngle = 0;
+        Spawn(new Enemy(Tower.Location, 0, 10, 100, new Vector2(-100,100)));
+        Bullets.Add(new Bullet(new Vector2 (0,0), new Vector2(100 * (float) Math.Cos(bulletAngle), 100 * (float) Math.Sin(bulletAngle)), 100, Effects.Homing, i % 4));
       }
     }
 

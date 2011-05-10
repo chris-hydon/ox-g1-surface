@@ -11,7 +11,7 @@ namespace SurfaceTower.Model.EventArguments
     {
       this.s = s;
     }
-    public ShotPatterns Bullet
+    public ShotPatterns Shots
     {
       get { return s; }
     }
