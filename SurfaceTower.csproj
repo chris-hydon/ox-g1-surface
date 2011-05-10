@@ -144,7 +144,6 @@
     <Compile Include="VideoEngine\ParticleEngine\Particle.cs" />
     <Compile Include="VideoEngine\View.cs" />
     <Compile Include="VideoEngine\SimpleView.cs" />
-    <Compile Include="VideoEngine\View3D.cs" />
   </ItemGroup>
   <ItemGroup>
     <NestedContentProject Include="Content\Content.contentproj">

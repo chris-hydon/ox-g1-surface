@@ -41,7 +41,7 @@ namespace SurfaceTower.Model
 
     public float Orientation
     {
-      get { return (float) Math.Atan(Velocity.Y / Velocity.X); }
+      get { return (float) Math.Atan2(Velocity.Y, Velocity.X); }
       set
       {
         // The orientation of a bullet is always the direction of travel and cannot be set directly.
@@ -99,7 +99,7 @@ namespace SurfaceTower.Model
       Enemy nearest = new Enemy(Location, Orientation, 0, 0, Velocity);
       foreach (Enemy e in App.Instance.Model.Living)
       {
-        double dist = Math.Sqrt((e.Location.X - Location.X) * (e.Location.X - Location.X) + (e.Location.Y - Location.Y) * (e.Location.Y - Location.Y));
+        double dist = (e.Location - Location).Length();
         if (dist < neardist)
         {
           nearest = e;
@@ -117,19 +117,37 @@ namespace SurfaceTower.Model
       }
       else
       {
-        if (((Effects.Homing & effects) != 0) && App.Instance.Model.Living.Count > 0)
+        // Homing bullets can control their acceleration.
+        if ((Effects.Homing & effects) != 0)
         {
-          if (!App.Instance.Model.Living.Contains(focus))
+          if (App.Instance.Model.Living.Count == 0)
           {
-            focus = FindNearest();
+            Acceleration = Vector2.Zero;
           }
-          Vector2 target = (focus.Location + focus.Velocity/Constants.UPDATES_PER_SECOND) - Location;
-          float modifier = (target.X * Velocity.X + target.Y * Velocity.Y < Math.PI) ? 0.05f : 0.3f;
-          Acceleration = (20000 * target / (modifier * target.Length() * target.Length())) - Velocity;
+          else
+          {
+            // Find the nearest enemy.
+            //if (!App.Instance.Model.Living.Contains(focus))
+            //{
+              focus = FindNearest();
+            //}
+
+            // Get the difference between the bullet's location and that of the target.
+            Vector2 target = focus.Location - Location;
+
+            // Figure out the relative orientation.
+            float orient = Orientation;
+            double orientMod = Math.Atan2(target.Y, target.X) - orient;
+
+            // Apply an acceleration perpendicular to the velocity to rotate the bullet.
+            Acceleration = Vector2.Transform(Velocity, Matrix.CreateRotationZ((float) ((orientMod < 0 || orientMod > Math.PI) ? -Math.PI / 2 : Math.PI / 2)));
+          }
+
+          // Update movement.
+          Velocity += Acceleration / Constants.UPDATES_PER_SECOND;
+          Location += Velocity / Constants.UPDATES_PER_SECOND;
+          age++;
         }
-        Velocity += Acceleration / Constants.UPDATES_PER_SECOND;
-        Location += Velocity / Constants.UPDATES_PER_SECOND;
-        age++;
       }
     }
 

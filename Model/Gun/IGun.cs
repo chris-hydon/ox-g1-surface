@@ -14,6 +14,7 @@ namespace SurfaceTower.Model.Gun
 
     event EventHandler<ShotArgs> ShotFired;
     event EventHandler UpgradeReady;
+    event EventHandler<BulletArgs> NewBullet;
 
     void Shoot();
   }
