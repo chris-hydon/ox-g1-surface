@@ -30,11 +30,11 @@ namespace SurfaceTower.Model
 
 
       //For toy version, put some enemy on the stage, at a constant velocity towards the tower.
-      for (int i = 0; i < 1; i++)
+      for (int i = 0; i < 3; i++)
       {
         double bulletAngle = 0;
-        Spawn(new Enemy(Tower.Location, 0, 10, 100, new Vector2(-100,100)));
-        Bullets.Add(new Bullet(new Vector2 (0,0), new Vector2(100 * (float) Math.Cos(bulletAngle), 100 * (float) Math.Sin(bulletAngle)), 100, Effects.Homing, i % 4));
+        Spawn(new Enemy(new Vector2 (200 + 50 *(i % 10),200 + 50 * (i + 5 % 10)), 0, 10, 10000, new Vector2(10,-10)));
+        Bullets.Add(new Bullet(new Vector2 (i,0), new Vector2(100 * (float) Math.Cos(bulletAngle), 100 * (float) Math.Sin(bulletAngle)), 1, Effects.Homing|Effects.Pierce, i % 4));
       }
     }
 

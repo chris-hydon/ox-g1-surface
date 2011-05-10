@@ -119,6 +119,7 @@ namespace SurfaceTower.Model
 
     public event EventHandler<UpdateArgs> Update;
     public event EventHandler<EnemyArgs> NewEnemy;
+    public event EventHandler<EnemyArgs> DeadEnemy;
 
     #endregion
 
@@ -129,7 +130,6 @@ namespace SurfaceTower.Model
       lastUpdate = gameTime.TotalRealTime;
       Update(this, new UpdateArgs(LastUpdate));
       Queue<Enemy> deathRow = new Queue<Enemy>();
-      Queue<Bullet> usedBullets = new Queue<Bullet>();
       foreach(Bullet b in bullets)
       {
         foreach(Enemy e in living)
@@ -192,6 +192,10 @@ namespace SurfaceTower.Model
     public void Kill(EnemyTimePair etp)
     {
       dying.Remove(etp);
+      if (DeadEnemy != null)
+      {
+        DeadEnemy(this, new EnemyArgs(etp.enemy));
+      }
       dead.Add(new EnemyTimePair(etp.enemy, LastUpdate));
     }
 

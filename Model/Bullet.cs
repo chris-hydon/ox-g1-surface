@@ -26,6 +26,7 @@ namespace SurfaceTower.Model
     protected int playerId;
     protected Effects effects;
     protected int age;
+    protected Enemy focus;
 
     #region Properties
     public int Age
@@ -91,7 +92,23 @@ namespace SurfaceTower.Model
       this.effects = effects;
       this.playerId = playerId;
     }
-    
+
+    protected Enemy FindNearest()
+    {
+      double neardist = double.PositiveInfinity;
+      Enemy nearest = new Enemy(Location, Orientation, 0, 0, Velocity);
+      foreach (Enemy e in App.Instance.Model.Living)
+      {
+        double dist = Math.Sqrt((e.Location.X - Location.X) * (e.Location.X - Location.X) + (e.Location.Y - Location.Y) * (e.Location.Y - Location.Y));
+        if (dist < neardist)
+        {
+          nearest = e;
+          neardist = dist;
+        }
+      }
+      return nearest;
+    }
+
     public void Move()
     {
       if (age > Constants.BULLET_LIFE)
@@ -102,17 +119,11 @@ namespace SurfaceTower.Model
       {
         if (((Effects.Homing & effects) != 0) && App.Instance.Model.Living.Count > 0)
         {
-          double neardist = double.PositiveInfinity;
-          Enemy nearest = new Enemy(Location, Orientation, 0, 0, Velocity);
-          foreach (Enemy e in App.Instance.Model.Living)
+          if (!App.Instance.Model.Living.Contains(focus))
           {
-            double dist = Math.Sqrt((e.Location.X - Location.X) * (e.Location.X - Location.X) + (e.Location.Y - Location.Y) * (e.Location.Y - Location.Y));
-            if (dist < neardist)
-            {
-              nearest = e;
-            }
+            focus = FindNearest();
           }
-          Vector2 target = (nearest.Location + nearest.Velocity/Constants.UPDATES_PER_SECOND) - Location;
+          Vector2 target = (focus.Location + focus.Velocity/Constants.UPDATES_PER_SECOND) - Location;
           float modifier = (target.X * Velocity.X + target.Y * Velocity.Y < Math.PI) ? 0.05f : 0.3f;
           Acceleration = (20000 * target / (modifier * target.Length() * target.Length())) - Velocity;
         }
