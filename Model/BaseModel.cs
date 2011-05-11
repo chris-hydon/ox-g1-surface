@@ -22,13 +22,16 @@ namespace SurfaceTower.Model
     }
   }
 
-  public struct EnemyTimePair
+  public struct EnemyTimeWho
   {
     public Enemy enemy;
     public TimeSpan time;
-    public EnemyTimePair(Enemy enemy, TimeSpan time){
+    public int who;
+    public EnemyTimeWho(Enemy enemy, TimeSpan time, int who)
+    {
       this.enemy = enemy;
       this.time = time;
+      this.who = who;
     }
   }
 
@@ -46,7 +49,7 @@ namespace SurfaceTower.Model
 
   public class BaseModel
   {
-    protected ICollection<EnemyTimePair> dying = new LinkedList<EnemyTimePair>(), dead = new LinkedList<EnemyTimePair>();
+    protected ICollection<EnemyTimeWho> dying = new LinkedList<EnemyTimeWho>(), dead = new LinkedList<EnemyTimeWho>();
     protected ICollection<CollisionTimePair> collisions = new LinkedList<CollisionTimePair>();
     protected ICollection<Bullet> bullets = new LinkedList<Bullet>();
     protected ICollection<Enemy> living = new LinkedList<Enemy>();
@@ -89,12 +92,12 @@ namespace SurfaceTower.Model
       get { return living; }
     }
 
-    public ICollection<EnemyTimePair> Dying
+    public ICollection<EnemyTimeWho> Dying
     {
       get { return dying; }
     }
 
-    public ICollection<EnemyTimePair> Dead
+    public ICollection<EnemyTimeWho> Dead
     {
       get { return dead; }
     }
@@ -129,7 +132,7 @@ namespace SurfaceTower.Model
     {
       lastUpdate = gameTime.TotalRealTime;
       Update(this, new UpdateArgs(LastUpdate));
-      Queue<Enemy> deathRow = new Queue<Enemy>();
+      Queue<EnemyTimeWho> deathRow = new Queue<EnemyTimeWho>();
       foreach(Bullet b in bullets)
       {
         foreach(Enemy e in living)
@@ -139,7 +142,7 @@ namespace SurfaceTower.Model
             e.Health -= b.Power;
             if (e.Health <= 0)
             {
-              deathRow.Enqueue(e);
+              deathRow.Enqueue(new EnemyTimeWho(e, LastUpdate, b.PlayerId));
             }
 
             if ((Effects.Pierce & b.Effects) == 0)
@@ -163,7 +166,7 @@ namespace SurfaceTower.Model
         }
         while (deathRow.Count > 0)
         {
-          MakeDying(new EnemyTimePair(deathRow.Dequeue(), LastUpdate));
+          MakeDying(deathRow.Dequeue());
         }
         b.Move();
       }
@@ -183,22 +186,22 @@ namespace SurfaceTower.Model
       if (NewEnemy != null) NewEnemy(this, new EnemyArgs(e));
     }
 
-    public void MakeDying(EnemyTimePair etp)
+    public void MakeDying(EnemyTimeWho etw)
     {
-      Living.Remove(etp.enemy);
-      dying.Add(etp);
+      Living.Remove(etw.enemy);
+      dying.Add(etw);
     }
 
-    public void Kill(EnemyTimePair etp)
+    public void Kill(EnemyTimeWho etw)
     {
-      dying.Remove(etp);
-      if (DeadEnemy != null) DeadEnemy(this, new EnemyArgs(etp.enemy));
-      dead.Add(new EnemyTimePair(etp.enemy, LastUpdate));
+      dying.Remove(etw);
+      if (DeadEnemy != null) DeadEnemy(this, new EnemyArgs(etw.enemy));
+      dead.Add(new EnemyTimeWho(etw.enemy, LastUpdate, etw.who));
     }
 
-    public void Cremate(EnemyTimePair etp)
+    public void Cremate(EnemyTimeWho etw)
     {
-      dead.Remove(etp);
+      dead.Remove(etw);
     }
 
     #endregion

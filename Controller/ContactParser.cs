@@ -117,7 +117,7 @@ namespace SurfaceTower.Controller
       {
         if (playerTags[i] == c.Id)
         {
-          App.Instance.Model.Players[i].Orientation = (float) (c.Orientation * 180 / Math.PI);
+          App.Instance.Model.Players[i].Orientation = c.Orientation;
         }
       }
     }
