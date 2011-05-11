@@ -25,7 +25,7 @@ namespace SurfaceTower.VideoEngine
         //Draws the sprites
         public SpriteBatch spritebatch { get; set; }
         //Sprites
-        private Texture2D enemy, bullet, middle;
+        private Texture2D enemy, bullet, middle, gun;
         //Postprocessing to apply bloom
         private BloomPostprocess.BloomComponent bloom; 
         //The particle engine
@@ -45,18 +45,20 @@ namespace SurfaceTower.VideoEngine
             enemy = content.Load<Texture2D>("enemy");
             bullet = content.Load<Texture2D>("bullet");
             middle = content.Load<Texture2D>("centre");
+            gun = content.Load<Texture2D>("turret");
             graphics.GraphicsDevice.Clear(Color.Black);
             //Initializes the bloom postprocessing with the device to display on
             bloom = new BloomPostprocess.BloomComponent(gm, graphics.GraphicsDevice);
             //Registers the bloom compenent to the list of compenents, it will be drawn AFTER the rest of the game.
             gm.Components.Add(bloom);
             particleEngine = new PEngine(this);
-            particleEngine.addEmitter(new Vector2(300));
-            particleEngine.addExplosion(new Vector2(App.Instance.GraphicsDevice.Viewport.Width / 2, App.Instance.GraphicsDevice.Viewport.Height / 2));
+            particleEngine.addEmitter(new Vector2(300), Color.Red, 60);
+            particleEngine.addEmitter(new Vector2(300), Color.Orange, 10);
+
+            particleEngine.addExplosion(new Vector2(App.Instance.GraphicsDevice.Viewport.Width / 2, App.Instance.GraphicsDevice.Viewport.Height / 2), Color.GreenYellow);
         }
 
         public void draw(GameTime gameTime){
-
 
             //Clear the previous frame 
             graphics.GraphicsDevice.Clear(Color.Black);
@@ -67,6 +69,15 @@ namespace SurfaceTower.VideoEngine
             spritebatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.None);
             //Particles
             particleEngine.Draw();
+            
+
+            //Guns
+            foreach (Model.Gun.Turret t in baseModel.Turrets)
+            {
+                spritebatch.Draw(gun, new Rectangle((int)t.Location.X, (int)t.Location.Y, (int)t.Shape.Width, (int)t.Shape.Height), new Rectangle(0, 0, gun.Width, gun.Height),
+                    Color.GreenYellow, t.Orientation, new Vector2(gun.Width / 2, gun.Height / 2), SpriteEffects.None, 1);
+            }
+
             //Living
             foreach (Enemy e in baseModel.Living){
                 Rectangle rect = new Rectangle((int)e.Location.X, (int)e.Location.Y, (int)e.Shape.Width, (int)e.Shape.Height);
@@ -76,8 +87,8 @@ namespace SurfaceTower.VideoEngine
             //bullets
             foreach (Bullet b in baseModel.Bullets)
             {
-                Rectangle rect = new Rectangle((int)b.Location.X, (int)b.Location.Y, (int)b.Shape.Width, (int)b.Shape.Height);
-                spritebatch.Draw(bullet, rect, new Rectangle(0, 0, bullet.Width, bullet.Height), Color.White, b.Orientation, new Vector2(bullet.Width / 2, bullet.Height / 2), SpriteEffects.None, 1);
+                Rectangle rect = new Rectangle((int)b.Location.X, (int)b.Location.Y, (int)(2*b.Shape.Width), (int)(2*b.Shape.Height));
+                spritebatch.Draw(bullet, rect, new Rectangle(0, 0, bullet.Width, bullet.Height), Color.ForestGreen, b.Orientation, new Vector2(bullet.Width / 2, bullet.Height / 2), SpriteEffects.None, 1);
             }
             spritebatch.End();
             return;

@@ -34,7 +34,12 @@ namespace SurfaceTower.Model
       {
         Spawn(new Enemy(new Vector2(100 + 50 * (i % 10), 100 + 50 * (i / 10)), 0, 10, 1, Vector2.Zero));
       }
-      Bullets.Add(new Bullet(new Vector2(0, 0), 200 * Vector2.One, 1, Effects.Homing | Effects.Pierce, 0));
+      for (int i = 0; i < 100; i++)
+      {
+          Bullets.Add(new Bullet(new Vector2(10*i, 5*i^2), 200 * Vector2.One, 1, Effects.Homing , 0));
+      }
+      turrets.Add(new Turret(new Vector2(400, 50), 0));
+        
     }
 
   

@@ -35,13 +35,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="turret.jpg">
-      <Name>turret</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Bullet.png">
       <Name>Bullet</Name>
       <Importer>TextureImporter</Importer>
@@ -86,6 +79,13 @@
   <ItemGroup>
     <Compile Include="particle.png">
       <Name>particle</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="turret.png">
+      <Name>turret</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
