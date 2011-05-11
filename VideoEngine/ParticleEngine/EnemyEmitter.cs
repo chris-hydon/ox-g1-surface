@@ -54,11 +54,11 @@ namespace SurfaceTower.VideoEngine.ParticleEngine
 
         private Particle newPart()
         {
-            Vector2 v = -0.1f * ((float)random.NextDouble())* enemy.Velocity;
-            v = Vector2.Transform(v, Matrix.CreateRotationZ((float) (Math.PI*(0.5)*(random.NextDouble() - 0.5))));
+            Vector2 v = -0.04f * ((float)random.NextDouble())* enemy.Velocity;
+            v = Vector2.Transform(v, Matrix.CreateRotationZ((float) (Math.PI*(0.35)*(random.NextDouble() - 0.5))));
             Vector2 p = enemy.Location;
-            int s = random.Next(5);
-            int ttl = random.Next(20) + 1;
+            int s = random.Next(3)+3;
+            int ttl = random.Next(15) + 1;
             Particle particle = new Particle(v, p, 0, 0, s, ttl, sprite, Color.HotPink);
             return particle;
         }

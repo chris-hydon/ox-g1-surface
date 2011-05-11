@@ -10,14 +10,16 @@ namespace SurfaceTower.VideoEngine.ParticleEngine
 {
     public class ExplosionEmitter : AbstractEmitter
     {
-        private const int EXPLOSION_SIZE = 3000;
-        private const int EXPLOSION_LENGTH = 50;
-        private const int EXPLOSION_SPEED = 8;
-        public ExplosionEmitter(Vector2 position, Texture2D sprite)
+        private const int EXPLOSION_SIZE = 300;
+        private const int EXPLOSION_LENGTH = 60;
+        private const int EXPLOSION_SPEED = 6;
+        private Color color;
+        public ExplosionEmitter(Vector2 position, Texture2D sprite, Color color)
         {
             this.position = position;
             this.sprite = sprite;
             this.particles = new List<Particle>(EXPLOSION_SIZE);
+            this.color = color;
             Vector2 v;
             for (int i = 0; i < EXPLOSION_SIZE; i++)
             {
@@ -32,7 +34,7 @@ namespace SurfaceTower.VideoEngine.ParticleEngine
                 {
                     v.Y *= -1;
                 }
-                Particle p = new Particle(v, position, 0, 0, 10, EXPLOSION_LENGTH, sprite, Color.Red);
+                Particle p = new Particle(v, position, 0, 0, random.Next(6) + 4, EXPLOSION_LENGTH, sprite, color);
                 particles.Add(p);
                 numberOfParticles++;
             }

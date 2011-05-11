@@ -22,6 +22,21 @@ namespace SurfaceTower.VideoEngine.ParticleEngine
             emitters = new List<AbstractEmitter>(MAXEMITTERS);
             tex = view.content.Load<Texture2D>("particle");
             App.Instance.Model.NewEnemy += new EventHandler<SurfaceTower.Model.EventArguments.EnemyArgs>(NewEnemy);
+            App.Instance.Model.DeadEnemy += new EventHandler<SurfaceTower.Model.EventArguments.EnemyArgs>(Model_DeadEnemy);
+            foreach (Model.Gun.Turret t in App.Instance.Model.Turrets)
+            {
+                t.NewBullet += new EventHandler<SurfaceTower.Model.EventArguments.BulletArgs>(t_NewBullet);
+            }
+        }
+
+        void t_NewBullet(object sender, SurfaceTower.Model.EventArguments.BulletArgs e)
+        {
+            emitters.Add(new FireBulletEmitter(e.Bullet, tex, 30));
+        }
+
+        void Model_DeadEnemy(object sender, SurfaceTower.Model.EventArguments.EnemyArgs e)
+        {
+            addExplosion(e.Enemy.Location, Color.HotPink);
         }
 
         void NewEnemy(object sender, SurfaceTower.Model.EventArguments.EnemyArgs e)
@@ -29,15 +44,15 @@ namespace SurfaceTower.VideoEngine.ParticleEngine
             //emitters.Add(new EnemyEmitter(e.Enemy, tex));
         }
 
-        public void addEmitter(Vector2 position)
+        public void addEmitter(Vector2 position, Color color, int size)
         {
 
-            emitters.Add(new Emitter(position, tex));
+            emitters.Add(new Emitter(position, tex, color, size));
         }
 
-        public void addExplosion(Vector2 position)
+        public void addExplosion(Vector2 position, Color color)
         {
-            ExplosionEmitter e = new ExplosionEmitter(position, tex);
+            ExplosionEmitter e = new ExplosionEmitter(position, tex, color);
             e.Update();
             emitters.Add(e);
         }

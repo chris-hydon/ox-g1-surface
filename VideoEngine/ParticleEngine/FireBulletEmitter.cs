@@ -3,26 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using SurfaceTower.Model;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace SurfaceTower.VideoEngine.ParticleEngine
-{ 
-    public class Emitter : AbstractEmitter
+{
+    class FireBulletEmitter : AbstractEmitter
     {
-        private const int MAXPARTICLES = 200;
-        private Color color;
+        private Bullet bullet;
+        private const int MAXPARTICLES = 100;
+        private Texture2D tex;
         private int size;
 
-        public Emitter(Vector2 position, Texture2D sprite, Color color, int size)
+        public FireBulletEmitter(Bullet bullet, Texture2D tex, int size)
         {
-            this.position = position;
-            this.sprite = sprite;
-            this.color = color;
+            this.bullet = bullet;
+            this.tex = tex;
             this.size = size;
         }
 
-        public override void Update(){
+        public override void Update()
+        {
             Particle p;
             for (int i = particles.Count; i < MAXPARTICLES; i++)
             {
@@ -31,7 +34,8 @@ namespace SurfaceTower.VideoEngine.ParticleEngine
             for (int i = 0; i < particles.Count; i++)
             {
                 p = particles.ElementAt<Particle>(i);
-                if (p.timeToLive <= 0){
+                if (p.timeToLive <= 0)
+                {
                     particles.Remove(p);
                 }
             }
@@ -39,15 +43,16 @@ namespace SurfaceTower.VideoEngine.ParticleEngine
             {
                 particles.ElementAt<Particle>(i).Update();
             }
-        }
+        }    
+        
 
-        public override bool IsFinished(){
-            return false;
+        public override bool IsFinished()
+        {
+            return (bullet.Age <= 0 && particles.Count == 0);
         }
-
         private Particle newParticle()
         {
-            Vector2 v = (float)random.NextDouble()*0.05f*(new Vector2(random.Next(size), random.Next(size)));
+            Vector2 v = (float)random.NextDouble() * 0.05f * (new Vector2(random.Next(size), random.Next(size)));
             if (random.Next(3) > 1)
             {
                 v.X *= -1;
@@ -56,12 +61,10 @@ namespace SurfaceTower.VideoEngine.ParticleEngine
             {
                 v.Y *= -1;
             }
-            Vector2 p = position;
-            float a = (float)random.NextDouble();
-            float av = (float)random.NextDouble();
-            int s = random.Next(3)+3;
-            int ttl = random.Next(50)+1;
-            Particle particle = new Particle(v, p, a, av, s, ttl, sprite, color);
+            Vector2 p = bullet.Location;
+            int s = random.Next(3) + 3;
+            int ttl = random.Next(50) + 1;
+            Particle particle = new Particle(v, p, 0, 0, s, ttl, tex, Color.Red);
             return particle;
         }
 
