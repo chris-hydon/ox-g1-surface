@@ -2,6 +2,7 @@
 
 using Microsoft.Xna.Framework;
 using SurfaceTower.Model.Shape;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace SurfaceTower.Model
 {
@@ -22,8 +23,14 @@ namespace SurfaceTower.Model
     protected int health;
     protected States state;
     protected int age = 0;
+    protected Color colour;
 
     #region Properties
+    public Color Colour
+    {
+      get { return colour; }
+      set { colour = value; }
+    }
 
     public int Age
     {
@@ -79,11 +86,12 @@ namespace SurfaceTower.Model
 
     #region Methods
 
-    public Enemy(Vector2 location, float orientation, int size, int health, Vector2 velocity)
+    public Enemy(Vector2 location, float orientation, int size, int health, Vector2 velocity, Color colour)
     {
       this.shape = new Circle(size, location);
       this.orientation = orientation;
       this.health = health;
+      this.colour = colour;
       this.velocity = new Vector2(velocity.X, velocity.Y);
     }
 
@@ -104,6 +112,31 @@ namespace SurfaceTower.Model
     {
       return Shape.Collides(c.Shape);
     }
+    #endregion
+
+    #region Statics
+
+    /// <summary>
+    /// Determine the closest enemy to the IEntity origin, using the standard 2D distance metric.
+    /// </summary>
+    /// <param name="from">The IEntity from which to base the search.</param>
+    /// <returns>The closest Enemy to origin, or null if no such Enemy exists.</returns>
+    public static Enemy FindNearestLiving(IEntity origin)
+    {
+      double neardist = double.PositiveInfinity;
+      Enemy nearest = null;
+      foreach (Enemy e in App.Instance.Model.Living)
+      {
+        double dist = (e.Location - origin.Location).Length();
+        if (dist < neardist)
+        {
+          nearest = e;
+          neardist = dist;
+        }
+      }
+      return nearest;
+    }
+
     #endregion
   }
 }
