@@ -105,5 +105,30 @@ namespace SurfaceTower.Model
       return Shape.Collides(c.Shape);
     }
     #endregion
+
+    #region Statics
+
+    /// <summary>
+    /// Determine the closest enemy to the IEntity origin, using the standard 2D distance metric.
+    /// </summary>
+    /// <param name="from">The IEntity from which to base the search.</param>
+    /// <returns>The closest Enemy to origin, or null if no such Enemy exists.</returns>
+    public static Enemy FindNearestLiving(IEntity origin)
+    {
+      double neardist = double.PositiveInfinity;
+      Enemy nearest = null;
+      foreach (Enemy e in App.Instance.Model.Living)
+      {
+        double dist = (e.Location - origin.Location).Length();
+        if (dist < neardist)
+        {
+          nearest = e;
+          neardist = dist;
+        }
+      }
+      return nearest;
+    }
+
+    #endregion
   }
 }

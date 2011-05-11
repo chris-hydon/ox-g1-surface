@@ -26,7 +26,7 @@ namespace SurfaceTower.Model
     protected int playerId;
     protected Effects effects;
     protected int age;
-    protected Enemy focus;
+    //protected Enemy focus; // Probably not needed... depends on whether we want to continually dog a given enemy or not.
 
     #region Properties
     public int Age
@@ -84,6 +84,8 @@ namespace SurfaceTower.Model
     
     #endregion
 
+    #region Methods
+
     public Bullet(Vector2 location, Vector2 velocity, int power, Effects effects, int playerId)
     {
       this.shape = new Circle(3, location);
@@ -93,25 +95,9 @@ namespace SurfaceTower.Model
       this.playerId = playerId;
     }
 
-    protected Enemy FindNearest()
-    {
-      double neardist = double.PositiveInfinity;
-      Enemy nearest = new Enemy(Location, Orientation, 0, 0, Velocity);
-      foreach (Enemy e in App.Instance.Model.Living)
-      {
-        double dist = (e.Location - Location).Length();
-        if (dist < neardist)
-        {
-          nearest = e;
-          neardist = dist;
-        }
-      }
-      return nearest;
-    }
-
     public void Move()
     {
-      if (age > Constants.BULLET_LIFE)
+      if (age > Constants.BULLET_LIFE * Constants.UPDATES_PER_SECOND)
       {
         App.Instance.Model.UsedBullets.Enqueue(this);
       }
@@ -120,34 +106,13 @@ namespace SurfaceTower.Model
         // Homing bullets can control their acceleration.
         if ((Effects.Homing & effects) != 0)
         {
-          if (App.Instance.Model.Living.Count == 0)
-          {
-            Acceleration = Vector2.Zero;
-          }
-          else
-          {
-            // Find the nearest enemy.
-            //if (!App.Instance.Model.Living.Contains(focus))
-            //{
-              focus = FindNearest();
-            //}
-
-            // Get the difference between the bullet's location and that of the target.
-            Vector2 target = focus.Location - Location;
-
-            // Figure out the relative orientation.
-            float orient = Orientation;
-            double orientMod = Math.Atan2(target.Y, target.X) - orient;
-
-            // Apply an acceleration perpendicular to the velocity to rotate the bullet.
-            Acceleration = Vector2.Transform(Velocity, Matrix.CreateRotationZ((float) ((orientMod < 0 || orientMod > Math.PI) ? -Math.PI / 2 : Math.PI / 2)));
-          }
-
-          // Update movement.
-          Velocity += Acceleration / Constants.UPDATES_PER_SECOND;
-          Location += Velocity / Constants.UPDATES_PER_SECOND;
-          age++;
+          Acceleration = HomingAcceleration();
         }
+
+        // Update movement.
+        Velocity += Acceleration / Constants.UPDATES_PER_SECOND;
+        Location += Velocity / Constants.UPDATES_PER_SECOND;
+        age++;
       }
     }
 
@@ -155,5 +120,29 @@ namespace SurfaceTower.Model
     {
       return Shape.Collides(c.Shape);
     }
+
+    private Vector2 HomingAcceleration()
+    {
+      // Nothing on which to home in.
+      if (App.Instance.Model.Living.Count == 0)
+      {
+        return Vector2.Zero;
+      }
+
+      // Find the nearest enemy.
+      Enemy focus = Enemy.FindNearestLiving(this);
+
+      // Get the difference between the bullet's location and that of the target.
+      Vector2 target = focus.Location - Location;
+
+      // Figure out the relative orientation.
+      double orientMod = Math.Atan2(target.Y, target.X) - Orientation;
+
+      // Apply an acceleration perpendicular to the velocity to rotate the bullet.
+      return Constants.BULLET_HOMING_TURNSPEED * Vector2.Transform(Velocity,
+        Matrix.CreateRotationZ((float) ((orientMod < 0 || orientMod > Math.PI) ? -Math.PI / 2 : Math.PI / 2)));
+    }
+
+    #endregion
   }
 }

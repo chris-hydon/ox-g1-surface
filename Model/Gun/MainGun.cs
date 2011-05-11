@@ -30,7 +30,10 @@ namespace SurfaceTower.Model.Gun
       get { return orientation; }
       set
       {
-        orientation = value % 360;
+        float cap = (float) Math.PI * 2;
+        orientation = value;
+        while (orientation < 0) orientation += cap;
+        while (orientation >= cap) orientation -= cap;
       }
     }
 
@@ -93,17 +96,18 @@ namespace SurfaceTower.Model.Gun
 
     /// <summary>
     /// Shoot this gun's ShotPatterns. It fires one bullet per ShotPattern with the
-    /// appropriate parameters, then signals the ShotFired event.
+    /// appropriate parameters, with NewBullet fired for each bullet, then finally signals
+    /// the ShotFired event.
     /// </summary>
     public void Shoot()
     {
       foreach (ShotPattern shot in Shots)
       {
-        Vector2 velocity = new Vector2(
+        Vector2 velocity = Constants.BULLET_VELOCITY * new Vector2(
           (float) Math.Cos(Orientation + shot.OrientationModifier),
           (float) Math.Sin(Orientation + shot.OrientationModifier)
         );
-        Vector2 locMod = Vector2.Transform(shot.PositionModifier, Matrix.CreateRotationZ(Orientation));
+        Vector2 locMod = Vector2.Transform(shot.PositionModifier + new Vector2(0, Constants.MAIN_TURRET_RADIUS), Matrix.CreateRotationZ(Orientation));
         Bullet bullet = new Bullet(App.Instance.Model.Tower.Location + locMod, velocity, Strength, shot.Effects, PlayerId);
         App.Instance.Model.Bullets.Add(bullet);
         if (NewBullet != null) NewBullet(this, new BulletArgs(bullet));
@@ -118,6 +122,7 @@ namespace SurfaceTower.Model.Gun
     /// <param name="e">Always null</param>
     public void OnClick(object sender, EventArgs e)
     {
+      Shoot();
     }
 
     /// <summary>
