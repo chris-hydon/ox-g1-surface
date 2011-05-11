@@ -9,6 +9,10 @@ namespace SurfaceTower.Model
     private readonly Circle shape;
     private int health;
 
+    #region Events
+
+    #endregion
+
     #region Properties
 
     public Vector2 Location

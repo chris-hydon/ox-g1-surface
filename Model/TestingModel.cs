@@ -3,6 +3,7 @@
 using Microsoft.Xna.Framework;
 using SurfaceTower.Model.Gun;
 using SurfaceTower.Model.EventArguments;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace SurfaceTower.Model
 {
@@ -32,9 +33,9 @@ namespace SurfaceTower.Model
       //For toy version, put some enemy on the stage, at a constant velocity towards the tower.
       for (int i = 0; i < 100; i++)
       {
-        Spawn(new Enemy(new Vector2(100 + 50 * (i % 10), 100 + 50 * (i / 10)), 0, 10, 15, Vector2.Zero));
+        Spawn(new Enemy(new Vector2(100 + 50 * (i % 10), 100 + 50 * (i / 10)), 0, 10, 15, Vector2.Zero, Color.Azure));
       }
-      Bullets.Add(new Bullet(new Vector2(0, 0), 200 * Vector2.One, 1, Effects.Homing | Effects.Pierce, 0));
+      Bullets.Add(new Bullet(new Vector2(0, 0), 200 * Vector2.One, 1, Effects.Homing | Effects.Burn | Effects.Pierce, 0));
       Turrets.Add(new Turret(new Vector2(300, 30), 1));
     }
 
