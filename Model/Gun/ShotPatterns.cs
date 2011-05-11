@@ -132,8 +132,8 @@ namespace SurfaceTower.Model.Gun
       .Add(new ShotPattern(0, Vector2.Zero, Effects.None));
 
     public static ShotPatterns TwoShot = new ShotPatterns()
-      .Add(new ShotPattern(0, new Vector2(-3, 0), Effects.None))
-      .Add(new ShotPattern(0, new Vector2(3, 0), Effects.None));
+      .Add(new ShotPattern(0, new Vector2(0, -10), Effects.None))
+      .Add(new ShotPattern(0, new Vector2(0, 10), Effects.None));
 
     public static ShotPatterns Spread = new ShotPatterns()
       .Add(new ShotPattern(-0.5f, Vector2.Zero, Effects.None))

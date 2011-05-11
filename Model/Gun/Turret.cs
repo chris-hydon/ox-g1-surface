@@ -136,7 +136,10 @@ namespace SurfaceTower.Model.Gun
     /// <param name="e">Always null</param>
     public void OnClick(object sender, EventArgs e)
     {
-      Shoot();
+      if (App.Instance.Model.Living.Count > 0)
+      {
+        Shoot();
+      }
     }
     
     #endregion

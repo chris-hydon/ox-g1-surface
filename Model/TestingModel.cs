@@ -17,10 +17,6 @@ namespace SurfaceTower.Model
 
     public void FirstUpdate(GameTime gameTime)
     {
-      // Some simple demo stuff.
-      players[0].IsActive = true;
-      players[0].Orientation = 0;
-
       // Audio folks, something like this should be in your initialize, not mine!
       Music.TimeSignature = new TimeSignature(4, 4);
       Music.Tempo = 60;
@@ -46,8 +42,6 @@ namespace SurfaceTower.Model
     /// <param name="e">Always null</param>
     public void OnBeat(object sender, EventArgs e)
     {
-      // Some demo stuff.
-      players[0].Orientation += 1;
     }
 
     public override void OnUpdate(GameTime gameTime)
