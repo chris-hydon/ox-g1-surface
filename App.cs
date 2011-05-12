@@ -30,6 +30,11 @@ namespace SurfaceTower
       get { return gameModel; }
     }
 
+    public bool ApplicationActivated
+    {
+      get { return isApplicationActivated; }
+    }
+
     #endregion
 
     protected override void Initialize()
@@ -50,7 +55,10 @@ namespace SurfaceTower
 
     protected override void DoDraw(GameTime gameTime)
     {
-      gameView.draw(gameTime);
+      if (ApplicationActivated)
+      {
+        gameView.draw(gameTime);
+      }
     }
 
     protected override void DoRotate(GameTime gameTime, bool inverted)
@@ -59,7 +67,10 @@ namespace SurfaceTower
 
     protected override void DoUpdate(GameTime gameTime, bool activated)
     {
-      gameModel.OnUpdate(gameTime);
+      if (ApplicationActivated)
+      {
+        gameModel.OnUpdate(gameTime);
+      }
     }
     
     protected override void ProcessContacts(GameTime gameTime, ReadOnlyContactCollection contacts)

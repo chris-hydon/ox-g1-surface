@@ -110,6 +110,8 @@ namespace BloomPostprocess
        //Draws the bloom: Extracts the brightest parts of screen --> Horizontal gaussian blur --> Vertical gaussian blur --> combine this with original screen
         public override void Draw(GameTime gameTime)
         {
+            if (!SurfaceTower.App.Instance.ApplicationActivated) return;
+
             //Create a texture from the screen
             device.ResolveBackBuffer(resolveTarget);
 
