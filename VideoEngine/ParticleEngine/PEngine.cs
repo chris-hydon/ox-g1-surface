@@ -36,7 +36,7 @@ namespace SurfaceTower.VideoEngine.ParticleEngine
 
         void Model_DeadEnemy(object sender, SurfaceTower.Model.EventArguments.EnemyArgs e)
         {
-            addExplosion(e.Enemy.Location, Color.HotPink);
+            addExplosion(e.Enemy.Location, e.Enemy.Colour);
         }
 
         void NewEnemy(object sender, SurfaceTower.Model.EventArguments.EnemyArgs e)

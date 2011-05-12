@@ -14,7 +14,9 @@ namespace SurfaceTower.VideoEngine
     public class SimpleView : View
     {
         #region Fields
-        //You just lost this
+
+        private const int BIG_GUN_SIZE = 30;
+        private Color[] player_colors = new Color[4] {Color.Red, Color.ForestGreen, Color.Teal, Color.Gold};
         private Game gm;
         //The game model
         private BaseModel baseModel;
@@ -54,7 +56,6 @@ namespace SurfaceTower.VideoEngine
             particleEngine = new PEngine(this);
             particleEngine.addEmitter(new Vector2(300), Color.Red, 60);
             particleEngine.addEmitter(new Vector2(300), Color.Orange, 10);
-
             particleEngine.addExplosion(new Vector2(App.Instance.GraphicsDevice.Viewport.Width / 2, App.Instance.GraphicsDevice.Viewport.Height / 2), Color.GreenYellow);
         }
 
@@ -70,25 +71,48 @@ namespace SurfaceTower.VideoEngine
             //Particles
             particleEngine.Draw();
             
+            //middle
+
+            Color c = Color.DeepPink;
+            c.A = (byte)100;
+            spritebatch.Draw(middle, new Rectangle((int)baseModel.Tower.Location.X, (int)baseModel.Tower.Location.Y, (int)baseModel.Tower.Shape.Width, (int)baseModel.Tower.Shape.Height),
+                null, c, 0, new Vector2(middle.Width / 2, middle.Height / 2), SpriteEffects.None, 0);
 
             //Guns
             foreach (Model.Gun.Turret t in baseModel.Turrets)
             {
                 spritebatch.Draw(gun, new Rectangle((int)t.Location.X, (int)t.Location.Y, (int)t.Shape.Width, (int)t.Shape.Height), new Rectangle(0, 0, gun.Width, gun.Height),
-                    Color.GreenYellow, t.Orientation, new Vector2(gun.Width / 2, gun.Height / 2), SpriteEffects.None, 1);
+                    player_colors[t.PlayerId], t.Orientation, new Vector2(gun.Width / 2, gun.Height / 2), SpriteEffects.None, 1);
+            }
+            foreach (Model.Gun.MainGun m in baseModel.Players)
+            {
+                if (m.IsActive)
+                {
+                    spritebatch.Draw(gun, new Rectangle((int)m.Location.X, (int)m.Location.Y, BIG_GUN_SIZE, BIG_GUN_SIZE), new Rectangle(0, 0, gun.Width, gun.Height),
+                      player_colors[m.PlayerId], m.Orientation, new Vector2(gun.Width / 2, gun.Height / 2), SpriteEffects.None, 1);
+                }
             }
 
             //Living
-            foreach (Enemy e in baseModel.Living){
+            foreach (Enemy e in baseModel.Living)
+            {
                 Rectangle rect = new Rectangle((int)e.Location.X, (int)e.Location.Y, (int)e.Shape.Width, (int)e.Shape.Height);
-                spritebatch.Draw(enemy, rect, new Rectangle(0,0,enemy.Width, enemy.Height), Color.White, e.Orientation, new Vector2(enemy.Width / 2, enemy.Height / 2), SpriteEffects.None, 1);
+                spritebatch.Draw(enemy, rect, new Rectangle(0, 0, enemy.Width, enemy.Height), e.Colour, e.Orientation, new Vector2(enemy.Width / 2, enemy.Height / 2), SpriteEffects.None, 1);
             }
+            //dying
+             foreach (EnemyTimeWho et in baseModel.Dying){
+                 Enemy e = et.enemy;
+                Rectangle rect = new Rectangle((int)e.Location.X, (int)e.Location.Y, (int)e.Shape.Width, (int)e.Shape.Height);
+                spritebatch.Draw(enemy, rect, new Rectangle(0,0,enemy.Width, enemy.Height), e.Colour, e.Orientation, new Vector2(enemy.Width / 2, enemy.Height / 2), SpriteEffects.None, 1);
+            }
+
+
 
             //bullets
             foreach (Bullet b in baseModel.Bullets)
             {
                 Rectangle rect = new Rectangle((int)b.Location.X, (int)b.Location.Y, (int)(2*b.Shape.Width), (int)(2*b.Shape.Height));
-                spritebatch.Draw(bullet, rect, new Rectangle(0, 0, bullet.Width, bullet.Height), Color.ForestGreen, b.Orientation, new Vector2(bullet.Width / 2, bullet.Height / 2), SpriteEffects.None, 1);
+                spritebatch.Draw(bullet, rect, new Rectangle(0, 0, bullet.Width, bullet.Height), player_colors[b.PlayerId], b.Orientation, new Vector2(bullet.Width / 2, bullet.Height / 2), SpriteEffects.None, 1);
             }
             spritebatch.End();
             return;

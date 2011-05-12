@@ -10,8 +10,8 @@ namespace SurfaceTower.VideoEngine.ParticleEngine
 {
     public class ExplosionEmitter : AbstractEmitter
     {
-        private const int EXPLOSION_SIZE = 300;
-        private const int EXPLOSION_LENGTH = 60;
+        private const int EXPLOSION_SIZE = 250;
+        private const int EXPLOSION_LENGTH = 50;
         private const int EXPLOSION_SPEED = 6;
         private Color color;
         public ExplosionEmitter(Vector2 position, Texture2D sprite, Color color)
