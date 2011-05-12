@@ -116,6 +116,22 @@ namespace SurfaceTower.Model
     {
       get { return lastUpdate; }
     }
+
+    public int NumberOfPlayers
+    {
+      get
+      {
+        int n = 0;
+        for (int i = 0; i < 4; i++)
+        {
+          if (players[i].IsActive)
+          {
+            n++;
+          }
+        }
+        return n;
+      }
+    }
     #endregion
 
     #region Events
@@ -135,6 +151,7 @@ namespace SurfaceTower.Model
     public virtual void OnUpdate(GameTime gameTime)
     {
       lastUpdate = gameTime.TotalRealTime;
+      EnemyGenerator.Instance.Update();
       Update(this, new UpdateArgs(LastUpdate));
       Queue<EnemyTimeWho> deathRow = new Queue<EnemyTimeWho>();
       foreach(Bullet b in bullets)

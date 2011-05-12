@@ -29,10 +29,14 @@ namespace SurfaceTower.Model
       //For toy version, put some enemy on the stage, at a constant velocity towards the tower.
       for (int i = 0; i < 100; i++)
       {
-        Spawn(new Enemy(new Vector2(100 + 50 * (i % 10), 100 + 50 * (i / 10)), 0, 10, 15, Vector2.Zero, Color.Azure));
+        //Spawn(new Enemy(new Vector2(100 + 50 * (i % 10), 100 + 50 * (i / 10)), 0, 10, 15, Vector2.Zero, Color.Azure));
       }
       Bullets.Add(new Bullet(new Vector2(0, 0), 200 * Vector2.One, 1, Effects.Homing | Effects.Burn | Effects.Pierce, 0));
-      Turrets.Add(new Turret(new Vector2(300, 30), 1));
+      Turrets.Add(new Turret(new Vector2(100, 100), 1));
+      Turrets.Add(new Turret(new Vector2(500, 500), 2));
+      Turrets.Add(new Turret(new Vector2(100, 500), 3));
+      Turrets.Add(new Turret(new Vector2(500, 100), 0));
+      players[0].IsActive = true;
     }
 
     /// <summary>
