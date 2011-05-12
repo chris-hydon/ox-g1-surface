@@ -123,6 +123,10 @@ namespace SurfaceTower.Model
     public event EventHandler<UpdateArgs> Update;
     public event EventHandler<EnemyArgs> NewEnemy;
     public event EventHandler<EnemyArgs> DeadEnemy;
+    public event EventHandler<TurretArgs> AddTurret;
+    public event EventHandler<TurretArgs> RemoveTurret;
+    public event EventHandler<PlayerArgs> AddPlayer;
+    public event EventHandler<PlayerArgs> RemovePlayer;
 
     #endregion
 
@@ -161,7 +165,6 @@ namespace SurfaceTower.Model
             {
               e.State |= Enemy.States.Stunned;
             }
-
           }
         }
         while (deathRow.Count > 0)
@@ -202,6 +205,44 @@ namespace SurfaceTower.Model
     public void Cremate(EnemyTimeWho etw)
     {
       dead.Remove(etw);
+    }
+
+    public void CreateTurret(Vector2 location, int owner)
+    {
+      Turret t = new Turret(location, owner);
+      Turrets.Add(t);
+      if (AddTurret != null) AddTurret(this, new TurretArgs(t));
+    }
+
+    public void DeleteTurret(Turret t)
+    {
+      if (Turrets.Contains(t))
+      {
+        Turrets.Remove(t);
+        if (RemoveTurret != null) RemoveTurret(this, new TurretArgs(t));
+      }
+    }
+
+    public bool PlayerJoin(int player)
+    {
+      if (!Players[player].IsActive)
+      {
+        Players[player].IsActive = true;
+        if (AddPlayer != null) AddPlayer(this, new PlayerArgs(player));
+        return true;
+      }
+      return false;
+    }
+
+    public bool PlayerLeave(int player)
+    {
+      if (Players[player].IsActive)
+      {
+        Players[player].IsActive = false;
+        if (RemovePlayer != null) RemovePlayer(this, new PlayerArgs(player));
+        return true;
+      }
+      return false;
     }
 
     #endregion

@@ -11,12 +11,18 @@ namespace SurfaceTower.Controller
     private Contact contact;
     private TimeSpan lastSeen;
     private TimeSpan timeAdded;
+    private float initialOrientation;
 
     #region Properties
 
     public Contact Contact
     {
       get { return contact; }
+    }
+
+    public float InitialOrientation
+    {
+      get { return initialOrientation; }
     }
 
     public TimeSpan TimeAdded
@@ -38,6 +44,7 @@ namespace SurfaceTower.Controller
       this.contact = contact;
       this.lastSeen = time;
       this.timeAdded = time;
+      this.initialOrientation = contact.Orientation;
     }
 
     public void Update(Contact contact, TimeSpan time)

@@ -42,8 +42,9 @@ namespace SurfaceTower.Controller
       if (e.Contact.IsTagRecognized)
       {
         // Add a player!
-        MainGun[] players = App.Instance.Model.Players;
-        MainGun[] sortedPlayers;
+        BaseModel model = App.Instance.Model;
+        MainGun[] players = model.Players;
+        int[] sortedPlayers;
         
         // Which region?
         int width = App.Instance.GraphicsDevice.PresentationParameters.BackBufferWidth;
@@ -57,12 +58,12 @@ namespace SurfaceTower.Controller
           // Top (0)
           if (x + y < 1)
           {
-            sortedPlayers = new MainGun[] { players[0], players[x > 0.5 ? 1 : 3], players[x > 0.5 ? 3 : 1], players[2] };
+            sortedPlayers = new int[] { 0, x > 0.5 ? 1 : 3, x > 0.5 ? 3 : 1, 2 };
           }
           // Right (1)
           else
           {
-            sortedPlayers = new MainGun[] { players[1], players[y > 0.5 ? 2 : 0], players[y > 0.5 ? 0 : 2], players[3] };
+            sortedPlayers = new int[] { 1, y > 0.5 ? 2 : 0, y > 0.5 ? 0 : 2, 3 };
           }
         }
         else
@@ -70,21 +71,20 @@ namespace SurfaceTower.Controller
           // Left (3)
           if (x + y < 1)
           {
-            sortedPlayers = new MainGun[] { players[3], players[y > 0.5 ? 2 : 0], players[y > 0.5 ? 0 : 2], players[1] };
+            sortedPlayers = new int[] { 3, y > 0.5 ? 2 : 0, y > 0.5 ? 0 : 2, 1 };
           }
           // Bottom (2)
           else
           {
-            sortedPlayers = new MainGun[] { players[2], players[x > 0.5 ? 1 : 3], players[x > 0.5 ? 3 : 1], players[0] };
+            sortedPlayers = new int[] { 2, x > 0.5 ? 1 : 3, x > 0.5 ? 3 : 1, 0 };
           }
         }
 
-        foreach (MainGun t in sortedPlayers)
+        for (int i = 0; i < 4; i++)
         {
-          if (!t.IsActive)
+          if (model.PlayerJoin(sortedPlayers[i]))
           {
-            t.IsActive = true;
-            playerTags[t.PlayerId] = e.Contact.Id;
+            playerTags[sortedPlayers[i]] = e.Contact.Id;
             e.ContactUpdated += new EventHandler(OnTagUpdated);
             break;
           }
@@ -100,7 +100,7 @@ namespace SurfaceTower.Controller
         {
           if (playerTags[i] == e.Contact.Id)
           {
-            App.Instance.Model.Players[i].IsActive = false;
+            App.Instance.Model.PlayerLeave(i);
             playerTags[i] = 0;
             e.ContactUpdated -= new EventHandler(OnTagUpdated);
             break;
@@ -111,13 +111,14 @@ namespace SurfaceTower.Controller
 
     void OnTagUpdated(object sender, EventArgs e)
     {
-      Contact c = ((ContactData) sender).Contact;
+      ContactData c =  (ContactData) sender;
 
       for (int i = 0; i < 4; i++)
       {
-        if (playerTags[i] == c.Id)
+        if (playerTags[i] == c.Contact.Id)
         {
-          App.Instance.Model.Players[i].Orientation = c.Orientation;
+          float o = (float) ((i - 1) * Math.PI / 2) + c.Contact.Orientation - c.InitialOrientation;
+          App.Instance.Model.Players[i].Orientation = o;
         }
       }
     }
