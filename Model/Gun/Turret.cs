@@ -120,11 +120,11 @@ namespace SurfaceTower.Model.Gun
         // Figure out the relative orientation and cap the rate of rotation.
         float orientMod = (float) Math.Atan2(target.Y, target.X) - Orientation;
         float turnSpeed = Constants.TURRET_TURNSPEED / Constants.UPDATES_PER_SECOND;
+        while (orientMod < -Math.PI) orientMod += (float) Math.PI * 2;
         if (Math.Abs(orientMod) > turnSpeed)
         {
           orientMod = orientMod > 0 ? turnSpeed : -turnSpeed;
         }
-
         Orientation += orientMod;
       }
     }
