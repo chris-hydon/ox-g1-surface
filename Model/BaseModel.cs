@@ -54,6 +54,7 @@ namespace SurfaceTower.Model
     protected ICollection<Bullet> bullets = new LinkedList<Bullet>();
     protected ICollection<Enemy> living = new LinkedList<Enemy>();
     protected Queue<Bullet> usedBullets = new Queue<Bullet>();
+    protected Queue<EnemyTimeWho> deathRow = new Queue<EnemyTimeWho>();
 
     protected TimeSpan lastUpdate;
     protected Music music = new Music();
@@ -62,6 +63,10 @@ namespace SurfaceTower.Model
     protected ICollection<Turret> turrets = new LinkedList<Turret>();
 
     #region Properties
+    public Queue<EnemyTimeWho> DeathRow
+    {
+      get { return deathRow; }
+    }
     public Queue<Bullet> UsedBullets
     {
       get { return usedBullets; }
@@ -153,7 +158,6 @@ namespace SurfaceTower.Model
       lastUpdate = gameTime.TotalRealTime;
       EnemyGenerator.Instance.Update();
       Update(this, new UpdateArgs(LastUpdate));
-      Queue<EnemyTimeWho> deathRow = new Queue<EnemyTimeWho>();
       foreach(Bullet b in bullets)
       {
         foreach(Enemy e in living)
@@ -209,7 +213,11 @@ namespace SurfaceTower.Model
     public void MakeDying(EnemyTimeWho etw)
     {
       Living.Remove(etw.enemy);
-      dying.Add(etw);
+      //A 'who' of -1 signifies that the enemy was removed by reaching the centre, rather than being destroyed by a player
+      if (etw.who > -1)
+      {
+        dying.Add(etw);
+      }
     }
 
     public void Kill(EnemyTimeWho etw)

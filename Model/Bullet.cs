@@ -123,18 +123,15 @@ namespace SurfaceTower.Model
 
     private Vector2 HomingAcceleration()
     {
-      // Nothing on which to home in.
-      if (App.Instance.Model.Living.Count == 0)
-      {
-        return Vector2.Zero;
-      }
-
       // Find the nearest enemy.
       Enemy focus = Enemy.FindNearestLiving(this);
 
-      // Get the difference between the bullet's location and that of the target.
+      // If there's no target, there's no homing acceleration
+      if (focus == null)
+      {
+        return Vector2.Zero;
+      }
       Vector2 target = focus.Location - Location;
-
       // Figure out the relative orientation.
       double orientMod = Math.Atan2(target.Y, target.X) - Orientation;
 

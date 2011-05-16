@@ -84,6 +84,10 @@ namespace SurfaceTower.Model
 
     #endregion
 
+    #region Events
+    public event EventHandler EnemyReached;
+    #endregion
+
     #region Methods
 
     public Enemy(Vector2 location, float orientation, int size, int health, Vector2 velocity, Color colour)
@@ -97,6 +101,7 @@ namespace SurfaceTower.Model
 
     public virtual void Move()
     {
+      // move if not stunned
       if ((state & States.Stunned) == 0)
       {
         Velocity += Acceleration / Constants.UPDATES_PER_SECOND;
@@ -105,6 +110,14 @@ namespace SurfaceTower.Model
         {
           health--;
         }
+      }
+
+      //Damage the tower and die if in contact
+      if (Collides(App.Instance.Model.Tower))
+      {
+        App.Instance.Model.Tower.Health -= (int) Math.Round(Size);
+        if (EnemyReached != null) EnemyReached(this, null);
+        App.Instance.Model.DeathRow.Enqueue(new EnemyTimeWho(this, TimeSpan.MinValue, -1));
       }
     }
 
@@ -127,11 +140,18 @@ namespace SurfaceTower.Model
       Enemy nearest = null;
       foreach (Enemy e in App.Instance.Model.Living)
       {
-        double dist = (e.Location - origin.Location).Length();
-        if (dist < neardist)
+        //width and height are set to the width and height of the screen
+        int width = App.Instance.GraphicsDevice.Viewport.Width;
+        int height = App.Instance.GraphicsDevice.Viewport.Height;
+        //if the enemy is on the screen
+        if (e.Location.X>=0 && e.Location.X <= width && e.Location.Y>=0 && e.Location.Y <=height)
         {
-          nearest = e;
-          neardist = dist;
+          double dist = (e.Location - origin.Location).Length();
+          if (dist < neardist)
+          {
+            nearest = e;
+            neardist = dist;
+          }
         }
       }
       return nearest;

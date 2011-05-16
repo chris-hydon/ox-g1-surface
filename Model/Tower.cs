@@ -42,6 +42,7 @@ namespace SurfaceTower.Model
     {
       Viewport v = App.Instance.GraphicsDevice.Viewport;
       shape = new Circle(Constants.MAIN_TURRET_RADIUS, new Vector2(v.Width / 2, v.Height / 2));
+      health = 1000;
     }
 
     public bool Collides(ICollidable c)
