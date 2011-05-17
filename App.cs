@@ -51,6 +51,14 @@ namespace SurfaceTower
       contactParser = new ContactParser();
     }
 
+    public bool onScreen(Vector2 pos)
+    {
+      //width and height are set to the width and height of the screen
+      int width = App.Instance.GraphicsDevice.Viewport.Width;
+      int height = App.Instance.GraphicsDevice.Viewport.Height;
+      return (pos.X >= 0 && pos.X <= width && pos.Y >= 0 && pos.Y <= height);
+    }
+
     #region Game Events
 
     protected override void DoDraw(GameTime gameTime)

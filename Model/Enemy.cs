@@ -140,11 +140,8 @@ namespace SurfaceTower.Model
       Enemy nearest = null;
       foreach (Enemy e in App.Instance.Model.Living)
       {
-        //width and height are set to the width and height of the screen
-        int width = App.Instance.GraphicsDevice.Viewport.Width;
-        int height = App.Instance.GraphicsDevice.Viewport.Height;
         //if the enemy is on the screen
-        if (e.Location.X>=0 && e.Location.X <= width && e.Location.Y>=0 && e.Location.Y <=height)
+        if (App.Instance.onScreen(e.Location))
         {
           double dist = (e.Location - origin.Location).Length();
           if (dist < neardist)

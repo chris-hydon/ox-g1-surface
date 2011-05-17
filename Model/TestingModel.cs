@@ -25,6 +25,7 @@ namespace SurfaceTower.Model
 
       Music.Beat += new EventHandler(OnBeat);
 
+      spawner = new Spawner();
 
       //For toy version, put some enemy on the stage, at a constant velocity towards the tower.
       for (int i = 0; i < 100; i++)

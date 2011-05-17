@@ -55,7 +55,7 @@ namespace SurfaceTower.Model
     protected ICollection<Enemy> living = new LinkedList<Enemy>();
     protected Queue<Bullet> usedBullets = new Queue<Bullet>();
     protected Queue<EnemyTimeWho> deathRow = new Queue<EnemyTimeWho>();
-
+    protected Spawner spawner;
     protected TimeSpan lastUpdate;
     protected Music music = new Music();
     protected MainGun[] players = new MainGun[4] { new MainGun(0), new MainGun(1), new MainGun(2), new MainGun(3) };
@@ -156,43 +156,49 @@ namespace SurfaceTower.Model
     public virtual void OnUpdate(GameTime gameTime)
     {
       lastUpdate = gameTime.TotalRealTime;
-      EnemyGenerator.Instance.Update();
       Update(this, new UpdateArgs(LastUpdate));
       foreach(Bullet b in bullets)
       {
-        foreach(Enemy e in living)
+        if (App.Instance.onScreen(b.Location))
         {
-          if (e.Collides(b))
+          foreach (Enemy e in living)
           {
-            e.Health -= b.Power;
-            if (e.Health <= 0)
+            if (e.Collides(b))
             {
-              deathRow.Enqueue(new EnemyTimeWho(e, LastUpdate, b.PlayerId));
-            }
+              e.Health -= b.Power;
+              if (e.Health <= 0)
+              {
+                deathRow.Enqueue(new EnemyTimeWho(e, LastUpdate, b.PlayerId));
+              }
 
-            if ((Effects.Pierce & b.Effects) == 0)
-            {
-              usedBullets.Enqueue(b);
-            }
-            if ((Effects.Burn & b.Effects) != 0)
-            {
-              e.State |= Enemy.States.Burning;
-            }
-            if ((Effects.Slow & b.Effects) != 0)
-            {
-              e.State |= Enemy.States.Slowed;
-            }
-            if ((Effects.Stun & b.Effects) != 0)
-            {
-              e.State |= Enemy.States.Stunned;
+              if ((Effects.Pierce & b.Effects) == 0)
+              {
+                usedBullets.Enqueue(b);
+              }
+              if ((Effects.Burn & b.Effects) != 0)
+              {
+                e.State |= Enemy.States.Burning;
+              }
+              if ((Effects.Slow & b.Effects) != 0)
+              {
+                e.State |= Enemy.States.Slowed;
+              }
+              if ((Effects.Stun & b.Effects) != 0)
+              {
+                e.State |= Enemy.States.Stunned;
+              }
             }
           }
+          while (deathRow.Count > 0)
+          {
+            MakeDying(deathRow.Dequeue());
+          }
+          b.Move();
         }
-        while (deathRow.Count > 0)
+        else
         {
-          MakeDying(deathRow.Dequeue());
+          usedBullets.Enqueue(b);
         }
-        b.Move();
       }
       while (usedBullets.Count > 0)
       {

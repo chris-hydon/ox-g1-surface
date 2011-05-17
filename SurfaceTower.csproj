@@ -105,7 +105,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
-    <Compile Include="Model\EnemyGenerator.cs" />
+    <Compile Include="Model\PointGenerator.cs" />
+    <Compile Include="Model\IGenerator.cs" />
+    <Compile Include="Model\Spawner.cs" />
+    <Compile Include="Model\CircleGenerator.cs" />
     <Compile Include="Model\EventArguments\BulletArgs.cs" />
     <Compile Include="Model\EventArguments\PlayerArgs.cs" />
     <Compile Include="Model\EventArguments\TurretArgs.cs" />
