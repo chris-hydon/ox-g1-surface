@@ -30,6 +30,11 @@ namespace SurfaceTower
       get { return gameModel; }
     }
 
+    public ContactParser Controller
+    {
+      get { return contactParser; }
+    }
+
     public bool ApplicationActivated
     {
       get { return isApplicationActivated; }

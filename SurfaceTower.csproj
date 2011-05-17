@@ -128,6 +128,8 @@
     <Compile Include="Constants.cs" />
     <Compile Include="Controller\ContactData.cs" />
     <Compile Include="Controller\ContactParser.cs" />
+    <Compile Include="Controller\ITouchHandler.cs" />
+    <Compile Include="Controller\TowerTouch.cs" />
     <Compile Include="Model\Bullet.cs" />
     <Compile Include="Model\Enemy.cs" />
     <Compile Include="Model\EventArguments\UpdateArgs.cs" />
@@ -149,6 +151,7 @@
     <Compile Include="VideoEngine\ParticleEngine\IEmitter.cs" />
     <Compile Include="VideoEngine\ParticleEngine\PEngine.cs" />
     <Compile Include="VideoEngine\ParticleEngine\Particle.cs" />
+    <Compile Include="VideoEngine\Touchable\ITouchable.cs" />
     <Compile Include="VideoEngine\View.cs" />
     <Compile Include="VideoEngine\SimpleView.cs" />
   </ItemGroup>

@@ -15,6 +15,7 @@ namespace SurfaceTower.Model.Gun
     private int playerId;
     private ShotPatterns shots;
     private int strength;
+    private float improvocity;
 
     public MainGun(int playerId)
     {
@@ -57,6 +58,20 @@ namespace SurfaceTower.Model.Gun
       set { strength = value; }
     }
 
+    public float Improvocity
+    {
+      get { return improvocity; }
+      private set
+      {
+        improvocity = value;
+        if (improvocity >= 1)
+        {
+          improvocity = 1;
+          if (UpgradeReady != null) UpgradeReady(this, null);
+        }
+      }
+    }
+
     public ShotPatterns Shots
     {
       get { return shots; }
@@ -91,6 +106,11 @@ namespace SurfaceTower.Model.Gun
       }
     }
 
+    public bool CanUpgrade
+    {
+      get { return Improvocity == 1; }
+    }
+
     #endregion
 
     #region Events
@@ -122,6 +142,16 @@ namespace SurfaceTower.Model.Gun
         if (NewBullet != null) NewBullet(this, new BulletArgs(bullet));
       }
       if (ShotFired != null) ShotFired(this, new ShotArgs(Shots));
+    }
+
+    public void Killed(Enemy e)
+    {
+      if (!IsActive)
+      {
+        return;
+      }
+
+      Improvocity += Constants.BASE_IMPROVOCITY * e.Size;
     }
 
     /// <summary>

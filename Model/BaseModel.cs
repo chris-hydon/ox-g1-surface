@@ -230,6 +230,7 @@ namespace SurfaceTower.Model
     {
       dying.Remove(etw);
       if (DeadEnemy != null) DeadEnemy(this, new EnemyArgs(etw.enemy));
+      Players[etw.who].Killed(etw.enemy);
       dead.Add(new EnemyTimeWho(etw.enemy, LastUpdate, etw.who));
     }
 
