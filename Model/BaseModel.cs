@@ -206,7 +206,11 @@ namespace SurfaceTower.Model
       }
       foreach (Enemy e in living)
       {
-        e.Move();
+        if ((e.State & Enemy.States.Stunned) == 0)
+        {
+          e.Move();
+        }
+        e.Update();
       }
     }
 

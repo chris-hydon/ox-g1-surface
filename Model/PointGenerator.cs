@@ -34,12 +34,12 @@ namespace SurfaceTower.Model
       this.amount = amount;
     }
 
-    public void Generate(int numEnemies)
+    public void Generate()
     {
       clickCount++;
       if (clickCount % interval == 0)
       {
-        model.Living.Add(new Enemy(pos, 0f, difficulty, difficulty, (model.Tower.Location - pos) / 5, Microsoft.Xna.Framework.Graphics.Color.BlanchedAlmond));
+        model.Living.Add(new WaveEnemy(pos, 0f, difficulty, difficulty, (model.Tower.Location - pos) / 5, Microsoft.Xna.Framework.Graphics.Color.BlanchedAlmond));
         generated++;
       }
       if (generated >= amount)

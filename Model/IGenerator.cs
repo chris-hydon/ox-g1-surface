@@ -8,6 +8,6 @@ namespace SurfaceTower.Model
   public interface IGenerator
   {
     bool Done { get; }
-    void Generate(int number);
+    void Generate();
   }
 }

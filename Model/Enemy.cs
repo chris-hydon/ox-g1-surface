@@ -101,15 +101,15 @@ namespace SurfaceTower.Model
 
     public virtual void Move()
     {
-      // move if not stunned
-      if ((state & States.Stunned) == 0)
+      Velocity += Acceleration / Constants.UPDATES_PER_SECOND;
+      Location += ((state & States.Slowed) == 0 ? Velocity / 2 : Velocity) / Constants.UPDATES_PER_SECOND;
+    }
+    public void Update()
+    {
+      // damage if burning
+      if ((state & States.Burning) != 0)
       {
-        Velocity += Acceleration / Constants.UPDATES_PER_SECOND;
-        Location += ((state & States.Slowed) == 0 ? Velocity/2 : Velocity) / Constants.UPDATES_PER_SECOND;
-        if ((state & States.Burning) != 0)
-        {
           health--;
-        }
       }
 
       //Damage the tower and die if in contact

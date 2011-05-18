@@ -21,7 +21,7 @@ namespace SurfaceTower.Model
 
     void OnBar(object sender, EventArgs e)
     {
-      generators.Add(new CircleGenerator());
+      generators.Add(new CircleGenerator(random.Next(40)));
       if (random.NextDouble() < 0.75f)
       {
         double angle = Math.PI * random.NextDouble() * 2;
@@ -31,6 +31,10 @@ namespace SurfaceTower.Model
         int x = width / 2 + (int)(width * Math.Cos(angle));
         int y = height / 2 + (int)(height * Math.Sin(angle));
         generators.Add(new PointGenerator(new Vector2(x,y), random.Next(Constants.LARGEST_ENEMIES), 1 + (int) Math.Round(10 * random.NextDouble()), random.Next(20)));
+      }
+      if (random.NextDouble() < 0.50f)
+      {
+        generators.Add(new SideGenerator(random.Next(4)));
       }
     }
 
@@ -47,7 +51,7 @@ namespace SurfaceTower.Model
           }
           else
           {
-            eg.Generate(numEnemies / generators.Count);
+            eg.Generate();
           }
         }
         while (finished.Count > 0)

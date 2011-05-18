@@ -105,8 +105,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="Model\BossGenerator.cs" />
     <Compile Include="Model\PointGenerator.cs" />
     <Compile Include="Model\IGenerator.cs" />
+    <Compile Include="Model\SideGenerator.cs" />
     <Compile Include="Model\Spawner.cs" />
     <Compile Include="Model\CircleGenerator.cs" />
     <Compile Include="Model\EventArguments\BulletArgs.cs" />
@@ -122,6 +124,7 @@
     <Compile Include="Model\Shape\Circle.cs" />
     <Compile Include="Model\Shape\IShape.cs" />
     <Compile Include="Model\Tower.cs" />
+    <Compile Include="Model\WaveEnemy.cs" />
     <Compile Include="TowerAudio\TowerAudioEngine.cs" />
     <Compile Include="TowerAudio\DrumPlayer.cs" />
     <Compile Include="TowerAudio\MelodyPlayer.cs" />
