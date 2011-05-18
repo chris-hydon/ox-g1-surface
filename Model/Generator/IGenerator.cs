@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SurfaceTower.Model
+namespace SurfaceTower.Model.Generator
 {
   public interface IGenerator
   {

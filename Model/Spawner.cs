@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+
 using Microsoft.Xna.Framework;
+
+using SurfaceTower.Model.Generator;
 
 namespace SurfaceTower.Model
 {
@@ -21,7 +22,16 @@ namespace SurfaceTower.Model
 
     void OnBar(object sender, EventArgs e)
     {
-      generators.Add(new CircleGenerator(random.Next(40)));
+      AbstractGenerator g = new CircleGenerator(1);
+      g.EnemyHealth = 1;
+      g.EnemySize = 10;
+      g.EnemySizeVariance = 5;
+      g.EnemyType = EnemyType.Regular;
+      g.MultiplayerAdjustment = 1.7f;
+      g.Frequency = 1;
+      g.WaveSize = 10;
+      generators.Add(g);
+
       if (random.NextDouble() < 0.75f)
       {
         double angle = Math.PI * random.NextDouble() * 2;
@@ -30,11 +40,26 @@ namespace SurfaceTower.Model
         int height = App.Instance.GraphicsDevice.Viewport.Height;
         int x = width / 2 + (int)(width * Math.Cos(angle));
         int y = height / 2 + (int)(height * Math.Sin(angle));
-        generators.Add(new PointGenerator(new Vector2(x,y), random.Next(Constants.LARGEST_ENEMIES), 1 + (int) Math.Round(10 * random.NextDouble()), random.Next(20)));
+
+        g = new PointGenerator(new Vector2(x, y), random.Next(20));
+        g.EnemyHealth = 1;
+        g.EnemySize = 20;
+        g.EnemySizeVariance = 0;
+        g.EnemyType = EnemyType.Wave;
+        g.Frequency = model.Music.ClicksPerBeat / 2;
+        generators.Add(g);
       }
       if (random.NextDouble() < 0.50f)
       {
-        generators.Add(new SideGenerator(random.Next(4)));
+        g = new SideGenerator(random.Next(4), 1);
+        g.EnemyHealth = 1;
+        g.EnemySize = 20;
+        g.EnemySizeVariance = 5;
+        g.EnemyType = EnemyType.Regular;
+        g.MultiplayerAdjustment = 1.7f;
+        g.Frequency = 1;
+        g.WaveSize = 10;
+        generators.Add(g);
       }
     }
 
