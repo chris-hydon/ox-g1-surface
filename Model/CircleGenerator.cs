@@ -40,7 +40,7 @@ namespace SurfaceTower.Model
         int x = width/2 + (int)(width * Math.Cos(angle));
         int y = height/2 + (int)(height * Math.Sin(angle));
         //spawn an enemy which will move towards the centre (and therefore onto the screen)
-        model.Spawn(new Enemy(new Vector2(x, y), 0f, enemySize, enemySize * 10, 0.1f * (2*(model.Tower.Location - new Vector2(x,y))), Color.DarkSeaGreen));
+        model.Spawn(new SpiralEnemy(new Vector2(x, y), 0f, enemySize, enemySize * 10, 0.1f * (2*(model.Tower.Location - new Vector2(x,y))), Color.DarkSeaGreen));
         done = true;
       }
     }

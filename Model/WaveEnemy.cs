@@ -25,15 +25,13 @@ namespace SurfaceTower.Model
     void OnBeat(object sender, EventArgs e)
     {
       add *= -1;
-      System.Console.WriteLine(add);
     }
 
     public override void Move()
     {
       waveVelocity += Acceleration / Constants.UPDATES_PER_SECOND;
       displacement += waveVelocity / Constants.UPDATES_PER_SECOND;
-      Acceleration = -36 * displacement;
-      System.Console.WriteLine(Acceleration);
+      Acceleration = -100 * displacement;
       base.Move();
     }
   }

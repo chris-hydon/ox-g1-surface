@@ -123,6 +123,8 @@
     <Compile Include="Model\IMovable.cs" />
     <Compile Include="Model\Shape\Circle.cs" />
     <Compile Include="Model\Shape\IShape.cs" />
+    <Compile Include="Model\SpiralEnemy.cs">
+    </Compile>
     <Compile Include="Model\Tower.cs" />
     <Compile Include="Model\WaveEnemy.cs" />
     <Compile Include="TowerAudio\TowerAudioEngine.cs" />
