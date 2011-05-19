@@ -17,8 +17,8 @@ namespace SurfaceTower.Model.Generator
     private int enemySize;
     private int enemySizeVariance;
     private int enemyHealth;
-    private int waveSize;
-    private int wavesLeft;
+    private int groupSize;
+    private int groupsLeft;
     private int frequency;
     private float multiplayerAdjustment;
     private int generated;
@@ -42,7 +42,7 @@ namespace SurfaceTower.Model.Generator
     /// </summary>
     public bool Done
     {
-      get { return WavesLeft <= 0; }
+      get { return GroupsLeft <= 0; }
     }
 
     /// <summary>
@@ -82,32 +82,32 @@ namespace SurfaceTower.Model.Generator
     }
 
     /// <summary>
-    /// Number of enemies per wave, per player.
+    /// Number of enemies per group, per player.
     /// </summary>
-    public int WaveSize
+    public int GroupSize
     {
-      get { return waveSize; }
-      set { waveSize = value; }
+      get { return groupSize; }
+      set { groupSize = value; }
     }
 
     /// <summary>
-    /// Actual number of enemies per wave.
+    /// Actual number of enemies per group.
     /// </summary>
-    public int EnemiesPerWave
+    public int EnemiesPerGroup
     {
-      get { return (int) (waveSize * Math.Pow(multiplayerAdjustment, App.Instance.Model.NumberOfPlayers - 1)); }
+      get { return (int) (groupSize * Math.Pow(multiplayerAdjustment, App.Instance.Model.NumberOfPlayers - 1)); }
     }
 
     /// <summary>
-    /// Number of waves remaining before this generator is depleted.
+    /// Number of groups remaining before this generator is depleted.
     /// </summary>
-    public int WavesLeft
+    public int GroupsLeft
     {
-      get { return wavesLeft; }
+      get { return groupsLeft; }
     }
 
     /// <summary>
-    /// How often a wave should be spawned (once every [Frequency] clicks).
+    /// How often a group should be spawned (once every [Frequency] clicks).
     /// </summary>
     public int Frequency
     {
@@ -116,7 +116,7 @@ namespace SurfaceTower.Model.Generator
     }
 
     /// <summary>
-    /// Multiplier to be applied to waveSize for each additional player beyond the first.
+    /// Multiplier to be applied to groupSize for each additional player beyond the first.
     /// </summary>
     public float MultiplayerAdjustment
     {
@@ -131,10 +131,10 @@ namespace SurfaceTower.Model.Generator
     /// <summary>
     /// A generator for creating enemies. This class provides functionality common to most generators.
     /// </summary>
-    /// <param name="waves">Number of waves to spawn before expiring the generator.</param>
-    public AbstractGenerator(int waves)
+    /// <param name="waves">Number of groups to spawn before expiring the generator.</param>
+    public AbstractGenerator(int groups)
     {
-      wavesLeft = waves;
+      groupsLeft = groups;
     }
 
     protected virtual Enemy NextEnemy(Vector2 location, float orientation, Vector2 velocity, Color colour)
@@ -165,19 +165,19 @@ namespace SurfaceTower.Model.Generator
       if (clickCounter++ % frequency == 0)
       {
         generated = 0;
-        wavesLeft--;
+        groupsLeft--;
         return true;
       }
       return false;
     }
 
     /// <summary>
-    /// Decides whether or not this generator should spawn a new enemy this generate cycle.
+    /// Decides whether or not this generator should spawn a new enemy for this group.
     /// </summary>
     /// <returns>True if a new enemy should spawn, false otherwise.</returns>
     protected bool HasNextEnemy()
     {
-      return (EnemiesPerWave > generated);
+      return (EnemiesPerGroup > generated);
     }
 
     #endregion

@@ -49,8 +49,14 @@ namespace SurfaceTower.Model
 
     public float Orientation
     {
-      get { return orientation; }
-      set { orientation = value; }
+      //get { return orientation; }
+      //set { orientation = value; }
+      get { return (float) Math.Atan2(Velocity.Y, Velocity.X); }
+      set
+      {
+        // The orientation of an enemy is always the direction of travel and cannot be set directly.
+        throw new InvalidOperationException();
+      }
     }
 
     public Vector2 Location

@@ -17,7 +17,7 @@ namespace SurfaceTower.Model.Generator
     {
       this.pos = pos;
       // This should by default spawn only a single enemy at a time.
-      WaveSize = 1;
+      GroupSize = 1;
       MultiplayerAdjustment = 1;
     }
 

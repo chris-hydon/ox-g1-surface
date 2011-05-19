@@ -29,7 +29,7 @@ namespace SurfaceTower.Model
       g.EnemyType = EnemyType.Regular;
       g.MultiplayerAdjustment = 1.7f;
       g.Frequency = 1;
-      g.WaveSize = 10;
+      g.GroupSize = 10;
       generators.Add(g);
 
       if (random.NextDouble() < 0.75f)
@@ -58,7 +58,7 @@ namespace SurfaceTower.Model
         g.EnemyType = EnemyType.Regular;
         g.MultiplayerAdjustment = 1.7f;
         g.Frequency = 1;
-        g.WaveSize = 10;
+        g.GroupSize = 10;
         generators.Add(g);
       }
     }

@@ -12,9 +12,9 @@ namespace SurfaceTower.Model.Generator
     /// <summary>
     /// Generates enemies in a circle around the edge of the screen.
     /// </summary>
-    /// <param name="waveCount">Number of waves to spawn before expiring the generator.</param>
-    public CircleGenerator(int waveCount)
-      : base(waveCount)
+    /// <param name="groups">Number of groups to spawn before expiring the generator.</param>
+    public CircleGenerator(int groups)
+      : base(groups)
     {
     }
 

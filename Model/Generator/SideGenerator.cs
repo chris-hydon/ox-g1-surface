@@ -10,7 +10,12 @@ namespace SurfaceTower.Model.Generator
     BaseModel model = App.Instance.Model;
     Vector2 start, end;
 
-    public SideGenerator(int side, int waveCount) : base(waveCount)
+    /// <summary>
+    /// Generate enemies at evenly-spaced intervals along one side of the screen.
+    /// </summary>
+    /// <param name="side">The side to use - corresponds with playerId. 0-3 only.</param>
+    /// <param name="groups">Number of groups to spawn before expiring the generator.</param>
+    public SideGenerator(int side, int groups) : base(groups)
     {
       switch(side)
       {
@@ -38,17 +43,17 @@ namespace SurfaceTower.Model.Generator
     {
       if (ShouldGenerate())
       {
-        for (int i = 0; i < EnemiesPerWave; i++)
+        for (int i = 0; i < EnemiesPerGroup; i++)
         {
           Vector2 pos = Vector2.Zero;
           // Avoid division by zero errors.
-          if (EnemiesPerWave == 1)
+          if (EnemiesPerGroup == 1)
           {
             pos = (start + end) / 2;
           }
           else
           {
-            pos = start + (i * (end - start)) / (EnemiesPerWave - 1);
+            pos = start + (i * (end - start)) / (EnemiesPerGroup - 1);
           }
 
           model.Spawn(NextEnemy(pos, 0f, (model.Tower.Location - pos) / 5, Color.SkyBlue));
