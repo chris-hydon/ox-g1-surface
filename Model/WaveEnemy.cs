@@ -29,7 +29,7 @@ namespace SurfaceTower.Model
     {
       waveVelocity += Acceleration / Constants.UPDATES_PER_SECOND;
       displacement += waveVelocity / Constants.UPDATES_PER_SECOND;
-      Acceleration = -36 * displacement;
+      Acceleration = -100 * displacement;
       base.Move();
     }
   }
