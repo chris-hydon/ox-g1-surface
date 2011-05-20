@@ -8,7 +8,8 @@ namespace SurfaceTower.Model.Generator
   public enum EnemyType
   {
     Regular,
-    Wave
+    Wave,
+    Spiral
   }
 
   public abstract class AbstractGenerator : IGenerator
@@ -174,6 +175,8 @@ namespace SurfaceTower.Model.Generator
 
       switch (enemyType)
       {
+        case EnemyType.Spiral:
+          return new SpiralEnemy(location, size, enemyHealth, velocity, player);
         case EnemyType.Regular:
           return new Enemy(location, size, EnemyHealth, velocity, player);
         case EnemyType.Wave:

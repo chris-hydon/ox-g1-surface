@@ -69,19 +69,19 @@ namespace SurfaceTower.Model
 
       if (style < 50 || progress < 2)
       {
-        SimpleWave(false, false);
+        RandomWave(false, false);
       }
       else if (style < 60 || progress < 10)
       {
-        SimpleWave(true, false);
+        RandomWave(true, false);
       }
       else if (style < 70 || progress < 15)
       {
-        SimpleWave(false, true);
+        RandomWave(false, true);
       }
       else
       {
-        SimpleWave(true, true);
+        RandomWave(true, true);
       }
     }
 
@@ -128,6 +128,70 @@ namespace SurfaceTower.Model
           g.EnemySize = 20;
           g.EnemySizeVariance = LinearDifficulty(5, 10);
           g.EnemyType = EnemyType.Regular;
+          g.Frequency = model.Music.ClicksPerBeat / 2;
+          if (playerSpecifc)
+          {
+            g.PlayerSpecific = true;
+            g.TargetPlayer = p.PlayerId;
+          }
+
+          wave.Add(g);
+        }
+      }
+
+      waves.Enqueue(wave);
+    }
+    void RandomWave(bool useAllSides, bool playerSpecifc)
+    {
+      ICollection<IGenerator> wave = new LinkedList<IGenerator>();
+      AbstractGenerator g;
+      foreach (MainGun p in model.Players)
+      {
+        if (p.IsActive)
+        {
+          int side = p.PlayerId;
+          // If useAllSides, sometimes choose a different side.
+          if (useAllSides && random.Next(2) == 0)
+          {
+            side = random.Next(0, 3);
+          }
+          int genType = random.Next(3);
+
+          switch (genType)
+          {
+            case 0: g = new CircleGenerator(1);
+              g.GroupSize = 20;
+              g.MultiplayerAdjustment = 1;
+              System.Console.WriteLine(0);
+              break;
+            case 1: g = new PointGenerator(PointGenerator.PointOnSide(side, 20), 3 + LinearDifficulty(10, 12));
+              System.Console.WriteLine(1);
+              break;
+            case 2: g = new SideGenerator(side, 1);
+              g.GroupSize = 20;
+              g.MultiplayerAdjustment = 1;
+              System.Console.WriteLine(2);
+              break;
+            default : throw new InvalidOperationException();
+          }
+          int enemyType = random.Next(3);
+          switch (enemyType)
+          {
+            case 0:
+              g.EnemyType = EnemyType.Regular;
+              break;
+            case 1:
+              g.EnemyType = EnemyType.Spiral;
+              break;
+            case 2:
+              g.EnemyType = EnemyType.Wave;
+              break;
+            default: throw new InvalidOperationException();
+          }
+
+          g.EnemyHealth = 1 + LinearDifficulty(5, 0);
+          g.EnemySize = 20;
+          g.EnemySizeVariance = LinearDifficulty(5, 10);
           g.Frequency = model.Music.ClicksPerBeat / 2;
           if (playerSpecifc)
           {
