@@ -10,8 +10,8 @@ namespace SurfaceTower.Model
   public class SpiralEnemy : Enemy
   {
     Vector2 initialVelocity;
-    public SpiralEnemy(Vector2 location, float orientation, int size, int health, Vector2 velocity, Color colour) :
-      base(location, orientation, size, health, Vector2.Transform(App.Instance.Model.Tower.Location - location, Matrix.CreateRotationZ((float)Math.PI / 2)), colour)
+    public SpiralEnemy(Vector2 location, int size, int health, Vector2 velocity, int player) :
+      base(location, size, health, Vector2.Transform(App.Instance.Model.Tower.Location - location, Matrix.CreateRotationZ((float)Math.PI / 2)), player)
     {
       initialVelocity = Vector2.Transform(App.Instance.Model.Tower.Location - location, Matrix.CreateRotationZ((float)Math.PI / 2));
     }
