@@ -14,7 +14,7 @@ namespace SurfaceTower.TowerAudio
         public enum Note {C = 0, Cs, D, Ds, E, F, Fs, G, Gs, A, As, B };
         public enum ScaleDegree { Tonic1 = 0, Supertonic1, Mediant1, Subdominant1, Dominant1, Submediant1, Subtonic1,
                                   Tonic2, Supertonic2, Mediant2, Subdominant2, Dominant2, Submediant2, Subtonic2};
-        enum SoundPack { Bass, Eva, Simpleb, Spaceb, Weeping };
+        enum SoundPack { Eva, Simpleb, Spaceb, Weeping };
         #endregion
 
 
