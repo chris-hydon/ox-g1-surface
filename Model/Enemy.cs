@@ -16,14 +16,17 @@ namespace SurfaceTower.Model
       Burning = 2,
       Stunned = 4,
     }
+
+    private Color[] player_colors = new Color[4] { Color.Red, Color.ForestGreen, Color.Teal, Color.Gold };
+
     protected Vector2 velocity;
     protected Vector2 acceleration = Vector2.Zero;
     protected readonly IShape shape;
-    protected float orientation;
     protected int health;
     protected States state;
     protected int age = 0;
     protected Color colour;
+    protected int player = -1;
 
     #region Properties
     public Color Colour
@@ -49,8 +52,6 @@ namespace SurfaceTower.Model
 
     public float Orientation
     {
-      //get { return orientation; }
-      //set { orientation = value; }
       get { return (float) Math.Atan2(Velocity.Y, Velocity.X); }
       set
       {
@@ -88,6 +89,12 @@ namespace SurfaceTower.Model
       set { health = value; }
     }
 
+    public int Player
+    {
+      get { return player; }
+      set { player = value; }
+    }
+
     #endregion
 
     #region Events
@@ -96,13 +103,21 @@ namespace SurfaceTower.Model
 
     #region Methods
 
-    public Enemy(Vector2 location, float orientation, int size, int health, Vector2 velocity, Color colour)
+    public Enemy(Vector2 location, int size, int health, Vector2 velocity, int player)
     {
       this.shape = new Circle(size, location);
-      this.orientation = orientation;
       this.health = health;
-      this.colour = colour;
       this.velocity = new Vector2(velocity.X, velocity.Y);
+      this.player = player;
+
+      if (player != -1)
+      {
+        this.Colour = player_colors[player];
+      }
+      else
+      {
+        this.Colour = Color.BlanchedAlmond;
+      }
     }
 
     public virtual void Move()
@@ -124,11 +139,19 @@ namespace SurfaceTower.Model
         App.Instance.Model.Tower.Health -= (int) Math.Round(Size);
         if (EnemyReached != null) EnemyReached(this, null);
         App.Instance.Model.DeathRow.Enqueue(new EnemyTimeWho(this, TimeSpan.MinValue, -1));
+
+        // Remove all EnemyReached subscribers.
+        EnemyReached = null;
       }
     }
 
     public bool Collides(ICollidable c)
     {
+      if (Player != -1 && c is Bullet && ((Bullet) c).PlayerId != Player)
+      {
+        return false;
+      }
+
       return Shape.Collides(c.Shape);
     }
     #endregion

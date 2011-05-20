@@ -105,6 +105,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="Model\GameModel.cs" />
     <Compile Include="Model\Generator\AbstractGenerator.cs" />
     <Compile Include="Model\Generator\BossGenerator.cs" />
     <Compile Include="Model\Generator\IGenerator.cs" />

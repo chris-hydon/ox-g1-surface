@@ -43,6 +43,13 @@ namespace SurfaceTower.TowerAudio
           }
         }
 
+        public void Restart()
+        {
+          App.Instance.Model.Music.Click += new EventHandler(OnClick);
+          App.Instance.Model.Music.Beat += new EventHandler(OnBeat);
+          App.Instance.Model.Music.Bar += new EventHandler(OnBar);
+          App.Instance.Model.Update += new EventHandler<SurfaceTower.Model.EventArguments.UpdateArgs>(OnUpdate);
+        }
         
         #region Called on Event
 

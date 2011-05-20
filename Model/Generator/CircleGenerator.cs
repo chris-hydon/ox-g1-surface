@@ -31,7 +31,7 @@ namespace SurfaceTower.Model.Generator
           Vector2 location = new Vector2(ScreenWidth / 2 + (int) (ScreenWidth * Math.Cos(angle)), ScreenHeight / 2 + (int) (ScreenHeight * Math.Sin(angle)));
 
           //spawn an enemy which will move towards the centre (and therefore onto the screen)
-          model.Spawn(NextEnemy(location, 0f, 0.2f * (model.Tower.Location - location), Color.DarkSeaGreen));
+          model.Spawn(NextEnemy(location, 0.2f * (model.Tower.Location - location)));
         }
       }
     }

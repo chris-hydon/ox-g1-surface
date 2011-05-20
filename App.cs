@@ -48,12 +48,18 @@ namespace SurfaceTower
 
       App.Instance = this;
       //Initialize the game model
-      gameModel = new TestingModel();
+      gameModel = new GameModel();
       //Initialize AudioEngine
       towerAudioEngine = new TowerAudioEngine(gameModel);
       //Initialize the UI component
       gameView = new SimpleView(gameModel, graphics, Content);
       contactParser = new ContactParser();
+    }
+
+    public void Restart()
+    {
+      Model.Restart();
+      towerAudioEngine.Restart();
     }
 
     public bool onScreen(Vector2 pos)

@@ -13,8 +13,8 @@ namespace SurfaceTower.Model
     Vector2 displacement;
     Vector2 waveVelocity = Vector2.Zero;
 
-    public WaveEnemy(Vector2 location, float orientation, int size, int health, Vector2 velocity, Color colour) :
-      base(location, orientation, size, health, velocity, colour)
+    public WaveEnemy(Vector2 location, int size, int health, Vector2 velocity, int player) :
+      base(location, size, health, velocity, player)
     {
       normal = Vector2.Transform(velocity/velocity.Length(), Matrix.CreateRotationZ((float)Math.PI / 2));
       displacement = normal * 50;

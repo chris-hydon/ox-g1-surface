@@ -17,13 +17,16 @@ namespace SurfaceTower.Model.Generator
     private int enemySize;
     private int enemySizeVariance;
     private int enemyHealth;
+    private EnemyType enemyType;
     private int groupSize;
     private int groupsLeft;
     private int frequency;
     private float multiplayerAdjustment;
-    private int generated;
-    private EnemyType enemyType;
     private int clickCounter = 0;
+    private bool playerSpecific = false;
+    private int targetPlayer = -1;
+
+    private int generated;
 
     #region Properties
 
@@ -124,6 +127,25 @@ namespace SurfaceTower.Model.Generator
       set { multiplayerAdjustment = value; }
     }
 
+    /// <summary>
+    /// Whether each enemy spawned should be specific to a given player.
+    /// </summary>
+    public bool PlayerSpecific
+    {
+      get { return playerSpecific; }
+      set { playerSpecific = value; }
+    }
+
+    /// <summary>
+    /// The player that each enemy spawned must be killed by. -1 is random. This does nothing
+    /// unless PlayerSpecific is true.
+    /// </summary>
+    public int TargetPlayer
+    {
+      get { return targetPlayer; }
+      set { targetPlayer = value; }
+    }
+
     #endregion
 
     #region Methods
@@ -137,19 +159,25 @@ namespace SurfaceTower.Model.Generator
       groupsLeft = groups;
     }
 
-    protected virtual Enemy NextEnemy(Vector2 location, float orientation, Vector2 velocity, Color colour)
+    protected virtual Enemy NextEnemy(Vector2 location, Vector2 velocity)
     {
       generated++;
 
       // Pick a size for the enemy.
       int size = EnemySize + random.Next(-EnemySizeVariance, EnemySizeVariance);
 
+      int player = -1;
+      if (PlayerSpecific)
+      {
+        player = (TargetPlayer == -1) ? random.Next(0, 3) : TargetPlayer;
+      }
+
       switch (enemyType)
       {
         case EnemyType.Regular:
-          return new Enemy(location, orientation, size, EnemyHealth, velocity, colour);
+          return new Enemy(location, size, EnemyHealth, velocity, player);
         case EnemyType.Wave:
-          return new WaveEnemy(location, orientation, size, EnemyHealth, velocity, colour);
+          return new WaveEnemy(location, size, EnemyHealth, velocity, player);
         default:
           throw new NotImplementedException();
       }

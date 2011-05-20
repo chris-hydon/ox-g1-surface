@@ -63,10 +63,12 @@ namespace SurfaceTower.Model
     protected ICollection<Turret> turrets = new LinkedList<Turret>();
 
     #region Properties
+
     public Queue<EnemyTimeWho> DeathRow
     {
       get { return deathRow; }
     }
+
     public Queue<Bullet> UsedBullets
     {
       get { return usedBullets; }
@@ -137,6 +139,12 @@ namespace SurfaceTower.Model
         return n;
       }
     }
+
+    public int Progress
+    {
+      get { return (int) (Music.BarCount * Constants.PROGRESSION_RATE); }
+    }
+
     #endregion
 
     #region Events
@@ -270,7 +278,7 @@ namespace SurfaceTower.Model
       return false;
     }
 
-    public bool PlayerLeave(int player)
+    public virtual bool PlayerLeave(int player)
     {
       if (Players[player].IsActive)
       {
@@ -279,6 +287,37 @@ namespace SurfaceTower.Model
         return true;
       }
       return false;
+    }
+
+    public virtual void Restart()
+    {
+      music.Stop();
+      UnsubscribeAll();
+      spawner = null;
+      living.Clear();
+      dying.Clear();
+      dead.Clear();
+      collisions.Clear();
+      bullets.Clear();
+      usedBullets.Clear();
+      deathRow.Clear();
+      turrets.Clear();
+      players = new MainGun[4] { new MainGun(0), new MainGun(1), new MainGun(2), new MainGun(3) };
+      tower = new Tower();
+
+      // Free up memory - we've chucked a lot of stuff away and there shouldn't be much processing going on right now.
+      System.GC.Collect();
+    }
+
+    private void UnsubscribeAll()
+    {
+      Update = null;
+      NewEnemy = null;
+      DeadEnemy = null;
+      AddTurret = null;
+      RemoveTurret = null;
+      AddPlayer = null;
+      RemovePlayer = null;
     }
 
     #endregion

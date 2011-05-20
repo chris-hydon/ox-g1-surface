@@ -56,7 +56,7 @@ namespace SurfaceTower.Model.Generator
             pos = start + (i * (end - start)) / (EnemiesPerGroup - 1);
           }
 
-          model.Spawn(NextEnemy(pos, 0f, (model.Tower.Location - pos) / 5, Color.SkyBlue));
+          model.Spawn(NextEnemy(pos, (model.Tower.Location - pos) / 5));
         }
       }
     }

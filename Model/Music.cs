@@ -45,6 +45,10 @@ namespace SurfaceTower.Model
     private int clicksPerBeat;
     // Up to four voices: one voice per player. Voices may be inactive.
     private Voice[] voices;
+    // Total number of bars since the game started.
+    private int barCount;
+    // Number of beats since the start of the bar (0..TimeSignature.number).
+    private int beatCount;
 
     public Music()
     {
@@ -91,6 +95,16 @@ namespace SurfaceTower.Model
       get { return voices; }
     }
 
+    public int BarCount
+    {
+      get { return barCount; }
+    }
+
+    public int BeatCount
+    {
+      get { return beatCount; }
+    }
+
     #endregion
 
     #region Events
@@ -106,7 +120,15 @@ namespace SurfaceTower.Model
     public void Start(TimeSpan time)
     {
       lastClick = lastBeat = lastBar = time;
+      barCount = 0;
       App.Instance.Model.Update += new EventHandler<UpdateArgs>(OnUpdate);
+    }
+
+    public void Stop()
+    {
+      Bar = null;
+      Beat = null;
+      Click = null;
     }
 
     /// <returns>The total duration of each bar, in milliseconds.</returns>
@@ -141,6 +163,8 @@ namespace SurfaceTower.Model
       if ((time - lastBar).TotalMilliseconds > BarDuration())
       {
         lastClick = lastBeat = lastBar = time;
+        barCount++;
+        beatCount = 0;
         if (Bar != null) Bar(this, null);
         if (Beat != null) Beat(this, null);
         if (Click != null) Click(this, null);
@@ -148,6 +172,7 @@ namespace SurfaceTower.Model
       else if ((time - lastBeat).TotalMilliseconds > BeatDuration())
       {
         lastClick = lastBeat = time;
+        beatCount++;
         if (Beat != null) Beat(this, null);
         if (Click != null) Click(this, null);
       }
