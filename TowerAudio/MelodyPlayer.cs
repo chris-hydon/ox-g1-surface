@@ -67,7 +67,6 @@ namespace SurfaceTower.TowerAudio
 
             soundBanks = new LinkedList<SoundBank>();
 
-            soundBanks.Add(new SoundBank(audioEngine, "Content/Bass Sound.xsb"));
             soundBanks.Add(new SoundBank(audioEngine, "Content/Eva Sound.xsb"));
             soundBanks.Add(new SoundBank(audioEngine, "Content/Simpleb Sound.xsb"));
             soundBanks.Add(new SoundBank(audioEngine, "Content/Spaceb Sound.xsb"));

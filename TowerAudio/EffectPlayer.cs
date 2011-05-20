@@ -22,17 +22,41 @@ namespace SurfaceTower.TowerAudio
 
             soundBank = new SoundBank(audioEngine, "Content/Effect Sound.xsb");
 
-            App.Instance.Model.AddPlayer += new EventHandler<SurfaceTower.Model.EventArguments.PlayerArgs>(AddPlayer);
+            App.Instance.Model.AddPlayer += new EventHandler<SurfaceTower.Model.EventArguments.PlayerArgs>(OnAddPlayer);
+            App.Instance.Model.RemovePlayer += new EventHandler<SurfaceTower.Model.EventArguments.PlayerArgs>(OnRemovePlayer);
+            App.Instance.Model.NewEnemy += new EventHandler<SurfaceTower.Model.EventArguments.EnemyArgs>(OnNewEnemy);
 
             heartbeatCue = soundBank.GetCue("Hearbeat");
         }
 
-        void AddPlayer(object sender, SurfaceTower.Model.EventArguments.PlayerArgs e)
+        public void Restart()
+        {
+            App.Instance.Model.AddPlayer += new EventHandler<SurfaceTower.Model.EventArguments.PlayerArgs>(OnAddPlayer);
+            App.Instance.Model.RemovePlayer += new EventHandler<SurfaceTower.Model.EventArguments.PlayerArgs>(OnRemovePlayer);
+            App.Instance.Model.NewEnemy += new EventHandler<SurfaceTower.Model.EventArguments.EnemyArgs>(OnNewEnemy);
+        }
+        
+        #region Things that happen on events
+
+        void OnNewEnemy(object sender, SurfaceTower.Model.EventArguments.EnemyArgs e)
+        {
+            e.Enemy.EnemyReached += new EventHandler(Enemy_EnemyReached);
+        }
+
+        void Enemy_EnemyReached(object sender, EventArgs e)
+        {
+            soundBank.PlayCue("Anvil");
+        }
+
+        void OnRemovePlayer(object sender, SurfaceTower.Model.EventArguments.PlayerArgs e)
+        {
+            soundBank.PlayCue("Aww");
+        }
+
+        void OnAddPlayer(object sender, SurfaceTower.Model.EventArguments.PlayerArgs e)
         {
             soundBank.PlayCue("Crowdcheer");
         }
-
-        #region Things that happen on events
 
         internal void OnClick()
         {

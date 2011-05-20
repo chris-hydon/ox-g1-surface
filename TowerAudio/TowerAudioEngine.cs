@@ -34,7 +34,6 @@ namespace SurfaceTower.TowerAudio
             waveBanks = new LinkedList<WaveBank>();
             waveBanks.Add(new WaveBank(audioEngine, "Content/Drum Bank.xwb"));
             waveBanks.Add(new WaveBank(audioEngine, "Content/Effect Bank.xwb"));
-            waveBanks.Add(new WaveBank(audioEngine, "Content/Bass Bank.xwb"));
             waveBanks.Add(new WaveBank(audioEngine, "Content/Eva Bank.xwb"));
             waveBanks.Add(new WaveBank(audioEngine, "Content/Simpleb Bank.xwb"));
             waveBanks.Add(new WaveBank(audioEngine, "Content/Spaceb Bank.xwb"));
@@ -61,6 +60,7 @@ namespace SurfaceTower.TowerAudio
           App.Instance.Model.Music.Beat += new EventHandler(OnBeat);
           App.Instance.Model.Music.Bar += new EventHandler(OnBar);
           App.Instance.Model.Update += new EventHandler<SurfaceTower.Model.EventArguments.UpdateArgs>(OnUpdate);
+          effectPlayer.Restart();
         }
         
         #region Called on Event
