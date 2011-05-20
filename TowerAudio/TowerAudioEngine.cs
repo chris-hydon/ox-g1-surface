@@ -11,8 +11,9 @@ namespace SurfaceTower.TowerAudio
     {
         private BaseModel baseModel;
         private AudioEngine audioEngine;
-        private DrumPlayer drumPlayer;
-        private MelodyPlayer melodyPlayer;
+        private EffectPlayer effectPlayer;
+        public DrumPlayer drumPlayer;
+        public MelodyPlayer melodyPlayer;
         private ICollection<WaveBank> waveBanks;
 
         public TowerAudioEngine(BaseModel baseModel)
@@ -23,14 +24,25 @@ namespace SurfaceTower.TowerAudio
 
             audioEngine = new AudioEngine("Content/8bit.xgs");
             audioEngine.Update();
+
+            //setting the values in App.Instance.Music
+            App.Instance.Model.Music.TimeSignature = new TimeSignature(4, 4);
+            App.Instance.Model.Music.Tempo = 60;
+            App.Instance.Model.Music.ClicksPerBeat = 4;
+
             //this is needed as the constructor does something magical which allows the sounds to play
             waveBanks = new LinkedList<WaveBank>();
-            waveBanks.Add(new WaveBank(audioEngine, "Content/Arabian Bank.xwb"));
-            waveBanks.Add(new WaveBank(audioEngine, "Content/Heavy Bank.xwb"));
             waveBanks.Add(new WaveBank(audioEngine, "Content/Drum Bank.xwb"));
+            waveBanks.Add(new WaveBank(audioEngine, "Content/Effect Bank.xwb"));
+            waveBanks.Add(new WaveBank(audioEngine, "Content/Bass Bank.xwb"));
+            waveBanks.Add(new WaveBank(audioEngine, "Content/Eva Bank.xwb"));
+            waveBanks.Add(new WaveBank(audioEngine, "Content/Simpleb Bank.xwb"));
+            waveBanks.Add(new WaveBank(audioEngine, "Content/Spaceb Bank.xwb"));
+            waveBanks.Add(new WaveBank(audioEngine, "Content/Weeping Bank.xwb"));
 
             drumPlayer = new DrumPlayer(audioEngine);
             melodyPlayer = new MelodyPlayer(audioEngine);
+            effectPlayer = new EffectPlayer(audioEngine, this);
 
             App.Instance.Model.Music.Click += new EventHandler(OnClick);
             App.Instance.Model.Music.Beat += new EventHandler(OnBeat);
@@ -55,8 +67,10 @@ namespace SurfaceTower.TowerAudio
 
         void OnClick(object sender, EventArgs e)
         {
+            audioEngine.Update();
             drumPlayer.OnClick();
             melodyPlayer.OnClick();
+            effectPlayer.OnClick();
         }
 
         void OnBeat(object sender, EventArgs e)

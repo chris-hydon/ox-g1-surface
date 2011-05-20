@@ -131,7 +131,9 @@
     <Compile Include="Model\WaveEnemy.cs" />
     <Compile Include="TowerAudio\TowerAudioEngine.cs" />
     <Compile Include="TowerAudio\DrumPlayer.cs" />
+	<Compile Include="TowerAudio\EffectPlayer.cs" />
     <Compile Include="TowerAudio\MelodyPlayer.cs" />
+	<Compile Include="TowerAudio\ScaleDecider.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Controller\ContactData.cs" />
     <Compile Include="Controller\ContactParser.cs" />

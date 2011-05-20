@@ -11,12 +11,6 @@ namespace SurfaceTower.Model
 
     public void FirstUpdate(GameTime gameTime)
     {
-      // [ To be removed once audio is merged in [
-      Music.TimeSignature = new TimeSignature(4, 4);
-      Music.Tempo = 60;
-      Music.ClicksPerBeat = 8;
-      // ]]
-
       spawner = new Spawner();
       Music.Start(gameTime.TotalRealTime);
     }

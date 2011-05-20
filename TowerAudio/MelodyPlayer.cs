@@ -4,138 +4,191 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Audio;
 using SurfaceTower.Model;
+using ChordType = SurfaceTower.TowerAudio.ScaleDecider.ChordType;
 
 namespace SurfaceTower.TowerAudio
 {
-    class MelodyPlayer
+    public class MelodyPlayer
     {
         #region Structures and Enums
-        private struct Scale
-        {
-            public int[] notes;
-
-            public Scale(int[] note)
-            {
-                this.notes = note;
-            }
-        }
-        enum ScaleType { Major, NatMinor, HarMinor, Pentatonic };
+        public enum Note {C = 0, Cs, D, Ds, E, F, Fs, G, Gs, A, As, B };
+        public enum ScaleDegree { Tonic1 = 0, Supertonic1, Mediant1, Subdominant1, Dominant1, Submediant1, Subtonic1,
+                                  Tonic2, Supertonic2, Mediant2, Subdominant2, Dominant2, Submediant2, Subtonic2};
+        enum SoundPack { Bass, Eva, Simpleb, Spaceb, Weeping };
         #endregion
 
 
         #region Constants
-        public const int SPREAD = 2;
-
-        private int[][] scaleSignature = new int[][]
-        {
-        new int[]{2,2,1,2,2,2,1},
-        new int[]{2,1,2,2,1,2,2},
-        new int[]{2,1,2,2,1,3,1},
-        new int[]{2,2,3,2,3},
+        private ChordType[][] CHORD_PROGRESSIONS_LIST = new ChordType[][]{
+        new ChordType[]{ChordType.I, ChordType.VI, ChordType.IV, ChordType.V}, //Love songs
+        new ChordType[]{ChordType.I, ChordType.V, ChordType.VI, ChordType.IV}, //Extremely often used
+        new ChordType[]{ChordType.I, ChordType.IV, ChordType.I, ChordType.V}, //Happy
+        new ChordType[]{ChordType.I, ChordType.IV, ChordType.V, ChordType.IV}, //Happy again
+        new ChordType[]{ChordType.I, ChordType.III, ChordType.IV, ChordType.V}, //Inspirational
+        new ChordType[]{ChordType.VI, ChordType.V, ChordType.IV, ChordType.V}, //Hip-Hop
+        new ChordType[]{ChordType.VI, ChordType.IV, ChordType.I, ChordType.V}, //Angsty?
+        new ChordType[]{ChordType.VI, ChordType.V, ChordType.IV, ChordType.III}, //Cool, jazzy (Hit the Road, Jack)
+        new ChordType[]{ChordType.VI, ChordType.IV, ChordType.V, ChordType.VI}, //Uplifting
+        new ChordType[]{ChordType.VI, ChordType.I, ChordType.II, ChordType.VI}, //tough blues
         };
+
+        private SoundPack[] playerSoundPack = new SoundPack[] { SoundPack.Eva, SoundPack.Simpleb, SoundPack.Spaceb, SoundPack.Weeping };
+
+        private int progression = 1;
+        
+        public const int SOUNDPACKSIZE = 48;
+        public const int SPREAD = 1;
+        public static float musicVolume = 1.0f;
         #endregion
 
         #region Variables
-        private Scale currentScale;
+        public bool notePlaying = true;
+
+        private ScaleDecider scaleDecider;
+        private int currentNotePosition;
+        private int previousNotePosition;
 
         private BaseModel model;
         private AudioEngine audioEngine;
         private ICollection<SoundBank> soundBanks;
+        private Cue[] previousCues;
         private Random random;
+
+        private int position = 0;
+        private int clickPosition = 0;
+        private Music music = App.Instance.Model.Music;
         #endregion
 
         
         public MelodyPlayer(AudioEngine audioEngine)
         {
             this.audioEngine = audioEngine;
-            random = new Random();
             model = App.Instance.Model;
 
             soundBanks = new LinkedList<SoundBank>();
-            soundBanks.Add(new SoundBank(audioEngine, "Content/Arabian Sound.xsb"));
-            soundBanks.Add(new SoundBank(audioEngine, "Content/Heavy Sound.xsb"));
 
-            currentScale = CreateScale(1, ScaleType.Major);
+            soundBanks.Add(new SoundBank(audioEngine, "Content/Bass Sound.xsb"));
+            soundBanks.Add(new SoundBank(audioEngine, "Content/Eva Sound.xsb"));
+            soundBanks.Add(new SoundBank(audioEngine, "Content/Simpleb Sound.xsb"));
+            soundBanks.Add(new SoundBank(audioEngine, "Content/Spaceb Sound.xsb"));
+            soundBanks.Add(new SoundBank(audioEngine, "Content/Weeping Sound.xsb"));
+
+            scaleDecider = new ScaleDecider(Note.C, ScaleDecider.ScaleType.Major);
+
+            currentNotePosition = (int)ScaleDegree.Tonic1;
+            previousNotePosition = (int)ScaleDegree.Tonic1;
+            previousCues = new Cue[3];
+            random = new Random();
         }
-
-        #region Methods
-        private Scale CreateScale(int note, ScaleType scaleType)
-        {
-            int scaleLength = scaleSignature[(int)scaleType].Length;
-            int len = scaleLength * 2;
-
-            int[] result = new int[len];
-            result[0] = note;
-            for (int i = 0; i < len - 1; i++)
-            {
-                result[i + 1] = (result[i] + scaleSignature[(int)scaleType][i % scaleLength]);
-                if (result[i + 1] > 24)
-                    result[i + 1] = (result[i + 1] % 24) + 1;
-            }
-
-            return new Scale(result);
-        }
-
-        private Scale CreateTransitionScale(Scale prev, Scale next)
-        {
-            int[] aux = new int[24];
-            int auxPointer = 0;
-            for (int i = 0; i < prev.notes.Length; i++)
-            {
-                for (int j = 0; j < next.notes.Length; j++)
-                {
-                    if (prev.notes[i] == next.notes[j])
-                    {
-                        aux[auxPointer] = prev.notes[i];
-                        auxPointer++;
-                    }
-                }
-            }
-
-            auxPointer = 0;
-            while (auxPointer < 24 && aux[auxPointer] != 0)
-            {
-                auxPointer++;
-            }
-
-            int[] result = new int[auxPointer];
-            for (int i = 0; i < auxPointer; i++)
-            {
-                result[i] = aux[i];
-            }
-
-            return new Scale(result);
-        }
-        #endregion
 
         #region Things happening on Events
 
         internal void OnClick()
         {
+            //decide if scale should change
+            scaleDecider.ClickUpdate();
+
+            UpdateCurrentNote();
+
             if (model.Dying.Count > 0)
             {
                 //Sound has to be played.
-                int scaleLength = currentScale.notes.Length;
-                int notePosition = random.Next(scaleLength);
-                soundBanks.ElementAt(1).PlayCue( currentScale.notes[notePosition]+ "s");
+                //check if any correction needs to be done to resolve tension.
+                currentNotePosition = CorrectNote(previousNotePosition, currentNotePosition);
+
+                int position = 0;
+                ScaleDecider.Chord chord = scaleDecider.GenerateChord((ChordType)(currentNotePosition % 12), currentNotePosition / 12);
+
+                String lengthString;
+                if (random.Next(3) < 2)
+                    lengthString = "s";
+                else
+                    lengthString = "l";
+                
 
                 while (model.Dying.Count != 0)
                 {
+                    if(notePlaying)
+                        soundBanks.ElementAt((int)playerSoundPack[model.Dying.ElementAt(0).who]).PlayCue((scaleDecider.NoteAt(chord.Notes[position]) + 1) + lengthString);
+
+                    position++;
+                    position %= chord.Notes.Length;
                     model.Kill(model.Dying.ElementAt(0));
                 }
             }
+
+            
+            clickPosition++;
+            clickPosition %= music.TimeSignature.number * music.ClicksPerBeat;
+        }
+
+        private int PlayerDyingCount(int playerNumber)
+        {
+            int result = 0;
+
+            foreach (EnemyTimeWho etw in model.Dying)
+            {
+                if (etw.who == playerNumber)
+                {
+                    result++;
+                }
+            }
+            return result;
+        }
+
+        private void UpdateCurrentNote()
+        {
+            //set up the note modifier and update the current note
+            int noteModifier = random.Next(2 * SPREAD) - 1;
+            int scaleLength = scaleDecider.Length;
+            currentNotePosition += noteModifier;
+
+            //do corrections
+            if (currentNotePosition >= scaleLength)
+            {
+                currentNotePosition -= currentNotePosition % scaleLength;
+            }
+            if (currentNotePosition < 1)
+            {
+                currentNotePosition = 1 - currentNotePosition;
+            }
+
+            //just as a precaution if the size of the scale is smaller than SPREAD
+            currentNotePosition = (currentNotePosition % scaleLength) + 1;
+        }
+
+        private int CorrectNote(int previousNote, int currentNote)
+        {
+            if (scaleDecider.CurrentScale.ScaleType == ScaleDecider.ScaleType.Major ||
+                scaleDecider.CurrentScale.ScaleType == ScaleDecider.ScaleType.HarMinor ||
+                scaleDecider.CurrentScale.ScaleType == ScaleDecider.ScaleType.NatMinor)
+            {
+                //if previous note was a subtonic, resolve the tension
+                if (previousNote == (int)ScaleDegree.Subtonic1 || previousNote == (int)ScaleDegree.Subtonic2)
+                    return (int) ScaleDegree.Tonic2;
+
+                //if previous note was a supertonic go towards the V note (dominant)
+                if (previousNote == (int) ScaleDegree.Supertonic1)
+                    return (int)ScaleDegree.Dominant1;
+                if (previousNote == (int)ScaleDegree.Supertonic2)
+                    return (int)ScaleDegree.Dominant2;
+            }
+            return currentNote;
         }
 
         internal void OnBeat()
         {
-            
+            position = (position + 1) % 4;
         }
 
         internal void OnBar()
         {
-            
+            progression = random.Next(10);
         }
 
+        #endregion
+
+        #region Methods
         #endregion
     }
 }
