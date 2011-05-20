@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 
-namespace SurfaceTower.Model
+namespace SurfaceTower.Model.Generator
 {
   public class BossGenerator : IGenerator
   {

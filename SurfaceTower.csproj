@@ -105,12 +105,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
-    <Compile Include="Model\BossGenerator.cs" />
-    <Compile Include="Model\PointGenerator.cs" />
-    <Compile Include="Model\IGenerator.cs" />
-    <Compile Include="Model\SideGenerator.cs" />
+    <Compile Include="Model\Generator\AbstractGenerator.cs" />
+    <Compile Include="Model\Generator\BossGenerator.cs" />
+    <Compile Include="Model\Generator\IGenerator.cs" />
+    <Compile Include="Model\Generator\PointGenerator.cs" />
+    <Compile Include="Model\Generator\SideGenerator.cs" />
     <Compile Include="Model\Spawner.cs" />
-    <Compile Include="Model\CircleGenerator.cs" />
+    <Compile Include="Model\Generator\CircleGenerator.cs" />
     <Compile Include="Model\EventArguments\BulletArgs.cs" />
     <Compile Include="Model\EventArguments\PlayerArgs.cs" />
     <Compile Include="Model\EventArguments\TurretArgs.cs" />

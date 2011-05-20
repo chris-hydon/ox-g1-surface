@@ -10,7 +10,6 @@ namespace SurfaceTower.Model
   public class WaveEnemy : Enemy
   {
     Vector2 normal;
-    int add = 1;
     Vector2 displacement;
     Vector2 waveVelocity = Vector2.Zero;
 
@@ -19,14 +18,13 @@ namespace SurfaceTower.Model
     {
       normal = Vector2.Transform(velocity/velocity.Length(), Matrix.CreateRotationZ((float)Math.PI / 2));
       displacement = normal * 50;
-      App.Instance.Model.Music.Beat += new EventHandler(OnBeat);
     }
 
-    void OnBeat(object sender, EventArgs e)
-    {
-      add *= -1;
-    }
-
+    /// <summary>
+    /// WaveEnemies move with their usual velocity plus simple harmonic motion.
+    /// The formula is -x^2 * d, where d is the displacement from the middle of
+    /// the wave and x is the number of radians per second to oscilate.
+    /// </summary>
     public override void Move()
     {
       waveVelocity += Acceleration / Constants.UPDATES_PER_SECOND;
