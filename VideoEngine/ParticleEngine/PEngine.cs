@@ -23,11 +23,19 @@ namespace SurfaceTower.VideoEngine.ParticleEngine
             tex = view.content.Load<Texture2D>("particle");
             App.Instance.Model.NewEnemy += new EventHandler<SurfaceTower.Model.EventArguments.EnemyArgs>(NewEnemy);
             App.Instance.Model.DeadEnemy += new EventHandler<SurfaceTower.Model.EventArguments.EnemyArgs>(Model_DeadEnemy);
+            App.Instance.Model.AddTurret += new EventHandler<SurfaceTower.Model.EventArguments.TurretArgs>(Model_AddTurret);
             foreach (Model.Gun.Turret t in App.Instance.Model.Turrets)
             {
                 t.NewBullet += new EventHandler<SurfaceTower.Model.EventArguments.BulletArgs>(t_NewBullet);
             }
         }
+
+        void Model_AddTurret(object sender, SurfaceTower.Model.EventArguments.TurretArgs e)
+        {
+            e.Turret.NewBullet+=new EventHandler<SurfaceTower.Model.EventArguments.BulletArgs>(t_NewBullet);
+        }
+
+
 
         void t_NewBullet(object sender, SurfaceTower.Model.EventArguments.BulletArgs e)
         {
@@ -41,7 +49,13 @@ namespace SurfaceTower.VideoEngine.ParticleEngine
 
         void NewEnemy(object sender, SurfaceTower.Model.EventArguments.EnemyArgs e)
         {
-            //emitters.Add(new EnemyEmitter(e.Enemy, tex));
+            e.Enemy.EnemyReached += new EventHandler(Enemy_EnemyReached);
+        }
+
+        void Enemy_EnemyReached(object sender, EventArgs e)
+        {
+            Enemy enemy = (Enemy)sender;
+            addExplosion(enemy.Location, enemy.Colour);
         }
 
         public void addEmitter(Vector2 position, Color color, int size)
@@ -57,7 +71,7 @@ namespace SurfaceTower.VideoEngine.ParticleEngine
             emitters.Add(e);
         }
 
-        public void Update(ICollection<Enemy> living)
+        public void Update()
         {
             AbstractEmitter em;
             for (int i=0; i < emitters.Count; i++)

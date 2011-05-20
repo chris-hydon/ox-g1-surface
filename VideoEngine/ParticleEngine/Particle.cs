@@ -59,7 +59,7 @@ namespace SurfaceTower.VideoEngine.ParticleEngine
             Vector2 origin = new Vector2(sprite.Width/2, sprite.Height/2);
             int a = (255 * timeToLive) / originalttl;
             color.A = (byte)((255 * timeToLive) / originalttl);
-            spriteBatch.Draw(sprite, new Rectangle((int)position.X, (int)position.Y, size, size), color);
+            spriteBatch.Draw(sprite, new Rectangle((int)position.X, (int)position.Y, size, size), null, color, 0, new Vector2(sprite.Width/2, sprite.Height/2), SpriteEffects.None, 0);
 
         }
 

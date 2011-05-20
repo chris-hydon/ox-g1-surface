@@ -27,7 +27,7 @@ namespace SurfaceTower.VideoEngine
         //Draws the sprites
         public SpriteBatch spritebatch { get; set; }
         //Sprites
-        private Texture2D enemy, bullet, middle, gun;
+        private Texture2D enemy, bullet, middle, gun, background;
         //Postprocessing to apply bloom
         private BloomPostprocess.BloomComponent bloom; 
         //The particle engine
@@ -48,31 +48,30 @@ namespace SurfaceTower.VideoEngine
             bullet = content.Load<Texture2D>("bullet");
             middle = content.Load<Texture2D>("centre");
             gun = content.Load<Texture2D>("turret");
+            background = content.Load<Texture2D>("bg");
             graphics.GraphicsDevice.Clear(Color.Black);
             //Initializes the bloom postprocessing with the device to display on
             bloom = new BloomPostprocess.BloomComponent(gm, graphics.GraphicsDevice);
             //Registers the bloom compenent to the list of compenents, it will be drawn AFTER the rest of the game.
             gm.Components.Add(bloom);
             particleEngine = new PEngine(this);
-            particleEngine.addEmitter(new Vector2(300), Color.Red, 60);
-            particleEngine.addEmitter(new Vector2(300), Color.Orange, 10);
-            particleEngine.addExplosion(new Vector2(App.Instance.GraphicsDevice.Viewport.Width / 2, App.Instance.GraphicsDevice.Viewport.Height / 2), Color.GreenYellow);
         }
 
         public void draw(GameTime gameTime){
 
             //Clear the previous frame 
             graphics.GraphicsDevice.Clear(Color.Black);
+           
+            particleEngine.Update();
 
-            particleEngine.Update(baseModel.Living);
-
-          
             spritebatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.None);
-            //Particles
-            particleEngine.Draw();
-            
-            //middle
 
+            //Particles
+            spritebatch.Draw(background, new Rectangle(0,0,graphics.GraphicsDevice.Viewport.Width, graphics.GraphicsDevice.Viewport.Height), Color.White);
+            particleEngine.Draw();
+
+
+            //middle
             Color c = Color.DeepPink;
             c.A = (byte)100;
             spritebatch.Draw(middle, new Rectangle((int)baseModel.Tower.Location.X, (int)baseModel.Tower.Location.Y, (int)baseModel.Tower.Shape.Width, (int)baseModel.Tower.Shape.Height),
@@ -114,8 +113,10 @@ namespace SurfaceTower.VideoEngine
                 Rectangle rect = new Rectangle((int)b.Location.X, (int)b.Location.Y, (int)(2*b.Shape.Width), (int)(2*b.Shape.Height));
                 spritebatch.Draw(bullet, rect, new Rectangle(0, 0, bullet.Width, bullet.Height), player_colors[b.PlayerId], b.Orientation, new Vector2(bullet.Width / 2, bullet.Height / 2), SpriteEffects.None, 1);
             }
+
             spritebatch.End();
             return;
+            
             
         }
     }
