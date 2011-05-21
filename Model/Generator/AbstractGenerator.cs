@@ -14,7 +14,7 @@ namespace SurfaceTower.Model.Generator
 
   public abstract class AbstractGenerator : IGenerator
   {
-    protected Random random = new Random();
+    protected static Random random = new Random();
     private int enemySize;
     private int enemySizeVariance;
     private int enemyHealth;

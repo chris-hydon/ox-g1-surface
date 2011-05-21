@@ -42,7 +42,7 @@ namespace SurfaceTower.Model.Generator
     {
       int width = App.Instance.GraphicsDevice.Viewport.Width;
       int height = App.Instance.GraphicsDevice.Viewport.Height;
-      float rn = (float) new Random().NextDouble();
+      float rn = (float) random.NextDouble();
 
       switch (playerId)
       {
