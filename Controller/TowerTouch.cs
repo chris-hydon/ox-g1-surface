@@ -1,4 +1,5 @@
 ﻿using SurfaceTower.VideoEngine.Touchable;
+using Microsoft.Surface.Core;
 
 namespace SurfaceTower.Controller
 {
@@ -11,6 +12,14 @@ namespace SurfaceTower.Controller
       {
         // Do... something?
       }
+    }
+
+    public void Press(Contact contact, int playerId)
+    {
+    }
+
+    public void Release(Contact contact, int playerId)
+    {
     }
   }
 }
