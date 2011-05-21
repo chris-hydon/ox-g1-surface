@@ -62,7 +62,6 @@ namespace SurfaceTower.Model.Gun
     #region Events
 
     public event EventHandler<ShotArgs> ShotFired;
-    public event EventHandler UpgradeReady;
     public event EventHandler<BulletArgs> NewBullet;
 
     #endregion

@@ -13,7 +13,6 @@ namespace SurfaceTower.Model.Gun
     int Strength { get; set; }
 
     event EventHandler<ShotArgs> ShotFired;
-    event EventHandler UpgradeReady;
     event EventHandler<BulletArgs> NewBullet;
 
     void Shoot();

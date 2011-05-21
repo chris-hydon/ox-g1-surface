@@ -48,7 +48,7 @@ namespace SurfaceTower.TowerAudio
             App.Instance.Model.Music.Bar += new EventHandler(OnBar);
             App.Instance.Model.Update += new EventHandler<SurfaceTower.Model.EventArguments.UpdateArgs>(OnUpdate);
           }
-          catch (InvalidOperationException e)
+          catch (InvalidOperationException)
           {
             Console.WriteLine("There is no audio device plugged in. AudioEngine will not be used.");
           }
