@@ -170,7 +170,7 @@ namespace SurfaceTower.Model.Generator
       int player = -1;
       if (PlayerSpecific)
       {
-        player = (TargetPlayer == -1) ? random.Next(0, 3) : TargetPlayer;
+        player = (TargetPlayer == -1) ? random.Next(0, 4) : TargetPlayer;
       }
 
       switch (enemyType)

@@ -109,7 +109,7 @@ namespace SurfaceTower.Model.Gun
     void OnUpdate(object sender, UpdateArgs e)
     {
       // Find the nearest enemy.
-      Enemy focus = Enemy.FindNearestLiving(this);
+      Enemy focus = Enemy.FindNearestLiving(this, playerId);
 
       if (focus != null)
       {

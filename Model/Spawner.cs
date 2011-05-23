@@ -196,7 +196,7 @@ namespace SurfaceTower.Model
           if (playerSpecifc)
           {
             g.PlayerSpecific = true;
-            g.TargetPlayer = p.PlayerId;
+            //g.TargetPlayer = p.PlayerId;
           }
 
           wave.Add(g);

@@ -124,7 +124,7 @@ namespace SurfaceTower.Model
     private Vector2 HomingAcceleration()
     {
       // Find the nearest enemy.
-      Enemy focus = Enemy.FindNearestLiving(this);
+      Enemy focus = Enemy.FindNearestLiving(this, PlayerId);
 
       // If there's no target, there's no homing acceleration
       if (focus == null)

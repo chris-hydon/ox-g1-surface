@@ -163,14 +163,14 @@ namespace SurfaceTower.Model
     /// </summary>
     /// <param name="from">The IEntity from which to base the search.</param>
     /// <returns>The closest Enemy to origin, or null if no such Enemy exists.</returns>
-    public static Enemy FindNearestLiving(IEntity origin)
+    public static Enemy FindNearestLiving(IEntity origin, int targetRestriction)
     {
       double neardist = double.PositiveInfinity;
       Enemy nearest = null;
       foreach (Enemy e in App.Instance.Model.Living)
       {
         //if the enemy is on the screen
-        if (App.Instance.onScreen(e.Location))
+        if (App.Instance.onScreen(e.Location) && (e.Player == -1 || e.Player == targetRestriction))
         {
           double dist = (e.Location - origin.Location).Length();
           if (dist < neardist)

@@ -18,14 +18,16 @@ namespace SurfaceTower.Model
     public void FirstUpdate(GameTime gameTime)
     {
       // Audio folks, something like this should be in your initialize, not mine!
-      Music.TimeSignature = new TimeSignature(4, 4);
-      Music.Tempo = 60;
-      Music.ClicksPerBeat = 8;
       Music.Start(gameTime.TotalRealTime);
 
       Music.Beat += new EventHandler(OnBeat);
 
       spawner = new Spawner();
+      for (int i = 0; i < 4; i++) { 
+        Players[i].IsActive = true;
+        Turrets.Add(new Turret(new Vector2((i % 2 + 1) * 250, (float)Math.Ceiling((double)i / 2) * 250), i));
+      
+      }
     }
 
     /// <summary>

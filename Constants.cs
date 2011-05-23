@@ -12,7 +12,7 @@ namespace SurfaceTower
     public const int MAIN_TURRET_DEFAULT_POWER = 50;
     public const float MAIN_TURRET_RADIUS = 100.0f;
     public const float PROGRESSION_RATE = 1; // Ranks per bar
-    public const int TOWER_DEFAULT_HEALTH = 1000;
+    public const int TOWER_DEFAULT_HEALTH = 100000000;
     public const int TOWER_REGENERATION = 1; // Regen per beat
     public const int TURRET_DEFAULT_POWER = 500;
     public const float TURRET_RADIUS = 10.0f;
