@@ -37,14 +37,14 @@ namespace SurfaceTower.VideoEngine.ParticleEngine
         }
         
         public void Update(){
-            if (position.Y > App.Instance.GraphicsDevice.Viewport.Height || position.Y < 0)
+            /**if (position.Y > App.Instance.GraphicsDevice.Viewport.Height || position.Y < 0)
             {
                 this.velocity.Y *= -1;
             }
             if (position.X > App.Instance.GraphicsDevice.Viewport.Width || position.X < 0)
             {
                 this.velocity.X *= -1;
-            }
+            }*/
 
             if (timeToLive > 0)
             {

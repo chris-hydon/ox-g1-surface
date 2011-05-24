@@ -57,6 +57,11 @@ namespace SurfaceTower.VideoEngine
             particleEngine = new PEngine(this);
         }
 
+        public void Restart()
+        {
+            particleEngine.Reset();
+        }
+
         public void draw(GameTime gameTime){
 
             //Clear the previous frame 
