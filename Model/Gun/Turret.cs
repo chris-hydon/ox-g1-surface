@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using Microsoft.Surface.Core;
 using Microsoft.Xna.Framework;
 using SurfaceTower.Model;
 using SurfaceTower.Model.EventArguments;
 using SurfaceTower.Model.Shape;
+using SurfaceTower.Model.Upgrades;
 using SurfaceTower.Controller;
 
 namespace SurfaceTower.Model.Gun
@@ -100,11 +102,26 @@ namespace SurfaceTower.Model.Gun
       get { return controller; }
     }
 
+    public ICollection<Upgrade> Upgrades
+    {
+      get
+      {
+        ICollection<Upgrade> upgrades = new List<Upgrade>(5);
+        upgrades.Add(new StrengthUpgrade(this, 2));
+        upgrades.Add(new EffectUpgrade(this, Effects.Homing, true));
+        upgrades.Add(new ShotUpgrade(this, ShotPatterns.TwoShot, false));
+        upgrades.Add(new ShotUpgrade(this, ShotPatterns.Spread, false));
+        return upgrades;
+      }
+    }
+
     #endregion
 
     #region Events
 
     public event EventHandler<ShotArgs> ShotFired;
+    public event EventHandler UpgradeReady;
+    public event EventHandler UpgradeDone;
     public event EventHandler<BulletArgs> NewBullet;
 
     #endregion
@@ -168,6 +185,18 @@ namespace SurfaceTower.Model.Gun
           orientMod = orientMod > 0 ? turnSpeed : -turnSpeed;
         }
         Orientation += orientMod;
+      }
+    }
+
+    public void ShowMenu(bool show)
+    {
+      if (show && App.Instance.Model.Players[playerId].CanUpgrade)
+      {
+        if (UpgradeReady != null) UpgradeReady(this, null);
+      }
+      else if (!show)
+      {
+        if (UpgradeDone != null) UpgradeDone(this, null);
       }
     }
 

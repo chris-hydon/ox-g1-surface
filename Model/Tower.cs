@@ -1,16 +1,19 @@
 ﻿using System;
 
-using SurfaceTower.Model.Shape;
+using Microsoft.Surface.Core;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SurfaceTower.Controller;
+using SurfaceTower.Model.Shape;
 
 namespace SurfaceTower.Model
 {
-  public class Tower : IEntity, ICollidable
+  public class Tower : IEntity, ICollidable, ITouchable
   {
     private readonly Circle shape;
     private int health;
     private int maxHealth = Constants.TOWER_DEFAULT_HEALTH;
+    private ITouchHandler controller;
 
     #region Properties
 
@@ -62,6 +65,11 @@ namespace SurfaceTower.Model
       }
     }
 
+    public ITouchHandler Controller
+    {
+      get { return controller; }
+    }
+
     #endregion
 
     #region Events
@@ -69,6 +77,8 @@ namespace SurfaceTower.Model
     public event EventHandler ZeroHealth;
 
     #endregion
+
+    #region Methods
 
     /// <summary>
     /// The Tower is the central target for the enemies - if its health reaches zero the game is over.
@@ -78,6 +88,7 @@ namespace SurfaceTower.Model
       Viewport v = App.Instance.GraphicsDevice.Viewport;
       shape = new Circle(Constants.MAIN_TURRET_RADIUS, new Vector2(v.Width / 2, v.Height / 2));
       health = maxHealth;
+      controller = new TowerTouch();
     }
 
     public void OnBeat(object sender, EventArgs e)
@@ -90,5 +101,12 @@ namespace SurfaceTower.Model
     {
       return Shape.Collides(c.Shape);
     }
+
+    public bool InRegion(Contact target)
+    {
+      return Shape.Collides(target);
+    }
+
+    #endregion
   }
 }

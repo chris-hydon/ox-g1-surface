@@ -11,12 +11,19 @@ namespace SurfaceTower.Model
   [Flags]
   public enum Effects
   {
-    None = 0,
-    Pierce = 1,
-    Burn = 2,
-    Stun = 4,
-    Slow = 8,
-    Homing = 16,
+    None           = 0x0000,
+    Pierce         = 0x0001,
+    Burn           = 0x0002,
+    Stun           = 0x0004,
+    Slow           = 0x0008,
+    Homing         = 0x0010,
+    Infrequent     = 0x0020,
+    VeryInfrequent = 0x0040,
+    Disc           = 0x0080,
+    Wide           = 0x0100,
+    Exploding      = 0x0200,
+    DoublePower    = 0x0400,
+    ShortRange     = 0x0800,
   }
 
   public class Bullet : ICollidable, IMovable

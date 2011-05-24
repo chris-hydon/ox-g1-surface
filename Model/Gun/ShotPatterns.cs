@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace SurfaceTower.Model.Gun
 {
-  public struct ShotPattern
+  public class ShotPattern
   {
     private float orientMod;
     private Vector2 posMod;
@@ -27,9 +27,11 @@ namespace SurfaceTower.Model.Gun
     public Effects Effects
     {
       get { return effects; }
+      set { effects = value; }
     }
 
     #endregion
+
     /// <summary>
     /// A ShotPattern stores the characteristics of a shot.
     /// </summary>
@@ -51,14 +53,22 @@ namespace SurfaceTower.Model.Gun
   {
     #region Class Definition
 
-    private Node head = null;
+    private ShotPattern me;
+    private ShotPatterns next = null;
+
+    public ShotPatterns()
+    {
+    }
+
+    private ShotPatterns(ShotPattern pattern, ShotPatterns next)
+    {
+      me = pattern;
+      this.next = next;
+    }
+
     public ShotPatterns Add(ShotPattern pattern)
     {
-      Node oldHead = head;
-      head = new Node();
-      head.me = pattern;
-      head.next = oldHead;
-      return this;
+      return new ShotPatterns(pattern, this);
     }
 
     public IEnumerator<ShotPattern> GetEnumerator()
@@ -71,22 +81,12 @@ namespace SurfaceTower.Model.Gun
       return new ShotPatternEnum(this);
     }
 
-    #region Node
-
-    private class Node
-    {
-      public ShotPattern me;
-      public Node next;
-    }
-
-    #endregion
-
     #region Enumerator
 
     public class ShotPatternEnum : IEnumerator<ShotPattern>
     {
       ShotPatterns parent;
-      Node enumHead = null;
+      ShotPatterns current = null;
 
       public ShotPatternEnum(ShotPatterns parent)
       {
@@ -95,35 +95,35 @@ namespace SurfaceTower.Model.Gun
 
       public ShotPattern Current
       {
-        get { return enumHead.me; }
+        get { return current.me; }
       }
 
       object IEnumerator.Current
       {
-        get { return enumHead.me; }
+        get { return current.me; }
       }
 
       public bool MoveNext()
       {
-        if (enumHead == null)
+        if (current == null)
         {
-          enumHead = parent.head;
+          current = parent;
         }
         else
         {
-          enumHead = enumHead.next;
+          current = current.next;
         }
-        return enumHead != null;
+        return current != null;
       }
 
       public void Reset()
       {
-        enumHead = null;
+        current = null;
       }
 
       public void Dispose()
       {
-        enumHead = null;
+        current = null;
       }
     }
 
@@ -147,6 +147,9 @@ namespace SurfaceTower.Model.Gun
       .Add(new ShotPattern(-0.5f, Vector2.Zero, Effects.None))
       .Add(new ShotPattern(0, Vector2.Zero, Effects.None))
       .Add(new ShotPattern(0.5f, Vector2.Zero, Effects.None));
+
+    public static ShotPatterns SingleHoming = new ShotPatterns()
+      .Add(new ShotPattern(0, Vector2.Zero, Effects.Homing));
 
     #endregion
   }

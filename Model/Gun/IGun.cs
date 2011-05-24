@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using SurfaceTower.Model.EventArguments;
 using Microsoft.Xna.Framework;
+using SurfaceTower.Model.EventArguments;
+using SurfaceTower.Model.Upgrades;
 
 namespace SurfaceTower.Model.Gun
 {
@@ -12,10 +13,14 @@ namespace SurfaceTower.Model.Gun
     int PlayerId { get; }
     ShotPatterns Shots { get; set; }
     int Strength { get; set; }
+    ICollection<Upgrade> Upgrades { get; }
 
     event EventHandler<ShotArgs> ShotFired;
+    event EventHandler UpgradeReady;
+    event EventHandler UpgradeDone;
     event EventHandler<BulletArgs> NewBullet;
 
     void Shoot();
+    void ShowMenu(bool show);
   }
 }

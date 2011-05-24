@@ -106,6 +106,7 @@
   <ItemGroup>
     <Compile Include="App.cs" />
     <Compile Include="Controller\TurretMover.cs" />
+    <Compile Include="Controller\UpgradeOption.cs" />
     <Compile Include="Model\GameModel.cs" />
     <Compile Include="Model\Generator\AbstractGenerator.cs" />
     <Compile Include="Model\Generator\BossGenerator.cs" />
@@ -130,6 +131,10 @@
     <Compile Include="Model\SpiralEnemy.cs">
     </Compile>
     <Compile Include="Model\Tower.cs" />
+    <Compile Include="Model\Upgrades\EffectUpgrade.cs" />
+    <Compile Include="Model\Upgrades\ShotUpgrade.cs" />
+    <Compile Include="Model\Upgrades\StrengthUpgrade.cs" />
+    <Compile Include="Model\Upgrades\Upgrade.cs" />
     <Compile Include="Model\WaveEnemy.cs" />
     <Compile Include="TowerAudio\TowerAudioEngine.cs" />
     <Compile Include="TowerAudio\DrumPlayer.cs" />
