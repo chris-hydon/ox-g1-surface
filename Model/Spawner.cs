@@ -76,19 +76,19 @@ namespace SurfaceTower.Model
       //which are too difficult are not encountered too early.
       if (style < 50 || progress < 2)
       {
-        RandomWave(false, false);
+        CornersWave(EnemyType.Spiral, true);
       }
       else if (style < 60 || progress < 10)
       {
-        RandomWave(true, false);
+        CornersWave(EnemyType.Spiral, true);
       }
       else if (style < 70 || progress < 15)
       {
-        RandomWave(false, true);
+        CornersWave(EnemyType.Spiral, true);
       }
       else
       {
-        RandomWave(true, true);
+        CornersWave(EnemyType.Spiral, true);
       }
     }
 
@@ -119,7 +119,7 @@ namespace SurfaceTower.Model
     {
       ICollection<IGenerator> wave = new LinkedList<IGenerator>();
       PointGenerator g;
-      foreach (MainGun p in model.Players)
+      foreach (MainGun p in model.ActivePlayers)
       {
         if (p.IsActive)
         {
@@ -148,12 +148,18 @@ namespace SurfaceTower.Model
 
       waves.Enqueue(wave);
     }
-    //Works similarly to SimpleWave, with the same parameters.
+    /// <summary>
+    /// Chooses a random generator type and enemy type per player and queues them.
+    /// </summary>
+    /// <param name="useAllSides">False if only each player's own side should be used to spawn, true if
+    /// there should be a chance of using a random side.</param>
+    /// <param name="playerSpecifc">If true, each spawn can only be damaged by the player who shares a
+    /// colour with it.</param>
     void RandomWave(bool useAllSides, bool playerSpecifc)
     {
       ICollection<IGenerator> wave = new LinkedList<IGenerator>();
       AbstractGenerator g;
-      foreach (MainGun p in model.Players)
+      foreach (MainGun p in model.ActivePlayers)
       {
         if (p.IsActive)
         {
@@ -216,6 +222,53 @@ namespace SurfaceTower.Model
       waves.Enqueue(wave);
     }
 
+    /// <summary>
+    /// Queues up a wave of enemies per player in the corners of the screen.
+    /// </summary>
+    /// <param name="enemyType"> The type of enemy to spawn.</param>
+    /// <param name="playerSpecifc">If true, each spawn can only be damaged by the player who shares a
+    /// colour with it.</param>
+    void CornersWave(EnemyType enemyType, bool playerSpecifc)
+    {
+      ICollection<IGenerator> wave = new LinkedList<IGenerator>();
+      PointGenerator g;
+      Vector2[] corners = {new Vector2(-100, -100), new Vector2(-100, height + 100), new Vector2(width+100, -100), new Vector2(width+100, height+100)};
+      shuffle(corners);
+      foreach (MainGun p in model.ActivePlayers)
+      {
+        float width = App.Instance.GraphicsDevice.Viewport.Width;
+        float height = App.Instance.GraphicsDevice.Viewport.Height;
+
+        Vector2 pos = corners[p.PlayerId];
+        g = new PointGenerator(pos, 3 + LinearDifficulty(10, 12));
+        g.EnemyHealth = 1 + LinearDifficulty(5, 0);
+        g.EnemySize = 20;
+        g.EnemySizeVariance = LinearDifficulty(5, 10);
+        g.EnemyType = enemyType;
+        g.Frequency = model.Music.ClicksPerBeat / 2;
+        if (playerSpecifc)
+        {
+          g.PlayerSpecific = true;
+          g.TargetPlayer = p.PlayerId;
+        }
+        wave.Add(g);
+      }
+      waves.Enqueue(wave);
+    }
+
+    //Shuffle randomly reorders the target array.
+    void shuffle(Vector2[] target)
+    {
+      List<Vector2> temp = new List<Vector2>(target);
+      for (int index = 0; index < target.Length; index++)
+      {
+        int r = random.Next(temp.Count);
+        target[index] = temp[r];
+        temp.RemoveAt(r);
+      }
+
+
+    }
     #endregion
   }
 }

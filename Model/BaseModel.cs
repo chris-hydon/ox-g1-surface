@@ -39,6 +39,26 @@ namespace SurfaceTower.Model
 
     #region Properties
 
+    public MainGun[] ActivePlayers
+    {
+      get
+      {
+        MainGun[] actives = new MainGun[NumberOfPlayers];
+        int index = 0;
+        for (int i = 0; i < 4; i++)
+        {
+          if (players[i].IsActive)
+          {
+            actives[index] = players[i];
+            index++;
+          }
+        }
+        return actives;
+      }
+
+    }
+
+
     public Queue<EnemyTimeWho> DeathRow
     {
       get { return deathRow; }

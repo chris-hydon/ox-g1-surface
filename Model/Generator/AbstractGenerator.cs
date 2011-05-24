@@ -171,7 +171,15 @@ namespace SurfaceTower.Model.Generator
       if (PlayerSpecific)
       {
         //If it's a player-specific enemy, but the target has not been specified, choose it at random.
-        player = (TargetPlayer == -1) ? random.Next(0, 4) : TargetPlayer;
+        if (TargetPlayer == -1)
+        {
+          int index = random.Next(App.Instance.Model.NumberOfPlayers);
+          player = App.Instance.Model.ActivePlayers[index].PlayerId;
+        }
+        else
+        {
+          player = TargetPlayer;
+        }
       }
 
       switch (enemyType)
