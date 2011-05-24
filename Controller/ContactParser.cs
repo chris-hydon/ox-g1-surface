@@ -5,7 +5,6 @@ using Microsoft.Surface.Core;
 using Microsoft.Xna.Framework;
 using SurfaceTower.Model;
 using SurfaceTower.Model.Gun;
-using SurfaceTower.VideoEngine.Touchable;
 
 namespace SurfaceTower.Controller
 {
@@ -78,7 +77,7 @@ namespace SurfaceTower.Controller
       {
         foreach (ITouchable t in Touchables)
         {
-          if (t.InRegion(new Vector2(e.Contact.CenterX, e.Contact.CenterY)))
+          if (t.InRegion(e.Contact))
           {
             pendingPressed.Add(new TouchableContactPair(t, e));
           }
@@ -101,20 +100,27 @@ namespace SurfaceTower.Controller
             int player = WhichPlayer(e);
             if (player != -1)
             {
-              p.Touchable.Controller.Release(e.Contact, player);
+              p.Touchable.Controller.Release(e, player);
             }
             return;
           }
         }
-        foreach (ITouchable t in Touchables)
+        int length = pendingPressed.Count;
+        for (int i = 0; i < length; i++)
         {
-          if (t.InRegion(new Vector2(e.Contact.CenterX, e.Contact.CenterY)))
+          if (pendingPressed[i].Contact == e)
           {
-            int player = WhichPlayer(e);
-            if (player != -1)
+            if (pendingPressed[i].Touchable.InRegion(e.Contact))
             {
-              t.Controller.Touch(player);
+              int player = WhichPlayer(e);
+              if (player != -1)
+              {
+                System.Console.WriteLine(player);
+                pendingPressed[i].Touchable.Controller.Touch(e, player);
+              }
             }
+            pendingPressed.RemoveAt(i);
+            return;
           }
         }
       }
@@ -308,8 +314,8 @@ namespace SurfaceTower.Controller
       for (int i = 0; i < length; i++)
       {
         TouchableContactPair p = pendingPressed[i];
-        if ((p.Contact.LastSeen - p.Contact.TimeAdded).TotalMilliseconds > 500 &&
-          p.Touchable.InRegion(new Vector2(p.Contact.Contact.CenterX, p.Contact.Contact.CenterY)))
+        if ((p.Contact.LastSeen - p.Contact.TimeAdded).TotalMilliseconds > 50 &&
+          p.Touchable.InRegion(p.Contact.Contact))
         {
           pressed.Add(p);
           pendingPressed.RemoveAt(i);
@@ -318,7 +324,7 @@ namespace SurfaceTower.Controller
           int player = WhichPlayer(p.Contact);
           if (player != -1)
           {
-            p.Touchable.Controller.Press(p.Contact.Contact, player);
+            p.Touchable.Controller.Press(p.Contact, player);
           }
         }
       }

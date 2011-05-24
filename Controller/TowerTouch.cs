@@ -1,25 +1,30 @@
-﻿using SurfaceTower.VideoEngine.Touchable;
 using Microsoft.Surface.Core;
+using SurfaceTower.Model;
 
 namespace SurfaceTower.Controller
 {
   public class TowerTouch : ITouchHandler
   {
-    public void Touch(int playerId)
+
+    #region Methods
+
+    public void Press(ContactData contact, int playerId)
+    {
+    }
+
+    public void Release(ContactData contact, int playerId)
+    {
+    }
+
+    public void Touch(ContactData contact, int playerId)
     {
       // Upgrade ready?
       if (App.Instance.Model.Players[playerId].CanUpgrade)
       {
-        // Do... something?
+        // Make upgrade menu appear.
       }
     }
 
-    public void Press(Contact contact, int playerId)
-    {
-    }
-
-    public void Release(Contact contact, int playerId)
-    {
-    }
+    #endregion
   }
 }

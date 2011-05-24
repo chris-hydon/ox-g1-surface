@@ -1,20 +1,24 @@
 ﻿using System;
 
+using Microsoft.Surface.Core;
 using Microsoft.Xna.Framework;
 using SurfaceTower.Model;
 using SurfaceTower.Model.EventArguments;
 using SurfaceTower.Model.Shape;
-
+using SurfaceTower.Controller;
 
 namespace SurfaceTower.Model.Gun
 {
-  public class Turret : IEntity, IGun
+  public class Turret : IEntity, IGun, ITouchable
   {
     protected Circle shape;
     protected float orientation;
     protected int playerId;
     protected ShotPatterns shots;
     protected int strength;
+    protected bool exists = false;
+    protected bool active = false;
+    protected ITouchHandler controller;
 
     #region Properties
 
@@ -38,6 +42,7 @@ namespace SurfaceTower.Model.Gun
     public Vector2 Location
     {
       get { return shape.Origin; }
+      set { shape.Origin = value; }
     }
 
     public ShotPatterns Shots
@@ -55,6 +60,44 @@ namespace SurfaceTower.Model.Gun
     public int PlayerId
     {
       get { return playerId; }
+    }
+
+    /// <summary>
+    /// Whether or not the turret exists yet. Turrets start in a "bubble", which must be popped to gain control.
+    /// Setting Active to true for the first time sets Exists to true.
+    /// </summary>
+    public bool Exists
+    {
+      get { return exists; }
+    }
+
+    /// <summary>
+    /// Turrets are inactive if they don't exist, or if they're currently being moved by their owner. Turrets
+    /// only shoot bullets if they are active.
+    /// </summary>
+    public bool Active
+    {
+      get { return active; }
+      set
+      {
+        if (value)
+        {
+          exists = true;
+          App.Instance.Model.Update += new EventHandler<UpdateArgs>(OnUpdate);
+          App.Instance.Model.Music.Click += new EventHandler(OnClick);
+        }
+        else
+        {
+          App.Instance.Model.Update -= new EventHandler<UpdateArgs>(OnUpdate);
+          App.Instance.Model.Music.Click -= new EventHandler(OnClick);
+        }
+        active = value;
+      }
+    }
+
+    public ITouchHandler Controller
+    {
+      get { return controller; }
     }
 
     #endregion
@@ -75,8 +118,8 @@ namespace SurfaceTower.Model.Gun
       Shots = ShotPatterns.Simple;
       strength = Constants.TURRET_DEFAULT_POWER;
       orientation = (owner - 1) * (float) Math.PI / 2;
-      App.Instance.Model.Update += new EventHandler<UpdateArgs>(OnUpdate);
-      App.Instance.Model.Music.Click += new EventHandler(OnClick);
+      controller = new TurretMover(this);
+      App.Instance.Controller.Touchables.Add(this);
     }
 
     /// <summary>
@@ -135,9 +178,14 @@ namespace SurfaceTower.Model.Gun
     /// <param name="e">Always null</param>
     public void OnClick(object sender, EventArgs e)
     {
-        Shoot();
+      Shoot();
     }
     
+    public bool InRegion(Contact target)
+    {
+      return Shape.Collides(target);
+    }
+
     #endregion
   }
 }
