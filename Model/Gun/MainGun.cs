@@ -91,12 +91,13 @@ namespace SurfaceTower.Model.Gun
 
           if (value)
           {
+            // Register the listeners.
             m.Music.Click += new EventHandler(OnClick);
             m.Music.Beat += new EventHandler(OnBeat);
           }
           else
           {
-            // This bit is magic.
+            // Deregister the listeners.
             m.Music.Click -= new EventHandler(OnClick);
             m.Music.Beat -= new EventHandler(OnBeat);
           }
@@ -136,6 +137,7 @@ namespace SurfaceTower.Model.Gun
           (float) Math.Cos(Orientation + shot.OrientationModifier),
           (float) Math.Sin(Orientation + shot.OrientationModifier)
         );
+        //Modifies the starting location and orientation of the bullet.
         Vector2 locMod = Vector2.Transform(shot.PositionModifier, Matrix.CreateRotationZ(Orientation));
         Bullet bullet = new Bullet(Location + locMod, velocity, Strength, shot.Effects, PlayerId);
         App.Instance.Model.Bullets.Add(bullet);

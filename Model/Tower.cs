@@ -35,6 +35,7 @@ namespace SurfaceTower.Model
       set
       {
         health = Math.Min(value, MaxHealth);
+        //If health has reached zero, fire an event to notify that the tower has ZeroHealth.
         if (health <= 0 && ZeroHealth != null)
         {
           ZeroHealth(this, null);
@@ -69,6 +70,9 @@ namespace SurfaceTower.Model
 
     #endregion
 
+    /// <summary>
+    /// The Tower is the central target for the enemies - if its health reaches zero the game is over.
+    /// </summary>
     public Tower()
     {
       Viewport v = App.Instance.GraphicsDevice.Viewport;
@@ -78,6 +82,7 @@ namespace SurfaceTower.Model
 
     public void OnBeat(object sender, EventArgs e)
     {
+      //The tower has a healing effect based on the TOWER_REGENERATION constant.
       Health += Constants.TOWER_REGENERATION;
     }
 

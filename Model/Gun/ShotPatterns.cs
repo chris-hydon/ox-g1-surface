@@ -30,7 +30,12 @@ namespace SurfaceTower.Model.Gun
     }
 
     #endregion
-
+    /// <summary>
+    /// A ShotPattern stores the characteristics of a shot.
+    /// </summary>
+    /// <param name="orientMod">How much to alter the orientation by.</param>
+    /// <param name="posMod">How much to alter the position by.</param>
+    /// <param name="waves">Number of groups to spawn before expiring the generator.</param>
     public ShotPattern(float orientMod, Vector2 posMod, Effects effects)
     {
       this.orientMod = orientMod;
@@ -128,13 +133,16 @@ namespace SurfaceTower.Model.Gun
 
     #region Patterns
 
+    //Fires a single shot straight ahead with no bullet effects or location offset.
     public static ShotPatterns Simple = new ShotPatterns()
       .Add(new ShotPattern(0, Vector2.Zero, Effects.None));
-
+    
+    //Fires 2 shots parallel to eachother, 20 pixels apart.
     public static ShotPatterns TwoShot = new ShotPatterns()
       .Add(new ShotPattern(0, new Vector2(0, -10), Effects.None))
       .Add(new ShotPattern(0, new Vector2(0, 10), Effects.None));
 
+    //Fires 2 shots in a V shape and 1 straight ahead through the middle, with no location offset or bullet effects.
     public static ShotPatterns Spread = new ShotPatterns()
       .Add(new ShotPattern(-0.5f, Vector2.Zero, Effects.None))
       .Add(new ShotPattern(0, Vector2.Zero, Effects.None))

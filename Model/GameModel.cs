@@ -5,6 +5,7 @@ using SurfaceTower.Model.Gun;
 
 namespace SurfaceTower.Model
 {
+  //This is intended to be the BaseModel for the final application.
   public class GameModel : BaseModel
   {
     private bool first;

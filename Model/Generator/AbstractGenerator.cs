@@ -170,6 +170,7 @@ namespace SurfaceTower.Model.Generator
       int player = -1;
       if (PlayerSpecific)
       {
+        //If it's a player-specific enemy, but the target has not been specified, choose it at random.
         player = (TargetPlayer == -1) ? random.Next(0, 4) : TargetPlayer;
       }
 

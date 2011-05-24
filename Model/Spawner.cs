@@ -15,7 +15,9 @@ namespace SurfaceTower.Model
     protected Random random = new Random();
     protected Queue<IGenerator> finished = new Queue<IGenerator>();
     protected Queue<ICollection<IGenerator>> waves = new Queue<ICollection<IGenerator>>();
-
+    /// <summary>
+    /// A Spawner can add generators and prompt them to generate enemies.
+    /// </summary>
     public Spawner()
     {
       model.Music.Click += new EventHandler(OnClick);
@@ -40,20 +42,23 @@ namespace SurfaceTower.Model
 
     void OnClick(object sender, EventArgs e)
     {
-      int numEnemies = (int)(1 + model.LastUpdate.TotalMinutes + model.NumberOfPlayers * (int)Math.Round(Constants.MAX_SPAWNING * random.NextDouble()));
       if (model.Living.Count < Constants.MAX_ENEMY_COUNT)
       {
         foreach (IGenerator eg in generators)
         {
           if (eg.Done)
           {
+            //Generator has expired - mark it for removal.
             finished.Enqueue(eg);
           }
           else
           {
+            //Generator has not expired - prompt it to generate its next enemy/enemies.
             eg.Generate();
           }
         }
+        //The finished collection stores generators which need to be removed. It is used so that generators
+        //are not removed during the foreach loop.
         while (finished.Count > 0)
         {
           generators.Remove(finished.Dequeue());
@@ -63,10 +68,12 @@ namespace SurfaceTower.Model
 
     protected void DetermineWave()
     {
-      Console.WriteLine("Progress: " + model.Progress + ", Players: " + model.NumberOfPlayers);
       int progress = model.Progress;
+      //style can determine the style of the next wave.
       int style = random.Next(100) + progress;
 
+      //The next wave depends on the style, though there are caps based on progress to ensure that waves
+      //which are too difficult are not encountered too early.
       if (style < 50 || progress < 2)
       {
         RandomWave(false, false);
@@ -141,6 +148,7 @@ namespace SurfaceTower.Model
 
       waves.Enqueue(wave);
     }
+    //Works similarly to SimpleWave, with the same parameters.
     void RandomWave(bool useAllSides, bool playerSpecifc)
     {
       ICollection<IGenerator> wave = new LinkedList<IGenerator>();
@@ -155,6 +163,7 @@ namespace SurfaceTower.Model
           {
             side = random.Next(0, 3);
           }
+          //Choose the type of generator.
           int genType = random.Next(3);
 
           switch (genType)
@@ -174,6 +183,8 @@ namespace SurfaceTower.Model
               break;
             default : throw new InvalidOperationException();
           }
+
+          //Choose the type of enemy.
           int enemyType = random.Next(3);
           switch (enemyType)
           {
@@ -196,7 +207,6 @@ namespace SurfaceTower.Model
           if (playerSpecifc)
           {
             g.PlayerSpecific = true;
-            //g.TargetPlayer = p.PlayerId;
           }
 
           wave.Add(g);

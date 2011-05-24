@@ -19,9 +19,8 @@ namespace SurfaceTower
     public const float TURRET_TURNSPEED = 1f; // Radians per second
     public const float UPDATES_PER_SECOND = 60;
     public const float MAX_ENEMY_COUNT = 200;
-    // This is multiplied by the number of players - this is the maximum amount of enemies which can spawn per player, per spawn.
-    public const int MAX_SPAWNING = 100;
+    // This is the maximum amount of enemies which can be on the screen and still have a new wave spawn.
     public const int LARGEST_ENEMIES = 30;
-    public const int SPAWN_INTERVAL = 1000;
+    public const int BURN_DAMAGE = 1;
   }
 }

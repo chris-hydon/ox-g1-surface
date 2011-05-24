@@ -13,12 +13,13 @@ namespace SurfaceTower.Model.Generator
     /// <summary>
     /// Generate enemies at evenly-spaced intervals along one side of the screen.
     /// </summary>
-    /// <param name="side">The side to use - corresponds with playerId. 0-3 only.</param>
+    /// <param name="side">The side to use - sides are numbered clockwise starting at 0(the top).</param>
     /// <param name="groups">Number of groups to spawn before expiring the generator.</param>
     public SideGenerator(int side, int groups) : base(groups)
     {
       switch(side)
       {
+          //Start and end points are set on the corners of a rectangle outside of the screen.
         case 0 :
           start = new Vector2(-100, -100);
           end = new Vector2(ScreenWidth + 100, -100);

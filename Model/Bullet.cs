@@ -6,6 +6,8 @@ using SurfaceTower.Model.Shape;
 
 namespace SurfaceTower.Model
 {
+  //Effects uses the Flags style to make it easy to have more than one effect active, and to add and remove from the effects.
+  //They are powers of 2 to enable effects to be added, removed and checked using bitwise AND and OR operations.
   [Flags]
   public enum Effects
   {
@@ -26,7 +28,6 @@ namespace SurfaceTower.Model
     protected int playerId;
     protected Effects effects;
     protected int age;
-    //protected Enemy focus; // Probably not needed... depends on whether we want to continually dog a given enemy or not.
 
     #region Properties
     public int Age
@@ -42,11 +43,6 @@ namespace SurfaceTower.Model
     public float Orientation
     {
       get { return (float) Math.Atan2(Velocity.Y, Velocity.X); }
-      set
-      {
-        // The orientation of a bullet is always the direction of travel and cannot be set directly.
-        throw new InvalidOperationException();
-      }
     }
 
     public Vector2 Location
@@ -99,6 +95,7 @@ namespace SurfaceTower.Model
     {
       if (age > Constants.BULLET_LIFE * Constants.UPDATES_PER_SECOND)
       {
+        //The bullet has lived longer than the maximum bullet life - mark it for removal.
         App.Instance.Model.UsedBullets.Enqueue(this);
       }
       else
@@ -131,8 +128,9 @@ namespace SurfaceTower.Model
       {
         return Vector2.Zero;
       }
+      //Calculate the relative location.
       Vector2 target = focus.Location - Location;
-      // Figure out the relative orientation.
+      // Calculate the relative orientation.
       double orientMod = Math.Atan2(target.Y, target.X) - Orientation;
 
       // Apply an acceleration perpendicular to the velocity to rotate the bullet.

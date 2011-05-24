@@ -8,20 +8,7 @@ using SurfaceTower.Model.Gun;
 namespace SurfaceTower.Model
 {
   #region Structures
-
-  public struct Collision
-  {
-    public enum CollisionType { BULLET_ENEMY, ENEMY_TOWER };
-    public int x, y;
-    public CollisionType type;
-    public Collision(int x, int y, CollisionType type)
-    {
-      this.x = x;
-      this.y = y;
-      this.type = type;
-    }
-  }
-
+  // Stores a triple of an Enemy, a TimeSpan and an int representing a playerID.
   public struct EnemyTimeWho
   {
     public Enemy enemy;
@@ -34,23 +21,11 @@ namespace SurfaceTower.Model
       this.who = who;
     }
   }
-
-  public struct CollisionTimePair
-  {
-    public Collision collision;
-    public TimeSpan time;
-    public CollisionTimePair(Collision collision, TimeSpan time){
-      this.collision = collision;
-      this.time = time;
-    }
-  }
-
   #endregion
 
-  public class BaseModel
+  public abstract class BaseModel
   {
     protected ICollection<EnemyTimeWho> dying = new LinkedList<EnemyTimeWho>(), dead = new LinkedList<EnemyTimeWho>();
-    protected ICollection<CollisionTimePair> collisions = new LinkedList<CollisionTimePair>();
     protected ICollection<Bullet> bullets = new LinkedList<Bullet>();
     protected ICollection<Enemy> living = new LinkedList<Enemy>();
     protected Queue<Bullet> usedBullets = new Queue<Bullet>();
@@ -114,11 +89,6 @@ namespace SurfaceTower.Model
       get { return bullets; }
     }
 
-    public ICollection<CollisionTimePair> Collisions
-    {
-      get { return collisions; }
-    }
-
     public TimeSpan LastUpdate
     {
       get { return lastUpdate; }
@@ -176,13 +146,16 @@ namespace SurfaceTower.Model
               e.Health -= b.Power;
               if (e.Health <= 0)
               {
+                //Enemy e has died - mark it for removal, storing the playerID of its killer and its time of death.
                 deathRow.Enqueue(new EnemyTimeWho(e, LastUpdate, b.PlayerId));
               }
 
               if ((Effects.Pierce & b.Effects) == 0)
               {
+                //Bullet b is a non-piercing bullet and has hit a target - mark it for removal.
                 usedBullets.Enqueue(b);
               }
+              //The following if-statements add the effects of the bullet to the enemy which it hit.
               if ((Effects.Burn & b.Effects) != 0)
               {
                 e.State |= Enemy.States.Burning;
@@ -197,23 +170,29 @@ namespace SurfaceTower.Model
               }
             }
           }
+          //deathRow is used to store enemies which need to be removed from the living collection.
+          //It is used to avoid modifying the collection during the foreach loop. Once the loop is finished
+          //deathRow is emptied of its contents, which are dealt with accordingly.
           while (deathRow.Count > 0)
           {
             MakeDying(deathRow.Dequeue());
           }
           b.Move();
         }
-        else
+        else 
         {
+          //Bullet b is not on screen, so mark it for removal.
           usedBullets.Enqueue(b);
         }
       }
+      //usedBullets is the Bullet equivalent of deathRow which is for Enemies. See deathRow for details.
       while (usedBullets.Count > 0)
       {
         bullets.Remove(usedBullets.Dequeue());
       }
       foreach (Enemy e in living)
       {
+        //Don't move the enemy if it's stunned.
         if ((e.State & Enemy.States.Stunned) == 0)
         {
           e.Move();
@@ -228,6 +207,10 @@ namespace SurfaceTower.Model
       if (NewEnemy != null) NewEnemy(this, new EnemyArgs(e));
     }
 
+    /// <summary>
+    /// MakeDying mmoves an enemy from the living collection to the dying collection (unless it hit the centre).
+    /// The dying collection is used to store enemies until the AudioEngine is ready to make a sound for them.
+    /// </summary>
     public void MakeDying(EnemyTimeWho etw)
     {
       Living.Remove(etw.enemy);
@@ -238,6 +221,10 @@ namespace SurfaceTower.Model
       }
     }
 
+    /// <summary>
+    /// Kill is called by the AudioEngine and moves an enemy from dying to dead, which allows the VideoEngine
+    /// to play its death animation, and also fires the DeadEnemy event.
+    /// </summary>
     public void Kill(EnemyTimeWho etw)
     {
       dying.Remove(etw);
@@ -246,6 +233,10 @@ namespace SurfaceTower.Model
       dead.Add(new EnemyTimeWho(etw.enemy, LastUpdate, etw.who));
     }
 
+    /// <summary>
+    /// Cremate removes an enemy from the dead collection, and is called by the VideoEngine once the death
+    /// animation is done. The enemy is then no longer referred to and is garbage-collected. 
+    /// </summary>
     public void Cremate(EnemyTimeWho etw)
     {
       dead.Remove(etw);
@@ -288,7 +279,7 @@ namespace SurfaceTower.Model
       }
       return false;
     }
-
+    //Restart resets the BaseModel, ready for a new game to begin.
     public virtual void Restart()
     {
       music.Stop();
@@ -297,7 +288,6 @@ namespace SurfaceTower.Model
       living.Clear();
       dying.Clear();
       dead.Clear();
-      collisions.Clear();
       bullets.Clear();
       usedBullets.Clear();
       deathRow.Clear();
@@ -308,7 +298,7 @@ namespace SurfaceTower.Model
       // Free up memory - we've chucked a lot of stuff away and there shouldn't be much processing going on right now.
       System.GC.Collect();
     }
-
+    //This ensures there are no memory leaks from event listeners listening to the model.
     private void UnsubscribeAll()
     {
       Update = null;

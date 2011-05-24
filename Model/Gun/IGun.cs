@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace SurfaceTower.Model.Gun
 {
+  //Any Gun must store its owner, its shot type (pattern and strength), notify of new shots and bullets, and shoot when prompted.
   public interface IGun
   {
     int PlayerId { get; }

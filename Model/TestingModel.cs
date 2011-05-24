@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace SurfaceTower.Model
 {
+  //TestingModel is for testing only.
   class TestingModel : BaseModel
   {
     #region Properties
@@ -17,7 +18,6 @@ namespace SurfaceTower.Model
 
     public void FirstUpdate(GameTime gameTime)
     {
-      // Audio folks, something like this should be in your initialize, not mine!
       Music.Start(gameTime.TotalRealTime);
 
       Music.Beat += new EventHandler(OnBeat);
