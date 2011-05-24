@@ -121,29 +121,26 @@ namespace SurfaceTower.Model
       PointGenerator g;
       foreach (MainGun p in model.ActivePlayers)
       {
-        if (p.IsActive)
+        int side = p.PlayerId;
+        // If useAllSides, sometimes choose a different side.
+        if (useAllSides && random.Next(2) == 0)
         {
-          int side = p.PlayerId;
-          // If useAllSides, sometimes choose a different side.
-          if (useAllSides && random.Next(2) == 0)
-          {
-            side = random.Next(0, 3);
-          }
-
-          g = new PointGenerator(PointGenerator.PointOnSide(side, 20), 3 + LinearDifficulty(10, 12));
-          g.EnemyHealth = 1 + LinearDifficulty(5, 0);
-          g.EnemySize = 20;
-          g.EnemySizeVariance = LinearDifficulty(5, 10);
-          g.EnemyType = EnemyType.Regular;
-          g.Frequency = model.Music.ClicksPerBeat / 2;
-          if (playerSpecifc)
-          {
-            g.PlayerSpecific = true;
-            g.TargetPlayer = p.PlayerId;
-          }
-
-          wave.Add(g);
+          side = random.Next(0, 3);
         }
+
+        g = new PointGenerator(PointGenerator.PointOnSide(side, 20), 3 + LinearDifficulty(10, 12));
+        g.EnemyHealth = 1 + LinearDifficulty(5, 0);
+        g.EnemySize = 20;
+        g.EnemySizeVariance = LinearDifficulty(5, 10);
+        g.EnemyType = EnemyType.Regular;
+        g.Frequency = model.Music.ClicksPerBeat / 2;
+        if (playerSpecifc)
+        {
+          g.PlayerSpecific = true;
+          g.TargetPlayer = p.PlayerId;
+        }
+
+        wave.Add(g);
       }
 
       waves.Enqueue(wave);
@@ -161,62 +158,59 @@ namespace SurfaceTower.Model
       AbstractGenerator g;
       foreach (MainGun p in model.ActivePlayers)
       {
-        if (p.IsActive)
+        int side = p.PlayerId;
+        // If useAllSides, sometimes choose a different side.
+        if (useAllSides && random.Next(2) == 0)
         {
-          int side = p.PlayerId;
-          // If useAllSides, sometimes choose a different side.
-          if (useAllSides && random.Next(2) == 0)
-          {
-            side = random.Next(0, 3);
-          }
-          //Choose the type of generator.
-          int genType = random.Next(3);
-
-          switch (genType)
-          {
-            case 0: g = new CircleGenerator(1);
-              g.GroupSize = 20;
-              g.MultiplayerAdjustment = 1;
-              System.Console.WriteLine(0);
-              break;
-            case 1: g = new PointGenerator(PointGenerator.PointOnSide(side, 20), 3 + LinearDifficulty(10, 12));
-              System.Console.WriteLine(1);
-              break;
-            case 2: g = new SideGenerator(side, 1);
-              g.GroupSize = 20;
-              g.MultiplayerAdjustment = 1;
-              System.Console.WriteLine(2);
-              break;
-            default : throw new InvalidOperationException();
-          }
-
-          //Choose the type of enemy.
-          int enemyType = random.Next(3);
-          switch (enemyType)
-          {
-            case 0:
-              g.EnemyType = EnemyType.Regular;
-              break;
-            case 1:
-              g.EnemyType = EnemyType.Spiral;
-              break;
-            case 2:
-              g.EnemyType = EnemyType.Wave;
-              break;
-            default: throw new InvalidOperationException();
-          }
-
-          g.EnemyHealth = 1 + LinearDifficulty(5, 0);
-          g.EnemySize = 20;
-          g.EnemySizeVariance = LinearDifficulty(5, 10);
-          g.Frequency = model.Music.ClicksPerBeat / 2;
-          if (playerSpecifc)
-          {
-            g.PlayerSpecific = true;
-          }
-
-          wave.Add(g);
+          side = random.Next(0, 3);
         }
+        //Choose the type of generator.
+        int genType = random.Next(3);
+
+        switch (genType)
+        {
+          case 0: g = new CircleGenerator(1);
+            g.GroupSize = 20;
+            g.MultiplayerAdjustment = 1;
+            System.Console.WriteLine(0);
+            break;
+          case 1: g = new PointGenerator(PointGenerator.PointOnSide(side, 20), 3 + LinearDifficulty(10, 12));
+            System.Console.WriteLine(1);
+            break;
+          case 2: g = new SideGenerator(side, 1);
+            g.GroupSize = 20;
+            g.MultiplayerAdjustment = 1;
+            System.Console.WriteLine(2);
+            break;
+          default : throw new InvalidOperationException();
+        }
+
+        //Choose the type of enemy.
+        int enemyType = random.Next(3);
+        switch (enemyType)
+        {
+          case 0:
+            g.EnemyType = EnemyType.Regular;
+            break;
+          case 1:
+            g.EnemyType = EnemyType.Spiral;
+            break;
+          case 2:
+            g.EnemyType = EnemyType.Wave;
+            break;
+          default: throw new InvalidOperationException();
+        }
+
+        g.EnemyHealth = 1 + LinearDifficulty(5, 0);
+        g.EnemySize = 20;
+        g.EnemySizeVariance = LinearDifficulty(5, 10);
+        g.Frequency = model.Music.ClicksPerBeat / 2;
+        if (playerSpecifc)
+        {
+          g.PlayerSpecific = true;
+        }
+
+        wave.Add(g);
       }
 
       waves.Enqueue(wave);
@@ -230,15 +224,15 @@ namespace SurfaceTower.Model
     /// colour with it.</param>
     void CornersWave(EnemyType enemyType, bool playerSpecifc)
     {
+      float width = App.Instance.GraphicsDevice.Viewport.Width;
+      float height = App.Instance.GraphicsDevice.Viewport.Height;
+
       ICollection<IGenerator> wave = new LinkedList<IGenerator>();
       PointGenerator g;
       Vector2[] corners = {new Vector2(-100, -100), new Vector2(-100, height + 100), new Vector2(width+100, -100), new Vector2(width+100, height+100)};
       shuffle(corners);
       foreach (MainGun p in model.ActivePlayers)
       {
-        float width = App.Instance.GraphicsDevice.Viewport.Width;
-        float height = App.Instance.GraphicsDevice.Viewport.Height;
-
         Vector2 pos = corners[p.PlayerId];
         g = new PointGenerator(pos, 3 + LinearDifficulty(10, 12));
         g.EnemyHealth = 1 + LinearDifficulty(5, 0);
