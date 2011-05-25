@@ -34,7 +34,7 @@ namespace SurfaceTower.Controller
   {
     private readonly IList<ContactData> activeContacts = new List<ContactData>();
     private readonly int[] playerTags = new int[] {0, 0, 0, 0};
-    private readonly IList<ITouchable> touchables = new List<ITouchable>();
+    private IList<ITouchable> touchables = new List<ITouchable>();
     private readonly IList<TouchableContactPair> pressed = new List<TouchableContactPair>();
     private readonly IList<TouchableContactPair> pendingPressed = new List<TouchableContactPair>();
 
@@ -65,6 +65,13 @@ namespace SurfaceTower.Controller
     {
       ContactAdded += new EventHandler<ContactData>(OnContactAdded);
       ContactRemoved += new EventHandler<ContactData>(OnContactRemoved);
+      touchables.Add(App.Instance.Model.Tower);
+    }
+
+    public void Restart()
+    {
+      touchables = new List<ITouchable>();
+      touchables.Add(App.Instance.Model.Tower);
     }
 
     protected void OnContactAdded(object sender, ContactData e)

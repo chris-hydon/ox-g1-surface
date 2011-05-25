@@ -102,15 +102,15 @@ namespace SurfaceTower.Model.Gun
       get { return controller; }
     }
 
-    public ICollection<Upgrade> Upgrades
+    public ICollection<Upgrade.UpgradeType> Upgrades
     {
       get
       {
-        ICollection<Upgrade> upgrades = new List<Upgrade>(5);
-        upgrades.Add(new StrengthUpgrade(this, 2));
-        upgrades.Add(new EffectUpgrade(this, Effects.Homing, true));
-        upgrades.Add(new ShotUpgrade(this, ShotPatterns.TwoShot, false));
-        upgrades.Add(new ShotUpgrade(this, ShotPatterns.Spread, false));
+        ICollection<Upgrade.UpgradeType> upgrades = new List<Upgrade.UpgradeType>(5);
+        upgrades.Add(Upgrade.UpgradeType.Strength);
+        upgrades.Add(Upgrade.UpgradeType.Homing);
+        upgrades.Add(Upgrade.UpgradeType.TwoShot);
+        upgrades.Add(Upgrade.UpgradeType.Spread);
         return upgrades;
       }
     }

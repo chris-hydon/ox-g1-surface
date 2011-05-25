@@ -8,6 +8,14 @@ namespace SurfaceTower.Model.Upgrades
 {
   public abstract class Upgrade : ITouchable
   {
+    public enum UpgradeType
+    {
+      Strength,
+      Homing,
+      TwoShot,
+      Spread
+    }
+
     private int playerId;
     private ITouchHandler controller;
     private IGun upgradeTarget;
@@ -31,8 +39,8 @@ namespace SurfaceTower.Model.Upgrades
     public Upgrade(IGun upgradeTarget)
     {
       this.upgradeTarget = upgradeTarget;
-      this.playerId = upgradeTarget.PlayerId;
-      controller = new UpgradeOption(this, upgradeTarget.PlayerId);
+      playerId = upgradeTarget.PlayerId;
+      controller = new UpgradeOption(this, playerId);
     }
 
     public abstract void Apply();
@@ -40,6 +48,23 @@ namespace SurfaceTower.Model.Upgrades
     public bool InRegion(Contact target)
     {
       throw new System.NotImplementedException();
+    }
+
+    public static Upgrade CreateUpgrade(UpgradeType type, IGun gun)
+    {
+      switch (type)
+      {
+        case UpgradeType.Homing:
+          return new EffectUpgrade(gun, Effects.Homing, true);
+        case UpgradeType.Spread:
+          return new ShotUpgrade(gun, ShotPatterns.Spread, false);
+        case UpgradeType.Strength:
+          return new StrengthUpgrade(gun, 2);
+        case UpgradeType.TwoShot:
+          return new ShotUpgrade(gun, ShotPatterns.TwoShot, false);
+        default:
+          throw new NotImplementedException();
+      }
     }
 
     #endregion

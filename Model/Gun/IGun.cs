@@ -13,7 +13,7 @@ namespace SurfaceTower.Model.Gun
     int PlayerId { get; }
     ShotPatterns Shots { get; set; }
     int Strength { get; set; }
-    ICollection<Upgrade> Upgrades { get; }
+    ICollection<Upgrade.UpgradeType> Upgrades { get; }
 
     event EventHandler<ShotArgs> ShotFired;
     event EventHandler UpgradeReady;
