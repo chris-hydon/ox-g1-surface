@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Microsoft.Surface.Core;
 using Microsoft.Xna.Framework;
 
 namespace SurfaceTower.Model.Shape
@@ -12,6 +9,7 @@ namespace SurfaceTower.Model.Shape
     float Width { get; }
     float Height { get; }
     bool Collides(IShape otherShape);
+    bool Collides(Contact contact);
     bool CheckCollides(Circle otherShape);
   }
 }

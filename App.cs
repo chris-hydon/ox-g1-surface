@@ -59,6 +59,7 @@ namespace SurfaceTower
     public void Restart()
     {
       Model.Restart();
+      gameView.Restart();  
       towerAudioEngine.Restart();
     }
 

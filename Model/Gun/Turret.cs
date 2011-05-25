@@ -1,20 +1,26 @@
 ﻿using System;
+using System.Collections.Generic;
 
+using Microsoft.Surface.Core;
 using Microsoft.Xna.Framework;
 using SurfaceTower.Model;
 using SurfaceTower.Model.EventArguments;
 using SurfaceTower.Model.Shape;
-
+using SurfaceTower.Model.Upgrades;
+using SurfaceTower.Controller;
 
 namespace SurfaceTower.Model.Gun
 {
-  public class Turret : IEntity, IGun
+  public class Turret : IEntity, IGun, ITouchable
   {
     protected Circle shape;
     protected float orientation;
     protected int playerId;
     protected ShotPatterns shots;
     protected int strength;
+    protected bool exists = false;
+    protected bool active = false;
+    protected ITouchHandler controller;
 
     #region Properties
 
@@ -38,6 +44,7 @@ namespace SurfaceTower.Model.Gun
     public Vector2 Location
     {
       get { return shape.Origin; }
+      set { shape.Origin = value; }
     }
 
     public ShotPatterns Shots
@@ -57,12 +64,64 @@ namespace SurfaceTower.Model.Gun
       get { return playerId; }
     }
 
+    /// <summary>
+    /// Whether or not the turret exists yet. Turrets start in a "bubble", which must be popped to gain control.
+    /// Setting Active to true for the first time sets Exists to true.
+    /// </summary>
+    public bool Exists
+    {
+      get { return exists; }
+    }
+
+    /// <summary>
+    /// Turrets are inactive if they don't exist, or if they're currently being moved by their owner. Turrets
+    /// only shoot bullets if they are active.
+    /// </summary>
+    public bool Active
+    {
+      get { return active; }
+      set
+      {
+        if (value)
+        {
+          exists = true;
+          App.Instance.Model.Update += new EventHandler<UpdateArgs>(OnUpdate);
+          App.Instance.Model.Music.Click += new EventHandler(OnClick);
+        }
+        else
+        {
+          App.Instance.Model.Update -= new EventHandler<UpdateArgs>(OnUpdate);
+          App.Instance.Model.Music.Click -= new EventHandler(OnClick);
+        }
+        active = value;
+      }
+    }
+
+    public ITouchHandler Controller
+    {
+      get { return controller; }
+    }
+
+    public ICollection<Upgrade> Upgrades
+    {
+      get
+      {
+        ICollection<Upgrade> upgrades = new List<Upgrade>(5);
+        upgrades.Add(new StrengthUpgrade(this, 2));
+        upgrades.Add(new EffectUpgrade(this, Effects.Homing, true));
+        upgrades.Add(new ShotUpgrade(this, ShotPatterns.TwoShot, false));
+        upgrades.Add(new ShotUpgrade(this, ShotPatterns.Spread, false));
+        return upgrades;
+      }
+    }
+
     #endregion
 
     #region Events
 
     public event EventHandler<ShotArgs> ShotFired;
     public event EventHandler UpgradeReady;
+    public event EventHandler UpgradeDone;
     public event EventHandler<BulletArgs> NewBullet;
 
     #endregion
@@ -76,8 +135,8 @@ namespace SurfaceTower.Model.Gun
       Shots = ShotPatterns.Simple;
       strength = Constants.TURRET_DEFAULT_POWER;
       orientation = (owner - 1) * (float) Math.PI / 2;
-      App.Instance.Model.Update += new EventHandler<UpdateArgs>(OnUpdate);
-      App.Instance.Model.Music.Click += new EventHandler(OnClick);
+      controller = new TurretMover(this);
+      App.Instance.Controller.Touchables.Add(this);
     }
 
     /// <summary>
@@ -110,7 +169,7 @@ namespace SurfaceTower.Model.Gun
     void OnUpdate(object sender, UpdateArgs e)
     {
       // Find the nearest enemy.
-      Enemy focus = Enemy.FindNearestLiving(this);
+      Enemy focus = Enemy.FindNearestLiving(this, playerId);
 
       if (focus != null)
       {
@@ -129,6 +188,18 @@ namespace SurfaceTower.Model.Gun
       }
     }
 
+    public void ShowMenu(bool show)
+    {
+      if (show && App.Instance.Model.Players[playerId].CanUpgrade)
+      {
+        if (UpgradeReady != null) UpgradeReady(this, null);
+      }
+      else if (!show)
+      {
+        if (UpgradeDone != null) UpgradeDone(this, null);
+      }
+    }
+
     /// <summary>
     /// Called in response to the Music.Click signal.
     /// </summary>
@@ -136,9 +207,14 @@ namespace SurfaceTower.Model.Gun
     /// <param name="e">Always null</param>
     public void OnClick(object sender, EventArgs e)
     {
-        Shoot();
+      Shoot();
     }
     
+    public bool InRegion(Contact target)
+    {
+      return Shape.Collides(target);
+    }
+
     #endregion
   }
 }

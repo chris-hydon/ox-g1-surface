@@ -30,6 +30,13 @@ namespace SurfaceTower.VideoEngine.ParticleEngine
             }
         }
 
+        public void Reset()
+        {
+            App.Instance.Model.NewEnemy += new EventHandler<SurfaceTower.Model.EventArguments.EnemyArgs>(NewEnemy);
+            App.Instance.Model.DeadEnemy += new EventHandler<SurfaceTower.Model.EventArguments.EnemyArgs>(Model_DeadEnemy);
+            App.Instance.Model.AddTurret += new EventHandler<SurfaceTower.Model.EventArguments.TurretArgs>(Model_AddTurret);  
+        }
+
         void Model_AddTurret(object sender, SurfaceTower.Model.EventArguments.TurretArgs e)
         {
             e.Turret.NewBullet+=new EventHandler<SurfaceTower.Model.EventArguments.BulletArgs>(t_NewBullet);

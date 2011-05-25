@@ -53,11 +53,6 @@ namespace SurfaceTower.Model
     public float Orientation
     {
       get { return (float) Math.Atan2(Velocity.Y, Velocity.X); }
-      set
-      {
-        // The orientation of an enemy is always the direction of travel and cannot be set directly.
-        throw new InvalidOperationException();
-      }
     }
 
     public Vector2 Location
@@ -110,6 +105,7 @@ namespace SurfaceTower.Model
       this.velocity = new Vector2(velocity.X, velocity.Y);
       this.player = player;
 
+      //If the enemy is player specific, colour it dependent upon its player.
       if (player != -1)
       {
         this.Colour = player_colors[player];
@@ -127,26 +123,27 @@ namespace SurfaceTower.Model
     }
     public void Update()
     {
-      // damage if burning
+      // Damage the enemy if it is burning
       if ((state & States.Burning) != 0)
       {
-          health--;
+          health -= Constants.BURN_DAMAGE;
       }
 
-      //Damage the tower and die if in contact
+      //If the enemy is in contact with the tower, damage the tower and mark the enemy for removal.
       if (Collides(App.Instance.Model.Tower))
       {
         App.Instance.Model.Tower.Health -= (int) Math.Round(Size);
         if (EnemyReached != null) EnemyReached(this, null);
         App.Instance.Model.DeathRow.Enqueue(new EnemyTimeWho(this, TimeSpan.MinValue, -1));
 
-        // Remove all EnemyReached subscribers.
+        // Remove all EnemyReached subscribers listening to this enemy.
         EnemyReached = null;
       }
     }
 
     public bool Collides(ICollidable c)
     {
+      //If enemy is player specific, bullets from other players don't collide with it.
       if (Player != -1 && c is Bullet && ((Bullet) c).PlayerId != Player)
       {
         return false;
@@ -161,16 +158,17 @@ namespace SurfaceTower.Model
     /// <summary>
     /// Determine the closest enemy to the IEntity origin, using the standard 2D distance metric.
     /// </summary>
-    /// <param name="from">The IEntity from which to base the search.</param>
-    /// <returns>The closest Enemy to origin, or null if no such Enemy exists.</returns>
-    public static Enemy FindNearestLiving(IEntity origin)
+    /// <param name="origin">The IEntity from which to base the search.</param>
+    /// <param name="targetRestriction">The playerID of the origin, if applicable.</param>
+    /// <returns>The closest living Enemy to origin, or null if no Enemy exists.</returns>
+    public static Enemy FindNearestLiving(IEntity origin, int targetRestriction)
     {
       double neardist = double.PositiveInfinity;
       Enemy nearest = null;
       foreach (Enemy e in App.Instance.Model.Living)
       {
-        //if the enemy is on the screen
-        if (App.Instance.onScreen(e.Location))
+        //If the enemy is on the screen, and is either non-player-specific or its target matches the targetRestriction
+        if (App.Instance.onScreen(e.Location) && (e.Player == -1 || e.Player == targetRestriction))
         {
           double dist = (e.Location - origin.Location).Length();
           if (dist < neardist)

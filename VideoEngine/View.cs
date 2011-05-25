@@ -9,5 +9,6 @@ namespace SurfaceTower.VideoEngine
     public interface View
     {
          void draw(GameTime gameTime);
+         void Restart();
     }
 }

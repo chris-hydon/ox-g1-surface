@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using SurfaceTower.Model;
 using SurfaceTower.Model.EventArguments;
 using SurfaceTower.Model.Shape;
+using SurfaceTower.Model.Upgrades;
 
 namespace SurfaceTower.Model.Gun
 {
@@ -67,7 +68,6 @@ namespace SurfaceTower.Model.Gun
         if (improvocity >= 1)
         {
           improvocity = 1;
-          if (UpgradeReady != null) UpgradeReady(this, null);
         }
       }
     }
@@ -91,12 +91,13 @@ namespace SurfaceTower.Model.Gun
 
           if (value)
           {
+            // Register the listeners.
             m.Music.Click += new EventHandler(OnClick);
             m.Music.Beat += new EventHandler(OnBeat);
           }
           else
           {
-            // This bit is magic.
+            // Deregister the listeners.
             m.Music.Click -= new EventHandler(OnClick);
             m.Music.Beat -= new EventHandler(OnBeat);
           }
@@ -109,6 +110,20 @@ namespace SurfaceTower.Model.Gun
     public bool CanUpgrade
     {
       get { return Improvocity == 1; }
+      set { Improvocity = value ? 1 : 0; }
+    }
+
+    public ICollection<Upgrade> Upgrades
+    {
+      get
+      {
+        ICollection<Upgrade> upgrades = new List<Upgrade>(5);
+        upgrades.Add(new StrengthUpgrade(this, 2));
+        upgrades.Add(new EffectUpgrade(this, Effects.Homing, true));
+        upgrades.Add(new ShotUpgrade(this, ShotPatterns.TwoShot, false));
+        upgrades.Add(new ShotUpgrade(this, ShotPatterns.Spread, false));
+        return upgrades;
+      }
     }
 
     #endregion
@@ -117,6 +132,7 @@ namespace SurfaceTower.Model.Gun
 
     public event EventHandler<ShotArgs> ShotFired;
     public event EventHandler UpgradeReady;
+    public event EventHandler UpgradeDone;
     public event EventHandler<BulletArgs> NewBullet;
 
     #endregion
@@ -136,6 +152,7 @@ namespace SurfaceTower.Model.Gun
           (float) Math.Cos(Orientation + shot.OrientationModifier),
           (float) Math.Sin(Orientation + shot.OrientationModifier)
         );
+        //Modifies the starting location and orientation of the bullet.
         Vector2 locMod = Vector2.Transform(shot.PositionModifier, Matrix.CreateRotationZ(Orientation));
         Bullet bullet = new Bullet(Location + locMod, velocity, Strength, shot.Effects, PlayerId);
         App.Instance.Model.Bullets.Add(bullet);
@@ -152,6 +169,18 @@ namespace SurfaceTower.Model.Gun
       }
 
       Improvocity += Constants.BASE_IMPROVOCITY * e.Size;
+    }
+
+    public void ShowMenu(bool show)
+    {
+      if (show && CanUpgrade)
+      {
+        if (UpgradeReady != null) UpgradeReady(this, null);
+      }
+      else if (!show)
+      {
+        if (UpgradeDone != null) UpgradeDone(this, null);
+      }
     }
 
     /// <summary>

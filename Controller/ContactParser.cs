@@ -5,15 +5,38 @@ using Microsoft.Surface.Core;
 using Microsoft.Xna.Framework;
 using SurfaceTower.Model;
 using SurfaceTower.Model.Gun;
-using SurfaceTower.VideoEngine.Touchable;
 
 namespace SurfaceTower.Controller
 {
+  public struct TouchableContactPair
+  {
+    private ITouchable touchable;
+    private ContactData contact;
+
+    public ITouchable Touchable
+    {
+      get { return touchable; }
+    }
+
+    public ContactData Contact
+    {
+      get { return contact; }
+    }
+
+    public TouchableContactPair(ITouchable touchable, ContactData contact)
+    {
+      this.touchable = touchable;
+      this.contact = contact;
+    }
+  }
+
   public class ContactParser
   {
     private readonly IList<ContactData> activeContacts = new List<ContactData>();
     private readonly int[] playerTags = new int[] {0, 0, 0, 0};
     private readonly IList<ITouchable> touchables = new List<ITouchable>();
+    private readonly IList<TouchableContactPair> pressed = new List<TouchableContactPair>();
+    private readonly IList<TouchableContactPair> pendingPressed = new List<TouchableContactPair>();
 
     #region Properties
 
@@ -50,6 +73,16 @@ namespace SurfaceTower.Controller
       {
         AddPlayer(e);
       }
+      else if (e.Contact.IsFingerRecognized)
+      {
+        foreach (ITouchable t in Touchables)
+        {
+          if (t.InRegion(e.Contact))
+          {
+            pendingPressed.Add(new TouchableContactPair(t, e));
+          }
+        }
+      }
     }
 
     protected void OnContactRemoved(object sender, ContactData e)
@@ -60,18 +93,34 @@ namespace SurfaceTower.Controller
       }
       else if (e.Contact.IsFingerRecognized)
       {
-        foreach (ITouchable t in Touchables)
+        foreach (TouchableContactPair p in pressed)
         {
-          if (t.InRegion(new Vector2(e.Contact.CenterX, e.Contact.CenterY)))
+          if (p.Contact == e)
           {
-            try
+            int player = WhichPlayer(e);
+            if (player != -1)
             {
-              t.Controller.Touch(WhichPlayer(e.Contact));
+              p.Touchable.Controller.Release(e, player);
             }
-            catch (InvalidOperationException ex)
+            return;
+          }
+        }
+        int length = pendingPressed.Count;
+        for (int i = 0; i < length; i++)
+        {
+          if (pendingPressed[i].Contact == e)
+          {
+            if (pendingPressed[i].Touchable.InRegion(e.Contact))
             {
-              // Do nothing - nobody playing.
+              int player = WhichPlayer(e);
+              if (player != -1)
+              {
+                System.Console.WriteLine(player);
+                pendingPressed[i].Touchable.Controller.Touch(e, player);
+              }
             }
+            pendingPressed.RemoveAt(i);
+            return;
           }
         }
       }
@@ -119,12 +168,11 @@ namespace SurfaceTower.Controller
     }
 
     /// <summary>
-    /// Determines the closest active (or inactive) player to the vector check. Throws InvalidOperationException
-    /// if no players are active (or inactive).
+    /// Determines the closest active (or inactive) player to the vector check.
     /// </summary>
     /// <param name="check">The vector to check.</param>
     /// <param name="active">True searches for active players only, false searches for inactive positions only.</param>
-    /// <returns>The playerId of the relevant player or position.</returns>
+    /// <returns>The playerId of the relevant player or position. -1 if no such player exists.</returns>
     private int WhichPlayer(Vector2 check, bool active)
     {
       int[] sortedPlayers;
@@ -169,20 +217,19 @@ namespace SurfaceTower.Controller
         }
       }
 
-      throw new InvalidOperationException("No players are currently " + (active ? "active." : "inactive."));
+      return -1;
     }
 
     /// <summary>
     /// Of the active players, this method decides who was responsible for the given contact.
-    /// If no players are active, InvalidOperationException is thrown.
     /// </summary>
     /// <param name="c">The contact to check. Type should be tag or finger.</param>
-    /// <returns>The playerid of the most likely responsible active player.</returns>
-    private int WhichPlayer(Contact c)
+    /// <returns>The playerid of the most likely responsible active player. -1 if no such player exists.</returns>
+    private int WhichPlayer(ContactData c)
     {
       MainGun[] players = App.Instance.Model.Players;
       int[] sortedPlayers = null;
-      int octant = (int) (4 * c.Orientation / Math.PI);
+      int octant = (int) (4 * c.InitialOrientation / Math.PI);
 
       switch (octant)
       {
@@ -220,7 +267,7 @@ namespace SurfaceTower.Controller
         }
       }
 
-      throw new InvalidOperationException("No players are currently active.");
+      return -1;
     }
 
     public void ProcessContacts(GameTime gameTime, ReadOnlyContactCollection contacts)
@@ -259,6 +306,26 @@ namespace SurfaceTower.Controller
           i--;
           length--;
           if (ContactRemoved != null) ContactRemoved(this, d);
+        }
+      }
+
+      // Finally, check to see if anything in pendingPressed can be moved to pressed.
+      length = pendingPressed.Count;
+      for (int i = 0; i < length; i++)
+      {
+        TouchableContactPair p = pendingPressed[i];
+        if ((p.Contact.LastSeen - p.Contact.TimeAdded).TotalMilliseconds > 50 &&
+          p.Touchable.InRegion(p.Contact.Contact))
+        {
+          pressed.Add(p);
+          pendingPressed.RemoveAt(i);
+          i--;
+          length--;
+          int player = WhichPlayer(p.Contact);
+          if (player != -1)
+          {
+            p.Touchable.Controller.Press(p.Contact, player);
+          }
         }
       }
     }

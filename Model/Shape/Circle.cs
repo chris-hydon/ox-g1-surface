@@ -1,4 +1,8 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+
+using Microsoft.Xna.Framework;
+using Microsoft.Surface.Core;
+
 namespace SurfaceTower.Model.Shape
 {
   public class Circle : IShape
@@ -40,6 +44,17 @@ namespace SurfaceTower.Model.Shape
     public bool Collides(IShape otherShape)
     {
       return otherShape.CheckCollides(this);
+    }
+
+    /// <summary>
+    /// Actually use a circle - it's not much different to ellipse, easier to work out and more sensitive is
+    /// a good thing in this case.
+    /// </summary>
+    /// <param name="contact">The Contact object to compare.</param>
+    /// <returns>Whether or not the Contact is touching this shape.</returns>
+    public bool Collides(Contact contact)
+    {
+      return Radius + (contact.MajorAxis / 2) > (Origin - new Vector2(contact.CenterX, contact.CenterY)).Length();
     }
 
     public bool CheckCollides(Circle otherShape)

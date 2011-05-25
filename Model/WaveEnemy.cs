@@ -7,6 +7,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace SurfaceTower.Model
 {
+  /// <summary>
+  /// A WaveEnemy moves towards the centre, dodging from side to side.
+  /// </summary>
   public class WaveEnemy : Enemy
   {
     Vector2 normal;

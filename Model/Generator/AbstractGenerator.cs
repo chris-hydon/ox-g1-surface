@@ -14,7 +14,7 @@ namespace SurfaceTower.Model.Generator
 
   public abstract class AbstractGenerator : IGenerator
   {
-    protected Random random = new Random();
+    protected static Random random = new Random();
     private int enemySize;
     private int enemySizeVariance;
     private int enemyHealth;
@@ -170,7 +170,16 @@ namespace SurfaceTower.Model.Generator
       int player = -1;
       if (PlayerSpecific)
       {
-        player = (TargetPlayer == -1) ? random.Next(0, 3) : TargetPlayer;
+        //If it's a player-specific enemy, but the target has not been specified, choose it at random.
+        if (TargetPlayer == -1)
+        {
+          int index = random.Next(App.Instance.Model.NumberOfPlayers);
+          player = App.Instance.Model.ActivePlayers[index].PlayerId;
+        }
+        else
+        {
+          player = TargetPlayer;
+        }
       }
 
       switch (enemyType)

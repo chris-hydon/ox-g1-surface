@@ -5,12 +5,14 @@ using SurfaceTower.Model.Gun;
 
 namespace SurfaceTower.Model
 {
+  //This is intended to be the BaseModel for the final application.
   public class GameModel : BaseModel
   {
     private bool first;
 
     public void FirstUpdate(GameTime gameTime)
     {
+      Music.Beat += new EventHandler(Tower.OnBeat);
       spawner = new Spawner();
       Music.Start(gameTime.TotalRealTime);
     }

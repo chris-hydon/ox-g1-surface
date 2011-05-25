@@ -13,10 +13,19 @@ namespace SurfaceTower.Model.Generator
     Boss target;
     Vector2 pos;
 
+    #region Properties
     public bool Done
     {
       get { return done; }
     }
+    #endregion
+
+    #region Methods
+    /// <summary>
+    /// A generator for creating boss enemies.
+    /// </summary>
+    /// <param name="target">Which type of boss to spawn.</param>
+    /// <param name="pos">Where to spawn the boss.</param>
     public BossGenerator(Boss target, Vector2 pos)
     {
       this.target = target;
@@ -26,10 +35,13 @@ namespace SurfaceTower.Model.Generator
     {
       switch (target)
       {
+          //If the target is not implemented here, make done true to remove the generator.
         default : done = true;
           break;
       }
     }
+
+    #endregion
 
 
 
