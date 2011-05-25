@@ -82,7 +82,7 @@ namespace SurfaceTower.TowerAudio
             inTransition = false;
             clickCounter = 0;
             random = new Random();
-            SCALE_CHANGE_HP_TRESHOLD = App.Instance.Model.Tower.MaxHealth - 100;
+            SCALE_CHANGE_HP_TRESHOLD = (App.Instance.Model.Tower.MaxHealth - 100) * 0;
         }
 
         #region Properties

@@ -58,16 +58,16 @@ namespace SurfaceTower.TowerAudio
 
         #region Constants
 
-        private const int NO_OF_INSTRUMENTS = 11;
+        private const int NO_OF_INSTRUMENTS = 9;
 
-        private enum InstrumentName { bassdrum, tambourine, kickdrum, snaredrum, distortedsnare, distortedkick, kettledrum,
+        private enum InstrumentName { bassdrum, tambourine, kickdrum, snaredrum, kettledrum,
                                       triangle, rattle, hihat, cowbell};
         private ICollection<Instrument> instruments;
 
         #endregion
 
         #region Variables
-        public static float drumVolume = 0.7f; 
+        public static float drumVolume = 1.1f; 
         private bool drumsPlaying = true;
 
         private AudioEngine audioEngine;
@@ -90,8 +90,6 @@ namespace SurfaceTower.TowerAudio
             instruments.Add(new Instrument(10, "tambourine"));
             instruments.Add(new Instrument(200, "kickdrum"));
             instruments.Add(new Instrument(200, "snaredrum"));
-            instruments.Add(new Instrument(100, "distortedsnare"));
-            instruments.Add(new Instrument(100, "distortedkick"));
             instruments.Add(new Instrument(10, "kettledrum"));
             instruments.Add(new Instrument(10, "triangle"));
             instruments.Add(new Instrument(10, "rattle"));
@@ -177,14 +175,6 @@ namespace SurfaceTower.TowerAudio
                             if (random.Next(size) >= 2 * size/ 3) result[i] = 0;
                             else result[i] = instrumentSound;
                     }
-                    return result;
-                #endregion
-                #region distortedkick
-                case (int)InstrumentName.distortedkick:
-                    return result;
-                #endregion
-                #region distortedsnare
-                case (int)InstrumentName.distortedsnare:
                     return result;
                 #endregion
                 #region hihat
@@ -298,6 +288,7 @@ namespace SurfaceTower.TowerAudio
             #endregion
 
             int choice = random.Next(0, NO_OF_INSTRUMENTS);
+            choice = AdjustChoice(choice);
 
             if (drumLoop.futurePlaying[choice] == false)
             {
@@ -334,6 +325,24 @@ namespace SurfaceTower.TowerAudio
             }
 
             return new SurfaceTower.Model.BarRhythm(notes);
+        }
+
+        private int AdjustChoice(int choice)
+        {
+            bool choiceIsGood = false;
+
+            for (int i = 0; i < drumLoop.loopTrace.Length; i++)
+            {
+                if (i != choice && drumLoop.playing[i])
+                {
+                    choiceIsGood = true;
+                }
+            }
+
+            if (choiceIsGood)
+                return choice;
+
+            return AdjustChoice(random.Next(0, NO_OF_INSTRUMENTS));
         }
 
         #endregion
