@@ -113,7 +113,7 @@ namespace SurfaceTower.Model.Gun
         {
           current = current.next;
         }
-        return current != null;
+        return current.me != null;
       }
 
       public void Reset()
