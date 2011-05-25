@@ -50,7 +50,7 @@ namespace SurfaceTower.Controller
         // Make upgrade menu appear.
         p.ShowMenu(true);
       }
-      if (p.UpgradeMenuShowing)
+      else if (p.UpgradeMenuShowing)
       {
         p.ShowMenu(false);
       }

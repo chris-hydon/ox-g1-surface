@@ -122,7 +122,6 @@ namespace SurfaceTower.Controller
               int player = WhichPlayer(e);
               if (player != -1)
               {
-                System.Console.WriteLine(player);
                 pendingPressed[i].Touchable.Controller.Touch(e, player);
               }
             }
