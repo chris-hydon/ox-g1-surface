@@ -38,6 +38,15 @@ namespace SurfaceTower.TowerAudio
             App.Instance.Model.AddPlayer += new EventHandler<SurfaceTower.Model.EventArguments.PlayerArgs>(OnAddPlayer);
             App.Instance.Model.RemovePlayer += new EventHandler<SurfaceTower.Model.EventArguments.PlayerArgs>(OnRemovePlayer);
             App.Instance.Model.NewEnemy += new EventHandler<SurfaceTower.Model.EventArguments.EnemyArgs>(OnNewEnemy);
+
+            if (exclusiveMode)
+            {
+                audioEngine.GetCategory("Music").SetVolume(MelodyPlayer.musicVolume);
+                audioEngine.GetCategory("Drums").SetVolume(DrumPlayer.drumVolume);
+                heartbeatCue.Stop(AudioStopOptions.Immediate);
+
+                exclusiveMode = false;
+            }
         }
         
         #region Things that happen on events

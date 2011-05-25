@@ -78,7 +78,7 @@ namespace SurfaceTower.TowerAudio
             soundBanks.Add(new SoundBank(audioEngine, "Content/Spaceb Sound.xsb"));
             soundBanks.Add(new SoundBank(audioEngine, "Content/Weeping Sound.xsb"));
 
-            scaleDecider = new ScaleDecider(Note.C, ScaleDecider.ScaleType.Major);
+            scaleDecider = new ScaleDecider(Note.Ds, ScaleDecider.ScaleType.HarMinor);
 
             currentNotePosition = (int)ScaleDegree.Tonic1;
             previousNotePosition = (int)ScaleDegree.Tonic1;

@@ -98350,7 +98350,7 @@ Sound Bank
     Sound
     {
         Name = 40s;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -98396,7 +98396,7 @@ Sound Bank
     Sound
     {
         Name = 1s;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -98442,7 +98442,7 @@ Sound Bank
     Sound
     {
         Name = 2l;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -98488,7 +98488,7 @@ Sound Bank
     Sound
     {
         Name = 2s;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -98534,7 +98534,7 @@ Sound Bank
     Sound
     {
         Name = 3l;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -98580,7 +98580,7 @@ Sound Bank
     Sound
     {
         Name = 3s;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -98626,7 +98626,7 @@ Sound Bank
     Sound
     {
         Name = 4l;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -98672,7 +98672,7 @@ Sound Bank
     Sound
     {
         Name = 4s;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -98718,7 +98718,7 @@ Sound Bank
     Sound
     {
         Name = 5l;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -98764,7 +98764,7 @@ Sound Bank
     Sound
     {
         Name = 5s;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -98810,7 +98810,7 @@ Sound Bank
     Sound
     {
         Name = 6l;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -98856,7 +98856,7 @@ Sound Bank
     Sound
     {
         Name = 6s;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -98902,7 +98902,7 @@ Sound Bank
     Sound
     {
         Name = 7l;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -98948,7 +98948,7 @@ Sound Bank
     Sound
     {
         Name = 7s;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -98994,7 +98994,7 @@ Sound Bank
     Sound
     {
         Name = 8l;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -99040,7 +99040,7 @@ Sound Bank
     Sound
     {
         Name = 8s;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -99086,7 +99086,7 @@ Sound Bank
     Sound
     {
         Name = 9l;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -99132,7 +99132,7 @@ Sound Bank
     Sound
     {
         Name = 9s;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -99178,7 +99178,7 @@ Sound Bank
     Sound
     {
         Name = 10l;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -99224,7 +99224,7 @@ Sound Bank
     Sound
     {
         Name = 10s;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -99270,7 +99270,7 @@ Sound Bank
     Sound
     {
         Name = 11l;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -99316,7 +99316,7 @@ Sound Bank
     Sound
     {
         Name = 11s;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -99362,7 +99362,7 @@ Sound Bank
     Sound
     {
         Name = 12l;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -99408,7 +99408,7 @@ Sound Bank
     Sound
     {
         Name = 12s;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -99454,7 +99454,7 @@ Sound Bank
     Sound
     {
         Name = 13l;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -99500,7 +99500,7 @@ Sound Bank
     Sound
     {
         Name = 13s;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -99546,7 +99546,7 @@ Sound Bank
     Sound
     {
         Name = 14l;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -99592,7 +99592,7 @@ Sound Bank
     Sound
     {
         Name = 14s;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -99638,7 +99638,7 @@ Sound Bank
     Sound
     {
         Name = 15l;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -99684,7 +99684,7 @@ Sound Bank
     Sound
     {
         Name = 15s;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -99730,7 +99730,7 @@ Sound Bank
     Sound
     {
         Name = 16l;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -99776,7 +99776,7 @@ Sound Bank
     Sound
     {
         Name = 16s;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -99822,7 +99822,7 @@ Sound Bank
     Sound
     {
         Name = 17l;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -99868,7 +99868,7 @@ Sound Bank
     Sound
     {
         Name = 17s;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -99914,7 +99914,7 @@ Sound Bank
     Sound
     {
         Name = 18l;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -99960,7 +99960,7 @@ Sound Bank
     Sound
     {
         Name = 18s;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -100006,7 +100006,7 @@ Sound Bank
     Sound
     {
         Name = 19l;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -100052,7 +100052,7 @@ Sound Bank
     Sound
     {
         Name = 19s;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -100098,7 +100098,7 @@ Sound Bank
     Sound
     {
         Name = 20l;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -100144,7 +100144,7 @@ Sound Bank
     Sound
     {
         Name = 20s;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -100190,7 +100190,7 @@ Sound Bank
     Sound
     {
         Name = 21l;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -100236,7 +100236,7 @@ Sound Bank
     Sound
     {
         Name = 21s;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -100282,7 +100282,7 @@ Sound Bank
     Sound
     {
         Name = 22l;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -100328,7 +100328,7 @@ Sound Bank
     Sound
     {
         Name = 22s;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -100374,7 +100374,7 @@ Sound Bank
     Sound
     {
         Name = 23l;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -100420,7 +100420,7 @@ Sound Bank
     Sound
     {
         Name = 23s;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -100466,7 +100466,7 @@ Sound Bank
     Sound
     {
         Name = 24l;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -100512,7 +100512,7 @@ Sound Bank
     Sound
     {
         Name = 24s;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -100558,7 +100558,7 @@ Sound Bank
     Sound
     {
         Name = 25l;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -100604,7 +100604,7 @@ Sound Bank
     Sound
     {
         Name = 25s;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -100650,7 +100650,7 @@ Sound Bank
     Sound
     {
         Name = 26l;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -100696,7 +100696,7 @@ Sound Bank
     Sound
     {
         Name = 26s;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -100742,7 +100742,7 @@ Sound Bank
     Sound
     {
         Name = 27l;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -100788,7 +100788,7 @@ Sound Bank
     Sound
     {
         Name = 27s;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -100834,7 +100834,7 @@ Sound Bank
     Sound
     {
         Name = 28l;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -100880,7 +100880,7 @@ Sound Bank
     Sound
     {
         Name = 28s;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -100926,7 +100926,7 @@ Sound Bank
     Sound
     {
         Name = 29l;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -100972,7 +100972,7 @@ Sound Bank
     Sound
     {
         Name = 29s;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -101018,7 +101018,7 @@ Sound Bank
     Sound
     {
         Name = 30l;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -101064,7 +101064,7 @@ Sound Bank
     Sound
     {
         Name = 30s;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -101110,7 +101110,7 @@ Sound Bank
     Sound
     {
         Name = 31l;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -101156,7 +101156,7 @@ Sound Bank
     Sound
     {
         Name = 31s;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -101202,7 +101202,7 @@ Sound Bank
     Sound
     {
         Name = 32l;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -101248,7 +101248,7 @@ Sound Bank
     Sound
     {
         Name = 32s;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -101294,7 +101294,7 @@ Sound Bank
     Sound
     {
         Name = 33l;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -101340,7 +101340,7 @@ Sound Bank
     Sound
     {
         Name = 33s;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -101386,7 +101386,7 @@ Sound Bank
     Sound
     {
         Name = 34l;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -101432,7 +101432,7 @@ Sound Bank
     Sound
     {
         Name = 34s;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -101478,7 +101478,7 @@ Sound Bank
     Sound
     {
         Name = 35l;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -101524,7 +101524,7 @@ Sound Bank
     Sound
     {
         Name = 35s;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -101570,7 +101570,7 @@ Sound Bank
     Sound
     {
         Name = 36l;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -101616,7 +101616,7 @@ Sound Bank
     Sound
     {
         Name = 36s;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -101662,7 +101662,7 @@ Sound Bank
     Sound
     {
         Name = 37l;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -101708,7 +101708,7 @@ Sound Bank
     Sound
     {
         Name = 37s;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -101754,7 +101754,7 @@ Sound Bank
     Sound
     {
         Name = 38l;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -101800,7 +101800,7 @@ Sound Bank
     Sound
     {
         Name = 38s;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -101846,7 +101846,7 @@ Sound Bank
     Sound
     {
         Name = 39l;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -101892,7 +101892,7 @@ Sound Bank
     Sound
     {
         Name = 39s;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -101938,7 +101938,7 @@ Sound Bank
     Sound
     {
         Name = 40l;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -101984,7 +101984,7 @@ Sound Bank
     Sound
     {
         Name = 41l;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -102030,7 +102030,7 @@ Sound Bank
     Sound
     {
         Name = 41s;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -102076,7 +102076,7 @@ Sound Bank
     Sound
     {
         Name = 42l;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -102122,7 +102122,7 @@ Sound Bank
     Sound
     {
         Name = 42s;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -102168,7 +102168,7 @@ Sound Bank
     Sound
     {
         Name = 43l;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -102214,7 +102214,7 @@ Sound Bank
     Sound
     {
         Name = 43s;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -102260,7 +102260,7 @@ Sound Bank
     Sound
     {
         Name = 44l;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -102306,7 +102306,7 @@ Sound Bank
     Sound
     {
         Name = 44s;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -102352,7 +102352,7 @@ Sound Bank
     Sound
     {
         Name = 45l;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -102398,7 +102398,7 @@ Sound Bank
     Sound
     {
         Name = 45s;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -102444,7 +102444,7 @@ Sound Bank
     Sound
     {
         Name = 46l;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -102490,7 +102490,7 @@ Sound Bank
     Sound
     {
         Name = 46s;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -102536,7 +102536,7 @@ Sound Bank
     Sound
     {
         Name = 47l;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -102582,7 +102582,7 @@ Sound Bank
     Sound
     {
         Name = 47s;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -102628,7 +102628,7 @@ Sound Bank
     Sound
     {
         Name = 48l;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -102674,7 +102674,7 @@ Sound Bank
     Sound
     {
         Name = 48s;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -102720,7 +102720,7 @@ Sound Bank
     Sound
     {
         Name = 1l;
-        Volume = -1200;
+        Volume = 0;
         Pitch = 0;
         Priority = 0;
 
@@ -111044,7 +111044,7 @@ Sound Bank
     Sound
     {
         Name = 2l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -111090,7 +111090,7 @@ Sound Bank
     Sound
     {
         Name = 2s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -111136,7 +111136,7 @@ Sound Bank
     Sound
     {
         Name = 3l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -111182,7 +111182,7 @@ Sound Bank
     Sound
     {
         Name = 3s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -111228,7 +111228,7 @@ Sound Bank
     Sound
     {
         Name = 4l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -111274,7 +111274,7 @@ Sound Bank
     Sound
     {
         Name = 4s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -111320,7 +111320,7 @@ Sound Bank
     Sound
     {
         Name = 5l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -111366,7 +111366,7 @@ Sound Bank
     Sound
     {
         Name = 5s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -111412,7 +111412,7 @@ Sound Bank
     Sound
     {
         Name = 6l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -111458,7 +111458,7 @@ Sound Bank
     Sound
     {
         Name = 6s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -111504,7 +111504,7 @@ Sound Bank
     Sound
     {
         Name = 7l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -111550,7 +111550,7 @@ Sound Bank
     Sound
     {
         Name = 7s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -111596,7 +111596,7 @@ Sound Bank
     Sound
     {
         Name = 8l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -111642,7 +111642,7 @@ Sound Bank
     Sound
     {
         Name = 8s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -111688,7 +111688,7 @@ Sound Bank
     Sound
     {
         Name = 9l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -111734,7 +111734,7 @@ Sound Bank
     Sound
     {
         Name = 9s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -111780,7 +111780,7 @@ Sound Bank
     Sound
     {
         Name = 10l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -111826,7 +111826,7 @@ Sound Bank
     Sound
     {
         Name = 10s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -111872,7 +111872,7 @@ Sound Bank
     Sound
     {
         Name = 11l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -111918,7 +111918,7 @@ Sound Bank
     Sound
     {
         Name = 11s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -111964,7 +111964,7 @@ Sound Bank
     Sound
     {
         Name = 12l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -112010,7 +112010,7 @@ Sound Bank
     Sound
     {
         Name = 12s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -112056,7 +112056,7 @@ Sound Bank
     Sound
     {
         Name = 13l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -112102,7 +112102,7 @@ Sound Bank
     Sound
     {
         Name = 13s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -112148,7 +112148,7 @@ Sound Bank
     Sound
     {
         Name = 14l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -112194,7 +112194,7 @@ Sound Bank
     Sound
     {
         Name = 14s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -112240,7 +112240,7 @@ Sound Bank
     Sound
     {
         Name = 15l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -112286,7 +112286,7 @@ Sound Bank
     Sound
     {
         Name = 15s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -112332,7 +112332,7 @@ Sound Bank
     Sound
     {
         Name = 16l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -112378,7 +112378,7 @@ Sound Bank
     Sound
     {
         Name = 16s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -112424,7 +112424,7 @@ Sound Bank
     Sound
     {
         Name = 17l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -112470,7 +112470,7 @@ Sound Bank
     Sound
     {
         Name = 17s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -112516,7 +112516,7 @@ Sound Bank
     Sound
     {
         Name = 18l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -112562,7 +112562,7 @@ Sound Bank
     Sound
     {
         Name = 18s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -112608,7 +112608,7 @@ Sound Bank
     Sound
     {
         Name = 19l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -112654,7 +112654,7 @@ Sound Bank
     Sound
     {
         Name = 19s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -112700,7 +112700,7 @@ Sound Bank
     Sound
     {
         Name = 20l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -112746,7 +112746,7 @@ Sound Bank
     Sound
     {
         Name = 20s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -112792,7 +112792,7 @@ Sound Bank
     Sound
     {
         Name = 21l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -112838,7 +112838,7 @@ Sound Bank
     Sound
     {
         Name = 21s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -112884,7 +112884,7 @@ Sound Bank
     Sound
     {
         Name = 22l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -112930,7 +112930,7 @@ Sound Bank
     Sound
     {
         Name = 22s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -112976,7 +112976,7 @@ Sound Bank
     Sound
     {
         Name = 23l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -113022,7 +113022,7 @@ Sound Bank
     Sound
     {
         Name = 23s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -113068,7 +113068,7 @@ Sound Bank
     Sound
     {
         Name = 24l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -113114,7 +113114,7 @@ Sound Bank
     Sound
     {
         Name = 24s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -113160,7 +113160,7 @@ Sound Bank
     Sound
     {
         Name = 25l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -113206,7 +113206,7 @@ Sound Bank
     Sound
     {
         Name = 25s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -113252,7 +113252,7 @@ Sound Bank
     Sound
     {
         Name = 26l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -113298,7 +113298,7 @@ Sound Bank
     Sound
     {
         Name = 26s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -113344,7 +113344,7 @@ Sound Bank
     Sound
     {
         Name = 27l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -113390,7 +113390,7 @@ Sound Bank
     Sound
     {
         Name = 27s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -113436,7 +113436,7 @@ Sound Bank
     Sound
     {
         Name = 28l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -113482,7 +113482,7 @@ Sound Bank
     Sound
     {
         Name = 28s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -113528,7 +113528,7 @@ Sound Bank
     Sound
     {
         Name = 29l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -113574,7 +113574,7 @@ Sound Bank
     Sound
     {
         Name = 29s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -113620,7 +113620,7 @@ Sound Bank
     Sound
     {
         Name = 30l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -113666,7 +113666,7 @@ Sound Bank
     Sound
     {
         Name = 30s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -113712,7 +113712,7 @@ Sound Bank
     Sound
     {
         Name = 31l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -113758,7 +113758,7 @@ Sound Bank
     Sound
     {
         Name = 31s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -113804,7 +113804,7 @@ Sound Bank
     Sound
     {
         Name = 32l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -113850,7 +113850,7 @@ Sound Bank
     Sound
     {
         Name = 32s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -113896,7 +113896,7 @@ Sound Bank
     Sound
     {
         Name = 33l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -113942,7 +113942,7 @@ Sound Bank
     Sound
     {
         Name = 33s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -113988,7 +113988,7 @@ Sound Bank
     Sound
     {
         Name = 34l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -114034,7 +114034,7 @@ Sound Bank
     Sound
     {
         Name = 34s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -114080,7 +114080,7 @@ Sound Bank
     Sound
     {
         Name = 35l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -114126,7 +114126,7 @@ Sound Bank
     Sound
     {
         Name = 35s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -114172,7 +114172,7 @@ Sound Bank
     Sound
     {
         Name = 36l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -114218,7 +114218,7 @@ Sound Bank
     Sound
     {
         Name = 36s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -114264,7 +114264,7 @@ Sound Bank
     Sound
     {
         Name = 37l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -114310,7 +114310,7 @@ Sound Bank
     Sound
     {
         Name = 37s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -114356,7 +114356,7 @@ Sound Bank
     Sound
     {
         Name = 38l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -114402,7 +114402,7 @@ Sound Bank
     Sound
     {
         Name = 38s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -114448,7 +114448,7 @@ Sound Bank
     Sound
     {
         Name = 39l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -114494,7 +114494,7 @@ Sound Bank
     Sound
     {
         Name = 39s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -114540,7 +114540,7 @@ Sound Bank
     Sound
     {
         Name = 40l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -114586,7 +114586,7 @@ Sound Bank
     Sound
     {
         Name = 40s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -114632,7 +114632,7 @@ Sound Bank
     Sound
     {
         Name = 41l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -114678,7 +114678,7 @@ Sound Bank
     Sound
     {
         Name = 41s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -114724,7 +114724,7 @@ Sound Bank
     Sound
     {
         Name = 42l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -114770,7 +114770,7 @@ Sound Bank
     Sound
     {
         Name = 42s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -114816,7 +114816,7 @@ Sound Bank
     Sound
     {
         Name = 43l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -114862,7 +114862,7 @@ Sound Bank
     Sound
     {
         Name = 43s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -114908,7 +114908,7 @@ Sound Bank
     Sound
     {
         Name = 44l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -114954,7 +114954,7 @@ Sound Bank
     Sound
     {
         Name = 44s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -115000,7 +115000,7 @@ Sound Bank
     Sound
     {
         Name = 45l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -115046,7 +115046,7 @@ Sound Bank
     Sound
     {
         Name = 45s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -115092,7 +115092,7 @@ Sound Bank
     Sound
     {
         Name = 46l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -115138,7 +115138,7 @@ Sound Bank
     Sound
     {
         Name = 46s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -115184,7 +115184,7 @@ Sound Bank
     Sound
     {
         Name = 47l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -115230,7 +115230,7 @@ Sound Bank
     Sound
     {
         Name = 47s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -115276,7 +115276,7 @@ Sound Bank
     Sound
     {
         Name = 48l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -115322,7 +115322,7 @@ Sound Bank
     Sound
     {
         Name = 48s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -115368,7 +115368,7 @@ Sound Bank
     Sound
     {
         Name = 1l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -115414,7 +115414,7 @@ Sound Bank
     Sound
     {
         Name = 1s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -117391,7 +117391,7 @@ Sound Bank
     Sound
     {
         Name = 43l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -117437,7 +117437,7 @@ Sound Bank
     Sound
     {
         Name = 1s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -117483,7 +117483,7 @@ Sound Bank
     Sound
     {
         Name = 2l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -117529,7 +117529,7 @@ Sound Bank
     Sound
     {
         Name = 2s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -117575,7 +117575,7 @@ Sound Bank
     Sound
     {
         Name = 3l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -117621,7 +117621,7 @@ Sound Bank
     Sound
     {
         Name = 3s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -117667,7 +117667,7 @@ Sound Bank
     Sound
     {
         Name = 4l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -117713,7 +117713,7 @@ Sound Bank
     Sound
     {
         Name = 4s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -117759,7 +117759,7 @@ Sound Bank
     Sound
     {
         Name = 5l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -117805,7 +117805,7 @@ Sound Bank
     Sound
     {
         Name = 5s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -117851,7 +117851,7 @@ Sound Bank
     Sound
     {
         Name = 6l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -117897,7 +117897,7 @@ Sound Bank
     Sound
     {
         Name = 6s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -117943,7 +117943,7 @@ Sound Bank
     Sound
     {
         Name = 7l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -117989,7 +117989,7 @@ Sound Bank
     Sound
     {
         Name = 7s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -118035,7 +118035,7 @@ Sound Bank
     Sound
     {
         Name = 8l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -118081,7 +118081,7 @@ Sound Bank
     Sound
     {
         Name = 8s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -118127,7 +118127,7 @@ Sound Bank
     Sound
     {
         Name = 9l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -118173,7 +118173,7 @@ Sound Bank
     Sound
     {
         Name = 9s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -118219,7 +118219,7 @@ Sound Bank
     Sound
     {
         Name = 10l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -118265,7 +118265,7 @@ Sound Bank
     Sound
     {
         Name = 10s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -118311,7 +118311,7 @@ Sound Bank
     Sound
     {
         Name = 11l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -118357,7 +118357,7 @@ Sound Bank
     Sound
     {
         Name = 11s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -118403,7 +118403,7 @@ Sound Bank
     Sound
     {
         Name = 12l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -118449,7 +118449,7 @@ Sound Bank
     Sound
     {
         Name = 12s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -118495,7 +118495,7 @@ Sound Bank
     Sound
     {
         Name = 13l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -118541,7 +118541,7 @@ Sound Bank
     Sound
     {
         Name = 13s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -118587,7 +118587,7 @@ Sound Bank
     Sound
     {
         Name = 14l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -118633,7 +118633,7 @@ Sound Bank
     Sound
     {
         Name = 14s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -118679,7 +118679,7 @@ Sound Bank
     Sound
     {
         Name = 15l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -118725,7 +118725,7 @@ Sound Bank
     Sound
     {
         Name = 15s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -118771,7 +118771,7 @@ Sound Bank
     Sound
     {
         Name = 16l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -118817,7 +118817,7 @@ Sound Bank
     Sound
     {
         Name = 16s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -118863,7 +118863,7 @@ Sound Bank
     Sound
     {
         Name = 17l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -118909,7 +118909,7 @@ Sound Bank
     Sound
     {
         Name = 17s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -118955,7 +118955,7 @@ Sound Bank
     Sound
     {
         Name = 18l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -119001,7 +119001,7 @@ Sound Bank
     Sound
     {
         Name = 18s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -119047,7 +119047,7 @@ Sound Bank
     Sound
     {
         Name = 19l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -119093,7 +119093,7 @@ Sound Bank
     Sound
     {
         Name = 19s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -119139,7 +119139,7 @@ Sound Bank
     Sound
     {
         Name = 20l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -119185,7 +119185,7 @@ Sound Bank
     Sound
     {
         Name = 20s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -119231,7 +119231,7 @@ Sound Bank
     Sound
     {
         Name = 21l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -119277,7 +119277,7 @@ Sound Bank
     Sound
     {
         Name = 21s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -119323,7 +119323,7 @@ Sound Bank
     Sound
     {
         Name = 22l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -119369,7 +119369,7 @@ Sound Bank
     Sound
     {
         Name = 22s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -119415,7 +119415,7 @@ Sound Bank
     Sound
     {
         Name = 23l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -119461,7 +119461,7 @@ Sound Bank
     Sound
     {
         Name = 23s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -119507,7 +119507,7 @@ Sound Bank
     Sound
     {
         Name = 24l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -119553,7 +119553,7 @@ Sound Bank
     Sound
     {
         Name = 24s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -119599,7 +119599,7 @@ Sound Bank
     Sound
     {
         Name = 25l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -119645,7 +119645,7 @@ Sound Bank
     Sound
     {
         Name = 25s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -119691,7 +119691,7 @@ Sound Bank
     Sound
     {
         Name = 26l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -119737,7 +119737,7 @@ Sound Bank
     Sound
     {
         Name = 26s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -119783,7 +119783,7 @@ Sound Bank
     Sound
     {
         Name = 27l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -119829,7 +119829,7 @@ Sound Bank
     Sound
     {
         Name = 27s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -119875,7 +119875,7 @@ Sound Bank
     Sound
     {
         Name = 28l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -119921,7 +119921,7 @@ Sound Bank
     Sound
     {
         Name = 28s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -119967,7 +119967,7 @@ Sound Bank
     Sound
     {
         Name = 29l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -120013,7 +120013,7 @@ Sound Bank
     Sound
     {
         Name = 29s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -120059,7 +120059,7 @@ Sound Bank
     Sound
     {
         Name = 30l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -120105,7 +120105,7 @@ Sound Bank
     Sound
     {
         Name = 30s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -120151,7 +120151,7 @@ Sound Bank
     Sound
     {
         Name = 31l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -120197,7 +120197,7 @@ Sound Bank
     Sound
     {
         Name = 31s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -120243,7 +120243,7 @@ Sound Bank
     Sound
     {
         Name = 32l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -120289,7 +120289,7 @@ Sound Bank
     Sound
     {
         Name = 32s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -120335,7 +120335,7 @@ Sound Bank
     Sound
     {
         Name = 33l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -120381,7 +120381,7 @@ Sound Bank
     Sound
     {
         Name = 33s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -120427,7 +120427,7 @@ Sound Bank
     Sound
     {
         Name = 34l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -120473,7 +120473,7 @@ Sound Bank
     Sound
     {
         Name = 34s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -120519,7 +120519,7 @@ Sound Bank
     Sound
     {
         Name = 35l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -120565,7 +120565,7 @@ Sound Bank
     Sound
     {
         Name = 35s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -120611,7 +120611,7 @@ Sound Bank
     Sound
     {
         Name = 36l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -120657,7 +120657,7 @@ Sound Bank
     Sound
     {
         Name = 36s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -120703,7 +120703,7 @@ Sound Bank
     Sound
     {
         Name = 37l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -120749,7 +120749,7 @@ Sound Bank
     Sound
     {
         Name = 37s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -120795,7 +120795,7 @@ Sound Bank
     Sound
     {
         Name = 38l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -120841,7 +120841,7 @@ Sound Bank
     Sound
     {
         Name = 38s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -120887,7 +120887,7 @@ Sound Bank
     Sound
     {
         Name = 39l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -120933,7 +120933,7 @@ Sound Bank
     Sound
     {
         Name = 39s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -120979,7 +120979,7 @@ Sound Bank
     Sound
     {
         Name = 40l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -121025,7 +121025,7 @@ Sound Bank
     Sound
     {
         Name = 40s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -121071,7 +121071,7 @@ Sound Bank
     Sound
     {
         Name = 41l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -121117,7 +121117,7 @@ Sound Bank
     Sound
     {
         Name = 41s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -121163,7 +121163,7 @@ Sound Bank
     Sound
     {
         Name = 42l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -121209,7 +121209,7 @@ Sound Bank
     Sound
     {
         Name = 42s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -121255,7 +121255,7 @@ Sound Bank
     Sound
     {
         Name = 43s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -121301,7 +121301,7 @@ Sound Bank
     Sound
     {
         Name = 44l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -121347,7 +121347,7 @@ Sound Bank
     Sound
     {
         Name = 44s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -121393,7 +121393,7 @@ Sound Bank
     Sound
     {
         Name = 45l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -121439,7 +121439,7 @@ Sound Bank
     Sound
     {
         Name = 45s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -121485,7 +121485,7 @@ Sound Bank
     Sound
     {
         Name = 46l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -121531,7 +121531,7 @@ Sound Bank
     Sound
     {
         Name = 46s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -121577,7 +121577,7 @@ Sound Bank
     Sound
     {
         Name = 47l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -121623,7 +121623,7 @@ Sound Bank
     Sound
     {
         Name = 47s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -121669,7 +121669,7 @@ Sound Bank
     Sound
     {
         Name = 48l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -121715,7 +121715,7 @@ Sound Bank
     Sound
     {
         Name = 48s;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
@@ -121761,7 +121761,7 @@ Sound Bank
     Sound
     {
         Name = 1l;
-        Volume = -1200;
+        Volume = -500;
         Pitch = 0;
         Priority = 0;
 
