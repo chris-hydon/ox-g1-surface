@@ -15,11 +15,11 @@ namespace SurfaceTower.VideoEngine
     /// </summary>
     public abstract class LineMenu : IMenu
     {
-        private const int NUMBEROFITEMS = 4;
+        protected int numberofitems;
         private const int ANIMATIONSPEED = 150;
         protected Vector2 position;
-        protected Vector2[] offsets = new Vector2[NUMBEROFITEMS];
-        protected MenuItem[] items = new MenuItem[NUMBEROFITEMS];
+        protected Vector2[] offsets;
+        protected MenuItem[] items;
         protected float singleItemWidth;
         private Vector2 direction;
         /// <summary>
@@ -28,9 +28,10 @@ namespace SurfaceTower.VideoEngine
         /// 0 - open
         /// -1 - closing
         /// </summary>
-        private const int OPENING = 1;
-        private const int OPEN = 0;
-        private const int CLOSING = -1;
+        private const int OPENING = 0;
+        private const int OPEN = 1;
+        private const int CLOSING = 2;
+        private const int CLOSED = 3;
         private short animationstate;
      
 
@@ -52,7 +53,7 @@ namespace SurfaceTower.VideoEngine
                     direction = new Vector2(-1, 0);
                     break;
             }
-            animationstate = 1;
+            animationstate = OPENING;
             this.position = position;
          
         }
@@ -65,11 +66,20 @@ namespace SurfaceTower.VideoEngine
                 t.Draw(sb, position+offsets[i]);
                 i++;
             }
-            if (animationstate!=0)
+            if (animationstate!=OPEN)
             {
                 updateAnimation();
             }
         }
+
+        public void Close()
+        {
+            if (animationstate == OPEN)
+            {
+                animationstate = CLOSING;
+            }
+        }
+
         private void updateAnimation()
         {
             if (animationstate == OPENING)
@@ -79,7 +89,7 @@ namespace SurfaceTower.VideoEngine
                     offsets[i] += (1 / singleItemWidth) * ANIMATIONSPEED * i * direction;
                 }
                 Vector2 v = offsets.Last() - offsets.First();
-                if (v.Length() > (singleItemWidth * NUMBEROFITEMS))
+                if (v.Length() > (singleItemWidth * numberofitems))
                 {
                     animationstate = OPEN;
                 }
@@ -94,7 +104,7 @@ namespace SurfaceTower.VideoEngine
                 Vector2 v = offsets.Last() - offsets.First();
                 if (v.Length() <= 5)
                 {
-                    animationstate = OPENING;
+                    animationstate = CLOSED;
                 }
             }
             

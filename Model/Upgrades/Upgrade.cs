@@ -47,7 +47,7 @@ namespace SurfaceTower.Model.Upgrades
 
     public bool InRegion(Contact target)
     {
-      throw new System.NotImplementedException();
+        return false;
     }
 
     public static Upgrade CreateUpgrade(UpgradeType type, IGun gun)

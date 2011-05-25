@@ -12,26 +12,42 @@ namespace SurfaceTower.VideoEngine.MenuDrawers
 { 
     public class MenuManager
     {
-        private ICollection<IMenu> menus = new LinkedList<IMenu>();
+        private Dictionary<int, IMenu> menus = new Dictionary<int, IMenu>();
 
         public MenuManager()
         {
-            menus.Add(new UGMenu(new Vector2(300,300), 0));
             foreach (MainGun p in App.Instance.Model.Players)
             {
-               p.UpgradeReady+=new EventHandler(p_UpgradeReady);
+               p.UpgradeReady+= new EventHandler(p_UpgradeReady);
+               p.UpgradeDone += new EventHandler(p_UpgradeDone); 
             }
+        }
+
+        void p_UpgradeDone(object sender, EventArgs e)
+        {
+            MainGun m = (MainGun)sender;
+            menus.Remove(m.PlayerId);
+            //IMenu menu;
+            //menus.TryGetValue(m.PlayerId, out menu);
+            //menu.Close();
         }
 
         void  p_UpgradeReady(object sender, EventArgs e)
         {
             MainGun p = (MainGun)sender;
-            menus.Add(new UGMenu(p.Location, p.PlayerId));
+            try
+            {
+                menus.Add(p.PlayerId, new UGMenu(p.Location, p.PlayerId, p.Upgrades.Keys));
+            }
+            catch (ArgumentException)
+            {
+
+            }
         }   
 
         public void Draw(SpriteBatch sb)
         {
-            foreach (IMenu m in menus)
+            foreach (IMenu m in menus.Values)
             {
                 if (m != null)
                 {

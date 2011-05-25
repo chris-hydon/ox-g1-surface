@@ -10,5 +10,6 @@ namespace SurfaceTower.VideoEngine.MenuDrawers
     public interface IMenu
     {
         void Draw(SpriteBatch sb);
+        void Close();
     }
 }
