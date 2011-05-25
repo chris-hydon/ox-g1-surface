@@ -61,6 +61,7 @@ namespace SurfaceTower
       Model.Restart();
       gameView.Restart();  
       towerAudioEngine.Restart();
+      contactParser.Restart();
     }
 
     public bool onScreen(Vector2 pos)

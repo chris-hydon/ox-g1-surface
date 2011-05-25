@@ -2,6 +2,7 @@
 
 using Microsoft.Surface.Core;
 using SurfaceTower.Model;
+using SurfaceTower.Model.Gun;
 
 namespace SurfaceTower.Controller
 {
@@ -18,8 +19,10 @@ namespace SurfaceTower.Controller
 
     public void Release(ContactData contact, int playerId)
     {
+      MainGun p = App.Instance.Model.Players[playerId];
+
       // Upgrade ready?
-      if (App.Instance.Model.Players[playerId].CanUpgrade)
+      if (p.CanUpgrade && p.UpgradeMenuShowing)
       {
         // If contact is currently over one of the menu items, fire that
         // item's Touch.
@@ -33,17 +36,23 @@ namespace SurfaceTower.Controller
         }
 
         // Hide the menu.
-        App.Instance.Model.Players[playerId].ShowMenu(false);
+        p.ShowMenu(false);
       }
     }
 
     public void Touch(ContactData contact, int playerId)
     {
+      MainGun p = App.Instance.Model.Players[playerId];
+
       // Upgrade ready?
-      if (App.Instance.Model.Players[playerId].CanUpgrade)
+      if (p.CanUpgrade && !p.UpgradeMenuShowing)
       {
         // Make upgrade menu appear.
-        App.Instance.Model.Players[playerId].ShowMenu(true);
+        p.ShowMenu(true);
+      }
+      else if (p.UpgradeMenuShowing)
+      {
+        p.ShowMenu(false);
       }
     }
 

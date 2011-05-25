@@ -21,6 +21,7 @@ namespace SurfaceTower.Model.Gun
     protected bool exists = false;
     protected bool active = false;
     protected ITouchHandler controller;
+    protected Dictionary<Upgrade.UpgradeType, Upgrade> upgrades;
 
     #region Properties
 
@@ -102,17 +103,9 @@ namespace SurfaceTower.Model.Gun
       get { return controller; }
     }
 
-    public ICollection<Upgrade> Upgrades
+    public Dictionary<Upgrade.UpgradeType, Upgrade> Upgrades
     {
-      get
-      {
-        ICollection<Upgrade> upgrades = new List<Upgrade>(5);
-        upgrades.Add(new StrengthUpgrade(this, 2));
-        upgrades.Add(new EffectUpgrade(this, Effects.Homing, true));
-        upgrades.Add(new ShotUpgrade(this, ShotPatterns.TwoShot, false));
-        upgrades.Add(new ShotUpgrade(this, ShotPatterns.Spread, false));
-        return upgrades;
-      }
+      get { return upgrades; }
     }
 
     #endregion

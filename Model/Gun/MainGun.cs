@@ -17,6 +17,8 @@ namespace SurfaceTower.Model.Gun
     private ShotPatterns shots;
     private int strength;
     private float improvocity;
+    private Dictionary<Upgrade.UpgradeType, Upgrade> upgrades;
+    private bool menuShowing;
 
     public MainGun(int playerId)
     {
@@ -113,17 +115,14 @@ namespace SurfaceTower.Model.Gun
       set { Improvocity = value ? 1 : 0; }
     }
 
-    public ICollection<Upgrade> Upgrades
+    public Dictionary<Upgrade.UpgradeType, Upgrade> Upgrades
     {
-      get
-      {
-        ICollection<Upgrade> upgrades = new List<Upgrade>(5);
-        upgrades.Add(new StrengthUpgrade(this, 2));
-        upgrades.Add(new EffectUpgrade(this, Effects.Homing, true));
-        upgrades.Add(new ShotUpgrade(this, ShotPatterns.TwoShot, false));
-        upgrades.Add(new ShotUpgrade(this, ShotPatterns.Spread, false));
-        return upgrades;
-      }
+      get { return upgrades; }
+    }
+
+    public bool UpgradeMenuShowing
+    {
+      get { return menuShowing; }
     }
 
     #endregion
@@ -173,12 +172,36 @@ namespace SurfaceTower.Model.Gun
 
     public void ShowMenu(bool show)
     {
-      if (show && CanUpgrade)
+      if (show && !UpgradeMenuShowing && CanUpgrade)
       {
+        upgrades = new Dictionary<Upgrade.UpgradeType, Upgrade>(5);
+        upgrades.Add(Upgrade.UpgradeType.Strength, Upgrade.CreateUpgrade(Upgrade.UpgradeType.Strength, this));
+        upgrades.Add(Upgrade.UpgradeType.Homing, Upgrade.CreateUpgrade(Upgrade.UpgradeType.Homing, this));
+        upgrades.Add(Upgrade.UpgradeType.TwoShot, Upgrade.CreateUpgrade(Upgrade.UpgradeType.TwoShot, this));
+        upgrades.Add(Upgrade.UpgradeType.Spread, Upgrade.CreateUpgrade(Upgrade.UpgradeType.Spread, this));
+        
+        foreach (Upgrade upgrade in Upgrades.Values)
+        {
+          App.Instance.Controller.Touchables.Add(upgrade);
+        }
+
+        menuShowing = true;
         if (UpgradeReady != null) UpgradeReady(this, null);
       }
-      else if (!show)
+      else if (!show && UpgradeMenuShowing)
       {
+        Queue<ITouchable> iterator = new Queue<ITouchable>(App.Instance.Controller.Touchables);
+        ITouchable u;
+        while (iterator.Count > 0)
+        {
+          u = iterator.Dequeue();
+          if (u is Upgrade && ((Upgrade) u).UpgradeTarget == this)
+          {
+            App.Instance.Controller.Touchables.Remove(u);
+          }
+        }
+
+        menuShowing = false;
         if (UpgradeDone != null) UpgradeDone(this, null);
       }
     }
