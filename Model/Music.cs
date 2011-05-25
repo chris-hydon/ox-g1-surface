@@ -162,24 +162,21 @@ namespace SurfaceTower.Model
       TimeSpan time = args.Time;
       if ((time - lastBar).TotalMilliseconds > BarDuration())
       {
-        lastClick = lastBeat = lastBar = time;
-        barCount++;
-        beatCount = 0;
-        if (Bar != null) Bar(this, null);
-        if (Beat != null) Beat(this, null);
-        if (Click != null) Click(this, null);
+          if (Bar != null) Bar(this, null);
+          beatCount = -1;
+          barCount++;
+          lastBar = time;
       }
-      else if ((time - lastBeat).TotalMilliseconds > BeatDuration())
+      if ((time - lastBeat).TotalMilliseconds > BeatDuration())
       {
-        lastClick = lastBeat = time;
-        beatCount++;
-        if (Beat != null) Beat(this, null);
-        if (Click != null) Click(this, null);
+          if (Beat != null) Beat(this, null);
+          beatCount++;
+          lastBeat = time;
       }
-      else if ((time - lastClick).TotalMilliseconds > ClickDuration())
+      if ((time - lastClick).TotalMilliseconds > ClickDuration())
       {
-        lastClick = time;
-        if (Click != null) Click(this, null);
+          if (Click != null) Click(this, null);
+          lastClick = time;
       }
     }
 

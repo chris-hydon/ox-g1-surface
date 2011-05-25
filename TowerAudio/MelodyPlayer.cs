@@ -12,7 +12,7 @@ namespace SurfaceTower.TowerAudio
      * if any sounds need to be played and then, if so, decides what sounds to play.
      * Some logic is also concerned with changing the scale the music is being played in and making sure chords don't sound
      * dissonant with the current scale*/
-
+     
     public class MelodyPlayer
     {
         #region Structures and Enums
@@ -178,6 +178,7 @@ namespace SurfaceTower.TowerAudio
         {
             //set up the note modifier and update the current note
             int noteModifier = random.Next(2 * SPREAD) - 1;
+            noteModifier -= SPREAD;
             int scaleLength = scaleDecider.Length;
             currentNotePosition += noteModifier;
 
