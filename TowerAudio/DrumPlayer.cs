@@ -308,20 +308,20 @@ namespace SurfaceTower.TowerAudio
 
             //Testing
 
-            System.Console.Write("  1 - - - 2 - - - 3 - - - 4 - - -\n");
-            for (int i = 0; i < drumLoop.loopTrace.Length; i++)
-            {
-                System.Console.Out.Write(drumLoop.playing[i].ToString()[0] + " ");
-                for (int j = 0; j < drumLoop.loopTrace[i].Length; j++)
-                {
-                    if (drumLoop.loopTrace[i][j] == 0)
-                        System.Console.Out.Write("O ");
-                    else
-                        System.Console.Out.Write("X ");
-                }
-                System.Console.Out.Write((InstrumentName)i);
-                System.Console.Out.Write('\n');
-            }
+            //System.Console.Write("  1 - - - 2 - - - 3 - - - 4 - - -\n");
+            //for (int i = 0; i < drumLoop.loopTrace.Length; i++)
+            //{
+            //    System.Console.Out.Write(drumLoop.playing[i].ToString()[0] + " ");
+            //    for (int j = 0; j < drumLoop.loopTrace[i].Length; j++)
+            //    {
+            //        if (drumLoop.loopTrace[i][j] == 0)
+            //            System.Console.Out.Write("O ");
+            //        else
+            //            System.Console.Out.Write("X ");
+            //    }
+            //    System.Console.Out.Write((InstrumentName)i);
+            //    System.Console.Out.Write('\n');
+            //}
         }
 
         internal SurfaceTower.Model.BarRhythm GetNextBarRhythm()

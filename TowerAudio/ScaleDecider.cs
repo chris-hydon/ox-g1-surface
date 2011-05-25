@@ -61,11 +61,16 @@ namespace SurfaceTower.TowerAudio
         new int[]{2,1,2,2,1,3,1},
         new int[]{2,2,3,2,3},
         };
+        private int SCALE_CHANGE_HP_TRESHOLD;
         #endregion
 
         #region Variables
         private Scale currentScale;
         private ScaleType currentScaleType;
+        private bool towerUnderHP;
+        private bool inTransition;
+        private int clickCounter;
+        private Random random;
         #endregion
 
 
@@ -73,6 +78,11 @@ namespace SurfaceTower.TowerAudio
         {
             currentScale = CreateScale(note, scaleType);
             currentScaleType = scaleType;
+            towerUnderHP = false;
+            inTransition = false;
+            clickCounter = 0;
+            random = new Random();
+            SCALE_CHANGE_HP_TRESHOLD = App.Instance.Model.Tower.MaxHealth - 100;
         }
 
         #region Properties
@@ -163,7 +173,17 @@ namespace SurfaceTower.TowerAudio
 
         internal void ClickUpdate()
         {
-            
+            if ((App.Instance.Model.Tower.Health < SCALE_CHANGE_HP_TRESHOLD) && !towerUnderHP)
+            {
+                towerUnderHP = true;
+                currentScale = CreateScale((MelodyPlayer.Note)random.Next(12),ScaleType.HarMinor);
+                System.Console.WriteLine("Tower under half HP");
+            }
+            if ((App.Instance.Model.Tower.Health > SCALE_CHANGE_HP_TRESHOLD) && !towerUnderHP)
+            {
+                towerUnderHP = false;
+                currentScale = CreateScale((MelodyPlayer.Note)random.Next(12), ScaleType.Major);
+            }
         }
         #endregion
 

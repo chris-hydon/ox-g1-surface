@@ -49,6 +49,7 @@ namespace SurfaceTower.Model
     private int barCount;
     // Number of beats since the start of the bar (0..TimeSignature.number).
     private int beatCount;
+    private int clickCount;
 
     public Music()
     {
@@ -159,25 +160,27 @@ namespace SurfaceTower.Model
     /// <param name="args">UpdateArgs object containing the current TimeSpan snapshot.</param>
     public void OnUpdate(object sender, UpdateArgs args)
     {
-      TimeSpan time = args.Time;
-      if ((time - lastBar).TotalMilliseconds > BarDuration())
-      {
-          if (Bar != null) Bar(this, null);
-          beatCount = -1;
-          barCount++;
-          lastBar = time;
-      }
-      if ((time - lastBeat).TotalMilliseconds > BeatDuration())
-      {
-          if (Beat != null) Beat(this, null);
-          beatCount++;
-          lastBeat = time;
-      }
-      if ((time - lastClick).TotalMilliseconds > ClickDuration())
-      {
-          if (Click != null) Click(this, null);
-          lastClick = time;
-      }
+        TimeSpan time = args.Time;
+        if ((time - lastClick).TotalMilliseconds > ClickDuration())
+        {
+            if (Click != null) Click(this, null);
+            lastClick = time;
+            clickCount++;
+            if (clickCount % clicksPerBeat == 0)
+            {
+                if (Beat != null) Beat(this, null);
+                lastBeat = time;
+                beatCount++;
+                if (clickCount % (timeSignature.number * clicksPerBeat) == 0)
+                {
+                    if (Bar != null) Bar(this, null);
+                    lastBar = time;
+                    barCount++;
+                    clickCount = 0;
+                    beatCount = 0;
+                }
+            }
+        }
     }
 
     #endregion

@@ -43,7 +43,7 @@ namespace SurfaceTower.TowerAudio
         
         //the number of different notes in the sound pack.
         public const int SOUNDPACKSIZE = 48;
-        public const int SPREAD = 1;
+        public const int SPREAD = 3;
         public static float musicVolume = 1.0f;
         #endregion
 
