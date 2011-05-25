@@ -10,10 +10,10 @@ namespace SurfaceTower.Model.Upgrades
   {
     public enum UpgradeType
     {
-      Strength,
       Homing,
+      Spread,
+      Strength,
       TwoShot,
-      Spread
     }
 
     private int playerId;
@@ -27,7 +27,7 @@ namespace SurfaceTower.Model.Upgrades
       get { return controller; }
     }
 
-    protected IGun UpgradeTarget
+    public IGun UpgradeTarget
     {
       get { return upgradeTarget; }
     }
@@ -52,19 +52,27 @@ namespace SurfaceTower.Model.Upgrades
 
     public static Upgrade CreateUpgrade(UpgradeType type, IGun gun)
     {
+      Upgrade u;
       switch (type)
       {
         case UpgradeType.Homing:
-          return new EffectUpgrade(gun, Effects.Homing, true);
+          u = new EffectUpgrade(gun, Effects.Homing, true);
+          break;
         case UpgradeType.Spread:
-          return new ShotUpgrade(gun, ShotPatterns.Spread, false);
+          u = new ShotUpgrade(gun, ShotPatterns.Spread, false);
+          break;
         case UpgradeType.Strength:
-          return new StrengthUpgrade(gun, 2);
+          u = new StrengthUpgrade(gun, 2);
+          break;
         case UpgradeType.TwoShot:
-          return new ShotUpgrade(gun, ShotPatterns.TwoShot, false);
+          u = new ShotUpgrade(gun, ShotPatterns.TwoShot, false);
+          break;
         default:
           throw new NotImplementedException();
       }
+
+      App.Instance.Controller.Touchables.Add(u);
+      return u;
     }
 
     #endregion
