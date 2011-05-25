@@ -6,6 +6,10 @@ using Microsoft.Xna.Framework.Audio;
 
 namespace SurfaceTower.TowerAudio
 {
+
+    /*EffectPlayer class is responsible with the logic deciding when non-musical sound effects should be played
+     * i.e. player joins the game, player leaves etc*/
+
     class EffectPlayer
     {
 
@@ -63,7 +67,7 @@ namespace SurfaceTower.TowerAudio
             if (App.Instance.Model.Tower.Health < Constants.HP_LIMIT_CRITICAL_TOWER)
             {
                 audioEngine.GetCategory("Music").SetVolume(0.07f);
-                audioEngine.GetCategory("Drums").SetVolume(0.1f);
+                audioEngine.GetCategory("Drums").SetVolume(0.3f);
                 if(!heartbeatCue.IsPlaying)
                     heartbeatCue.Play();
                 exclusiveMode = true;

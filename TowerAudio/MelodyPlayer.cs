@@ -8,6 +8,11 @@ using ChordType = SurfaceTower.TowerAudio.ScaleDecider.ChordType;
 
 namespace SurfaceTower.TowerAudio
 {
+    /* MelodyPlayer holds the logic deciding what sounds should be played as part of the melody. On Click events, it checks
+     * if any sounds need to be played and then, if so, decides what sounds to play.
+     * Some logic is also concerned with changing the scale the music is being played in and making sure chords don't sound
+     * dissonant with the current scale*/
+
     public class MelodyPlayer
     {
         #region Structures and Enums
@@ -36,6 +41,7 @@ namespace SurfaceTower.TowerAudio
 
         private int progression = 1;
         
+        //the number of different notes in the sound pack.
         public const int SOUNDPACKSIZE = 48;
         public const int SPREAD = 1;
         public static float musicVolume = 1.0f;
@@ -121,6 +127,20 @@ namespace SurfaceTower.TowerAudio
             clickPosition %= music.TimeSignature.number * music.ClicksPerBeat;
         }
 
+        internal void OnBeat()
+        {
+            position = (position + 1) % 4;
+        }
+
+        internal void OnBar()
+        {
+            progression = random.Next(10);
+        }
+
+        #endregion
+
+        #region Methods
+
         private int PlayerDyingCount(int playerNumber)
         {
             int result = 0;
@@ -133,6 +153,25 @@ namespace SurfaceTower.TowerAudio
                 }
             }
             return result;
+        }
+
+        private int CorrectNote(int previousNote, int currentNote)
+        {
+            if (scaleDecider.CurrentScale.ScaleType == ScaleDecider.ScaleType.Major ||
+                scaleDecider.CurrentScale.ScaleType == ScaleDecider.ScaleType.HarMinor ||
+                scaleDecider.CurrentScale.ScaleType == ScaleDecider.ScaleType.NatMinor)
+            {
+                //if previous note was a subtonic, resolve the tension
+                if (previousNote == (int)ScaleDegree.Subtonic1 || previousNote == (int)ScaleDegree.Subtonic2)
+                    return (int)ScaleDegree.Tonic2;
+
+                //if previous note was a supertonic go towards the V note (dominant)
+                if (previousNote == (int)ScaleDegree.Supertonic1)
+                    return (int)ScaleDegree.Dominant1;
+                if (previousNote == (int)ScaleDegree.Supertonic2)
+                    return (int)ScaleDegree.Dominant2;
+            }
+            return currentNote;
         }
 
         private void UpdateCurrentNote()
@@ -156,38 +195,6 @@ namespace SurfaceTower.TowerAudio
             currentNotePosition = (currentNotePosition % scaleLength) + 1;
         }
 
-        private int CorrectNote(int previousNote, int currentNote)
-        {
-            if (scaleDecider.CurrentScale.ScaleType == ScaleDecider.ScaleType.Major ||
-                scaleDecider.CurrentScale.ScaleType == ScaleDecider.ScaleType.HarMinor ||
-                scaleDecider.CurrentScale.ScaleType == ScaleDecider.ScaleType.NatMinor)
-            {
-                //if previous note was a subtonic, resolve the tension
-                if (previousNote == (int)ScaleDegree.Subtonic1 || previousNote == (int)ScaleDegree.Subtonic2)
-                    return (int) ScaleDegree.Tonic2;
-
-                //if previous note was a supertonic go towards the V note (dominant)
-                if (previousNote == (int) ScaleDegree.Supertonic1)
-                    return (int)ScaleDegree.Dominant1;
-                if (previousNote == (int)ScaleDegree.Supertonic2)
-                    return (int)ScaleDegree.Dominant2;
-            }
-            return currentNote;
-        }
-
-        internal void OnBeat()
-        {
-            position = (position + 1) % 4;
-        }
-
-        internal void OnBar()
-        {
-            progression = random.Next(10);
-        }
-
-        #endregion
-
-        #region Methods
         #endregion
     }
 }

@@ -7,6 +7,9 @@ using Microsoft.Xna.Framework.Audio;
 
 namespace SurfaceTower.TowerAudio
 {
+    /* TowerAudioEngine holds all the players, listens to Click, Beat, Bar and other events, then passes them along to
+     * the rest of the players*/
+
     public class TowerAudioEngine
     {
         private BaseModel baseModel;
@@ -54,6 +57,7 @@ namespace SurfaceTower.TowerAudio
           }
         }
 
+        //This function gets called whenever the game restarts. All the listeners must be reinitialised.
         public void Restart()
         {
           App.Instance.Model.Music.Click += new EventHandler(OnClick);
@@ -65,6 +69,7 @@ namespace SurfaceTower.TowerAudio
         
         #region Called on Event
 
+        //Events mostly just get passed on to drumPlayer, melodyPlayer and effectPlayer
         void OnClick(object sender, EventArgs e)
         {
             audioEngine.Update();

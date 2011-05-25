@@ -8,6 +8,9 @@ using SurfaceTower.Model;
 
 namespace SurfaceTower.TowerAudio
 {
+    /*DrumPlayer is responsible with creating backing drum loops in sync with the game. On each Bar it also updates the nextBarRythm
+     * value (a one dimensional boolean array) in
+     * each of the player voices, notifying the model about what the beat feels like.*/
     public class DrumPlayer
     {
         private struct DrumLoop
@@ -21,24 +24,6 @@ namespace SurfaceTower.TowerAudio
             public bool[] playing;
             public int[][] futureLoopTrace;
             public bool[] futurePlaying;
-
-            /*
-             * 0 - HiHat
-             * 1 - Cymbal
-             * 2 - CymbalCrash
-             * 3 - Cowbell
-             * 4 - Rattle
-             * 5 - Tambourine
-             * 6 - Congo
-             * 7 - Bongo
-             * 8 - Triangle
-             * 9 - BassDrum
-             * 10 - KickDrum
-             * 11 - SnareDrum
-             * 12 - KettleDrum
-             * 13 - DistortedKick
-             * 14 - DistortedSnare
-             */
 
             public DrumLoop(int[][] loopTrace, bool[] playing, int[][] futureLoopTrace, bool[] futurePlaying)
             {
@@ -82,7 +67,7 @@ namespace SurfaceTower.TowerAudio
         #endregion
 
         #region Variables
-        public static float drumVolume = 0.5f; 
+        public static float drumVolume = 0.7f; 
         private bool drumsPlaying = true;
 
         private AudioEngine audioEngine;
@@ -142,6 +127,8 @@ namespace SurfaceTower.TowerAudio
             soundBanks = new LinkedList<SoundBank>();
             soundBanks.Add(new SoundBank(audioEngine, "Content/Drum Sound.xsb"));
 
+            //Calling onBar twice because of the needs to initialize the voices in the model and the drumLoop
+            //both of these need to know what is going to happen next bar.
             OnBar();
             OnBar();
 
@@ -160,8 +147,8 @@ namespace SurfaceTower.TowerAudio
             return result;
         }
 
-        //Probability of generating a sound on a click is b/a
         //instrumentSound determines which specific recording of the given instrument will play
+        //based on the instrument that the loop is being generated for, different logic applies
         public int[] InitializeLoop(int size, int instrumentSound, int instrument) 
         {
             int[] result = new int[size];
@@ -355,6 +342,7 @@ namespace SurfaceTower.TowerAudio
 
         internal void OnClick()
         {
+            //play the next section of the drumLoop.
             for (int i = 0; i < NO_OF_INSTRUMENTS; i++)
             {
                 if (drumLoop.loopTrace[i][drumLoop.positionPointer] != 0 && drumLoop.playing[i] && drumsPlaying)
