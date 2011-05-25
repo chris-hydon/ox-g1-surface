@@ -32,6 +32,8 @@ namespace SurfaceTower.VideoEngine
         private BloomPostprocess.BloomComponent bloom; 
         //The particle engine
         private PEngine particleEngine;
+        //The Menu Engine
+        private MenuDrawers.MenuManager menuManager;
         #endregion
         
 
@@ -55,6 +57,7 @@ namespace SurfaceTower.VideoEngine
             //Registers the bloom compenent to the list of compenents, it will be drawn AFTER the rest of the game.
             gm.Components.Add(bloom);
             particleEngine = new PEngine(this);
+            menuManager = new MenuDrawers.MenuManager();
         }
 
         public void Restart()
@@ -74,6 +77,8 @@ namespace SurfaceTower.VideoEngine
             //Particles
             spritebatch.Draw(background, new Rectangle(0,0,graphics.GraphicsDevice.Viewport.Width, graphics.GraphicsDevice.Viewport.Height), Color.White);
             particleEngine.Draw();
+
+            menuManager.Draw(spritebatch);
 
 
             //middle
