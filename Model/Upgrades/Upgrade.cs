@@ -55,8 +55,8 @@ namespace SurfaceTower.Model.Upgrades
 
     public bool InRegion(Contact target)
     {
-      // return (drawer == null) ? false : drawer.InRegion(target);
-      return false;
+      return (drawer == null) ? false : drawer.IsHit(target);
+      //return false;
     }
 
     public static Upgrade CreateUpgrade(UpgradeType type, IGun gun)

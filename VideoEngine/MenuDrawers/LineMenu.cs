@@ -63,7 +63,8 @@ namespace SurfaceTower.VideoEngine
             int i = 0;
             foreach (MenuItem t in items)
             {
-                t.Draw(sb, position+offsets[i]);
+                t.position = position + offsets[i];
+                t.Draw(sb);
                 i++;
             }
             if (animationstate!=OPEN)
@@ -78,6 +79,10 @@ namespace SurfaceTower.VideoEngine
             {
                 animationstate = CLOSING;
             }
+        }
+        public bool Finished()
+        {
+            return (animationstate == CLOSED);
         }
 
         private void updateAnimation()

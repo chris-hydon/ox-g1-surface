@@ -63,6 +63,7 @@ namespace SurfaceTower.VideoEngine
         public void Restart()
         {
             particleEngine.Reset();
+            menuManager.reset();
         }
 
         public void draw(GameTime gameTime){

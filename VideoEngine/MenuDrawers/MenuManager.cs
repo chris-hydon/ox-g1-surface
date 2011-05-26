@@ -13,23 +13,36 @@ namespace SurfaceTower.VideoEngine.MenuDrawers
     public class MenuManager
     {
         private Dictionary<int, IMenu> menus = new Dictionary<int, IMenu>();
+        private Vector2[] menuPositions = new Vector2[4];
 
         public MenuManager()
         {
             foreach (MainGun p in App.Instance.Model.Players)
             {
                p.UpgradeReady+= new EventHandler(p_UpgradeReady);
-               p.UpgradeDone += new EventHandler(p_UpgradeDone); 
+               p.UpgradeDone += new EventHandler(p_UpgradeDone);
+               menuPositions[p.PlayerId] = p.Location;
             }
+        }
+        public void reset()
+        {
+            foreach (MainGun p in App.Instance.Model.Players)
+            {
+                p.UpgradeReady += new EventHandler(p_UpgradeReady);
+                p.UpgradeDone += new EventHandler(p_UpgradeDone);
+            }
+
         }
 
         void p_UpgradeDone(object sender, EventArgs e)
         {
             MainGun m = (MainGun)sender;
-            menus.Remove(m.PlayerId);
-            //IMenu menu;
-            //menus.TryGetValue(m.PlayerId, out menu);
-            //menu.Close();
+            IMenu menu;
+            menus.TryGetValue(m.PlayerId, out menu);
+            if (menu != null)
+            {
+                menu.Close();
+            }
         }
 
         void  p_UpgradeReady(object sender, EventArgs e)
@@ -37,7 +50,7 @@ namespace SurfaceTower.VideoEngine.MenuDrawers
             MainGun p = (MainGun)sender;
             try
             {
-                menus.Add(p.PlayerId, new UGMenu(p.Location, p.PlayerId, p.Upgrades.Keys));
+                menus.Add(p.PlayerId, new UGMenu(menuPositions[p.PlayerId], p.PlayerId, p.Upgrades));
             }
             catch (ArgumentException)
             {
@@ -47,11 +60,18 @@ namespace SurfaceTower.VideoEngine.MenuDrawers
 
         public void Draw(SpriteBatch sb)
         {
-            foreach (IMenu m in menus.Values)
+            Queue<KeyValuePair<int, IMenu>> iterator = new Queue<KeyValuePair<int, IMenu>>(menus);
+            KeyValuePair<int, IMenu> im;
+            while (iterator.Count > 0)
             {
-                if (m != null)
+                im = iterator.Dequeue();
+                if (im.Value != null)
                 {
-                    m.Draw(sb);
+                    im.Value.Draw(sb);
+                    if (im.Value.Finished())
+                    {
+                        menus.Remove(im.Key);
+                    }
                 }
             }
         }

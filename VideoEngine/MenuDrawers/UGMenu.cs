@@ -28,17 +28,19 @@ namespace SurfaceTower.VideoEngine.MenuDrawers
             {Upgrade.UpgradeType.Homing, homingTex},{Upgrade.UpgradeType.Spread, spreadTex}, {Upgrade.UpgradeType.Strength, strengthTex}, {Upgrade.UpgradeType.TwoShot, twoshotTex}
         };
 
-        public UGMenu(Vector2 position, int playerID, ICollection<Upgrade.UpgradeType> availableUpgrades) : base(position, playerID)
+        public UGMenu(Vector2 position, int playerID, Dictionary<Upgrade.UpgradeType, Upgrade> availableUpgrades) : base(position, playerID)
         {
             numberofitems = availableUpgrades.Count;
             offsets = new Vector2[numberofitems];
             items = new MenuItem[numberofitems];
             int i = 0;
-            foreach (Upgrade.UpgradeType upgrade in availableUpgrades)
+            foreach (KeyValuePair<Upgrade.UpgradeType, Upgrade> upgrade in availableUpgrades)
             {
                 Texture2D t;
-                upgradeTextures.TryGetValue(upgrade,out t);
-                items[i] = new MenuItem(t);
+                upgradeTextures.TryGetValue(upgrade.Key,out t);
+                MenuItem men = new MenuItem(t, position);
+                upgrade.Value.Drawer = men;
+                items[i] = men;
                 i++;
             }
             singleItemWidth = homingTex.Width;

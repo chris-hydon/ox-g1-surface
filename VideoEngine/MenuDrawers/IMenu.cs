@@ -11,5 +11,6 @@ namespace SurfaceTower.VideoEngine.MenuDrawers
     {
         void Draw(SpriteBatch sb);
         void Close();
+        bool Finished();
     }
 }
