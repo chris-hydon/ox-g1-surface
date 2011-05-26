@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework;
 
 namespace SurfaceTower.VideoEngine.MenuDrawers
 {
-    interface IMenuItem
+    public interface IMenuItem
     {
         void Draw(SpriteBatch sb, Vector2 position);
     }

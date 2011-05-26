@@ -320,7 +320,7 @@ namespace SurfaceTower.Controller
       for (int i = 0; i < length; i++)
       {
         TouchableContactPair p = pendingPressed[i];
-        if ((p.Contact.LastSeen - p.Contact.TimeAdded).TotalMilliseconds > 50 &&
+        if ((p.Contact.LastSeen - p.Contact.TimeAdded).TotalMilliseconds > 100 &&
           p.Touchable.InRegion(p.Contact.Contact))
         {
           pressed.Add(p);

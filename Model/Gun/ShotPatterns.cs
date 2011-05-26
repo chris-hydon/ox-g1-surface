@@ -60,6 +60,11 @@ namespace SurfaceTower.Model.Gun
     {
     }
 
+    public static ShotPatterns Create(ShotPattern pattern)
+    {
+      return new ShotPatterns().Add(pattern);
+    }
+
     private ShotPatterns(ShotPattern pattern, ShotPatterns next)
     {
       me = pattern;

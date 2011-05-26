@@ -25,6 +25,7 @@ namespace SurfaceTower.Model.Gun
       this.playerId = playerId;
       strength = Constants.MAIN_TURRET_DEFAULT_POWER;
       Shots = ShotPatterns.Simple;
+      orientation = (float) ((playerId - 1) * Math.PI / 2);
     }
 
     #region Properties

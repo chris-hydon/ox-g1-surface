@@ -3,6 +3,7 @@
 using Microsoft.Surface.Core;
 using SurfaceTower.Controller;
 using SurfaceTower.Model.Gun;
+using SurfaceTower.VideoEngine.MenuDrawers;
 
 namespace SurfaceTower.Model.Upgrades
 {
@@ -19,6 +20,7 @@ namespace SurfaceTower.Model.Upgrades
     private int playerId;
     private ITouchHandler controller;
     private IGun upgradeTarget;
+    private IMenuItem drawer = null;
 
     #region Properties
 
@@ -30,6 +32,12 @@ namespace SurfaceTower.Model.Upgrades
     public IGun UpgradeTarget
     {
       get { return upgradeTarget; }
+    }
+
+    public IMenuItem Drawer
+    {
+      get { return drawer; }
+      set { drawer = value; }
     }
 
     #endregion
@@ -47,7 +55,8 @@ namespace SurfaceTower.Model.Upgrades
 
     public bool InRegion(Contact target)
     {
-        return false;
+      // return (drawer == null) ? false : drawer.InRegion(target);
+      return false;
     }
 
     public static Upgrade CreateUpgrade(UpgradeType type, IGun gun)
