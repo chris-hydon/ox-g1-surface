@@ -69,26 +69,29 @@ namespace SurfaceTower.Model
     protected void DetermineWave()
     {
       int progress = model.Progress;
-      //style can determine the style of the next wave.
       int style = random.Next(100) + progress;
+      int wavesAdded = 0;
 
-      //The next wave depends on the style, though there are caps based on progress to ensure that waves
-      //which are too difficult are not encountered too early.
-      if (style < 50 || progress < 2)
+      while (random.Next(1, progress+1) > wavesAdded * 20)
       {
-        CornersWave(EnemyType.Spiral, true);
-      }
-      else if (style < 60 || progress < 10)
-      {
-        CornersWave(EnemyType.Spiral, true);
-      }
-      else if (style < 70 || progress < 15)
-      {
-        CornersWave(EnemyType.Spiral, true);
-      }
-      else
-      {
-        CornersWave(EnemyType.Spiral, true);
+        bool pSpec = random.Next(progress>100 ? 100 : progress)<60;
+        switch (random.Next(12))
+        {
+          case 0: SimpleWave(false, pSpec); break;
+          case 1: SimpleWave(true, pSpec); break;
+          case 2: CornersWave(EnemyType.Regular, pSpec); break;
+          case 3: CornersWave(EnemyType.Spiral, pSpec); break;
+          case 4: CornersWave(EnemyType.Wave, pSpec); break;
+          //RandomWaves are harder than other waves, and so increment wavesAdded by 2.
+          case 5: RandomWave(true, pSpec); wavesAdded++; break;
+          case 6: SidesWave(EnemyType.Regular, pSpec); break;
+          case 7: SidesWave(EnemyType.Wave, pSpec); break;
+          case 8: SidesWave(EnemyType.Spiral, pSpec); break;
+          case 9: CirclesWave(EnemyType.Regular, pSpec); break;
+          case 10: CirclesWave(EnemyType.Spiral, pSpec); break;
+          case 11: CirclesWave(EnemyType.Wave, pSpec); break;
+        }
+        wavesAdded++;
       }
     }
 
@@ -250,11 +253,90 @@ namespace SurfaceTower.Model
       waves.Enqueue(wave);
     }
 
-    //Shuffle randomly reorders the target array.
-    void shuffle(Vector2[] target)
+
+    /// <summary>
+    /// Queues up a wave of enemies per player on the sides of the screen.
+    /// </summary>
+    /// <param name="enemyType"> The type of enemy to spawn.</param>
+    /// <param name="playerSpecifc">If true, each spawn can only be damaged by the player who shares a
+    /// colour with it.</param>
+    void SidesWave(EnemyType enemyType, bool playerSpecifc)
     {
-      List<Vector2> temp = new List<Vector2>(target);
-      for (int index = 0; index < target.Length; index++)
+      ICollection<IGenerator> wave = new LinkedList<IGenerator>();
+      SideGenerator g;
+      int[] sides = { 0, 1, 2, 3 };
+      shuffle(sides);
+      foreach (MainGun p in model.ActivePlayers)
+      {
+        g = new SideGenerator(sides[p.PlayerId], 1);
+        g.EnemyHealth = 1 + LinearDifficulty(5, 0);
+        g.EnemySize = 20;
+        g.EnemySizeVariance = LinearDifficulty(5, 10);
+        g.EnemyType = enemyType;
+        g.Frequency = model.Music.ClicksPerBeat / 2;
+        if (playerSpecifc)
+        {
+          g.PlayerSpecific = true;
+          g.TargetPlayer = p.PlayerId;
+        }
+        wave.Add(g);
+      }
+      waves.Enqueue(wave);
+    }
+
+    /// <summary>
+    /// Queues up a wave of enemies per player on a circle around the screen. If not player specific, there
+    /// will be 1 CircleGenerator with NumberOfPlayers groups, if it is player specific, there will be one
+    /// group from four separate CircleGenerators, with enemies of different players being different sizes in the
+    /// same positions.
+    /// </summary>
+    /// <param name="enemyType"> The type of enemy to spawn.</param>
+    /// <param name="playerSpecifc">If true, each spawn can only be damaged by the player who shares a
+    /// colour with it.</param>
+    void CirclesWave(EnemyType enemyType, bool playerSpecifc)
+    {
+      ICollection<IGenerator> wave = new LinkedList<IGenerator>();
+      CircleGenerator g;
+      bool made = false;
+      foreach (MainGun p in model.ActivePlayers)
+      {
+        if (!playerSpecifc)
+        {
+          if(!made)
+          {
+          made = true;
+          g = new CircleGenerator(model.NumberOfPlayers);
+          g.EnemyHealth = 1 + LinearDifficulty(5, 0);
+          g.EnemySize = 20;
+          g.EnemySizeVariance = LinearDifficulty(5, 10);
+          g.EnemyType = enemyType;
+          g.Frequency = model.Music.ClicksPerBeat / 2;
+          wave.Add(g);
+          }
+        }
+        else
+        {
+          g = new CircleGenerator(1);
+          g.EnemyHealth = 1 + LinearDifficulty(5, 0);
+          g.EnemySize = 15 + 2*p.PlayerId;
+          g.EnemySizeVariance = LinearDifficulty(5, 10);
+          g.EnemyType = enemyType;
+          g.Frequency = model.Music.ClicksPerBeat / 2;
+          g.PlayerSpecific = true;
+          g.TargetPlayer = p.PlayerId;
+          wave.Add(g);
+        }
+      }
+      waves.Enqueue(wave);
+    }
+
+    #endregion
+
+    //Shuffle randomly reorders the target array.
+    void shuffle<T>(IList<T> target)
+    {
+      List<T> temp = new List<T>(target);
+      for (int index = 0; index < target.Count; index++)
       {
         int r = random.Next(temp.Count);
         target[index] = temp[r];
@@ -263,6 +345,6 @@ namespace SurfaceTower.Model
 
 
     }
-    #endregion
+    
   }
 }
