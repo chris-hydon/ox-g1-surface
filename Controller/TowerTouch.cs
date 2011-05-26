@@ -3,13 +3,12 @@
 using Microsoft.Surface.Core;
 using SurfaceTower.Model;
 using SurfaceTower.Model.Gun;
+using SurfaceTower.Model.Upgrades;
 
 namespace SurfaceTower.Controller
 {
   public class TowerTouch : ITouchHandler
   {
-    private readonly ICollection<ITouchable> menuOptions = new List<ITouchable>();
-
     #region Methods
 
     public void Press(ContactData contact, int playerId)
@@ -26,9 +25,9 @@ namespace SurfaceTower.Controller
       {
         // If contact is currently over one of the menu items, fire that
         // item's Touch.
-        foreach (ITouchable option in menuOptions)
+        foreach (ITouchable option in App.Instance.Controller.Touchables)
         {
-          if (option.InRegion(contact.Contact))
+          if (option is Upgrade && ((Upgrade) option).UpgradeTarget == p && option.InRegion(contact.Contact))
           {
             option.Controller.Touch(contact, playerId);
             break;

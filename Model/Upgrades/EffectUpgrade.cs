@@ -16,6 +16,7 @@ namespace SurfaceTower.Model.Upgrades
 
     public override void Apply()
     {
+      ShotPatterns upgraded = new ShotPatterns();
       foreach (ShotPattern shot in UpgradeTarget.Shots)
       {
         if (keepExistingEffects)
@@ -26,7 +27,9 @@ namespace SurfaceTower.Model.Upgrades
         {
           shot.Effects = newEffects;
         }
+        upgraded = upgraded.Add(shot);
       }
+      UpgradeTarget.Shots = upgraded;
     }
   }
 }
