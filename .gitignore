@@ -1,6 +1,7 @@
 bin
 Content/bin
 obj
+TestResults
 *.user
 *.suo
 *.cachefile

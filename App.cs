@@ -1,6 +1,9 @@
 ﻿using System;
-using Microsoft.Xna.Framework;
+
 using Microsoft.Surface.Core;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 
 using SurfaceTower.Model;
 using SurfaceTower.VideoEngine;
@@ -9,10 +12,22 @@ using SurfaceTower.TowerAudio;
 
 namespace SurfaceTower
 {
-  public class App : SurfaceApp
+  public interface IApp
+  {
+    BaseModel Model { get; }
+    ContactParser Controller { get; }
+    bool ApplicationActivated { get; }
+    GraphicsDevice GraphicsDevice { get; }
+    ContentManager Content { get; }
+
+    bool onScreen(Vector2 pos);
+    void Restart();
+  }
+
+  public class App : SurfaceApp, IApp
   {
     //For static access - should not be changed.
-    public static App Instance;
+    public static IApp Instance;
 
     //Holds the game state and logic
     protected BaseModel gameModel;
@@ -61,7 +76,7 @@ namespace SurfaceTower
       Model.Restart();
       gameView.Restart();  
       towerAudioEngine.Restart();
-      contactParser.Restart();
+      Controller.Restart();
     }
 
     public bool onScreen(Vector2 pos)

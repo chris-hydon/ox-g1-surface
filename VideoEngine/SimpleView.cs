@@ -41,7 +41,7 @@ namespace SurfaceTower.VideoEngine
         {
             this.baseModel = baseModel;
             this.graphics = graphics;
-            this.gm = App.Instance;
+            this.gm = (App) App.Instance;
             this.content = content;
             //initializes the sprite batch
             spritebatch = new SpriteBatch(graphics.GraphicsDevice);

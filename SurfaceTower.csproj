@@ -157,7 +157,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="SurfaceApp.cs" />
-    <Compile Include="Tests\Model\BulletTest.cs" />
     <Compile Include="VideoEngine\BloomComponent.cs" />
     <Compile Include="VideoEngine\MenuDrawers\IMenu.cs" />
     <Compile Include="VideoEngine\MenuDrawers\IMenuItem.cs" />
