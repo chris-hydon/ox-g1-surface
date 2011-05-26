@@ -66,8 +66,19 @@ namespace SurfaceTower.VideoEngine
                 t.position = position + offsets[i];
                 t.Draw(sb);
                 i++;
+                if (animationstate == CLOSING)
+                {
+                    if (t.alpha > 15)
+                    {
+                        t.alpha -= 15;
+                    }
+                    else
+                    {
+                        t.alpha = 0;
+                    }
+                }
             }
-            if (animationstate!=OPEN)
+            if (animationstate != OPEN)
             {
                 updateAnimation();
             }

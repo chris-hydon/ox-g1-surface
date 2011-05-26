@@ -14,16 +14,20 @@ namespace SurfaceTower.VideoEngine.MenuDrawers
     {
         private Texture2D menuImage;
         public Vector2 position;
+        public int alpha;
 
         public MenuItem(Texture2D menuImage, Vector2 position)
         {
             this.position = position;
             this.menuImage = menuImage;
+            this.alpha = 255;
         }
 
         public void Draw(SpriteBatch sb)
         {
-            sb.Draw(menuImage, position, null, Color.White, 0f, new Vector2(menuImage.Height / 2, menuImage.Width / 2), 1f, SpriteEffects.None, 0);
+            Color c = Color.White;
+            c.A = (byte)alpha;
+            sb.Draw(menuImage, position, null, c, 0f, new Vector2(menuImage.Height / 2, menuImage.Width / 2), 1f, SpriteEffects.None, 0);
         }
 
         public bool IsHit(Contact c)
