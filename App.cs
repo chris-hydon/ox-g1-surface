@@ -48,7 +48,7 @@ namespace SurfaceTower
 
       App.Instance = this;
       //Initialize the game model
-      gameModel = new TestingModel();
+      gameModel = new GameModel();
       //Initialize AudioEngine
       towerAudioEngine = new TowerAudioEngine(gameModel);
       //Initialize the UI component
