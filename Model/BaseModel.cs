@@ -58,7 +58,10 @@ namespace SurfaceTower.Model
 
     }
 
-
+    public Spawner Spawner
+    {
+      get { return spawner; }
+    }
     public Queue<EnemyTimeWho> DeathRow
     {
       get { return deathRow; }

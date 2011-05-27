@@ -3,6 +3,8 @@
 using Microsoft.Xna.Framework;
 using SurfaceTower.Model.Shape;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
+using SurfaceTower.Model.Generator;
 
 namespace SurfaceTower.Model
 {
@@ -53,6 +55,38 @@ namespace SurfaceTower.Model
         Vector2 direction = (Location - App.Instance.Model.Tower.Location);
         direction.Normalize();
         Location -=  direction * 20;
+        #region Minions
+        ICollection<IGenerator> minionsWave = new LinkedList<IGenerator>();
+        Vector2 parallel = Vector2.Transform(direction, Matrix.CreateRotationZ((float)Math.PI/2));
+        PointGenerator left = new PointGenerator(Location + (60*parallel), 1);
+        left.EnemyType = Generator.EnemyType.Regular;
+        left.Frequency = 1;
+        left.EnemyHealth = 20;
+        left.EnemySize = 20;
+        minionsWave.Add(left);
+
+        PointGenerator centreright = new PointGenerator(Location + (30 * parallel), 1);
+        centreright.EnemyType = Generator.EnemyType.Regular;
+        centreright.Frequency = 1;
+        centreright.EnemyHealth = 20;
+        centreright.EnemySize = 20;
+        minionsWave.Add(centreright);
+
+        PointGenerator centreleft = new PointGenerator(Location, 1);
+        centreleft.EnemyType = Generator.EnemyType.Regular;
+        centreleft.Frequency = 1;
+        centreleft.EnemyHealth = 20;
+        centreleft.EnemySize = 20;
+        minionsWave.Add(centreleft);
+
+        PointGenerator right = new PointGenerator(Location - (30*parallel), 1);
+        right.EnemyType = Generator.EnemyType.Regular;
+        right.Frequency = 1;
+        right.EnemyHealth = 20;
+        right.EnemySize = 20;
+        minionsWave.Add(right);
+        App.Instance.Model.Spawner.RequestWave(minionsWave);
+        #endregion
       }
       
       //Set direction of velocity based on the region the invader is in.
@@ -83,7 +117,6 @@ namespace SurfaceTower.Model
       //Set velocity
       Velocity = speed * dir;
       base.Move();
-      System.Console.WriteLine(Location);
     }
 
 

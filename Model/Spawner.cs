@@ -33,10 +33,13 @@ namespace SurfaceTower.Model
         DetermineWave();
       }
 
-      ICollection<IGenerator> wave = waves.Dequeue();
-      foreach (IGenerator g in wave)
+      while (waves.Count > 0)
       {
-        generators.Add(g);
+        ICollection<IGenerator> wave = waves.Dequeue();
+        foreach (IGenerator g in wave)
+        {
+          generators.Add(g);
+        }
       }
     }
 
@@ -72,7 +75,7 @@ namespace SurfaceTower.Model
       int style = random.Next(100) + progress;
       int wavesAdded = 0;
       //if progress reaches 100, spawn the Invader boss
-      if (progress == 4)
+      if (progress == 1)
       {
         BossWave(BossGenerator.Boss.Invader);
       }
@@ -138,7 +141,7 @@ namespace SurfaceTower.Model
         g.EnemySize = 20;
         g.EnemySizeVariance = LinearDifficulty(5, 10);
         g.EnemyType = EnemyType.Regular;
-        g.Frequency = model.Music.ClicksPerBeat / 2;
+        g.Frequency = model.Music.ClicksPerBeat;
         if (playerSpecifc)
         {
           g.PlayerSpecific = true;
@@ -209,7 +212,7 @@ namespace SurfaceTower.Model
         g.EnemyHealth = 1 + LinearDifficulty(5, 0);
         g.EnemySize = 20;
         g.EnemySizeVariance = LinearDifficulty(5, 10);
-        g.Frequency = model.Music.ClicksPerBeat / 2;
+        g.Frequency = model.Music.ClicksPerBeat;
         if (playerSpecifc)
         {
           g.PlayerSpecific = true;
@@ -244,7 +247,7 @@ namespace SurfaceTower.Model
         g.EnemySize = 20;
         g.EnemySizeVariance = LinearDifficulty(5, 10);
         g.EnemyType = enemyType;
-        g.Frequency = model.Music.ClicksPerBeat / 2;
+        g.Frequency = model.Music.ClicksPerBeat;
         if (playerSpecifc)
         {
           g.PlayerSpecific = true;
@@ -275,7 +278,7 @@ namespace SurfaceTower.Model
         g.EnemySize = 20;
         g.EnemySizeVariance = LinearDifficulty(5, 10);
         g.EnemyType = enemyType;
-        g.Frequency = model.Music.ClicksPerBeat / 2;
+        g.Frequency = model.Music.ClicksPerBeat;
         if (playerSpecifc)
         {
           g.PlayerSpecific = true;
@@ -323,7 +326,7 @@ namespace SurfaceTower.Model
           g.EnemySize = 15 + 2*p.PlayerId;
           g.EnemySizeVariance = LinearDifficulty(5, 10);
           g.EnemyType = enemyType;
-          g.Frequency = model.Music.ClicksPerBeat / 2;
+          g.Frequency = model.Music.ClicksPerBeat;
           g.PlayerSpecific = true;
           g.TargetPlayer = p.PlayerId;
           wave.Add(g);
@@ -342,6 +345,19 @@ namespace SurfaceTower.Model
       BossGenerator g = new BossGenerator(bossType, new Vector2(200, 200));
       wave.Add(g);
       waves.Enqueue(wave);
+    }
+
+    /// <summary>
+    /// Adds the requested wave to the queue waiting to be used activated next Bar.
+    /// </summary>
+    /// <param name="request"> The desired wave.</param>
+    public void RequestWave(ICollection<IGenerator> request)
+    {
+      ICollection<IGenerator> wave = new LinkedList<IGenerator>(request);
+      foreach (IGenerator g in wave)
+      {
+        generators.Add(g);
+      }
     }
 
     #endregion
