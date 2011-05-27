@@ -72,26 +72,26 @@ namespace SurfaceTower.Model
       int style = random.Next(100) + progress;
       int wavesAdded = 0;
       //if progress reaches 100, spawn the Invader boss
-      if (progress == 100)
+      if (progress == 4)
       {
         BossWave(BossGenerator.Boss.Invader);
       }
-      while (random.Next(1, progress+1) > wavesAdded * 20)
+      while (random.Next(1, progress+2) > wavesAdded * 20)
       {
         bool pSpec = random.Next(progress>100 ? 100 : progress)>40;
-        switch (random.Next(12))
+        switch (random.Next(11))
         {
-          case 0: SimpleWave(false, pSpec); break;
+          case 0: SimpleWave(false, pSpec);   break;
           case 1: SimpleWave(true, pSpec); break;
           case 2: CornersWave(EnemyType.Regular, pSpec); break;
           case 3: CornersWave(EnemyType.Spiral, pSpec); break;
           case 4: CornersWave(EnemyType.Wave, pSpec); break;
-          case 6: SidesWave(EnemyType.Regular, pSpec); break;
-          case 7: SidesWave(EnemyType.Wave, pSpec); break;
-          case 8: SidesWave(EnemyType.Spiral, pSpec); break;
-          case 9: CirclesWave(EnemyType.Regular, pSpec); break;
-          case 10: CirclesWave(EnemyType.Spiral, pSpec); break;
-          case 11: CirclesWave(EnemyType.Wave, pSpec); break;
+          case 5: SidesWave(EnemyType.Regular, pSpec); break;
+          case 6: SidesWave(EnemyType.Wave, pSpec); break;
+          case 7: SidesWave(EnemyType.Spiral, pSpec); break;
+          case 8: CirclesWave(EnemyType.Regular, pSpec); break;
+          case 9: CirclesWave(EnemyType.Spiral, pSpec); break;
+          case 10: CirclesWave(EnemyType.Wave, pSpec); break;
         }
         wavesAdded++;
       }
@@ -339,7 +339,7 @@ namespace SurfaceTower.Model
     void BossWave(BossGenerator.Boss bossType)
     {
       ICollection<IGenerator> wave = new LinkedList<IGenerator>();
-      BossGenerator g = new BossGenerator(bossType, new Vector2(-70, -70));
+      BossGenerator g = new BossGenerator(bossType, new Vector2(20, 20));
       wave.Add(g);
       waves.Enqueue(wave);
     }

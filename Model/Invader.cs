@@ -9,7 +9,7 @@ namespace SurfaceTower.Model
   public class Invader : Enemy
   {
     protected int region = 0000;
-    protected float speed = 5f;
+    protected float speed = 50f;
     #region Properties
     new public int Player
     {
@@ -72,9 +72,9 @@ namespace SurfaceTower.Model
       {
         //region is a corner (or is the centre, but invader would be destroyed were it within the tower)
         //so move in a circular motion clockwise, to reach the next side region
-        dir = App.Instance.Model.Tower.Location - Location;
+        dir = Location - App.Instance.Model.Tower.Location;
         dir.Normalize();
-        Vector2.Transform(dir, Matrix.CreateRotationZ((float)(Math.PI / 2)));
+        dir = Vector2.Transform(dir, Matrix.CreateRotationZ((float)(Math.PI / 2)));
       }
       //Set velocity
       Velocity = speed * dir;
