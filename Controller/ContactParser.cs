@@ -74,6 +74,18 @@ namespace SurfaceTower.Controller
       touchables.Add(App.Instance.Model.Tower);
     }
 
+    public Contact GetContactByPlayerId(int playerId)
+    {
+      foreach (ContactData d in ActiveContacts)
+      {
+        if (d.Contact.Id == playerTags[playerId])
+        {
+          return d.Contact;
+        }
+      }
+      return null;
+    }
+
     protected void OnContactAdded(object sender, ContactData e)
     {
       if (e.Contact.IsTagRecognized)

@@ -44,6 +44,11 @@ namespace SurfaceTower.Model.Gun
       this.posMod = posMod;
       this.effects = effects;
     }
+
+    public ShotPattern Clone()
+    {
+      return new ShotPattern(orientMod, posMod, effects);
+    }
   }
 
   /// <summary>
@@ -76,6 +81,16 @@ namespace SurfaceTower.Model.Gun
       return new ShotPatterns(pattern, this);
     }
 
+    public ShotPatterns Combine(ShotPatterns other)
+    {
+      ShotPatterns ret = this;
+      foreach (ShotPattern p in other)
+      {
+        ret.Add(p);
+      }
+      return ret;
+    }
+
     public IEnumerator<ShotPattern> GetEnumerator()
     {
       return new ShotPatternEnum(this);
@@ -100,12 +115,12 @@ namespace SurfaceTower.Model.Gun
 
       public ShotPattern Current
       {
-        get { return current.me; }
+        get { return current.me.Clone(); }
       }
 
       object IEnumerator.Current
       {
-        get { return current.me; }
+        get { return current.me.Clone(); }
       }
 
       public bool MoveNext()

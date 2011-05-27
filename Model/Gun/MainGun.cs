@@ -181,11 +181,6 @@ namespace SurfaceTower.Model.Gun
         upgrades.Add(Upgrade.UpgradeType.TwoShot, Upgrade.CreateUpgrade(Upgrade.UpgradeType.TwoShot, this));
         upgrades.Add(Upgrade.UpgradeType.Spread, Upgrade.CreateUpgrade(Upgrade.UpgradeType.Spread, this));
         
-        foreach (Upgrade upgrade in Upgrades.Values)
-        {
-          App.Instance.Controller.Touchables.Add(upgrade);
-        }
-
         menuShowing = true;
         if (UpgradeReady != null) UpgradeReady(this, null);
       }
