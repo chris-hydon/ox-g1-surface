@@ -339,7 +339,7 @@ namespace SurfaceTower.Model
     void BossWave(BossGenerator.Boss bossType)
     {
       ICollection<IGenerator> wave = new LinkedList<IGenerator>();
-      BossGenerator g = new BossGenerator(bossType, new Vector2(20, 20));
+      BossGenerator g = new BossGenerator(bossType, new Vector2(200, 200));
       wave.Add(g);
       waves.Enqueue(wave);
     }
