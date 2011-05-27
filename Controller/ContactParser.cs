@@ -33,6 +33,7 @@ namespace SurfaceTower.Controller
   public class ContactParser
   {
     private readonly IList<ContactData> activeContacts = new List<ContactData>();
+    private Queue<ContactData> leavingTags = new Queue<ContactData>();
     private readonly int[] playerTags = new int[] {0, 0, 0, 0};
     private IList<ITouchable> touchables = new List<ITouchable>();
     private readonly IList<TouchableContactPair> pressed = new List<TouchableContactPair>();
@@ -288,9 +289,59 @@ namespace SurfaceTower.Controller
       return -1;
     }
 
+    public Contact FindReturned(ReadOnlyContactCollection contacts, ContactData gone)
+    {
+      foreach (Contact c in contacts)
+      {
+        if (!c.IsTagRecognized) break;
+
+        for (int i = 0; i < 4; i++)
+        {
+          if (playerTags[i] == gone.Contact.Id)
+          {
+            if (Vector2.Distance(new Vector2(c.CenterX, c.CenterY), gone.LastLocation) < 20)
+            {
+              playerTags[i] = c.Id;
+              return c;
+            }
+            return null;
+          }
+        }
+      }
+      return null;
+    }
+
     public void ProcessContacts(GameTime gameTime, ReadOnlyContactCollection contacts)
     {
       TimeSpan now = gameTime.TotalRealTime;
+
+      // First process tags that are leaving.
+      Queue<ContactData> q = leavingTags;
+      ContactData current;
+      leavingTags = new Queue<ContactData>();
+      while (q.Count > 0)
+      {
+        current = q.Dequeue();
+        if (current.LastSeen + new TimeSpan(0, 0, 0, 1) < now)
+        {
+          if (ContactRemoved != null) ContactRemoved(this, current);
+        }
+        else
+        {
+          Contact returned = FindReturned(contacts, current);
+          if (returned != null)
+          {
+            current.Update(returned, now);
+            activeContacts.Add(current);
+          }
+          else
+          {
+            leavingTags.Enqueue(current);
+          }
+        }
+      }
+
+      // Now get current contacts.
       foreach (Contact c in contacts)
       {
         bool found = false;
@@ -323,7 +374,14 @@ namespace SurfaceTower.Controller
           activeContacts.RemoveAt(i);
           i--;
           length--;
-          if (ContactRemoved != null) ContactRemoved(this, d);
+          if (d.Contact.IsTagRecognized)
+          {
+            leavingTags.Enqueue(d);
+          }
+          else
+          {
+            if (ContactRemoved != null) ContactRemoved(this, d);
+          }
         }
       }
 

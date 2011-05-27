@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Surface.Core;
+using Microsoft.Xna.Framework;
 
 namespace SurfaceTower.Controller
 {
@@ -12,6 +13,7 @@ namespace SurfaceTower.Controller
     private TimeSpan lastSeen;
     private TimeSpan timeAdded;
     private float initialOrientation;
+    private Vector2 lastLocation;
 
     #region Properties
 
@@ -35,6 +37,11 @@ namespace SurfaceTower.Controller
       get { return lastSeen; }
     }
 
+    public Vector2 LastLocation
+    {
+      get { return lastLocation; }
+    }
+
     #endregion
 
     #region Methods
@@ -45,12 +52,14 @@ namespace SurfaceTower.Controller
       this.lastSeen = time;
       this.timeAdded = time;
       this.initialOrientation = contact.Orientation;
+      this.lastLocation = new Vector2(contact.CenterX, contact.CenterY);
     }
 
     public void Update(Contact contact, TimeSpan time)
     {
       this.contact = contact;
       this.lastSeen = time;
+      this.lastLocation = new Vector2(contact.CenterX, contact.CenterY);
       if (ContactUpdated != null) ContactUpdated(this, null);
     }
 
