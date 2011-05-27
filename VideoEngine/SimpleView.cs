@@ -27,7 +27,7 @@ namespace SurfaceTower.VideoEngine
         //Draws the sprites
         public SpriteBatch spritebatch { get; set; }
         //Sprites
-        private Texture2D enemy, bullet, middle, gun, background;
+        private Texture2D enemy, bullet, middle, gun, background, boss;
         //Postprocessing to apply bloom
         private BloomPostprocess.BloomComponent bloom; 
         //The particle engine
@@ -46,10 +46,11 @@ namespace SurfaceTower.VideoEngine
             //initializes the sprite batch
             spritebatch = new SpriteBatch(graphics.GraphicsDevice);
             //Loads the sprites
-            enemy = content.Load<Texture2D>("enemy");
+            enemy = content.Load<Texture2D>("Drone");
             bullet = content.Load<Texture2D>("bullet");
             middle = content.Load<Texture2D>("centre");
             gun = content.Load<Texture2D>("turret");
+            boss = content.Load<Texture2D>("spaceinvader");
             background = content.Load<Texture2D>("bg");
             graphics.GraphicsDevice.Clear(Color.Black);
             //Initializes the bloom postprocessing with the device to display on
@@ -106,8 +107,18 @@ namespace SurfaceTower.VideoEngine
             //Living
             foreach (Enemy e in baseModel.Living)
             {
+                
                 Rectangle rect = new Rectangle((int)e.Location.X, (int)e.Location.Y, (int)e.Shape.Width, (int)e.Shape.Height);
-                spritebatch.Draw(enemy, rect, new Rectangle(0, 0, enemy.Width, enemy.Height), e.Colour, e.Orientation, new Vector2(enemy.Width / 2, enemy.Height / 2), SpriteEffects.None, 1);
+                if (!(e is Invader))
+                {
+                    spritebatch.Draw(enemy, rect, new Rectangle(0, 0, enemy.Width, enemy.Height), e.Colour, e.Orientation, new Vector2(enemy.Width / 2, enemy.Height / 2), SpriteEffects.None, 1);
+                }
+                else
+                {
+                    Color cc = Color.Tomato;
+                    cc.A = 200;
+                    spritebatch.Draw(boss, rect, new Rectangle(0, 0, boss.Width, boss.Height), cc, e.Orientation, new Vector2(boss.Width / 2, boss.Height / 2), SpriteEffects.None, 1);
+                }
             }
             //dying
              foreach (EnemyTimeWho et in baseModel.Dying){

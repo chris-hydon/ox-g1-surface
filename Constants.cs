@@ -4,7 +4,7 @@ namespace SurfaceTower
 {
   public static class Constants
   {
-    public const float BASE_IMPROVOCITY = 1.00f; // Base improvocity per kill, multiplied by enemy size.
+    public const float BASE_IMPROVOCITY = 0.001f; // Base improvocity per kill, multiplied by enemy size.
     public const float BULLET_HOMING_TURNSPEED = 1; // Perpendicular acceleration relative to velocity
     public const int BULLET_LIFE = 20; // Seconds
     public const int BULLET_VELOCITY = 200; // Metres per second

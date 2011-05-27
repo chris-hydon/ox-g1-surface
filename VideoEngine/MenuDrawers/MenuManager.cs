@@ -13,6 +13,7 @@ namespace SurfaceTower.VideoEngine.MenuDrawers
     public class MenuManager
     {
         private Dictionary<int, IMenu> menus = new Dictionary<int, IMenu>();
+        private ICollection<ImprovMeter> meters = new List<ImprovMeter>();
         private Vector2[] menuPositions = new Vector2[4];
 
         public MenuManager()
@@ -22,8 +23,11 @@ namespace SurfaceTower.VideoEngine.MenuDrawers
                p.UpgradeReady+= new EventHandler(p_UpgradeReady);
                p.UpgradeDone += new EventHandler(p_UpgradeDone);
                menuPositions[p.PlayerId] = p.Location;
+               meters.Add(new ImprovMeter(p.PlayerId));
             }
+           
         }
+
         public void reset()
         {
             foreach (MainGun p in App.Instance.Model.Players)
@@ -73,6 +77,10 @@ namespace SurfaceTower.VideoEngine.MenuDrawers
                         menus.Remove(im.Key);
                     }
                 }
+            }
+            foreach (ImprovMeter imp in meters)
+            {
+                imp.Draw(sb);
             }
         }
 
