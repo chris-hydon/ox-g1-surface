@@ -8,7 +8,7 @@ namespace SurfaceTower.Model.Generator
 {
   public class BossGenerator : IGenerator
   {
-    public enum Boss {}
+    public enum Boss {Invader}
     bool done;
     Boss target;
     Vector2 pos;
@@ -35,6 +35,8 @@ namespace SurfaceTower.Model.Generator
     {
       switch (target)
       {
+          //If the target is implemented, spawn it and then make done true.
+        case Boss.Invader: App.Instance.Model.Spawn(new Invader(pos)); done = true;  break;
           //If the target is not implemented here, make done true to remove the generator.
         default : done = true;
           break;

@@ -71,10 +71,14 @@ namespace SurfaceTower.Model
       int progress = model.Progress;
       int style = random.Next(100) + progress;
       int wavesAdded = 0;
-
+      //if progress reaches 100, spawn the Invader boss
+      if (progress == 100)
+      {
+        BossWave(BossGenerator.Boss.Invader);
+      }
       while (random.Next(1, progress+1) > wavesAdded * 20)
       {
-        bool pSpec = random.Next(progress>100 ? 100 : progress)<60;
+        bool pSpec = random.Next(progress>100 ? 100 : progress)>40;
         switch (random.Next(12))
         {
           case 0: SimpleWave(false, pSpec); break;
@@ -82,8 +86,6 @@ namespace SurfaceTower.Model
           case 2: CornersWave(EnemyType.Regular, pSpec); break;
           case 3: CornersWave(EnemyType.Spiral, pSpec); break;
           case 4: CornersWave(EnemyType.Wave, pSpec); break;
-          //RandomWaves are harder than other waves, and so increment wavesAdded by 2.
-          case 5: RandomWave(true, pSpec); wavesAdded++; break;
           case 6: SidesWave(EnemyType.Regular, pSpec); break;
           case 7: SidesWave(EnemyType.Wave, pSpec); break;
           case 8: SidesWave(EnemyType.Spiral, pSpec); break;
@@ -330,6 +332,18 @@ namespace SurfaceTower.Model
       waves.Enqueue(wave);
     }
 
+    /// <summary>
+    /// Spawns a Boss enemy just off screen in the top-left corner.
+    /// </summary>
+    /// <param name="bossType"> The type of boss enemy to spawn.</param>
+    void BossWave(BossGenerator.Boss bossType)
+    {
+      ICollection<IGenerator> wave = new LinkedList<IGenerator>();
+      BossGenerator g = new BossGenerator(bossType, new Vector2(-70, -70));
+      wave.Add(g);
+      waves.Enqueue(wave);
+    }
+
     #endregion
 
     //Shuffle randomly reorders the target array.
@@ -342,9 +356,6 @@ namespace SurfaceTower.Model
         target[index] = temp[r];
         temp.RemoveAt(r);
       }
-
-
     }
-    
   }
 }
