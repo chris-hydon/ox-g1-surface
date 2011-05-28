@@ -31,14 +31,14 @@ namespace SurfaceTower.VideoEngine.MenuDrawers
                 if (improvosity < 0.5f)
                 {
                     sb.Draw(semicirc, new Vector2(tokenPos.X, tokenPos.Y), null, Color.HotPink, 0, new Vector2(0, semicirc.Height / 2), 1.02f*tokenPos.Bounds.Width / semicirc.Width, SpriteEffects.None, 0);
-                    sb.Draw(semicirc, new Vector2(tokenPos.X, tokenPos.Y), null, Color.Blue, 0, new Vector2(semicirc.Width, semicirc.Height / 2), 1.02f*tokenPos.Bounds.Width / semicirc.Width, SpriteEffects.FlipHorizontally, 0);
-                    sb.Draw(semicirc, new Vector2(tokenPos.X, tokenPos.Y), null, Color.Blue, (float)Math.PI*improvosity*2, new Vector2(0, semicirc.Height / 2), 1.02f*tokenPos.Bounds.Width / semicirc.Width, SpriteEffects.None, 0);
+                    sb.Draw(semicirc, new Vector2(tokenPos.X, tokenPos.Y), null, Color.Black, 0, new Vector2(semicirc.Width, semicirc.Height / 2), 1.02f*tokenPos.Bounds.Width / semicirc.Width, SpriteEffects.FlipHorizontally, 0);
+                    sb.Draw(semicirc, new Vector2(tokenPos.X, tokenPos.Y), null, Color.Black, (float)Math.PI*improvosity*2, new Vector2(0, semicirc.Height / 2), 1.04f*tokenPos.Bounds.Width / semicirc.Width, SpriteEffects.None, 0);
                 }
                 if (improvosity >= 0.5f)
                 {
                    
                     sb.Draw(semicirc, new Vector2(tokenPos.X, tokenPos.Y), null, Color.HotPink, 0, new Vector2(semicirc.Width, semicirc.Height / 2), 1.02f*tokenPos.Bounds.Width / semicirc.Width, SpriteEffects.FlipHorizontally, 0);
-                    sb.Draw(semicirc, new Vector2(tokenPos.X, tokenPos.Y), null, Color.Blue, (float)Math.PI * improvosity * 2, new Vector2(0, semicirc.Height / 2), 1.02f*tokenPos.Bounds.Width / semicirc.Width, SpriteEffects.None, 0);
+                    sb.Draw(semicirc, new Vector2(tokenPos.X, tokenPos.Y), null, Color.Black, (float)Math.PI * improvosity * 2, new Vector2(0, semicirc.Height / 2), 1.02f*tokenPos.Bounds.Width / semicirc.Width, SpriteEffects.None, 0);
                     sb.Draw(semicirc, new Vector2(tokenPos.X, tokenPos.Y), null, Color.HotPink, 0, new Vector2(0, semicirc.Height / 2), 1.02f*tokenPos.Bounds.Width / semicirc.Width, SpriteEffects.None, 0);
 
                 }

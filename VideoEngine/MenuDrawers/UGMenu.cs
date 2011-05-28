@@ -19,10 +19,10 @@ namespace SurfaceTower.VideoEngine.MenuDrawers
     public class UGMenu : LineMenu
     {
         //The icons for menu choices.
-        private static Texture2D homingTex = App.Instance.Content.Load<Texture2D>("menu");
-        private static Texture2D spreadTex = App.Instance.Content.Load<Texture2D>("menu");
-        private static Texture2D strengthTex = App.Instance.Content.Load<Texture2D>("menu");
-        private static Texture2D twoshotTex = App.Instance.Content.Load<Texture2D>("menu");
+        private static Texture2D homingTex = App.Instance.Content.Load<Texture2D>("homing");
+        private static Texture2D spreadTex = App.Instance.Content.Load<Texture2D>("trishot");
+        private static Texture2D strengthTex = App.Instance.Content.Load<Texture2D>("powerup");
+        private static Texture2D twoshotTex = App.Instance.Content.Load<Texture2D>("twoshot");
         private static Dictionary<Upgrade.UpgradeType, Texture2D> upgradeTextures = new Dictionary<Upgrade.UpgradeType, Texture2D>()
         {
             {Upgrade.UpgradeType.Homing, homingTex},{Upgrade.UpgradeType.Spread, spreadTex}, {Upgrade.UpgradeType.Strength, strengthTex}, {Upgrade.UpgradeType.TwoShot, twoshotTex}
@@ -36,6 +36,7 @@ namespace SurfaceTower.VideoEngine.MenuDrawers
             int i = 0;
             foreach (KeyValuePair<Upgrade.UpgradeType, Upgrade> upgrade in availableUpgrades)
             {
+              
                 Texture2D t;
                 upgradeTextures.TryGetValue(upgrade.Key,out t);
                 MenuItem men = new MenuItem(t, position);

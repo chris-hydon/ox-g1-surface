@@ -15,7 +15,6 @@ namespace SurfaceTower.VideoEngine
     {
         #region Fields
 
-        private const int BIG_GUN_SIZE = 30;
         private Color[] player_colors = new Color[4] {Color.Red, Color.ForestGreen, Color.Teal, Color.Gold};
         private Game gm;
         //The game model
@@ -49,7 +48,7 @@ namespace SurfaceTower.VideoEngine
             enemy = content.Load<Texture2D>("Drone");
             bullet = content.Load<Texture2D>("bullet");
             middle = content.Load<Texture2D>("centre");
-            gun = content.Load<Texture2D>("turret");
+            gun = content.Load<Texture2D>("2turret");
             boss = content.Load<Texture2D>("spaceinvader");
             background = content.Load<Texture2D>("bg");
             graphics.GraphicsDevice.Clear(Color.Black);
@@ -90,17 +89,22 @@ namespace SurfaceTower.VideoEngine
                 null, c, 0, new Vector2(middle.Width / 2, middle.Height / 2), SpriteEffects.None, 0);
 
             //Guns
+
             foreach (Model.Gun.Turret t in baseModel.Turrets)
             {
+                Color col = player_colors[t.PlayerId];
+                col.A = 100;
                 spritebatch.Draw(gun, new Rectangle((int)t.Location.X, (int)t.Location.Y, (int)t.Shape.Width, (int)t.Shape.Height), new Rectangle(0, 0, gun.Width, gun.Height),
-                    player_colors[t.PlayerId], t.Orientation, new Vector2(gun.Width / 2, gun.Height / 2), SpriteEffects.None, 1);
+                    col, t.Orientation, new Vector2(gun.Width / 2, gun.Height / 2), SpriteEffects.None, 1);
             }
             foreach (Model.Gun.MainGun m in baseModel.Players)
             {
                 if (m.IsActive)
                 {
-                    spritebatch.Draw(gun, new Rectangle((int)m.Location.X, (int)m.Location.Y, BIG_GUN_SIZE, BIG_GUN_SIZE), new Rectangle(0, 0, gun.Width, gun.Height),
-                      player_colors[m.PlayerId], m.Orientation, new Vector2(gun.Width / 2, gun.Height / 2), SpriteEffects.None, 1);
+                    Color col = player_colors[m.PlayerId];
+                    col.A = 200;
+                    spritebatch.Draw(gun, new Rectangle((int)m.Location.X, (int)m.Location.Y, (int)(0.5*gun.Width),(int)(0.5* gun.Height)), new Rectangle(0, 0, gun.Width, gun.Height),
+                      col, m.Orientation, new Vector2(gun.Width / 2, gun.Height / 2), SpriteEffects.None, 1);
                 }
             }
 
@@ -115,7 +119,7 @@ namespace SurfaceTower.VideoEngine
                 }
                 else
                 {
-                    Color cc = Color.Tomato;
+                    Color cc = e.Colour;
                     cc.A = 200;
                     spritebatch.Draw(boss, rect, new Rectangle(0, 0, boss.Width, boss.Height), cc, e.Orientation, new Vector2(boss.Width / 2, boss.Height / 2), SpriteEffects.None, 1);
                 }
