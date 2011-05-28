@@ -179,7 +179,7 @@ namespace SurfaceTower.TowerAudio
                 currentScale = CreateScale((MelodyPlayer.Note)random.Next(12),ScaleType.HarMinor);
                 System.Console.WriteLine("Tower under half HP");
             }
-            if ((App.Instance.Model.Tower.Health > SCALE_CHANGE_HP_TRESHOLD) && !towerUnderHP)
+            if ((App.Instance.Model.Tower.Health > SCALE_CHANGE_HP_TRESHOLD) && towerUnderHP)
             {
                 towerUnderHP = false;
                 currentScale = CreateScale((MelodyPlayer.Note)random.Next(12), ScaleType.Major);
