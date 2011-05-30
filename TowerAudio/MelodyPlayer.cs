@@ -115,6 +115,7 @@ namespace SurfaceTower.TowerAudio
                 {
                     if(notePlaying)
                         soundBanks.ElementAt((int)playerSoundPack[model.Dying.ElementAt(0).who]).PlayCue((scaleDecider.NoteAt(chord.Notes[position]) + 1) + lengthString);
+                    System.Console.WriteLine("Note: " + ((Note)(scaleDecider.NoteAt(chord.Notes[position]) % 12)).ToString());
 
                     position++;
                     position %= chord.Notes.Length;
