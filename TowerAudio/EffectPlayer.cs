@@ -101,7 +101,7 @@ namespace SurfaceTower.TowerAudio
         {
             if (App.Instance.Model.Tower.Health < Constants.HP_LIMIT_CRITICAL_TOWER)
             {
-                audioEngine.GetCategory("Music").SetVolume(0.07f);
+                audioEngine.GetCategory("Music").SetVolume(0.17f);
                 audioEngine.GetCategory("Drums").SetVolume(0.3f);
                 if (!heartbeatCue.IsPlaying)
                 {
