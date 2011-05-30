@@ -12,6 +12,7 @@ namespace SurfaceTower.VideoEngine.ParticleEngine
     public class PEngine
     {
         const int MAXEMITTERS = 50;
+        private Color[] player_cols = new Color[5] { Color.BlanchedAlmond, Color.Red, Color.ForestGreen, Color.Teal, Color.Gold };
         private ICollection<AbstractEmitter> emitters;
         private SimpleView view;
         private Texture2D tex;
@@ -51,7 +52,7 @@ namespace SurfaceTower.VideoEngine.ParticleEngine
 
         void Model_DeadEnemy(object sender, SurfaceTower.Model.EventArguments.EnemyArgs e)
         {
-            addExplosion(e.Enemy.Location, e.Enemy.Colour);
+            addExplosion(e.Enemy.Location, player_cols[e.Enemy.Player+1]);
         }
 
         void NewEnemy(object sender, SurfaceTower.Model.EventArguments.EnemyArgs e)
@@ -62,7 +63,7 @@ namespace SurfaceTower.VideoEngine.ParticleEngine
         void Enemy_EnemyReached(object sender, EventArgs e)
         {
             Enemy enemy = (Enemy)sender;
-            addExplosion(enemy.Location, enemy.Colour);
+            addExplosion(enemy.Location, player_cols[enemy.Player + 1]);
         }
 
         public void addEmitter(Vector2 position, Color color, int size)
