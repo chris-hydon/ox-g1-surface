@@ -87,6 +87,23 @@ namespace SurfaceTower.Controller
       return null;
     }
 
+    /// <summary>
+    /// Determine the ID of the player accociated with a tag contact, if any.
+    /// </summary>
+    /// <param name="c">The contact to check.</param>
+    /// <returns>The PlayerId associated with the contact, or -1 if the contact is not associated with a player.</returns>
+    public int GetPlayerIdByContact(Contact c)
+    {
+      for (int i = 0; i < 4; i++)
+      {
+        if (c.Id == playerTags[i])
+        {
+          return i;
+        }
+      }
+      return -1;
+    }
+
     protected void OnContactAdded(object sender, ContactData e)
     {
       if (e.Contact.IsTagRecognized)
@@ -289,17 +306,21 @@ namespace SurfaceTower.Controller
       return -1;
     }
 
-    public Contact FindReturned(ReadOnlyContactCollection contacts, ContactData gone)
+    private Contact FindReturned(ReadOnlyContactCollection contacts, ContactData gone)
     {
       foreach (Contact c in contacts)
       {
-        if (!c.IsTagRecognized) break;
+        // Not a tag, or is already associated with a player.
+        if (!c.IsTagRecognized || GetPlayerIdByContact(c) != -1)
+        {
+          continue;
+        }
 
         for (int i = 0; i < 4; i++)
         {
           if (playerTags[i] == gone.Contact.Id)
           {
-            if (Vector2.Distance(new Vector2(c.CenterX, c.CenterY), gone.LastLocation) < 20)
+            if (Vector2.Distance(new Vector2(c.CenterX, c.CenterY), gone.LastLocation) < 50)
             {
               playerTags[i] = c.Id;
               return c;
