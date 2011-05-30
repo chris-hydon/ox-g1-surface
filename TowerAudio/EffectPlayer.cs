@@ -103,8 +103,11 @@ namespace SurfaceTower.TowerAudio
             {
                 audioEngine.GetCategory("Music").SetVolume(0.07f);
                 audioEngine.GetCategory("Drums").SetVolume(0.3f);
-                if(!heartbeatCue.IsPlaying)
-                    heartbeatCue.Play();
+                if (!heartbeatCue.IsPlaying)
+                {
+                  Console.WriteLine("HB");
+                  heartbeatCue.Play();
+                }
                 heartbeatOnlyMode = true;
             }
             else
@@ -113,6 +116,7 @@ namespace SurfaceTower.TowerAudio
                     audioEngine.GetCategory("Music").SetVolume(MelodyPlayer.musicVolume);
                     audioEngine.GetCategory("Drums").SetVolume(DrumPlayer.drumVolume);
                     heartbeatCue.Stop(AudioStopOptions.Immediate);
+                    heartbeatCue = soundBank.GetCue("Hearbeat");
 
                     heartbeatOnlyMode = false;
                 }
