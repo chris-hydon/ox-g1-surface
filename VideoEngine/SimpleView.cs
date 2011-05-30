@@ -96,24 +96,37 @@ namespace SurfaceTower.VideoEngine
             //Living
             foreach (Enemy e in baseModel.Living)
             {
+                Color col = Color.BlanchedAlmond;
+                col.A = 200;
+                if (e.Player != -1)
+                {
+                    col = player_colors[e.Player];
+                    col.A = 230;
+                }
                 
                 Rectangle rect = new Rectangle((int)e.Location.X, (int)e.Location.Y, (int)e.Shape.Width, (int)e.Shape.Height);
                 if (!(e is Invader))
                 {
-                    spritebatch.Draw(enemy, rect, new Rectangle(0, 0, enemy.Width, enemy.Height), e.Colour, e.Orientation, new Vector2(enemy.Width / 2, enemy.Height / 2), SpriteEffects.None, 1);
+                    spritebatch.Draw(enemy, rect, new Rectangle(0, 0, enemy.Width, enemy.Height), col, e.Orientation, new Vector2(enemy.Width / 2, enemy.Height / 2), SpriteEffects.None, 1);
                 }
                 else
-                {
-                    Color cc = e.Colour;
-                    cc.A = 200;
-                    spritebatch.Draw(boss, rect, new Rectangle(0, 0, boss.Width, boss.Height), cc, e.Orientation, new Vector2(boss.Width / 2, boss.Height / 2), SpriteEffects.None, 1);
+                {   
+                 
+                    spritebatch.Draw(boss, rect, new Rectangle(0, 0, boss.Width, boss.Height), col, e.Orientation, new Vector2(boss.Width / 2, boss.Height / 2), SpriteEffects.None, 1);
                 }
             }
             //dying
-             foreach (EnemyTimeWho et in baseModel.Dying){
-                 Enemy e = et.enemy;
+            foreach (EnemyTimeWho et in baseModel.Dying)
+            {
+                Enemy e = et.enemy;
+                Color col = Color.BlanchedAlmond;
+                if (e.Player != -1)
+                {
+                    col = player_colors[e.Player];
+                }
+                c.A = 200;
                 Rectangle rect = new Rectangle((int)e.Location.X, (int)e.Location.Y, (int)e.Shape.Width, (int)e.Shape.Height);
-                spritebatch.Draw(enemy, rect, new Rectangle(0,0,enemy.Width, enemy.Height), e.Colour, e.Orientation, new Vector2(enemy.Width / 2, enemy.Height / 2), SpriteEffects.None, 1);
+                spritebatch.Draw(enemy, rect, new Rectangle(0, 0, enemy.Width, enemy.Height), col, e.Orientation, new Vector2(enemy.Width / 2, enemy.Height / 2), SpriteEffects.None, 1);
             }
 
 
