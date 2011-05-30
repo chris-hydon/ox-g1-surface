@@ -22,8 +22,8 @@ namespace SurfaceTower.Model.Generator
       this.pos = pos;
       // This should by default spawn only a single enemy at a time.
       GroupSize = 1;
-      // MultiplayerAdjustment multiplies the number of enemies per spawn based on the number of players.
-      MultiplayerAdjustment = 1;
+      // MultiplayerAdjustment increases the number of enemies per spawn based on the number of players.
+      MultiplayerAdjustment = 0;
     }
 
     public override void Generate()

@@ -4,17 +4,17 @@ namespace SurfaceTower
 {
   public static class Constants
   {
-    public const float BASE_IMPROVOCITY = 0.5f; // Base improvocity per kill, multiplied by enemy size.
+    public const float BASE_IMPROVOCITY = 0.001f; // Base improvocity per kill, multiplied by enemy size.
     public const float BULLET_HOMING_TURNSPEED = 1; // Perpendicular acceleration relative to velocity
     public const int BULLET_LIFE = 20; // Seconds
     public const int BULLET_VELOCITY = 200; // Metres per second
-    public const int HP_LIMIT_CRITICAL_TOWER = 950;
-    public const int MAIN_TURRET_DEFAULT_POWER = 50;
+    public const int HP_LIMIT_CRITICAL_TOWER = 100;
+    public const int MAIN_TURRET_DEFAULT_POWER = 10;
     public const float MAIN_TURRET_RADIUS = 100.0f;
     public const float PROGRESSION_RATE = 1; // Ranks per bar
-    public const int TOWER_DEFAULT_HEALTH = 100000000;
-    public const int TOWER_REGENERATION = 1; // Regen per beat
-    public const int TURRET_DEFAULT_POWER = 500;
+    public const int TOWER_DEFAULT_HEALTH = 1000;
+    public const int TOWER_REGENERATION = 5; // Regen per beat
+    public const int TURRET_DEFAULT_POWER = 20;
     public const float TURRET_RADIUS = 10.0f;
     public const float TURRET_TURNSPEED = 1f; // Radians per second
     public const float UPDATES_PER_SECOND = 60;

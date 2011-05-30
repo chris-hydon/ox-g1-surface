@@ -15,14 +15,14 @@ namespace SurfaceTower.Model.Generator
   public abstract class AbstractGenerator : IGenerator
   {
     protected static Random random = new Random();
-    private int enemySize;
-    private int enemySizeVariance;
-    private int enemyHealth;
+    private int enemySize = 20;
+    private int enemySizeVariance = 0;
+    private int enemyHealth = 1;
     private EnemyType enemyType;
     private int groupSize;
     private int groupsLeft;
-    private int frequency;
-    private float multiplayerAdjustment;
+    private int frequency = 2;
+    private float multiplayerAdjustment = 1;
     private int clickCounter = 0;
     private bool playerSpecific = false;
     private int targetPlayer = -1;
@@ -99,7 +99,7 @@ namespace SurfaceTower.Model.Generator
     /// </summary>
     public int EnemiesPerGroup
     {
-      get { return (int) (groupSize * Math.Pow(multiplayerAdjustment, App.Instance.Model.NumberOfPlayers - 1)); }
+      get { return (int) (groupSize * (1 + multiplayerAdjustment * (App.Instance.Model.NumberOfPlayers - 1))); }
     }
 
     /// <summary>

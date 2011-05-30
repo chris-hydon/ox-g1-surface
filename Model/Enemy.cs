@@ -17,23 +17,15 @@ namespace SurfaceTower.Model
       Stunned = 4,
     }
 
-    private Color[] player_colors = new Color[4] { Color.Red, Color.ForestGreen, Color.Teal, Color.Gold };
-
     protected Vector2 velocity;
     protected Vector2 acceleration = Vector2.Zero;
-    protected readonly IShape shape;
+    protected IShape shape;
     protected int health;
     protected States state;
     protected int age = 0;
-    protected Color colour;
     protected int player = -1;
 
     #region Properties
-    public Color Colour
-    {
-      get { return colour; }
-      set { colour = value; }
-    }
 
     public int Age
     {
@@ -104,16 +96,6 @@ namespace SurfaceTower.Model
       this.health = health;
       this.velocity = new Vector2(velocity.X, velocity.Y);
       this.player = player;
-
-      //If the enemy is player specific, colour it dependent upon its player.
-      if (player != -1)
-      {
-        this.Colour = player_colors[player];
-      }
-      else
-      {
-        this.Colour = Color.BlanchedAlmond;
-      }
     }
 
     public virtual void Move()

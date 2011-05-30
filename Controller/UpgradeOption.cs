@@ -37,6 +37,7 @@ namespace SurfaceTower.Controller
 
       // Hide the menu.
       App.Instance.Model.Players[playerId].ShowMenu(false);
+      App.Instance.Model.Players[playerId].CanUpgrade = false;
     }
 
     #endregion

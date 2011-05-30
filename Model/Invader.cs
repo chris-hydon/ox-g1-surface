@@ -8,7 +8,7 @@ using SurfaceTower.Model.Generator;
 
 namespace SurfaceTower.Model
 {
-  public class Invader : Enemy
+  public class Invader : Enemy, BossEnemy
   {
     protected int region = 0;
     protected float speed = 300f;
@@ -22,7 +22,10 @@ namespace SurfaceTower.Model
     #region Methods
 
     public Invader(Vector2 location) : base(location, 60, 5000, Vector2.Zero, -1)
-    { }
+    {
+      Vector2 halfSize = new Vector2(84, 60.5f);
+      shape = new SurfaceTower.Model.Shape.Rectangle(location - halfSize, location + halfSize);
+    }
 
     public override void Move()
     {

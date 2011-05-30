@@ -33,14 +33,14 @@ namespace SurfaceTower.Model
         DetermineWave();
       }
 
-      while (waves.Count > 0)
-      {
+      //while (waves.Count > 0)
+      //{
         ICollection<IGenerator> wave = waves.Dequeue();
         foreach (IGenerator g in wave)
         {
           generators.Add(g);
         }
-      }
+      //}
     }
 
     void OnClick(object sender, EventArgs e)
@@ -72,31 +72,65 @@ namespace SurfaceTower.Model
     protected void DetermineWave()
     {
       int progress = model.Progress;
-      int style = random.Next(100) + progress;
-      int wavesAdded = 0;
       //if progress reaches 100, spawn the Invader boss
-      if (progress == 1)
+      if (progress == 100)
       {
+        NullWave();
+        NullWave();
         BossWave(BossGenerator.Boss.Invader);
       }
-      while (random.Next(1, progress+2) > wavesAdded * 20)
+      else if (model.FightingBoss)
       {
-        bool pSpec = random.Next(progress>100 ? 100 : progress)>40;
-        switch (random.Next(11))
+        NullWave();
+      }
+      else
+      {
+        bool pSpec = random.Next(progress > 100 ? 100 : progress) > 40;
+        switch (random.Next(1 + Math.Max(progress / 5, 10)))
         {
-          case 0: SimpleWave(false, pSpec);   break;
-          case 1: SimpleWave(true, pSpec); break;
-          case 2: CornersWave(EnemyType.Regular, pSpec); break;
-          case 3: CornersWave(EnemyType.Spiral, pSpec); break;
-          case 4: CornersWave(EnemyType.Wave, pSpec); break;
-          case 5: SidesWave(EnemyType.Regular, pSpec); break;
-          case 6: SidesWave(EnemyType.Wave, pSpec); break;
-          case 7: SidesWave(EnemyType.Spiral, pSpec); break;
-          case 8: CirclesWave(EnemyType.Regular, pSpec); break;
-          case 9: CirclesWave(EnemyType.Spiral, pSpec); break;
-          case 10: CirclesWave(EnemyType.Wave, pSpec); break;
+          case 0:
+            SimpleWave(false, pSpec);
+            break;
+          case 1:
+            SimpleWave(true, pSpec);
+            break;
+          case 2:
+            CornersWave(EnemyType.Regular, pSpec);
+            break;
+          case 3:
+            CornersWave(EnemyType.Wave, pSpec);
+            break;
+          case 4:
+            CornersWave(EnemyType.Spiral, pSpec);
+            break;
+          case 5:
+            SidesWave(EnemyType.Regular, pSpec);
+            NullWave();
+            break;
+          case 6:
+            SidesWave(EnemyType.Wave, pSpec);
+            NullWave();
+            break;
+          case 7:
+            SidesWave(EnemyType.Spiral, pSpec);
+            NullWave();
+            break;
+          case 8:
+            CirclesWave(EnemyType.Regular, pSpec);
+            NullWave();
+            NullWave();
+            break;
+          case 9:
+            CirclesWave(EnemyType.Spiral, pSpec);
+            NullWave();
+            NullWave();
+            break;
+          case 10:
+            CirclesWave(EnemyType.Wave, pSpec);
+            NullWave();
+            NullWave();
+            break;
         }
-        wavesAdded++;
       }
     }
 
@@ -267,26 +301,28 @@ namespace SurfaceTower.Model
     /// colour with it.</param>
     void SidesWave(EnemyType enemyType, bool playerSpecifc)
     {
-      ICollection<IGenerator> wave = new LinkedList<IGenerator>();
+      ICollection<IGenerator> wave;
       SideGenerator g;
       int[] sides = { 0, 1, 2, 3 };
       shuffle(sides);
       foreach (MainGun p in model.ActivePlayers)
       {
-        g = new SideGenerator(sides[p.PlayerId], 1);
+        wave = new LinkedList<IGenerator>();
+        g = new SideGenerator(sides[p.PlayerId], 1 + random.Next(1 + LinearDifficulty(50, 3)));
         g.EnemyHealth = 1 + LinearDifficulty(5, 0);
         g.EnemySize = 20;
         g.EnemySizeVariance = LinearDifficulty(5, 10);
         g.EnemyType = enemyType;
         g.Frequency = model.Music.ClicksPerBeat;
+        g.GroupSize = 2 + LinearDifficulty(8, 10);
+        g.MultiplayerAdjustment = 0;
         if (playerSpecifc)
         {
           g.PlayerSpecific = true;
-          g.TargetPlayer = p.PlayerId;
         }
         wave.Add(g);
+        waves.Enqueue(wave);
       }
-      waves.Enqueue(wave);
     }
 
     /// <summary>
@@ -300,39 +336,47 @@ namespace SurfaceTower.Model
     /// colour with it.</param>
     void CirclesWave(EnemyType enemyType, bool playerSpecifc)
     {
-      ICollection<IGenerator> wave = new LinkedList<IGenerator>();
+      ICollection<IGenerator> wave;
       CircleGenerator g;
-      bool made = false;
-      foreach (MainGun p in model.ActivePlayers)
+      if (!playerSpecifc)
       {
-        if (!playerSpecifc)
+        wave = new LinkedList<IGenerator>();
+        g = new CircleGenerator(model.NumberOfPlayers);
+        g.EnemyHealth = 1 + LinearDifficulty(5, 0);
+        g.EnemySize = 20;
+        g.EnemySizeVariance = LinearDifficulty(5, 10);
+        g.EnemyType = enemyType;
+        g.Frequency = model.Music.ClicksPerBeat / 2;
+        g.GroupSize = 4 + LinearDifficulty(8, 10);
+        wave.Add(g);
+        waves.Enqueue(wave);
+      }
+      else
+      {
+        foreach (MainGun p in model.ActivePlayers)
         {
-          if(!made)
-          {
-          made = true;
-          g = new CircleGenerator(model.NumberOfPlayers);
-          g.EnemyHealth = 1 + LinearDifficulty(5, 0);
-          g.EnemySize = 20;
-          g.EnemySizeVariance = LinearDifficulty(5, 10);
-          g.EnemyType = enemyType;
-          g.Frequency = model.Music.ClicksPerBeat / 2;
-          wave.Add(g);
-          }
-        }
-        else
-        {
+          wave = new LinkedList<IGenerator>();
           g = new CircleGenerator(1);
           g.EnemyHealth = 1 + LinearDifficulty(5, 0);
-          g.EnemySize = 15 + 2*p.PlayerId;
+          g.EnemySize = 15 + 2 * p.PlayerId;
           g.EnemySizeVariance = LinearDifficulty(5, 10);
           g.EnemyType = enemyType;
           g.Frequency = model.Music.ClicksPerBeat;
           g.PlayerSpecific = true;
           g.TargetPlayer = p.PlayerId;
+          g.GroupSize = 2 + LinearDifficulty(15, 5);
           wave.Add(g);
+          waves.Enqueue(wave);
         }
       }
-      waves.Enqueue(wave);
+    }
+
+    /// <summary>
+    /// Creates a wave that spawns nothing. This is used to put in some breathing space.
+    /// </summary>
+    void NullWave()
+    {
+      waves.Enqueue(new LinkedList<IGenerator>());
     }
 
     /// <summary>
@@ -353,8 +397,7 @@ namespace SurfaceTower.Model
     /// <param name="request"> The desired wave.</param>
     public void RequestWave(ICollection<IGenerator> request)
     {
-      ICollection<IGenerator> wave = new LinkedList<IGenerator>(request);
-      foreach (IGenerator g in wave)
+      foreach (IGenerator g in request)
       {
         generators.Add(g);
       }

@@ -57,9 +57,22 @@ namespace SurfaceTower.Model.Shape
       return Radius + (contact.MajorAxis / 2) > (Origin - new Vector2(contact.CenterX, contact.CenterY)).Length();
     }
 
-    public bool CheckCollides(Circle otherShape)
+    public bool CheckCollides(Circle circle)
     {
-      return Radius + otherShape.Radius > (Origin - otherShape.Origin).Length();
+      return Radius + circle.Radius > (Origin - circle.Origin).Length();
+    }
+
+    public bool CheckCollides(Rectangle rect)
+    {
+      // Find the closest point to the circle in and on the boundary of the rectangle.
+      float closestX = Math.Max(rect.Left, Math.Min(rect.Right, Origin.X));
+      float closestY = Math.Max(rect.Top, Math.Min(rect.Bottom, Origin.Y));
+
+      // Calculate the distance between the circle's center and this closest point.
+      Vector2 distance = new Vector2(Origin.X - closestX, Origin.Y - closestY);
+
+      // If the distance is less than the circle's radius, intersection.
+      return distance.Length() < Radius;
     }
   }
 }

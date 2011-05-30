@@ -103,6 +103,12 @@ namespace SurfaceTower.Model.Gun
             // Deregister the listeners.
             m.Music.Click -= new EventHandler(OnClick);
             m.Music.Beat -= new EventHandler(OnBeat);
+
+            // Reset variables.
+            improvocity = 0;
+            strength = Constants.MAIN_TURRET_DEFAULT_POWER;
+            Shots = ShotPatterns.Simple;
+            orientation = (float) ((playerId - 1) * Math.PI / 2);
           }
 
           m.Music.Voices[PlayerId].IsActive = value;

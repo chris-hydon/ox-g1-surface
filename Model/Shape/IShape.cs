@@ -10,6 +10,7 @@ namespace SurfaceTower.Model.Shape
     float Height { get; }
     bool Collides(IShape otherShape);
     bool Collides(Contact contact);
-    bool CheckCollides(Circle otherShape);
+    bool CheckCollides(Circle circle);
+    bool CheckCollides(Rectangle rect);
   }
 }

@@ -138,6 +138,21 @@ namespace SurfaceTower.Model
       get { return (int) (Music.BarCount * Constants.PROGRESSION_RATE); }
     }
 
+    public bool FightingBoss
+    {
+      get
+      {
+        foreach (Enemy e in Living)
+        {
+          if (e is BossEnemy)
+          {
+            return true;
+          }
+        }
+        return false;
+      }
+    }
+
     #endregion
 
     #region Events

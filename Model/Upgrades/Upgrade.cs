@@ -71,7 +71,7 @@ namespace SurfaceTower.Model.Upgrades
           u = new ShotUpgrade(gun, ShotPatterns.Spread, false);
           break;
         case UpgradeType.Strength:
-          u = new StrengthUpgrade(gun, 2);
+          u = new StrengthUpgrade(gun, 10);
           break;
         case UpgradeType.TwoShot:
           u = new ShotUpgrade(gun, ShotPatterns.TwoShot, false);

@@ -107,6 +107,7 @@
     <Compile Include="App.cs" />
     <Compile Include="Controller\TurretMover.cs" />
     <Compile Include="Controller\UpgradeOption.cs" />
+    <Compile Include="Model\BossEnemy.cs" />
     <Compile Include="Model\Invader.cs" />
     <Compile Include="Model\GameModel.cs" />
     <Compile Include="Model\Generator\AbstractGenerator.cs" />
@@ -115,6 +116,7 @@
     <Compile Include="Model\Generator\PointGenerator.cs" />
     <Compile Include="Model\Generator\SideGenerator.cs" />
     <Compile Include="Model\ITouchable.cs" />
+    <Compile Include="Model\Shape\Rectangle.cs" />
     <Compile Include="Model\Spawner.cs" />
     <Compile Include="Model\Generator\CircleGenerator.cs" />
     <Compile Include="Model\EventArguments\BulletArgs.cs" />
