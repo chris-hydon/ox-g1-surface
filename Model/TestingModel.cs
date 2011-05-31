@@ -18,9 +18,10 @@ namespace SurfaceTower.Model
 
     public void FirstUpdate(GameTime gameTime)
     {
-      Music.Start(gameTime.TotalRealTime);
 
-      Music.Beat += new EventHandler(OnBeat);
+
+        Music.Beat += new EventHandler(OnBeat);
+       Music.Start(gameTime.TotalRealTime);
 
       spawner = new Spawner();
       for (int i = 0; i < 4; i++) { 

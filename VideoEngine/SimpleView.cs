@@ -152,8 +152,15 @@ namespace SurfaceTower.VideoEngine
                 col.A = 200;
                 Texture2D gun = gun1;
 
-                spritebatch.Draw(gun, new Rectangle((int)t.Location.X, (int)t.Location.Y, (int)t.Shape.Width, (int)t.Shape.Height), new Rectangle(0, 0, gun.Width, gun.Height),
+                spritebatch.Draw(gun, new Rectangle((int)t.Location.X, (int)t.Location.Y, (int)t.Shape.Width, (int)t.Shape.Height),null,
                     col, t.Orientation, new Vector2(gun.Width / 2, gun.Height / 2), SpriteEffects.None, 1);
+
+                if (!t.Exists)
+                {
+                    spritebatch.Draw(middle, new Rectangle((int)t.Location.X, (int)t.Location.Y, (int)t.Shape.Height+10, (int)t.Shape.Height+10),null,
+                    col, t.Orientation, new Vector2(middle.Width / 2, middle.Height / 2), SpriteEffects.None, 1);
+                }
+                
             }
             foreach (Model.Gun.MainGun m in baseModel.Players)
             {
