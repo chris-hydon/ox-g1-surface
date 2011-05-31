@@ -13,7 +13,7 @@ namespace SurfaceTower.Model.Gun
 {
   public class Turret : IEntity, IGun, ITouchable
   {
-    protected Circle shape;
+    protected IShape shape;
     protected float orientation;
     protected int playerId;
     protected ShotPatterns shots;
@@ -85,7 +85,11 @@ namespace SurfaceTower.Model.Gun
       {
         if (value)
         {
-          exists = true;
+          if (!Exists)
+          {
+            App.Instance.Model.Update -= new EventHandler<UpdateArgs>(GhostUpdate);
+            exists = true;
+          }
           App.Instance.Model.Update += new EventHandler<UpdateArgs>(OnUpdate);
           App.Instance.Model.Music.Click += new EventHandler(OnClick);
         }
@@ -123,13 +127,15 @@ namespace SurfaceTower.Model.Gun
 
     public Turret(Vector2 location, int owner)
     {
-      this.shape = new Circle(Constants.TURRET_RADIUS, location);
+      Vector2 size = new Vector2(Constants.TURRET_WIDTH, Constants.TURRET_HEIGHT);
+      this.shape = new SurfaceTower.Model.Shape.Rectangle(location - (size / 2), location + (size / 2));
       this.playerId = owner;
       Shots = ShotPatterns.Simple;
       strength = Constants.TURRET_DEFAULT_POWER;
       orientation = (owner - 1) * (float) Math.PI / 2;
       controller = new TurretMover(this);
       App.Instance.Controller.Touchables.Add(this);
+      App.Instance.Model.Update += new EventHandler<UpdateArgs>(GhostUpdate);
     }
 
     /// <summary>
@@ -179,6 +185,38 @@ namespace SurfaceTower.Model.Gun
         }
         Orientation += orientMod;
       }
+    }
+
+    /// <summary>
+    /// Called in response to BaseModel.Update when the turret doesn't exist yet. Float around and
+    /// rotate idly.
+    /// </summary>
+    /// <param name="sender">The BaseModel object which sent the Update signal.</param>
+    /// <param name="e">The UpdateArgs containing the current TimeSpan.</param>
+    void GhostUpdate(object sender, UpdateArgs e)
+    {
+      BaseModel model = (BaseModel) sender;
+      Vector2 originPoint = model.Tower.Location;
+      switch (PlayerId)
+      {
+        case 0:
+          originPoint -= new Vector2(0, originPoint.Y / 2);
+          break;
+        case 1:
+          originPoint += new Vector2(originPoint.X / 2, 0);
+          break;
+        case 2:
+          originPoint += new Vector2(0, originPoint.Y / 2);
+          break;
+        case 3:
+          originPoint -= new Vector2(originPoint.X / 2, 0);
+          break;
+      }
+      Vector2 acc = originPoint - Location;
+      //acc.Normalize();
+      Vector2 vel = Vector2.Transform(acc, Matrix.CreateRotationZ((float) Math.PI / 2)) + (acc / Constants.UPDATES_PER_SECOND);
+      Location += vel / Constants.UPDATES_PER_SECOND;
+      Orientation += Constants.TURRET_TURNSPEED / Constants.UPDATES_PER_SECOND;
     }
 
     public void ShowMenu(bool show)

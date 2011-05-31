@@ -109,6 +109,17 @@ namespace SurfaceTower.Model.Gun
             strength = Constants.MAIN_TURRET_DEFAULT_POWER;
             Shots = ShotPatterns.Simple;
             orientation = (float) ((playerId - 1) * Math.PI / 2);
+
+            // Remove all turrets.
+            Queue<Turret> turrets = new Queue<Turret>(App.Instance.Model.Turrets);
+            while (turrets.Count > 0)
+            {
+              Turret t = turrets.Dequeue();
+              if (t.PlayerId == PlayerId)
+              {
+                App.Instance.Model.DeleteTurret(t);
+              }
+            }
           }
 
           m.Music.Voices[PlayerId].IsActive = value;

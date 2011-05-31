@@ -33,14 +33,11 @@ namespace SurfaceTower.Model
         DetermineWave();
       }
 
-      //while (waves.Count > 0)
-      //{
-        ICollection<IGenerator> wave = waves.Dequeue();
-        foreach (IGenerator g in wave)
-        {
-          generators.Add(g);
-        }
-      //}
+      ICollection<IGenerator> wave = waves.Dequeue();
+      foreach (IGenerator g in wave)
+      {
+        generators.Add(g);
+      }
     }
 
     void OnClick(object sender, EventArgs e)

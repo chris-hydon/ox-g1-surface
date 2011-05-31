@@ -15,7 +15,8 @@ namespace SurfaceTower
     public const int TOWER_DEFAULT_HEALTH = 1000;
     public const int TOWER_REGENERATION = 5; // Regen per beat
     public const int TURRET_DEFAULT_POWER = 20;
-    public const float TURRET_RADIUS = 10.0f;
+    public const float TURRET_WIDTH = 50;
+    public const float TURRET_HEIGHT = 30;
     public const float TURRET_TURNSPEED = 1f; // Radians per second
     public const float UPDATES_PER_SECOND = 60;
     public const float MAX_ENEMY_COUNT = 200;

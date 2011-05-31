@@ -13,8 +13,56 @@ namespace SurfaceTower.Model
     public void FirstUpdate(GameTime gameTime)
     {
       Music.Beat += new EventHandler(Tower.OnBeat);
+      Music.Bar += new EventHandler(OnBar);
       spawner = new Spawner();
       Music.Start(gameTime.TotalRealTime);
+    }
+
+    void OnBar(object sender, EventArgs e)
+    {
+      int prog = (Progress / 10) - 3;
+      int[] turrets = new int[4] {0, 0, 0, 0};
+      int totalTurrets = 0;
+
+      foreach (Turret t in Turrets)
+      {
+        turrets[t.PlayerId]++;
+        totalTurrets++;
+      }
+
+      if (prog > totalTurrets)
+      {
+        int playerId = -1;
+        if (turrets[0] == 0 && Players[0].IsActive) playerId = 0;
+        else if (turrets[1] == 0 && Players[1].IsActive) playerId = 1;
+        else if (turrets[2] == 0 && Players[2].IsActive) playerId = 2;
+        else if (turrets[3] == 0 && Players[3].IsActive) playerId = 3;
+        else if (turrets[0] == 1 && Players[0].IsActive && prog > 4) playerId = 0;
+        else if (turrets[1] == 1 && Players[1].IsActive && prog > 4) playerId = 1;
+        else if (turrets[2] == 1 && Players[2].IsActive && prog > 4) playerId = 2;
+        else if (turrets[3] == 1 && Players[3].IsActive && prog > 4) playerId = 3;
+
+        if (playerId != -1)
+        {
+          Vector2 originPoint = Tower.Location;
+          switch (playerId)
+          {
+            case 0:
+              originPoint -= new Vector2(0, originPoint.Y / 4);
+              break;
+            case 1:
+              originPoint += new Vector2(originPoint.X / 4, 0);
+              break;
+            case 2:
+              originPoint += new Vector2(0, originPoint.Y / 4);
+              break;
+            case 3:
+              originPoint -= new Vector2(originPoint.X / 4, 0);
+              break;
+          }
+          CreateTurret(originPoint, playerId);
+        }
+      }
     }
 
     public override void OnUpdate(GameTime gameTime)
