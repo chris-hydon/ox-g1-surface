@@ -106099,7 +106099,7 @@ Sound Bank
     Sound
     {
         Name = Hearbeat;
-        Volume = -1200;
+        Volume = -300;
         Pitch = 0;
         Priority = 0;
 
