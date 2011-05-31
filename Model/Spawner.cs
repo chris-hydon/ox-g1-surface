@@ -15,6 +15,8 @@ namespace SurfaceTower.Model
     protected Random random = new Random();
     protected Queue<IGenerator> finished = new Queue<IGenerator>();
     protected Queue<ICollection<IGenerator>> waves = new Queue<ICollection<IGenerator>>();
+    protected int lastBoss = 0;
+
     /// <summary>
     /// A Spawner can add generators and prompt them to generate enemies.
     /// </summary>
@@ -70,8 +72,9 @@ namespace SurfaceTower.Model
     {
       int progress = model.Progress;
       //if progress reaches 100, spawn the Invader boss
-      if (progress == 100)
+      if (progress >= 100 + lastBoss)
       {
+        lastBoss = progress;
         NullWave();
         NullWave();
         BossWave(BossGenerator.Boss.Invader);
@@ -377,13 +380,13 @@ namespace SurfaceTower.Model
     }
 
     /// <summary>
-    /// Spawns a Boss enemy just off screen in the top-left corner.
+    /// Spawns a Boss enemy just on screen in the top-left corner.
     /// </summary>
     /// <param name="bossType"> The type of boss enemy to spawn.</param>
     void BossWave(BossGenerator.Boss bossType)
     {
       ICollection<IGenerator> wave = new LinkedList<IGenerator>();
-      BossGenerator g = new BossGenerator(bossType, new Vector2(200, 200));
+      BossGenerator g = new BossGenerator(bossType, new Vector2(50, 50));
       wave.Add(g);
       waves.Enqueue(wave);
     }

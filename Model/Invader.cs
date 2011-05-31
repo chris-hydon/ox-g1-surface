@@ -21,7 +21,7 @@ namespace SurfaceTower.Model
 
     #region Methods
 
-    public Invader(Vector2 location) : base(location, 60, 5000, Vector2.Zero, -1)
+    public Invader(Vector2 location, int health) : base(location, 60, health, Vector2.Zero, -1)
     {
       Vector2 halfSize = new Vector2(84, 60.5f);
       shape = new SurfaceTower.Model.Shape.Rectangle(location - halfSize, location + halfSize);
@@ -64,29 +64,29 @@ namespace SurfaceTower.Model
         PointGenerator left = new PointGenerator(Location + (60*parallel), 1);
         left.EnemyType = Generator.EnemyType.Regular;
         left.Frequency = 1;
-        left.EnemyHealth = 20;
-        left.EnemySize = 20;
+        left.EnemyHealth = 1;
+        left.EnemySize = 10;
         minionsWave.Add(left);
 
         PointGenerator centreright = new PointGenerator(Location + (30 * parallel), 1);
         centreright.EnemyType = Generator.EnemyType.Regular;
         centreright.Frequency = 1;
-        centreright.EnemyHealth = 20;
-        centreright.EnemySize = 20;
+        centreright.EnemyHealth = 1;
+        centreright.EnemySize = 10;
         minionsWave.Add(centreright);
 
         PointGenerator centreleft = new PointGenerator(Location, 1);
         centreleft.EnemyType = Generator.EnemyType.Regular;
         centreleft.Frequency = 1;
-        centreleft.EnemyHealth = 20;
-        centreleft.EnemySize = 20;
+        centreleft.EnemyHealth = 1;
+        centreleft.EnemySize = 10;
         minionsWave.Add(centreleft);
 
         PointGenerator right = new PointGenerator(Location - (30*parallel), 1);
         right.EnemyType = Generator.EnemyType.Regular;
         right.Frequency = 1;
-        right.EnemyHealth = 20;
-        right.EnemySize = 20;
+        right.EnemyHealth = 1;
+        right.EnemySize = 10;
         minionsWave.Add(right);
         App.Instance.Model.Spawner.RequestWave(minionsWave);
         #endregion

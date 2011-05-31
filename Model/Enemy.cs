@@ -114,7 +114,14 @@ namespace SurfaceTower.Model
       //If the enemy is in contact with the tower, damage the tower and mark the enemy for removal.
       if (Collides(App.Instance.Model.Tower))
       {
-        App.Instance.Model.Tower.Health -= (int) Math.Round(Size);
+        if (this is BossEnemy)
+        {
+          App.Instance.Model.Tower.Health = 0;
+        }
+        else
+        {
+          App.Instance.Model.Tower.Health -= (int) Math.Round(Size);
+        }
         if (EnemyReached != null) EnemyReached(this, null);
         App.Instance.Model.DeathRow.Enqueue(new EnemyTimeWho(this, TimeSpan.MinValue, -1));
 

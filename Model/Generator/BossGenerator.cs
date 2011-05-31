@@ -36,7 +36,7 @@ namespace SurfaceTower.Model.Generator
       switch (target)
       {
           //If the target is implemented, spawn it and then make done true.
-        case Boss.Invader: App.Instance.Model.Spawn(new Invader(pos)); done = true;  break;
+        case Boss.Invader: App.Instance.Model.Spawn(new Invader(pos, 2500 * App.Instance.Model.NumberOfPlayers)); done = true; break;
           //If the target is not implemented here, make done true to remove the generator.
         default : done = true;
           break;
