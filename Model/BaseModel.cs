@@ -171,6 +171,8 @@ namespace SurfaceTower.Model
 
     public virtual void OnUpdate(GameTime gameTime)
     {
+      if (Tower.Dead) return;
+
       lastUpdate = gameTime.TotalRealTime;
       Update(this, new UpdateArgs(LastUpdate));
       foreach(Bullet b in bullets)

@@ -14,8 +14,15 @@ namespace SurfaceTower.Model
     {
       Music.Beat += new EventHandler(Tower.OnBeat);
       Music.Bar += new EventHandler(OnBar);
+      Tower.ZeroHealth += new EventHandler(GameOver);
       spawner = new Spawner();
       Music.Start(gameTime.TotalRealTime);
+    }
+
+    void GameOver(object sender, EventArgs e)
+    {
+      // Stop sending click/beat/bar effects - music may still be playing though (e.g. outro).
+      Music.Stop();
     }
 
     void OnBar(object sender, EventArgs e)

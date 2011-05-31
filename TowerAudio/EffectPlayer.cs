@@ -19,6 +19,7 @@ namespace SurfaceTower.TowerAudio
         private bool heartbeatOnlyMode = false;
         private Cue heartbeatCue;
         private Cue introCue;
+        private Cue outroCue;
         private bool firstPlayerHasJoined;
 
         public EffectPlayer(AudioEngine audioEngine, TowerAudioEngine tae)
@@ -59,6 +60,9 @@ namespace SurfaceTower.TowerAudio
 
             if(heartbeatOnlyMode)
                 heartbeatOnlyMode = false;
+
+            if (outroCue != null && outroCue.IsPlaying)
+                outroCue.Stop(AudioStopOptions.Immediate);
         }
         
         #region Things that happen on events
@@ -68,7 +72,8 @@ namespace SurfaceTower.TowerAudio
             if(heartbeatCue.IsPlaying)
                 heartbeatCue.Stop(AudioStopOptions.Immediate);
             audioEngine.GetCategory("Drums").Stop(AudioStopOptions.Immediate);
-            soundBank.PlayCue("Outro");
+            outroCue = soundBank.GetCue("Outro");
+            outroCue.Play();
         }
 
         void OnNewEnemy(object sender, SurfaceTower.Model.EventArguments.EnemyArgs e)

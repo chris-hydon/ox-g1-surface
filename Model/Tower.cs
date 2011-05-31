@@ -14,6 +14,7 @@ namespace SurfaceTower.Model
     private int health;
     private int maxHealth = Constants.TOWER_DEFAULT_HEALTH;
     private ITouchHandler controller;
+    private bool dead = false;
 
     #region Properties
 
@@ -38,12 +39,19 @@ namespace SurfaceTower.Model
       set
       {
         health = Math.Min(value, MaxHealth);
+        Console.WriteLine("HP: " + health);
         //If health has reached zero, fire an event to notify that the tower has ZeroHealth.
-        if (health <= 0 && ZeroHealth != null)
+        if (health <= 0 && ZeroHealth != null && !dead)
         {
           ZeroHealth(this, null);
+          dead = true;
         }
       }
+    }
+
+    public bool Dead
+    {
+      get { return dead; }
     }
 
     public int MaxHealth
