@@ -26,13 +26,15 @@ namespace SurfaceTower.VideoEngine
         //Draws the sprites
         public SpriteBatch spritebatch { get; set; }
         //Sprites
-        private Texture2D enemy, bullet, middle, gun1, gun2, gun3, background, boss;
+        private Texture2D enemy, bullet, middle0, middle1, middle2, gun1, gun2, gun3, background, boss;
         //Postprocessing to apply bloom
         private BloomPostprocess.BloomComponent bloom; 
         //The particle engine
         private PEngine particleEngine;
         //The Menu Engine
         private MenuDrawers.MenuManager menuManager;
+        //The tower frame id
+        private float frameId = 0;
         #endregion
         
 
@@ -47,7 +49,9 @@ namespace SurfaceTower.VideoEngine
             //Loads the sprites
             enemy = content.Load<Texture2D>("Drone");
             bullet = content.Load<Texture2D>("bullet");
-            middle = content.Load<Texture2D>("centre");
+            middle0 = content.Load<Texture2D>("tower-0");
+            middle1 = content.Load<Texture2D>("tower-1");
+            middle2 = content.Load<Texture2D>("tower-2");
             gun1 = content.Load<Texture2D>("turret");
             gun2 = content.Load<Texture2D>("2turret");
             gun3 = content.Load<Texture2D>("3turret");
@@ -60,12 +64,14 @@ namespace SurfaceTower.VideoEngine
             gm.Components.Add(bloom);
             particleEngine = new PEngine(this);
             menuManager = new MenuDrawers.MenuManager();
+            baseModel.Tower.ZeroHealth += new EventHandler(OnDeath);
         }
 
         public void Restart()
         {
             particleEngine.Reset();
             menuManager.reset();
+            App.Instance.Model.Tower.ZeroHealth += new EventHandler(OnDeath);
         }
 
         public void draw(GameTime gameTime){
@@ -85,13 +91,33 @@ namespace SurfaceTower.VideoEngine
 
 
             //middle
-            Color c = Color.DeepPink;
-            c.A = (byte)100;
-            spritebatch.Draw(middle, new Rectangle((int)baseModel.Tower.Location.X, (int)baseModel.Tower.Location.Y, (int)baseModel.Tower.Shape.Width, (int)baseModel.Tower.Shape.Height),
-                null, c, 0, new Vector2(middle.Width / 2, middle.Height / 2), SpriteEffects.None, 0);
+            //Color c = Color.DeepPink;
+            //c.A = (byte)100;
+            //spritebatch.Draw(middle, new Rectangle((int)baseModel.Tower.Location.X, (int)baseModel.Tower.Location.Y, (int)baseModel.Tower.Shape.Width, (int)baseModel.Tower.Shape.Height),
+            //    null, c, 0, new Vector2(middle.Width / 2, middle.Height / 2), SpriteEffects.None, 0);
+            if (!baseModel.Tower.Dead)
+            {
+              int width = (int) baseModel.Tower.Shape.Width;
+              int height = (int) baseModel.Tower.Shape.Height;
 
-            //Guns
-            drawGuns(spritebatch);
+              frameId = (frameId + 0.2f) % 50;
+
+              int healthId = 7 - (int) (((float) baseModel.Tower.Health / baseModel.Tower.MaxHealth) * 7);
+              if (healthId > 6)
+              {
+                healthId = 6;
+              }
+
+              Color c = Color.White;
+              c.A = 200;
+              Texture2D t = frameId < 20 ? middle0 : (frameId < 40 ? middle1 : middle2);
+              Rectangle frame = new Rectangle(width * (((int) frameId) % 20), height * healthId, width, height);
+              spritebatch.Draw(t, new Rectangle((int) baseModel.Tower.Location.X, (int) baseModel.Tower.Location.Y, width, height), frame,
+                  c, 0, new Vector2(width / 2, height / 2), SpriteEffects.None, 0);
+
+              //Guns
+              drawGuns(spritebatch);
+            }
 
             //Living
             foreach (Enemy e in baseModel.Living)
@@ -124,7 +150,7 @@ namespace SurfaceTower.VideoEngine
                 {
                     col = player_colors[e.Player];
                 }
-                c.A = 200;
+                col.A = 200;
                 Rectangle rect = new Rectangle((int)e.Location.X, (int)e.Location.Y, (int)e.Shape.Width, (int)e.Shape.Height);
                 spritebatch.Draw(enemy, rect, new Rectangle(0, 0, enemy.Width, enemy.Height), col, e.Orientation, new Vector2(enemy.Width / 2, enemy.Height / 2), SpriteEffects.None, 1);
             }
@@ -181,6 +207,12 @@ namespace SurfaceTower.VideoEngine
                       col, m.Orientation, new Vector2(gun.Width / 2, gun.Height / 2), SpriteEffects.None, 1);
                 }
             }
+        }
+
+
+        void OnDeath(object sender, EventArgs e)
+        {
+          particleEngine.addExplosion(App.Instance.Model.Tower.Location, Color.HotPink);
         }
     }
 }
