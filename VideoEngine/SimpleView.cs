@@ -57,7 +57,7 @@ namespace SurfaceTower.VideoEngine
             gun2 = content.Load<Texture2D>("2turret");
             gun3 = content.Load<Texture2D>("3turret");
             boss = content.Load<Texture2D>("spaceinvader");
-            background = content.Load<Texture2D>("bg");
+            background = content.Load<Texture2D>("bg1");
             graphics.GraphicsDevice.Clear(Color.Black);
             //Initializes the bloom postprocessing with the device to display on
             bloom = new BloomPostprocess.BloomComponent(gm, graphics.GraphicsDevice);
