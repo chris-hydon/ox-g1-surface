@@ -91,15 +91,34 @@ namespace SurfaceTower.Model
 
     public Bullet(Vector2 location, Vector2 velocity, int power, Effects effects, int playerId)
     {
-      this.shape = new Circle(3, location);
+      if ((effects & Effects.Wide) != 0)
+      {
+        Vector2 corner = new Vector2(2, 2);
+        this.shape = new SurfaceTower.Model.Shape.Rectangle(location - corner, location + corner);
+      }
+      else if ((effects & Effects.Disc) != 0)
+      {
+        this.shape = new Circle(5, location);
+      }
+      else
+      {
+        this.shape = new Circle(3, location);
+      }
       this.velocity = velocity;
       this.power = power;
       this.effects = effects;
       this.playerId = playerId;
+
+      if ((effects & Effects.DoublePower) != 0)
+      {
+        this.velocity *= 2;
+        this.power *= 2;
+      }
     }
 
     public void Move()
     {
+      int timer = ((Effects & Effects.ShortRange) != 0) ? Constants.BULLET_LIFE_SHORT : Constants.BULLET_LIFE;
       if (age > Constants.BULLET_LIFE * Constants.UPDATES_PER_SECOND)
       {
         //The bullet has lived longer than the maximum bullet life - mark it for removal.
@@ -111,6 +130,15 @@ namespace SurfaceTower.Model
         if ((Effects.Homing & effects) != 0)
         {
           Acceleration = HomingAcceleration();
+        }
+
+        // Wide bullets should widen.
+        if ((Effects.Wide & effects) != 0)
+        {
+          if (shape.Height < 20)
+          {
+            ((SurfaceTower.Model.Shape.Rectangle) shape).Height += 1;
+          }
         }
 
         // Update movement.

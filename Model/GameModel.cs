@@ -27,7 +27,7 @@ namespace SurfaceTower.Model
 
     void OnBar(object sender, EventArgs e)
     {
-      int prog = (Progress / 10) - 3;
+      int prog = (Progress / 10);
       int[] turrets = new int[4] {0, 0, 0, 0};
       int totalTurrets = 0;
 

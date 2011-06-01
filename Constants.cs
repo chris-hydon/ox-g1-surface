@@ -7,6 +7,7 @@ namespace SurfaceTower
     public const float BASE_IMPROVOCITY = 0.001f; // Base improvocity per kill, multiplied by enemy size.
     public const float BULLET_HOMING_TURNSPEED = 1; // Perpendicular acceleration relative to velocity
     public const int BULLET_LIFE = 20; // Seconds
+    public const int BULLET_LIFE_SHORT = 2; // Seconds
     public const int BULLET_VELOCITY = 200; // Metres per second
     public const int HP_LIMIT_CRITICAL_TOWER = 100;
     public const int MAIN_TURRET_DEFAULT_POWER = 10;

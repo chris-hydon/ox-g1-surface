@@ -7,8 +7,8 @@ namespace SurfaceTower.Model.Upgrades
     private Effects newEffects;
     private bool keepExistingEffects;
 
-    public EffectUpgrade(IGun toUpgrade, Effects newEffects, bool keepExistingEffects)
-      : base(toUpgrade)
+    public EffectUpgrade(IGun toUpgrade, Effects newEffects, bool keepExistingEffects, UpgradeType type)
+      : base(toUpgrade, type)
     {
       this.newEffects = newEffects;
       this.keepExistingEffects = keepExistingEffects;
@@ -30,6 +30,7 @@ namespace SurfaceTower.Model.Upgrades
         upgraded = upgraded.Add(shot);
       }
       UpgradeTarget.Shots = upgraded;
+      UpgradeTarget.ApplyUpgrade(Type);
     }
   }
 }

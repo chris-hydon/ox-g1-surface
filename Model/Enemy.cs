@@ -67,7 +67,7 @@ namespace SurfaceTower.Model
 
     public float Size
     {
-      get { return ((Circle) Shape).Radius; }
+      get { return (Shape is Circle) ? ((Circle) Shape).Radius : ((SurfaceTower.Model.Shape.Rectangle) Shape).Width; }
     }
 
     public int Health

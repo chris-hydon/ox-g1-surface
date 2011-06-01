@@ -26,11 +26,21 @@ namespace SurfaceTower.Model.Shape
     public float Width
     {
       get { return Math.Abs(corner1.X - corner2.X); }
+      set
+      {
+        corner1 = new Vector2(Origin.X - (value / 2), corner1.Y);
+        corner2 = new Vector2(Origin.X + (value / 2), corner2.Y);
+      }
     }
 
     public float Height
     {
       get { return Math.Abs(corner1.Y - corner2.Y); }
+      set
+      {
+        corner1 = new Vector2(corner1.X, Origin.Y - (value / 2));
+        corner2 = new Vector2(corner2.X, Origin.Y + (value / 2));
+      }
     }
 
     public float Left

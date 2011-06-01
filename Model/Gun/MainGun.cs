@@ -19,6 +19,7 @@ namespace SurfaceTower.Model.Gun
     private float improvocity;
     private Dictionary<Upgrade.UpgradeType, Upgrade> upgrades;
     private bool menuShowing;
+    private NodeTree<Upgrade.UpgradeType> upgradeTreePos;
 
     public MainGun(int playerId)
     {
@@ -97,6 +98,7 @@ namespace SurfaceTower.Model.Gun
             // Register the listeners.
             m.Music.Click += new EventHandler(OnClick);
             m.Music.Beat += new EventHandler(OnBeat);
+            upgradeTreePos = Upgrade.UpgradeTree();
           }
           else
           {
@@ -165,6 +167,13 @@ namespace SurfaceTower.Model.Gun
     {
       foreach (ShotPattern shot in Shots)
       {
+        // Infrequent bullets should only be shot occasionally.
+        if ((((shot.Effects & Effects.Infrequent) != 0) && App.Instance.Model.Music.ClickCount % 2 != 0) ||
+          (((shot.Effects & Effects.VeryInfrequent) != 0) && App.Instance.Model.Music.ClickCount % 4 != 0))
+        {
+          continue;
+        }
+
         Vector2 velocity = Constants.BULLET_VELOCITY * new Vector2(
           (float) Math.Cos(Orientation + shot.OrientationModifier),
           (float) Math.Sin(Orientation + shot.OrientationModifier)
@@ -194,9 +203,11 @@ namespace SurfaceTower.Model.Gun
       {
         upgrades = new Dictionary<Upgrade.UpgradeType, Upgrade>(5);
         upgrades.Add(Upgrade.UpgradeType.Strength, Upgrade.CreateUpgrade(Upgrade.UpgradeType.Strength, this));
-        upgrades.Add(Upgrade.UpgradeType.Homing, Upgrade.CreateUpgrade(Upgrade.UpgradeType.Homing, this));
-        upgrades.Add(Upgrade.UpgradeType.TwoShot, Upgrade.CreateUpgrade(Upgrade.UpgradeType.TwoShot, this));
-        upgrades.Add(Upgrade.UpgradeType.Spread, Upgrade.CreateUpgrade(Upgrade.UpgradeType.Spread, this));
+
+        foreach (NodeTree<Upgrade.UpgradeType> t in upgradeTreePos.Children)
+        {
+          upgrades.Add(t.Data, Upgrade.CreateUpgrade(t.Data, this));
+        }
         
         menuShowing = true;
         if (UpgradeReady != null) UpgradeReady(this, null);
@@ -216,6 +227,18 @@ namespace SurfaceTower.Model.Gun
 
         menuShowing = false;
         if (UpgradeDone != null) UpgradeDone(this, null);
+      }
+    }
+
+    public void ApplyUpgrade(Upgrade.UpgradeType type)
+    {
+      foreach (NodeTree<Upgrade.UpgradeType> t in upgradeTreePos.Children)
+      {
+        if (t.Data == type)
+        {
+          upgradeTreePos = t;
+          return;
+        }
       }
     }
 

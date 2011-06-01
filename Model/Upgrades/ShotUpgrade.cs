@@ -7,8 +7,8 @@ namespace SurfaceTower.Model.Upgrades
     private ShotPatterns newShotPatterns;
     private bool keepExistingShots;
 
-    public ShotUpgrade(IGun toUpgrade, ShotPatterns newShotPatterns, bool keepExistingShots)
-      : base(toUpgrade)
+    public ShotUpgrade(IGun toUpgrade, ShotPatterns newShotPatterns, bool keepExistingShots, UpgradeType type)
+      : base(toUpgrade, type)
     {
       this.newShotPatterns = newShotPatterns;
       this.keepExistingShots = keepExistingShots;
@@ -20,13 +20,14 @@ namespace SurfaceTower.Model.Upgrades
       {
         foreach (ShotPattern shot in newShotPatterns)
         {
-          UpgradeTarget.Shots.Add(shot);
+          UpgradeTarget.Shots = UpgradeTarget.Shots.Add(shot);
         }
       }
       else
       {
         UpgradeTarget.Shots = newShotPatterns;
       }
+      UpgradeTarget.ApplyUpgrade(Type);
     }
   }
 }

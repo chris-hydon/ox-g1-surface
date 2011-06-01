@@ -6,8 +6,8 @@ namespace SurfaceTower.Model.Upgrades
   {
     private int strength;
 
-    public StrengthUpgrade(IGun toUpgrade, int strength)
-      : base(toUpgrade)
+    public StrengthUpgrade(IGun toUpgrade, int strength, UpgradeType type)
+      : base(toUpgrade, type)
     {
       this.strength = strength;
     }
@@ -15,6 +15,7 @@ namespace SurfaceTower.Model.Upgrades
     public override void Apply()
     {
       UpgradeTarget.Strength += strength;
+      UpgradeTarget.ApplyUpgrade(Type);
     }
   }
 }

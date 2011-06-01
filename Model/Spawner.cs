@@ -72,7 +72,7 @@ namespace SurfaceTower.Model
     {
       int progress = model.Progress;
       //if progress reaches 100, spawn the Invader boss
-      if (progress >= 100 + lastBoss)
+      if (progress >= 50 + lastBoss)
       {
         lastBoss = progress;
         NullWave();
@@ -276,7 +276,7 @@ namespace SurfaceTower.Model
       foreach (MainGun p in model.ActivePlayers)
       {
         Vector2 pos = corners[p.PlayerId];
-        g = new PointGenerator(pos, 3 + LinearDifficulty(10, 12));
+        g = new PointGenerator(pos, 1 + LinearDifficulty(10, 12));
         g.EnemyHealth = 1 + LinearDifficulty(5, 0);
         g.EnemySize = 20;
         g.EnemySizeVariance = LinearDifficulty(5, 10);
@@ -347,7 +347,8 @@ namespace SurfaceTower.Model
         g.EnemySizeVariance = LinearDifficulty(5, 10);
         g.EnemyType = enemyType;
         g.Frequency = model.Music.ClicksPerBeat / 2;
-        g.GroupSize = 4 + LinearDifficulty(8, 10);
+        g.GroupSize = 2 + LinearDifficulty(8, 10);
+        g.MultiplayerAdjustment = 0;
         wave.Add(g);
         waves.Enqueue(wave);
       }
@@ -365,6 +366,7 @@ namespace SurfaceTower.Model
           g.PlayerSpecific = true;
           g.TargetPlayer = p.PlayerId;
           g.GroupSize = 2 + LinearDifficulty(15, 5);
+          g.MultiplayerAdjustment = 0;
           wave.Add(g);
           waves.Enqueue(wave);
         }

@@ -4,7 +4,7 @@
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  xmlns:ss="http://schemas.microsoft.com/Surface/2007/ApplicationMetadata">
   <Application>
-    <Title>SurfaceTower</Title>
+    <Title>Tower Tunes</Title>
     <Description>A musical tower defense game.</Description>
     <ExecutableFile>SurfaceTower.exe</ExecutableFile>
     <Arguments></Arguments>

@@ -106,6 +106,11 @@ namespace SurfaceTower.Model
       get { return beatCount; }
     }
 
+    public int ClickCount
+    {
+      get { return clickCount; }
+    }
+
     #endregion
 
     #region Events

@@ -20,6 +20,7 @@ namespace SurfaceTower.Model.Gun
     event EventHandler UpgradeDone;
     event EventHandler<BulletArgs> NewBullet;
 
+    void ApplyUpgrade(Upgrade.UpgradeType type);
     void Shoot();
     void ShowMenu(bool show);
   }

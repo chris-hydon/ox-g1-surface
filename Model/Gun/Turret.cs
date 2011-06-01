@@ -147,6 +147,13 @@ namespace SurfaceTower.Model.Gun
     {
       foreach (ShotPattern shot in Shots)
       {
+        // Infrequent bullets should only be shot occasionally.
+        if ((((shot.Effects & Effects.Infrequent) != 0) && App.Instance.Model.Music.ClickCount % 2 != 0) ||
+          (((shot.Effects & Effects.VeryInfrequent) != 0) && App.Instance.Model.Music.ClickCount % 4 != 0))
+        {
+          continue;
+        }
+
         Vector2 velocity = Constants.BULLET_VELOCITY * new Vector2(
           (float) Math.Cos(Orientation + shot.OrientationModifier),
           (float) Math.Sin(Orientation + shot.OrientationModifier)
@@ -229,6 +236,10 @@ namespace SurfaceTower.Model.Gun
       {
         if (UpgradeDone != null) UpgradeDone(this, null);
       }
+    }
+
+    public void ApplyUpgrade(Upgrade.UpgradeType type)
+    {
     }
 
     /// <summary>

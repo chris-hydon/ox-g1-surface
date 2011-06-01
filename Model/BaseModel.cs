@@ -293,6 +293,8 @@ namespace SurfaceTower.Model
     {
       if (Turrets.Contains(t))
       {
+        // TODO: Investigate this memory leak.
+        t.Active = false;
         Turrets.Remove(t);
         if (RemoveTurret != null) RemoveTurret(this, new TurretArgs(t));
       }

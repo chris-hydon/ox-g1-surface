@@ -171,6 +171,36 @@ namespace SurfaceTower.Model.Gun
     public static ShotPatterns SingleHoming = new ShotPatterns()
       .Add(new ShotPattern(0, Vector2.Zero, Effects.Homing));
 
+    public static ShotPatterns Disc = new ShotPatterns()
+      .Add(new ShotPattern(0, Vector2.Zero, Effects.Disc));
+
+    public static ShotPatterns DiscSpread = new ShotPatterns()
+      .Add(new ShotPattern(0, Vector2.Zero, Effects.Disc))
+      .Add(new ShotPattern(-0.5f, Vector2.Zero, Effects.None))
+      .Add(new ShotPattern(0.5f, Vector2.Zero, Effects.None));
+
+    public static ShotPatterns HomingDisc = new ShotPatterns()
+      .Add(new ShotPattern(0, Vector2.Zero, Effects.Disc | Effects.Homing));
+
+    public static ShotPatterns InfrequentDisc = new ShotPatterns()
+      .Add(new ShotPattern(0, Vector2.Zero, Effects.Disc | Effects.Infrequent));
+
+    public static ShotPatterns InfrequentShortDisc = new ShotPatterns()
+      .Add(new ShotPattern(0, Vector2.Zero, Effects.Disc | Effects.Infrequent | Effects.ShortRange));
+
+    public static ShotPatterns InfrequentWide = new ShotPatterns()
+      .Add(new ShotPattern(0, Vector2.Zero, Effects.Wide | Effects.Infrequent | Effects.ShortRange | Effects.Pierce));
+
+    public static ShotPatterns TwoFast = new ShotPatterns()
+      .Add(new ShotPattern(0, new Vector2(0, -10), Effects.DoublePower))
+      .Add(new ShotPattern(0, new Vector2(0, 10), Effects.DoublePower));
+
+    public static ShotPatterns VeryInfrequentWide = new ShotPatterns()
+      .Add(new ShotPattern(0, Vector2.Zero, Effects.Wide | Effects.VeryInfrequent | Effects.ShortRange | Effects.Pierce));
+
+    public static ShotPatterns Wide = new ShotPatterns()
+      .Add(new ShotPattern(0, Vector2.Zero, Effects.Wide | Effects.ShortRange | Effects.Pierce));
+
     #endregion
   }
 }
