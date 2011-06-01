@@ -47,7 +47,7 @@ namespace SurfaceTower.VideoEngine.ParticleEngine
 
         void t_NewBullet(object sender, SurfaceTower.Model.EventArguments.BulletArgs e)
         {
-            emitters.Add(new FireBulletEmitter(e.Bullet, tex, 30));
+          //  emitters.Add(new FireBulletEmitter(e.Bullet, tex, 30));
         }
 
         void Model_DeadEnemy(object sender, SurfaceTower.Model.EventArguments.EnemyArgs e)
