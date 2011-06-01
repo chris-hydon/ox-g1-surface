@@ -26,7 +26,7 @@ namespace SurfaceTower.VideoEngine
         //Draws the sprites
         public SpriteBatch spritebatch { get; set; }
         //Sprites
-        private Texture2D enemy, bullet, middle0, middle1, middle2, gun1, gun2, gun3, background, boss;
+        private Texture2D enemy, bullet, middle, middle0, middle1, middle2, gun1, gun2, gun3, background, boss;
         //Postprocessing to apply bloom
         private BloomPostprocess.BloomComponent bloom; 
         //The particle engine
@@ -49,6 +49,7 @@ namespace SurfaceTower.VideoEngine
             //Loads the sprites
             enemy = content.Load<Texture2D>("Drone");
             bullet = content.Load<Texture2D>("bullet");
+            middle = content.Load<Texture2D>("centre");
             middle0 = content.Load<Texture2D>("tower-0");
             middle1 = content.Load<Texture2D>("tower-1");
             middle2 = content.Load<Texture2D>("tower-2");
